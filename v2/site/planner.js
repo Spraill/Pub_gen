@@ -893,7 +893,7 @@
       keywords: /\b(tudor|henry viii|anne boleyn|wolsey|thomas more|thomas cromwell)\b/,
       pubs: [
         [/\bthe boleyn\b/, "Named after Anne Boleyn"],
-        [/\bguy fawkes\b.*\|.*\byo\d/, "Birthplace of Guy Fawkes, born 1570"],
+        [/\bguy fawkes\b.*\|.*(\byo\d|\byork$)/, "Birthplace of Guy Fawkes, born 1570"],
         [/\bking henry\b/, "Named after a Tudor king"],
         [/\bye olde mitre\b/, "Founded 1546 for the Bishop of Ely's servants"],
         [/\bprospect of whitby\b/, "Riverside tavern dating from around 1520"],
@@ -926,7 +926,7 @@
         [/\bjerusalem tavern\b/, "Named after the Priory of St John (Knights Hospitaller)"],
         [/\bye olde mitre\b/, "In the grounds of the Bishops of Ely's medieval palace"],
         [/\bcittie of yorke\b/, "On the site of a pub dating from 1430"],
-        [/\bblack swan\b.*\|.*\byo\d/, "Timber-framed house dating from the 1400s"],
+        [/\bblack swan\b.*\|.*(\byo\d|\byork$)/, "Timber-framed house dating from the 1400s"],
       ],
       historicPubs: true,
     },
@@ -1072,9 +1072,9 @@
       exclude: /police (box|call ?box|station|museum)|callbox|ghost bike|ghost sign/,
       pubs: [
         [/\bten bells\b/, "Jack the Ripper's victims drank here in 1888"],
-        [/\bgolden fleece\b.*\|.*\byo\d/, "Said to be York's most haunted pub"],
-        [/\bguy fawkes\b.*\|.*\byo\d/, "Gunpowder plotter Guy Fawkes was born here in 1570"],
-        [/\bblack swan\b.*\|.*\byo\d/, "Medieval inn said to be haunted by several ghosts"],
+        [/\bgolden fleece\b.*\|.*(\byo\d|\byork$)/, "Said to be York's most haunted pub"],
+        [/\bguy fawkes\b.*\|.*(\byo\d|\byork$)/, "Gunpowder plotter Guy Fawkes was born here in 1570"],
+        [/\bblack swan\b.*\|.*(\byo\d|\byork$)/, "Medieval inn said to be haunted by several ghosts"],
         [/\bye olde starre\b/, "York's oldest licensed inn; its cellar was a Civil War hospital"],
         [/\bblind beggar\b/, "Ronnie Kray shot George Cornell at the bar in 1966"],
         [/\bcarpenters arms\b.*\|.*cheshire street/, "Bought by the Kray twins for their mother"],
@@ -1426,7 +1426,7 @@
 
   // ------------------------------------------------------------------ sharing & export
 
-  const TOKEN_PATTERN = /^(p?[nwr]|q)\d{1,15}$/;
+  const TOKEN_PATTERN = /^(p?[nwrd]|q)\d{1,15}$/;
 
   // Suffixes: "*" = auto-picked meal pub, "-" = auto-picked pub (can be swapped).
   function stopToken(stop) {
@@ -1705,13 +1705,14 @@
 
   const DAILY_CATEGORIES = new Set(["historical", "architecture", "religious", "museum", "cultural", "art", "garden", "scenic", "memorial"]);
   const DAILY_EXCLUDE =
-    /\b(embassy|high commission|club|offices?|headquarters|hotel|school|college|university|hospital|station|studios?|centre|center|library|shop|market hall|bank|tower block|house of fraser|apartments?|flats|estate|sainsbury'?s?|tesco|waitrose|lidl|aldi|primark|pret)\b/i;
+    /\b(embassy|high commission|club|offices?|headquarters|hotel|school|college|university|hospital|station|studios?|centre|center|library|shop|market hall|bank|tower block|house of fraser|apartments?|flats|estate|sainsbury'?s?|tesco|waitrose|lidl|aldi|primark|pret|dungeon|madame tussauds)\b/i;
   // Weighting cap: famous places still feature, but the crawl isn't always Buckingham Palace.
   const FAME_CAP = 45;
 
   /** Historic, beautiful or culturally significant, and well documented. */
   function isQualitySight(poi, minScore) {
-    if (poi.primary === "blue_plaque" || poi.score < minScore || DAILY_EXCLUDE.test(poi.title)) return false;
+    // "23 and 25, Micklegate": an address-named listing isn't a headline sight.
+    if (poi.primary === "blue_plaque" || poi.score < minScore || DAILY_EXCLUDE.test(poi.title) || /^\d/.test(poi.title)) return false;
     if (!poi.categories.some((category) => DAILY_CATEGORIES.has(category))) return false;
     return Boolean(poi.wikipedia || poi.wikidata || poi.fame >= 10);
   }
@@ -1723,6 +1724,18 @@
    * pubs (4–5 in total, finishing at a pub).
    */
   function pickDailyCrawl(pois, pubs, dateKey, areas) {
+    // Small cities have few headline sights: don't lean on yesterday's supporting sights again.
+    const yesterday = dailyCrawlFor(pois, pubs, shiftDateKey(dateKey, -1), areas, new Set());
+    return dailyCrawlFor(pois, pubs, dateKey, areas, new Set(yesterday ? yesterday.anchors.slice(1) : []));
+  }
+
+  function shiftDateKey(dateKey, days) {
+    const date = new Date(`${dateKey}T12:00:00Z`);
+    date.setUTCDate(date.getUTCDate() + days);
+    return date.toISOString().slice(0, 10);
+  }
+
+  function dailyCrawlFor(pois, pubs, dateKey, areas, avoid) {
     if (!areas || !areas.length) return null;
     const day = dayNumber(dateKey);
     const area = areas[((day % areas.length) + areas.length) % areas.length];
@@ -1749,7 +1762,11 @@
     for (const radius of [1200, 1800, 2600]) {
       support = pois.filter(
         (poi) =>
-          isQualitySight(poi, 65) && (poi.wikipedia || poi.fame >= 15) && poi !== hero && distance(hero, poi) <= radius
+          isQualitySight(poi, 65) &&
+          (poi.wikipedia || poi.fame >= 15) &&
+          poi !== hero &&
+          !avoid.has(poi) &&
+          distance(hero, poi) <= radius
       );
       if (support.length >= 4) break;
     }
@@ -1805,9 +1822,10 @@
   }
 
   function sourceUrl(place) {
-    const match = /^p?([nwrq])(\d+)$/.exec(place.id || "");
+    const match = /^p?([nwrqd])(\d+)$/.exec(place.id || "");
     if (!match) return "";
     if (match[1] === "q") return `https://openplaques.org/plaques/${match[2]}`;
+    if (match[1] === "d") return `https://www.wikidata.org/wiki/Q${match[2]}`;
     const type = { n: "node", w: "way", r: "relation" }[match[1]];
     return `https://www.openstreetmap.org/${type}/${match[2]}`;
   }

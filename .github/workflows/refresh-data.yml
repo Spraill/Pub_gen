@@ -41,6 +41,16 @@ jobs:
         run: python3 v2/build_v2.py --refresh-all --cities "${{ github.event.inputs.cities || 'all' }}" --publish-docs
       - name: Unit tests against the new data
         run: npm test
+      - name: Keep the built data for inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-data
+          path: |
+            v2/data/*.geojson
+            v2/public/data/places-*.json
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Commit if anything changed
         run: |
           git add -A v2/data

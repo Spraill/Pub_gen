@@ -202,7 +202,8 @@ CITIES_PATH = Path(__file__).resolve().parents[1] / "cities.json"
 # Search area for Overpass: an OSM boundary relation or a bounding box.
 OVERPASS_AREA: dict[str, Any] = {"relation": DEFAULT_RELATION_ID}
 # Optional OSM extract (URL, local path or "geofabrik" to look one up) used instead of Overpass.
-OSM_EXTRACT: dict[str, str] = {}
+OSM_EXTRACT: dict[str, Any] = {}
+CITY_NAME: dict[str, str] = {"name": "London"}
 
 
 def load_city(city: str) -> dict[str, Any]:
@@ -216,6 +217,7 @@ def use_city(city: str) -> dict[str, Any]:
     config = load_city(city)
     OVERPASS_AREA.clear()
     OVERPASS_AREA.update(config["overpassArea"])
+    CITY_NAME["name"] = config.get("name", "")
     OSM_EXTRACT.clear()
     if config.get("osmExtract") and "bbox" in OVERPASS_AREA:
         OSM_EXTRACT["source"] = config["osmExtract"]
@@ -244,10 +246,23 @@ def fetch_overpass_payload(
     start_offset: int = 0,
 ) -> tuple[dict[str, Any], str]:
     if OSM_EXTRACT:
-        from osm_extract import extract_payload
+        # Sources in order: downloaded OSM extracts, then "wikidata"; Overpass is the last resort.
+        sources = OSM_EXTRACT["source"] if isinstance(OSM_EXTRACT["source"], list) else [OSM_EXTRACT["source"]]
+        extracts = [item for item in sources if item != "wikidata"]
+        if extracts:
+            from osm_extract import extract_payload
 
-        source = OSM_EXTRACT["source"]
-        return extract_payload(source, OVERPASS_AREA["bbox"], fragment), f"extract:{source.rsplit('/', 1)[-1]}"
+            try:
+                return extract_payload(extracts, OVERPASS_AREA["bbox"], fragment), "osm-extract"
+            except RuntimeError as exc:
+                print(json.dumps({"osm_extract_unavailable": str(exc)[:160]}), flush=True)
+        if "wikidata" in sources:
+            from wikidata_source import wikidata_payload
+
+            try:
+                return wikidata_payload(OVERPASS_AREA["bbox"], fragment, CITY_NAME["name"]), "wikidata"
+            except RuntimeError as exc:
+                print(json.dumps({"wikidata_unavailable": str(exc)[:160]}), flush=True)
     # Small (bounding-box) cities don't need long server-side timeouts.
     if "bbox" in OVERPASS_AREA:
         timeout_seconds = min(timeout_seconds, 90)
@@ -450,7 +465,9 @@ def build_osm_record(
         "wikipedia": str(tags.get("wikipedia", "")).strip(),
         "wikidata": str(tags.get("wikidata", "")).strip(),
         "source_url": (
-            f"https://www.openstreetmap.org/{element.get('type','')}/{element['id']}"
+            f"https://www.wikidata.org/wiki/Q{element['id']}"
+            if element.get("type") == "wikidata"
+            else f"https://www.openstreetmap.org/{element.get('type','')}/{element['id']}"
         ),
         "fetched_at_utc": fetched_at_utc,
         "query_key": str(query_spec["key"]),
