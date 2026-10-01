@@ -262,15 +262,19 @@ async function run() {
     assert.match(await page.inputValue("#route-name"), /crawl/);
     await page.waitForFunction(() => document.querySelector("#sum-distance").textContent !== "…");
     await shot(page, "desktop-daily-route");
+    assert.equal(await page.locator(".reshuffle-row").isHidden(), true, "daily crawl can't be re-rolled");
+
+    // Another version on a normal Surprise me crawl.
+    await page.click("#tab-plan");
+    await page.click('[data-mode="random"]');
+    await page.click("#generate-button");
+    await page.waitForSelector(".reshuffle-row:not([hidden])");
     const before = await page.locator("#route-list .stop-title").allTextContents();
     await page.click("#reshuffle-button");
     await page.waitForFunction((old) => {
       const now = [...document.querySelectorAll("#route-list .stop-title")].map((el) => el.textContent);
-      return now.join("|") !== old.join("|");
+      return now.length && now.join("|") !== old.join("|");
     }, before);
-    const after = await page.locator("#route-list .stop-title").allTextContents();
-    assert.notDeepEqual(after, before);
-    assert.equal(after.length >= 6, true);
   });
 
   await scenario("desktop: surprise me (sights and pub-only)", { viewport: { width: 1280, height: 800 } }, async (page) => {

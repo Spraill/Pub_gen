@@ -404,6 +404,17 @@ def commons_title(props: dict[str, Any]) -> str:
     return ""
 
 
+def is_plaque(props: dict[str, Any]) -> bool:
+    tags = props.get("tags") or {}
+    memorial = str(tags.get("memorial", "")).lower()
+    return bool(
+        "plaque" in memorial
+        or memorial == "stolperstein"
+        or tags.get("plaque")
+        or re.search(r"\bplaque\b", clean(props.get("title")), re.IGNORECASE)
+    )
+
+
 def plaque_title(props: dict[str, Any]) -> str:
     """Mark titles that were cut from a longer plaque inscription."""
     title = clean(props.get("title"))
@@ -439,7 +450,10 @@ def compact_pois(geojson: dict[str, Any]) -> tuple[list[list[Any]], list[str], s
         if not keep:
             continue
         props = {**props, "interest_score": score, "title": plaque_title(props)}
-        categories = sort_categories(set(props.get("categories") or []) or {"landmark"})
+        categories = set(props.get("categories") or []) or {"landmark"}
+        if is_plaque(props):
+            categories.add("blue_plaque")  # one "Plaques" filter covers every plaque
+        categories = sort_categories(categories)
         all_categories.update(categories)
         records.append((identifier, coords, props, categories))
 

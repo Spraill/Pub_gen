@@ -313,7 +313,7 @@ test("crawl of the day is stable, high quality and ends at a pub", { skip: !data
     assert.deepEqual(P.pickDailyCrawl(data.pois, data.pubs, key).anchors.map((p) => p.id), crawl.anchors.map((p) => p.id));
     areas.add(crawl.area.name);
     const sightsInCrawl = crawl.anchors.filter((place) => place.kind === "poi");
-    assert.ok(sightsInCrawl.length >= 2, `${key} has ${sightsInCrawl.length} sights`);
+    assert.ok(sightsInCrawl.length >= 2 && sightsInCrawl.length <= 4, `${key} has ${sightsInCrawl.length} sights`);
     sightsInCrawl.forEach((poi) => assert.ok(P.isQualitySight(poi, 65), `${key}: ${poi.title}`));
     const plan = P.planRoute(crawl.anchors, data.pubs, crawl.options);
     assert.equal(plan.ok, true, `${key}: ${plan.error}`);
