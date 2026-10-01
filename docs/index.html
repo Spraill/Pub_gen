@@ -13,16 +13,16 @@
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./icon.svg">
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="preload" href="./data/places.json?v=0a07ed9f6d83" as="fetch" crossorigin>
+  <link rel="preload" href="./data/cities.json?v=87276d96799b" as="fetch" crossorigin>
   <link rel="preload" href="./fonts/fraunces-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="./vendor/leaflet/leaflet.css?v=0a07ed9f6d83">
-  <link rel="stylesheet" href="./vendor/markercluster/MarkerCluster.css?v=0a07ed9f6d83">
-  <link rel="stylesheet" href="./styles.css?v=0a07ed9f6d83">
-  <script defer src="./config.js?v=0a07ed9f6d83"></script>
-  <script defer src="./vendor/leaflet/leaflet.js?v=0a07ed9f6d83"></script>
-  <script defer src="./vendor/markercluster/leaflet.markercluster.js?v=0a07ed9f6d83"></script>
-  <script defer src="./planner.js?v=0a07ed9f6d83"></script>
-  <script defer src="./app.js?v=0a07ed9f6d83" data-version="0a07ed9f6d83" id="app-script"></script>
+  <link rel="stylesheet" href="./vendor/leaflet/leaflet.css?v=87276d96799b">
+  <link rel="stylesheet" href="./vendor/markercluster/MarkerCluster.css?v=87276d96799b">
+  <link rel="stylesheet" href="./styles.css?v=87276d96799b">
+  <script defer src="./config.js?v=87276d96799b"></script>
+  <script defer src="./vendor/leaflet/leaflet.js?v=87276d96799b"></script>
+  <script defer src="./vendor/markercluster/leaflet.markercluster.js?v=87276d96799b"></script>
+  <script defer src="./planner.js?v=87276d96799b"></script>
+  <script defer src="./app.js?v=87276d96799b" data-version="87276d96799b" id="app-script"></script>
 </head>
 <body>
   <div id="map" aria-label="Map of London pubs and sights"></div>
@@ -34,6 +34,7 @@
         <h1>London Crawl Planner</h1>
         <p class="brand-sub"><span id="count-pubs">…</span> pubs · <span id="count-pois">…</span> sights</p>
       </div>
+      <select id="city-select" class="city-select" aria-label="Choose a city" hidden></select>
     </div>
     <div class="search" id="search">
       <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 0 1 5.96 12.06l4.24 4.24-1.4 1.4-4.24-4.24A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>
@@ -231,7 +232,7 @@
 
       <!-- ============================== THEMES -->
       <section id="panel-themes" class="panel" role="tabpanel" aria-labelledby="tab-themes" hidden>
-        <p class="hint">Pick a theme and we'll find a walkable crawl of matching sights and pubs somewhere in London. Don't like it? Hit <strong>Another version</strong>.</p>
+        <p class="hint">Pick a theme and we'll find a walkable crawl of matching sights and pubs somewhere in the city. Don't like it? Hit <strong>Another version</strong>.</p>
         <div id="theme-grid" class="theme-grid" role="radiogroup" aria-label="Crawl theme"></div>
         <p id="theme-blurb" class="theme-blurb"></p>
         <div class="field-row">

@@ -303,6 +303,35 @@ async function run() {
     await shot(page, "mobile-theme-route");
   });
 
+  if (fs.existsSync(path.join(ROOT, "data", "places-york.json"))) {
+    await scenario("desktop: switch to York and share a York crawl", { viewport: { width: 1280, height: 800 } }, async (page, routerCalls, context) => {
+      await page.goto(base);
+      await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });
+      assert.match(await page.textContent(".brand h1"), /London/);
+      await Promise.all([page.waitForNavigation(), page.selectOption("#city-select", "york")]);
+      await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });
+      assert.match(await page.textContent(".brand h1"), /York Crawl Planner/);
+      assert.ok(Number((await page.textContent("#count-pubs")).replace(/\D/g, "")) > 20, "York has pubs");
+      await shot(page, "desktop-york");
+      await page.click('[data-mode="random"]');
+      await page.click("#generate-button");
+      await page.waitForSelector("#route-list .stop");
+      await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+      await page.click("#share-button");
+      const link = await page.evaluate(() => navigator.clipboard.readText());
+      assert.match(link, /c=york/);
+      // The city is remembered, and a London share link switches back.
+      await page.goto(base);
+      await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });
+      assert.match(await page.textContent(".brand h1"), /York/);
+      await page.goto(`${base}?city=london`);
+      await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });
+      assert.match(await page.textContent(".brand h1"), /London/);
+    });
+  } else {
+    console.log("skip - York data not built yet");
+  }
+
   await scenario("desktop: surprise me (sights and pub-only)", { viewport: { width: 1280, height: 800 } }, async (page) => {
     await page.goto(base);
     await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });

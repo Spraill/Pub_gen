@@ -6,6 +6,7 @@
     "build": "python3 v2/build_v2.py",
     "publish": "python3 v2/build_v2.py --publish-docs",
     "refresh": "python3 v2/build_v2.py --refresh-all --publish-docs",
+    "refresh:city": "python3 v2/build_v2.py --refresh-all --publish-docs --cities",
     "test": "node --test v2/tests/*.test.js && python3 -m unittest discover -s v2/tests -p 'test_*.py'",
     "test:e2e": "node v2/tests/e2e.cjs",
     "serve": "python3 -m http.server 8000 -d v2/public"

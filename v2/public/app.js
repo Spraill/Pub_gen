@@ -13,9 +13,25 @@
     [51.286, -0.51],
     [51.692, 0.334],
   ];
+
+  // Which city: a shared link's "c=" wins, then ?city=, then the last city used.
+  const CITY_ID = (() => {
+    const fromHash = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("c");
+    const fromQuery = new URLSearchParams(window.location.search).get("city");
+    let remembered = null;
+    try {
+      remembered = localStorage.getItem("pubgen.city");
+    } catch (error) {
+      remembered = null;
+    }
+    const id = (fromHash || fromQuery || remembered || "london").toLowerCase();
+    return /^[a-z-]{2,30}$/.test(id) ? id : "london";
+  })();
+  // London keeps the original keys so existing saved crawls survive.
+  const citySuffix = CITY_ID === "london" ? "" : `.${CITY_ID}`;
   const STORAGE = {
-    session: "pubgen.session.v1",
-    saved: "pubgen.saved.v1",
+    session: `pubgen.session.v1${citySuffix}`,
+    saved: `pubgen.saved.v1${citySuffix}`,
     info: "pubgen.info.v1",
     media: "pubgen.media.v1",
     howDismissed: "pubgen.how.v1",
@@ -130,6 +146,8 @@
     visiblePubs: [],
     markerSignature: "",
     crawl: null,
+    city: null,
+    cities: [],
     theme: "victorian",
     highlighted: new Set(),
     route: null,
@@ -330,9 +348,71 @@
 
   // ================================================================== data
 
-  async function loadDataset() {
+  async function loadCities() {
     try {
-      const response = await fetch(`./data/places.json?v=${encodeURIComponent(VERSION)}`);
+      const response = await fetch(`./data/cities.json?v=${encodeURIComponent(VERSION)}`);
+      if (!response.ok) throw new Error(`Cities request failed (${response.status})`);
+      return await response.json();
+    } catch (error) {
+      if (window.__PUBGEN_CITIES__) return window.__PUBGEN_CITIES__;
+      return new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = "./data/cities.js";
+        script.onload = () => resolve(window.__PUBGEN_CITIES__ || []);
+        script.onerror = () => resolve([]);
+        document.head.appendChild(script);
+      });
+    }
+  }
+
+  function applyCity(cities) {
+    const city = cities.find((item) => item.id === CITY_ID) || cities.find((item) => item.id === "london") || {
+      id: "london",
+      name: "London",
+      center: [51.509865, -0.118092],
+      bounds: LONDON_BOUNDS,
+      minZoom: 9,
+      dailyAreas: [],
+      data: "data/places-london.json",
+    };
+    state.city = city;
+    state.cities = cities;
+    try {
+      localStorage.setItem("pubgen.city", city.id);
+    } catch (error) {
+      // private mode: the city just isn't remembered
+    }
+    P.setReferenceLatitude(city.center[0]);
+    map.setMinZoom(city.minZoom || 9);
+    map.fitBounds(city.bounds);
+    const title = `${city.name} Crawl Planner`;
+    document.title = title;
+    document.querySelector(".brand h1").textContent = title;
+    $("loading-text").textContent = `Pulling a map of ${city.name}…`;
+    $("map").setAttribute("aria-label", `Map of ${city.name} pubs and sights`);
+    const select = $("city-select");
+    select.innerHTML = cities
+      .map((item) => `<option value="${escapeHtml(item.id)}"${item.id === city.id ? " selected" : ""}>${escapeHtml(item.name)}</option>`)
+      .join("");
+    select.hidden = cities.length < 2;
+    return city;
+  }
+
+  function switchCity(id) {
+    if (!id || id === state.city.id) return;
+    persistSession.flush();
+    try {
+      localStorage.setItem("pubgen.city", id);
+    } catch (error) {
+      // fall through to the URL
+    }
+    window.location.href = `${window.location.pathname}?city=${encodeURIComponent(id)}`;
+  }
+
+  async function loadDataset() {
+    const dataPath = state.city.data;
+    try {
+      const response = await fetch(`./${dataPath}?v=${encodeURIComponent(VERSION)}`);
       if (!response.ok) throw new Error(`Data request failed (${response.status})`);
       return await response.json();
     } catch (error) {
@@ -340,7 +420,7 @@
       if (window.__PUBGEN_DATA__) return window.__PUBGEN_DATA__;
       return new Promise((resolve, reject) => {
         const script = document.createElement("script");
-        script.src = "./data/places.js";
+        script.src = `./${dataPath.replace(/\.json$/, ".js")}`;
         script.onload = () => (window.__PUBGEN_DATA__ ? resolve(window.__PUBGEN_DATA__) : reject(error));
         script.onerror = () => reject(error);
         document.head.appendChild(script);
@@ -822,7 +902,7 @@
 
   function defaultRouteName(stops) {
     const first = stops[0] && stops[0].place;
-    if (!first) return "London crawl";
+    if (!first) return `${state.city.name} crawl`;
     const title = first.title.length > 40 ? `${first.title.slice(0, 38)}…` : first.title;
     return `${title} crawl`;
   }
@@ -1334,8 +1414,8 @@
   }
 
   function shareUrlFor(name, tokensOrStops) {
-    const base = window.location.href.split("#")[0];
-    return `${base}#${P.encodeShare(name, tokensOrStops)}`;
+    const base = window.location.href.split("#")[0].split("?")[0];
+    return `${base}#${P.encodeShare(name, tokensOrStops)}&c=${encodeURIComponent(state.city.id)}`;
   }
 
   async function copyText(text) {
@@ -1366,7 +1446,7 @@
 
   async function shareLink(name, stops, summary) {
     const url = shareUrlFor(name, stops);
-    const title = name || "London crawl";
+    const title = name || `${state.city.name} crawl`;
     if (navigator.share && window.matchMedia("(pointer: coarse)").matches) {
       try {
         await navigator.share({ title, text: `${title}${summary ? ` (${summary})` : ""}`, url });
@@ -1766,7 +1846,7 @@
     const card = $("daily-card");
     const dateKey = P.londonDateKey();
     if (!daily || daily.dateKey !== dateKey) {
-      daily = P.pickDailyCrawl(state.data.pois, state.data.pubs, dateKey);
+      daily = P.pickDailyCrawl(state.data.pois, state.data.pubs, dateKey, state.city.dailyAreas);
       if (daily) daily.plan = P.planRoute(daily.anchors, state.data.pubs, daily.options);
     }
     card.hidden = !(daily && daily.plan && daily.plan.ok);
@@ -1818,6 +1898,10 @@
 
   let themeCounts = null;
 
+  function themeName(theme) {
+    return theme.name.replace(/\bLondon\b/, state.city ? state.city.name : "London");
+  }
+
   function renderThemes() {
     if (!themeCounts) {
       themeCounts = {};
@@ -1828,18 +1912,18 @@
         };
       });
     }
-    $("theme-grid").innerHTML = P.THEMES.map((theme) => {
+    $("theme-grid").innerHTML = P.THEMES.filter((theme) => themeCounts[theme.id].sights >= 3).map((theme) => {
       const counts = themeCounts[theme.id];
       return `
         <button type="button" class="theme-card" role="radio" aria-checked="${theme.id === state.theme}" data-theme="${escapeHtml(theme.id)}">
           <span class="theme-icon" aria-hidden="true">${escapeHtml(theme.icon)}</span>
-          <span><span class="theme-name">${escapeHtml(theme.name)}</span>
+          <span><span class="theme-name">${escapeHtml(themeName(theme))}</span>
           <span class="theme-count">${formatCount(counts.sights)} sights · ${formatCount(counts.pubs)} pubs</span></span>
         </button>`;
     }).join("");
     const theme = P.themeById(state.theme);
     $("theme-blurb").textContent = theme ? theme.blurb : "";
-    $("theme-generate").textContent = theme ? `Generate ${theme.name} crawl` : "Generate themed crawl";
+    $("theme-generate").textContent = theme ? `Generate ${themeName(theme)} crawl` : "Generate themed crawl";
   }
 
   /** One line about a stop: its Wikipedia description, or its best story from another theme. */
@@ -1930,7 +2014,7 @@
       return;
     }
     setRoute({
-      name: `${theme.name} crawl`,
+      name: `${themeName(theme)} crawl`,
       source: "theme",
       theme: theme.id,
       stops: result.plan.stops,
@@ -2481,6 +2565,7 @@
       }
     });
     $("daily-button").addEventListener("click", openDaily);
+    $("city-select").addEventListener("change", (event) => switchCity(event.target.value));
     $("theme-grid").addEventListener("click", (event) => {
       const card = event.target.closest("[data-theme]");
       if (!card) return;
@@ -2726,6 +2811,7 @@
   async function start() {
     registerServiceWorker();
     initSheetDrag();
+    applyCity(await loadCities());
     try {
       const raw = await loadDataset();
       els.loadingText.textContent = "Drawing the map…";

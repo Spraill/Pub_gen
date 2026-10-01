@@ -17,11 +17,14 @@ from urllib.request import Request, urlopen
 
 DEFAULT_RELATION_ID = 175342
 DEFAULT_TIMEOUT_SECONDS = 240
-DEFAULT_RETRY_ROUNDS = 2
+DEFAULT_RETRY_ROUNDS = 3
+# Public Overpass mirrors; busy ones answer 429/504, so we rotate through all of them.
 DEFAULT_ENDPOINTS = (
     "https://overpass-api.de/api/interpreter",
-    "https://lz4.overpass-api.de/api/interpreter",
     "https://overpass.private.coffee/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://lz4.overpass-api.de/api/interpreter",
+    "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
 )
 DEFAULT_USER_AGENT = "pub-crawl-planner-v2/1.0 (+local build)"
 DEFAULT_OPENPLAQUES_DATA_PAGE = "https://openplaques.org/pages/data"
@@ -144,6 +147,7 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_TIMEOUT_SECONDS,
         help="Per-request timeout in seconds. Default: %(default)s",
     )
+    parser.add_argument("--city", default="london", help="City id from v2/cities.json. Default: %(default)s")
     parser.add_argument(
         "--skip-wikidata",
         action="store_true",
@@ -194,10 +198,39 @@ def discover_openplaques_url(timeout_seconds: int) -> str:
     return match.group(0) if match else DEFAULT_OPENPLAQUES_FALLBACK_URL
 
 
+CITIES_PATH = Path(__file__).resolve().parents[1] / "cities.json"
+# Search area for Overpass: an OSM boundary relation or a bounding box.
+OVERPASS_AREA: dict[str, Any] = {"relation": DEFAULT_RELATION_ID}
+# Optional OSM extract (URL, local path or "geofabrik" to look one up) used instead of Overpass.
+OSM_EXTRACT: dict[str, str] = {}
+
+
+def load_city(city: str) -> dict[str, Any]:
+    cities = json.loads(CITIES_PATH.read_text(encoding="utf-8"))
+    if city not in cities:
+        raise SystemExit(f"Unknown city {city!r}; choose from {', '.join(cities)}")
+    return cities[city]
+
+
+def use_city(city: str) -> dict[str, Any]:
+    config = load_city(city)
+    OVERPASS_AREA.clear()
+    OVERPASS_AREA.update(config["overpassArea"])
+    OSM_EXTRACT.clear()
+    if config.get("osmExtract") and "bbox" in OVERPASS_AREA:
+        OSM_EXTRACT["source"] = config["osmExtract"]
+    return config
+
+
 def build_query(fragment: str, timeout_seconds: int) -> str:
+    # Fragments are written against "(area.londonArea)"; a bbox city swaps that out.
+    if "bbox" in OVERPASS_AREA:
+        south, west, north, east = OVERPASS_AREA["bbox"]
+        body = fragment.replace("(area.londonArea)", f"({south},{west},{north},{east})")
+        return f"[out:json][timeout:{timeout_seconds}];({body});out center tags;"
     return (
         f"[out:json][timeout:{timeout_seconds}];"
-        f"rel({DEFAULT_RELATION_ID});"
+        f"rel({OVERPASS_AREA['relation']});"
         "map_to_area->.londonArea;"
         f"({fragment});"
         "out center tags;"
@@ -210,6 +243,14 @@ def fetch_overpass_payload(
     retry_rounds: int,
     start_offset: int = 0,
 ) -> tuple[dict[str, Any], str]:
+    if OSM_EXTRACT:
+        from osm_extract import extract_payload
+
+        source = OSM_EXTRACT["source"]
+        return extract_payload(source, OVERPASS_AREA["bbox"], fragment), f"extract:{source.rsplit('/', 1)[-1]}"
+    # Small (bounding-box) cities don't need long server-side timeouts.
+    if "bbox" in OVERPASS_AREA:
+        timeout_seconds = min(timeout_seconds, 90)
     query = build_query(fragment, timeout_seconds)
     last_error: Exception | None = None
     endpoint_count = len(DEFAULT_ENDPOINTS)
@@ -217,12 +258,14 @@ def fetch_overpass_payload(
         for endpoint_index in range(endpoint_count):
             endpoint = DEFAULT_ENDPOINTS[(start_offset + endpoint_index) % endpoint_count]
             try:
-                return post_json(endpoint, query, timeout_seconds), endpoint
-            except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
+                # Give the server its own timeout plus a margin before giving up on it.
+                return post_json(endpoint, query, timeout_seconds + 30), endpoint
+            except (HTTPError, URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
                 last_error = exc
+                print(json.dumps({"overpass_retry": endpoint, "round": round_number, "error": str(exc)[:120]}), flush=True)
                 continue
         if round_number < retry_rounds:
-            time.sleep(round_number * 2)
+            time.sleep(20 * round_number)
     raise RuntimeError(f"Failed Overpass POI fetch: {last_error}") from last_error
 
 
@@ -597,6 +640,7 @@ def feature_collection(records: list[dict[str, Any]]) -> dict[str, Any]:
 
 def main() -> int:
     args = parse_args()
+    city = use_city(args.city)
     fetched_at_utc = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
     records: list[dict[str, Any]] = []
@@ -632,8 +676,9 @@ def main() -> int:
     if not records:
         raise RuntimeError(f"No OSM POI records fetched. Last errors: {query_errors}")
 
-    openplaques_url = discover_openplaques_url(args.timeout)
-    openplaques_payload = json.loads(fetch_text(openplaques_url, args.timeout))
+    # Open Plaques publishes a London export; other cities rely on OSM plaques.
+    openplaques_url = discover_openplaques_url(args.timeout) if city.get("openPlaques") else ""
+    openplaques_payload = json.loads(fetch_text(openplaques_url, args.timeout)) if openplaques_url else {}
     for feature in openplaques_payload.get("features", []):
         record = build_openplaques_record(feature, fetched_at_utc)
         if record is not None:

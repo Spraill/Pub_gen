@@ -10,6 +10,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import build_v2 as build  # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+import osm_extract  # noqa: E402
+
 
 def pub_feature(name: str, osm_id: int, **props):
     tags = props.pop("tags", {})
@@ -138,6 +141,29 @@ class CompactionTests(unittest.TestCase):
         self.assertEqual(len(dataset["pub_fields"]), len(build.PUB_FIELDS))
         self.assertEqual(dataset["pubs"][0][0], "pn1")
         self.assertEqual(dataset["pois"][0][dataset["poi_fields"].index("wikidata")], "Q62378")
+
+
+class OsmExtractTests(unittest.TestCase):
+    def test_fragments_parse_to_tag_filters(self) -> None:
+        statements = osm_extract.parse_fragment(
+            'nwr["tourism"~"attraction|viewpoint"]["name"](area.londonArea);nwr["heritage"](area.londonArea);'
+        )
+        self.assertEqual(statements, [[("tourism", "~", "attraction|viewpoint"), ("name", "has", "")], [("heritage", "has", "")]])
+        self.assertTrue(osm_extract.matches({"tourism": "viewpoint", "name": "X"}, statements[0]))
+        self.assertFalse(osm_extract.matches({"tourism": "viewpoint"}, statements[0]))
+
+    def test_smallest_covering_geofabrik_region_wins(self) -> None:
+        def square(west: float, south: float, east: float, north: float) -> list:
+            return [[[west, south], [east, south], [east, north], [west, north], [west, south]]]
+
+        index = {
+            "features": [
+                {"properties": {"urls": {"pbf": "england"}}, "geometry": {"type": "Polygon", "coordinates": square(-6, 49, 2, 56)}},
+                {"properties": {"urls": {"pbf": "yorkshire"}}, "geometry": {"type": "MultiPolygon", "coordinates": [square(-2.5, 53.3, 0.2, 54.6)]}},
+                {"properties": {"urls": {"pbf": "partial"}}, "geometry": {"type": "Polygon", "coordinates": square(-1.8, 53.7, -1.1, 54.0)}},
+            ]
+        }
+        self.assertEqual(osm_extract.pick_geofabrik_region(index, [53.925, -1.16, 53.995, -1.02]), "yorkshire")
 
 
 if __name__ == "__main__":
