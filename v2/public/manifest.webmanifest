@@ -1,0 +1,13 @@
+{
+  "name": "London Crawl Planner",
+  "short_name": "Crawl Planner",
+  "description": "Plan walking pub crawls through London's sights. Save and share routes.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#efe9df",
+  "theme_color": "#253050",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
