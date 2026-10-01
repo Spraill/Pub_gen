@@ -1705,13 +1705,14 @@
 
   const DAILY_CATEGORIES = new Set(["historical", "architecture", "religious", "museum", "cultural", "art", "garden", "scenic", "memorial"]);
   const DAILY_EXCLUDE =
-    /\b(embassy|high commission|club|offices?|headquarters|hotel|school|college|university|hospital|station|studios?|centre|center|library|shop|market hall|bank|tower block|house of fraser|apartments?|flats|estate|sainsbury'?s?|tesco|waitrose|lidl|aldi|primark|pret)\b/i;
+    /\b(embassy|high commission|club|offices?|headquarters|hotel|school|college|university|hospital|station|studios?|centre|center|library|shop|market hall|bank|tower block|house of fraser|apartments?|flats|estate|sainsbury'?s?|tesco|waitrose|lidl|aldi|primark|pret|dungeon|madame tussauds)\b/i;
   // Weighting cap: famous places still feature, but the crawl isn't always Buckingham Palace.
   const FAME_CAP = 45;
 
   /** Historic, beautiful or culturally significant, and well documented. */
   function isQualitySight(poi, minScore) {
-    if (poi.primary === "blue_plaque" || poi.score < minScore || DAILY_EXCLUDE.test(poi.title)) return false;
+    // "23 and 25, Micklegate": an address-named listing isn't a headline sight.
+    if (poi.primary === "blue_plaque" || poi.score < minScore || DAILY_EXCLUDE.test(poi.title) || /^\d/.test(poi.title)) return false;
     if (!poi.categories.some((category) => DAILY_CATEGORIES.has(category))) return false;
     return Boolean(poi.wikipedia || poi.wikidata || poi.fame >= 10);
   }
@@ -1723,6 +1724,18 @@
    * pubs (4–5 in total, finishing at a pub).
    */
   function pickDailyCrawl(pois, pubs, dateKey, areas) {
+    // Small cities have few headline sights: don't lean on yesterday's supporting sights again.
+    const yesterday = dailyCrawlFor(pois, pubs, shiftDateKey(dateKey, -1), areas, new Set());
+    return dailyCrawlFor(pois, pubs, dateKey, areas, new Set(yesterday ? yesterday.anchors.slice(1) : []));
+  }
+
+  function shiftDateKey(dateKey, days) {
+    const date = new Date(`${dateKey}T12:00:00Z`);
+    date.setUTCDate(date.getUTCDate() + days);
+    return date.toISOString().slice(0, 10);
+  }
+
+  function dailyCrawlFor(pois, pubs, dateKey, areas, avoid) {
     if (!areas || !areas.length) return null;
     const day = dayNumber(dateKey);
     const area = areas[((day % areas.length) + areas.length) % areas.length];
@@ -1749,7 +1762,11 @@
     for (const radius of [1200, 1800, 2600]) {
       support = pois.filter(
         (poi) =>
-          isQualitySight(poi, 65) && (poi.wikipedia || poi.fame >= 15) && poi !== hero && distance(hero, poi) <= radius
+          isQualitySight(poi, 65) &&
+          (poi.wikipedia || poi.fame >= 15) &&
+          poi !== hero &&
+          !avoid.has(poi) &&
+          distance(hero, poi) <= radius
       );
       if (support.length >= 4) break;
     }

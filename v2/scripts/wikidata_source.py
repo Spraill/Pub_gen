@@ -75,7 +75,7 @@ LISTING_JUNK = re.compile(
     r"|\bstable\b|ice house|pinfold|\bnos?\.? \d",
     re.I,
 )
-STARTS_WITH_NUMBER = re.compile(r"^\d")
+STARTS_WITH_NUMBER = re.compile(r"^(numbers? )?\d", re.I)
 # Listing-style suffixes on pub names.
 PUB_SUFFIX = re.compile(r",? (public house|and attached buildings.*|\(number \d+\))$", re.I)
 # Historic England grades (P1435 values) worth a fame boost.
@@ -173,6 +173,12 @@ def elements_from_results(results: dict[str, Any]) -> list[dict[str, Any]]:
         has_class = len(tags) > 2
         if tags.get("amenity") != "pub" and item["heritage"] and PUB_NAME.search(label) and not NOT_A_PUB.search(label):
             tags["amenity"] = "pub"
+        # Listing-style labels ("Guildhall and Chamber Range, Atkinson block, ...", "44, Shambles")
+        # read better as their Wikipedia article title ("Guildhall, York", "44 Shambles").
+        article = item.get("wikipedia", "")[3:]
+        if article and (len(label) > 45 or STARTS_WITH_NUMBER.search(label) or LISTING_JUNK.search(label)):
+            label = re.sub(r" \([^)]*\)$", "", article)
+            tags["name"] = label
         is_pub = tags.get("amenity") == "pub"
         if is_pub:
             previous = None
