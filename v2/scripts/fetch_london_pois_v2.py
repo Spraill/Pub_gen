@@ -201,6 +201,8 @@ def discover_openplaques_url(timeout_seconds: int) -> str:
 CITIES_PATH = Path(__file__).resolve().parents[1] / "cities.json"
 # Search area for Overpass: an OSM boundary relation or a bounding box.
 OVERPASS_AREA: dict[str, Any] = {"relation": DEFAULT_RELATION_ID}
+# Optional downloaded OSM extract (URL or local path) used instead of Overpass.
+OSM_EXTRACT: dict[str, str] = {}
 
 
 def load_city(city: str) -> dict[str, Any]:
@@ -214,6 +216,9 @@ def use_city(city: str) -> dict[str, Any]:
     config = load_city(city)
     OVERPASS_AREA.clear()
     OVERPASS_AREA.update(config["overpassArea"])
+    OSM_EXTRACT.clear()
+    if config.get("osmExtract") and "bbox" in OVERPASS_AREA:
+        OSM_EXTRACT["source"] = config["osmExtract"]
     return config
 
 
@@ -238,6 +243,11 @@ def fetch_overpass_payload(
     retry_rounds: int,
     start_offset: int = 0,
 ) -> tuple[dict[str, Any], str]:
+    if OSM_EXTRACT:
+        from osm_extract import extract_payload
+
+        source = OSM_EXTRACT["source"]
+        return extract_payload(source, OVERPASS_AREA["bbox"], fragment), f"extract:{source.rsplit('/', 1)[-1]}"
     # Small (bounding-box) cities don't need long server-side timeouts.
     if "bbox" in OVERPASS_AREA:
         timeout_seconds = min(timeout_seconds, 90)

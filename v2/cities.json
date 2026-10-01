@@ -33,6 +33,7 @@
     "name": "York",
     "overpassArea": { "bbox": [53.925, -1.16, 53.995, -1.02] },
     "openPlaques": false,
+    "osmExtract": "https://download.geofabrik.de/europe/united-kingdom/england/north-yorkshire-latest.osm.pbf",
     "center": [53.959, -1.0815],
     "bounds": [[53.925, -1.16], [53.995, -1.02]],
     "minZoom": 12,
