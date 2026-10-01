@@ -33,8 +33,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Install OSM extract reader
-        run: pip install osmium
+      - name: Install OSM extract tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+          pip install osmium
       - name: Fetch fresh data and rebuild the site
         run: python3 v2/build_v2.py --refresh-all --cities "${{ github.event.inputs.cities || 'all' }}" --publish-docs
       - name: Unit tests against the new data

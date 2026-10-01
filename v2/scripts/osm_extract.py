@@ -14,8 +14,11 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import subprocess
+import time
 from pathlib import Path
 from typing import Any
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 GEOFABRIK_INDEX = "https://download.geofabrik.de/index-v1.json"
@@ -72,11 +75,11 @@ def _ring_contains(ring: list[list[float]], lon: float, lat: float) -> bool:
     return inside
 
 
-def pick_geofabrik_region(index: dict[str, Any], bbox: list[float]) -> str:
-    """The smallest Geofabrik region whose outline contains every corner of bbox."""
+def covering_geofabrik_regions(index: dict[str, Any], bbox: list[float]) -> list[str]:
+    """Geofabrik extracts whose outline contains every corner of bbox, smallest first."""
     south, west, north, east = bbox
     corners = [(west, south), (west, north), (east, south), (east, north)]
-    best: tuple[float, str] | None = None
+    found: list[tuple[float, str]] = []
     for feature in index.get("features", []):
         geometry = feature.get("geometry") or {}
         pbf = ((feature.get("properties") or {}).get("urls") or {}).get("pbf")
@@ -88,24 +91,59 @@ def pick_geofabrik_region(index: dict[str, Any], bbox: list[float]) -> str:
         points = [pt for poly in polygons for pt in poly[0]]
         lons = [pt[0] for pt in points]
         lats = [pt[1] for pt in points]
-        size = (max(lons) - min(lons)) * (max(lats) - min(lats))
-        if best is None or size < best[0]:
-            best = (size, pbf)
-    if best is None:
+        found.append(((max(lons) - min(lons)) * (max(lats) - min(lats)), pbf))
+    return [pbf for _, pbf in sorted(found)]
+
+
+def pick_geofabrik_region(index: dict[str, Any], bbox: list[float]) -> str:
+    regions = covering_geofabrik_regions(index, bbox)
+    if not regions:
         raise RuntimeError("No Geofabrik region covers this city.")
-    return best[1]
+    return regions[0]
 
 
-def resolve_source(source: str, bbox: list[float]) -> str:
-    """"geofabrik" means: look the right regional extract up in Geofabrik's index."""
+def candidate_sources(source: str, bbox: list[float]) -> list[str]:
+    """"geofabrik" means: the Geofabrik extracts covering the city, smallest first."""
     if source != "geofabrik":
-        return source
+        return [source]
     request = Request(GEOFABRIK_INDEX, headers={"User-Agent": "pub-gen-data-refresh/1.0"})
     with urlopen(request, timeout=120) as response:
         index = json.load(response)
-    url = pick_geofabrik_region(index, bbox)
-    print(json.dumps({"osm_extract": url}), flush=True)
-    return url
+    # Up to country level (county, region, country); a continent is too big to download.
+    return covering_geofabrik_regions(index, bbox)[:3]
+
+
+def obtain(source: str, bbox: list[float]) -> Path:
+    """A local .osm.pbf for the city: downloaded (falling back to bigger regions) and cut to bbox."""
+    if Path(source).exists():
+        return Path(source)
+    last_error: Exception | None = None
+    for url in candidate_sources(source, bbox):
+        for attempt in range(2):
+            try:
+                path = download(url)
+            except (HTTPError, URLError, TimeoutError, OSError) as exc:
+                last_error = exc
+                print(json.dumps({"osm_extract_failed": url, "attempt": attempt + 1, "error": str(exc)[:160]}), flush=True)
+                time.sleep(15)
+                continue
+            print(json.dumps({"osm_extract": url}), flush=True)
+            return clip(path, bbox)
+    raise RuntimeError(f"Could not download an OSM extract: {last_error}") from last_error
+
+
+def clip(path: Path, bbox: list[float]) -> Path:
+    """Cut a regional extract down to the city with osmium-tool, if installed (much faster to read)."""
+    if not shutil.which("osmium"):
+        return path
+    south, west, north, east = bbox
+    target = path.with_name(f"{path.name.split('.')[0]}-{south}_{west}_{north}_{east}.osm.pbf")
+    if not target.exists():
+        subprocess.run(
+            ["osmium", "extract", "-b", f"{west},{south},{east},{north}", "--overwrite", "-o", str(target), str(path)],
+            check=True,
+        )
+    return target
 
 
 def load_elements(path: Path, bbox: list[float]) -> list[dict[str, Any]]:
@@ -159,9 +197,7 @@ def load_elements(path: Path, bbox: list[float]) -> list[dict[str, Any]]:
 
 
 def extract_payload(url_or_path: str, bbox: list[float], fragment: str) -> dict[str, Any]:
-    if not Path(url_or_path).exists():
-        url_or_path = resolve_source(url_or_path, bbox)
-    path = Path(url_or_path) if Path(url_or_path).exists() else download(url_or_path)
+    path = obtain(url_or_path, bbox)
     key = (str(path), tuple(bbox))
     if key not in _loaded:
         _loaded[key] = load_elements(path, bbox)
