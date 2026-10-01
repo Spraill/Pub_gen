@@ -794,7 +794,8 @@
     const passes = [
       (place) => !seenKeys.has(keyFn(place)) && picks.every((pick) => distance(pick, place) >= minSpacing),
       (place) => picks.every((pick) => distance(pick, place) >= minSpacing),
-      () => true,
+      // Never the same building twice (some places are mapped under two names).
+      (place) => picks.every((pick) => distance(pick, place) >= 25),
     ];
     passes.forEach((accept) => {
       ordered.forEach((place) => {
@@ -923,16 +924,47 @@
       historicPubs: true,
     },
     {
-      id: "music", name: "Music legends", icon: "🎸", categories: ["music"],
-      blurb: "Rock, jazz, punk and classical: where the greats lived and played.",
-      keywords: /\b(music|musician|composer|singer|songwriter|jazz|rock|punk|opera|pianist|violinist|beatles|bowie|hendrix|handel|mozart)\b/,
+      id: "rock", name: "Rock, pop & punk", icon: "🎸",
+      blurb: "Fifty years of British music, from 1950s Soho skiffle and the Beatles to punk, Camden and Britpop.",
+      keywords: /\b(rock 'n' roll|rock and roll|rock star|rock band|punk|pop star|pop singer|pop group|beatles|bowie|ziggy|hendrix|rolling stones|sex pistols|the who|kinks|led zeppelin|pink floyd|marc bolan|freddie mercury|amy winehouse|the clash|britpop|abbey road (studios|crossing)|2i'?s|two i'?s|marquee|ufo club|skiffle|brian epstein|lennon|mccartney|hmv|recording studios?|guitarist|record shop|hammersmith palais|ray (&|and) dave davies)\b/,
+      exclude: /rock garden|rockery|rock face/,
       pubs: [
-        [/\b(dublin castle)\b/, "Camden venue where Madness and Blur played"],
-        [/\bhope (and|&) anchor\b.*\|.*islington|\bhope (and|&) anchor\b.*\|.*upper street/, "Legendary punk venue"],
-        [/\b(the lexington|old blue last|the windmill|half moon|the troubadour|the bull'?s head)\b/, "Well-known live music pub"],
-        [/\b(music|guitar|piano|fiddle|fiddler|jazz|drum)\b/, "Music in the name"],
+        [/\bdublin castle\b/, "Camden gig pub where Madness made their name"],
+        [/\bthe ship\b.*\|.*wardour street/, "Musicians' pub next to the old Marquee Club"],
+        [/\bhope (&|and) anchor\b.*\|.*upper street/, "Punk venue: the Stranglers, Madness, Joy Division"],
+        [/\bgood mixer\b/, "Camden Britpop haunt of Blur and Oasis"],
+        [/\bhawley arms\b/, "Amy Winehouse's Camden local"],
+        [/\bbull (&|and) gate\b/, "Kentish Town indie venue (early Blur, Coldplay)"],
+        [/\bwater rats\b/, "Bob Dylan's first UK gig (1962) and Oasis's first London show"],
+        [/\bold blue last\b/, "Shoreditch gig pub (Arctic Monkeys, Amy Winehouse)"],
+        [/\bblack heart\b.*\|.*camden/, "Camden rock and metal bar"],
+        [/\bhalf moon\b.*\|.*lower richmond/, "Putney venue where the Rolling Stones played"],
+        [/\b(the lexington|shacklewell arms|nambucca|the macbeth|the boogaloo|george tavern)\b/, "Well-known live music pub"],
       ],
       pubFlags: [[32, "Has live music"]],
+    },
+    {
+      id: "jazz", name: "Jazz, blues & folk", icon: "🎷",
+      blurb: "Soho jazz cellars, the blues boom and London's folk clubs.",
+      keywords: /\b(jazz|blues|folk (music|singer|song|club)|ronnie scott|100 club|reggae|calypso|gospel|bebop|bandleader|dance band|crooner|vera lynn)\b/,
+      pubs: [
+        [/\bspice of life\b/, "Soho pub with a jazz and folk basement since the 1960s"],
+        [/\bbull'?s head\b.*\|.*lonsdale road/, "Barnes riverside pub, a jazz venue since 1959"],
+        [/\bhalf moon\b.*\|.*lower richmond/, "Putney blues and folk venue"],
+        [/\b(jazz|blues)\b/, "Jazz or blues in the name"],
+      ],
+      pubFlags: [[32, "Has live music"]],
+    },
+    {
+      id: "classical", name: "Classical & opera", icon: "🎻", categories: [],
+      blurb: "Concert halls, opera houses and the homes of Handel, Mozart and Holst.",
+      keywords: /\b(composer|opera|orchestra|symphony|concert hall|conductor|pianist|violinist|cellist|organist|ballet|handel|mozart|haydn|elgar|holst|vaughan williams|mendelssohn|chopin|berlioz|wagner|purcell|britten|royal albert hall|wigmore hall|queen'?s hall|royal festival hall|sadler'?s wells)\b/,
+      pubs: [
+        [/\bnag'?s head\b.*\|.*james street/, "Opera-goers' pub beside the Royal Opera House"],
+        [/\bthe chandos\b.*\|.*st\.? martin'?s lane/, "Next to English National Opera at the Coliseum"],
+        [/\bcoal hole\b/, "Victorian song-and-supper club next to the Savoy"],
+        [/\b(opera|organ|fiddle)\b/, "Music in the name"],
+      ],
     },
     {
       id: "literary", name: "Literary London", icon: "📚", categories: ["literary"],
@@ -1017,27 +1049,41 @@
       ],
     },
     {
-      id: "wartime", name: "Wartime London", icon: "🎖️",
-      blurb: "The Blitz, the Few and the memorials to London's fallen.",
-      keywords: /\b(war|blitz|soldier|regiment|battle|veteran|raf|bomb|bombs|bombed|bombing|wartime|churchill|spitfire)\b/,
+      id: "wartime", name: "World War II & the Blitz", icon: "✈️", years: [1939, 1945], eventsOnly: true,
+      blurb: "The Blitz, the Battle of Britain, Churchill's bunker and Free French London.",
+      keywords: /\b(blitz|second world war|world war ii|world war two|wwii|ww2|flying bomb|doodlebug|v-?1|v-?2 rockets?|air raids?|battle of britain|bomber command|spitfires?|churchill war rooms|cabinet war rooms|de gaulle|free french|home guard|kindertransport|evacuees?|bomb damage|air raid precautions|eagle squadron|international brigades?|dunkirk|d-day|special operations executive|soe agent|violette szabo)\b/,
       pubs: [
+        [/\bfrench house\b/, "Free French HQ pub; de Gaulle is said to have written his 1940 appeal here"],
+        [/\bchurchill arms\b/, "Named for Churchill and decked in wartime memorabilia"],
         [/\bchurchill/, "Named after Winston Churchill"],
-        [/\b(grenadier|guardsman|marquis of granby|rifleman|volunteer)\b/, "Named for soldiers and regiments"],
-        [/\b(lord nelson|admiral nelson|duke of wellington|victory|waterloo|spitfire)\b/, "Named after a famous victory or commander"],
       ],
     },
     {
-      id: "crime", name: "Crime & mystery", icon: "🔍",
-      blurb: "Murders, gallows, gaols and great detectives.",
-      keywords: /\b(murder|murdered|police|crime|executed|execution|prison|gaol|gallows|ripper|sherlock|detective|highwayman|scotland yard|old bailey)\b/,
+      id: "crime", name: "Crime, ghosts & mystery", icon: "🔍",
+      blurb: "Murders, gallows and gaols, highwaymen and pirates, unsolved cases and London's most haunted pubs.",
+      keywords: /\b(murder|murdered|murders|ghost|ghosts|haunted|haunting|unsolved|mystery|executed|execution|executions|hanged|hanging|gallows|tyburn|ripper|kray|highwaym[ae]n|dick turpin|pirates?|smugglers?|smuggling|gunpowder plot|guy fawkes|body ?snatchers?|resurrection men|newgate|great train robbery|sweeney todd|plague pit|witch|witches|heist|robbery|assassinat\w*|poison\w*|prison|gaol|old bailey|the clink|beheaded|crime|sherlock|detective)\b/,
+      exclude: /police (box|call ?box|station|museum)|callbox|ghost bike|ghost sign/,
       pubs: [
-        [/\bten bells\b/, "Linked to Jack the Ripper's victims"],
-        [/\bblind beggar\b/, "Where Ronnie Kray shot George Cornell in 1966"],
-        [/\bviaduct tavern\b/, "Its cellars are said to be old Newgate cells"],
-        [/\bsherlock holmes\b/, "Home of Sherlock Holmes memorabilia"],
-        [/\bhung,? drawn (and|&) quartered\b/, "Named for the executions on Tower Hill"],
-        [/\b(prospect of whitby|town of ramsgate)\b/, "Linked to 'Hanging Judge' Jeffreys"],
-        [/\bmagpie (and|&) stump\b/, "Crowds watched Newgate hangings from here"],
+        [/\bten bells\b/, "Jack the Ripper's victims drank here in 1888"],
+        [/\bblind beggar\b/, "Ronnie Kray shot George Cornell at the bar in 1966"],
+        [/\bcarpenters arms\b.*\|.*cheshire street/, "Bought by the Kray twins for their mother"],
+        [/\bviaduct tavern\b/, "Its cellars are said to be old Newgate Prison cells, and it's reputedly haunted"],
+        [/\bmagpie (&|and) stump\b/, "Crowds paid to watch Newgate hangings from its windows"],
+        [/\bhung,? drawn (and|&) quartered\b/, "Named for the executions on nearby Tower Hill"],
+        [/\bprospect of whitby\b/, "Smugglers' haunt by Execution Dock, with a noose hanging outside"],
+        [/\btown of ramsgate\b/, "'Hanging Judge' Jeffreys was caught here in 1688"],
+        [/\bcaptain kidd\b/, "Named after the pirate hanged at Execution Dock in 1701"],
+        [/\bthe grenadier\b.*\|.*wilton row/, "Said to be London's most haunted pub: a ghostly officer killed for cheating at cards"],
+        [/\bspaniards inn\b/, "Highwayman Dick Turpin is said to have hidden here"],
+        [/\bthe flask\b.*\|.*highgate/, "Said to be haunted by a heartbroken Spanish barmaid"],
+        [/\bold bank of england\b/, "Fleet Street legend puts Sweeney Todd's pie shop nearby"],
+        [/\bmorpeth arms\b/, "Built for Millbank Prison guards; its cellars are said to be haunted cells"],
+        [/\blamb (and|&) flag\b.*\|.*rose street/, "Nicknamed the 'Bucket of Blood' for its bare-knuckle fights"],
+        [/\bship tavern\b.*\|.*gate street/, "Hid outlawed Catholic priests and secret masses"],
+        [/\bold nun'?s head\b/, "Named after a legendary abbess executed under Henry VIII"],
+        [/\bthe gun\b.*\|.*cold harbour/, "Riverside pub with a smugglers' spy-hole"],
+        [/\bthe anchor\b.*\|.*bank end/, "Bankside tavern beside the old Clink prison"],
+        [/\bsherlock holmes\b/, "Full of Sherlock Holmes memorabilia"],
       ],
     },
     {
@@ -1107,6 +1153,16 @@
 
   function eraReason(place, theme) {
     if (!theme.years) return "";
+    if (theme.eventsOnly) {
+      // Life spans say nothing about a war; look for "in 1941", "night of 10 May 1941"…
+      const event = /\b(?:in|on|of|during|from|until|by|night of)\s+(?:\d{1,2}(?:st|nd|rd|th)?\s+[a-z]+\s+)?(19[0-9]{2})\b/g;
+      let match;
+      while ((match = event.exec(placeText(place)))) {
+        const year = Number(match[1]);
+        if (year >= theme.years[0] && year <= theme.years[1]) return `Wartime event, ${year}`;
+      }
+      return "";
+    }
     const hit = placeDates(place).find((date) => date.year >= theme.years[0] && date.year <= theme.years[1]);
     return hit ? hit.label : "";
   }
@@ -1121,6 +1177,7 @@
   /** Why a sight fits a theme ("" if it doesn't). */
   function themeSightReason(poi, theme) {
     if (!poi || poi.kind !== "poi" || THEME_EXCLUDE.test(poi.title.toLowerCase())) return "";
+    if (theme.exclude && theme.exclude.test(placeText(poi))) return "";
     const categoryHit = (poi.categories || []).find((category) => (theme.categories || []).includes(category));
     if (theme.nameOnly) {
       if (poi.primary === "blue_plaque") return "";
@@ -1162,11 +1219,28 @@
   }
 
   /**
+   * Every theme link for a place, strongest first: curated pub stories and
+   * sight links (keywords, dates). Plain category matches are left out.
+   */
+  function placeStories(place) {
+    const stories = [];
+    THEMES.forEach((theme) => {
+      const reason = themeReason(place, theme);
+      if (!reason) return;
+      const curated = place.kind === "pub" && (theme.pubs || []).some(([, text]) => text === reason);
+      const weak = place.kind === "poi" && !/[“:]|\d/.test(reason);
+      if (weak) return;
+      stories.push({ theme: theme.id, icon: theme.icon, name: theme.name, reason, curated });
+    });
+    return stories.sort((a, b) => Number(b.curated) - Number(a.curated));
+  }
+
+  /**
    * A walkable themed crawl anywhere in London: find a spot where enough on-theme
    * places sit within walking distance, then pick a varied set of them.
    * sightCount sights (or, with 0 sights, pubCount on-theme pubs as stops).
    */
-  function pickThemedCrawl(theme, pois, pubs, sightCount, pubCount, rng) {
+  function pickThemedCrawl(theme, pois, pubs, sightCount, pubCount, rng, themedPubs) {
     const usePubs = sightCount <= 0;
     const want = usePubs ? Math.max(2, pubCount) : sightCount;
     const pool = usePubs
@@ -1176,37 +1250,85 @@
     const isPlaque = (place) => place.primary === "blue_plaque";
     // Plaques are rare in themed crawls: weighted right down, never the starting
     // point, and at most one per crawl.
+    // Flat-ish weights so "Another version" really varies.
+    // Themes with few non-plaque sights (rock, jazz…) lean on their plaques more.
+    const nonPlaqueCount = pool.filter((place) => !isPlaque(place)).length;
+    const plaqueWeight = nonPlaqueCount < 25 ? 0.6 : 0.08;
     const weight = usePubs
-      ? (pub) => 1 + metadataRichness(pub)
-      : (poi) => sightWeight(poi) * (isPlaque(poi) ? 0.08 : 1);
+      ? (pub) => 1 + metadataRichness(pub) / 3
+      : (poi) => (1 + poi.score / 100) * (isPlaque(poi) ? plaqueWeight : 1);
     const ordered = weightedOrder(pool, rng, weight);
-    const starts = usePubs ? ordered : ordered.filter((place) => !isPlaque(place));
+    const nonPlaques = ordered.filter((place) => !isPlaque(place));
+    // Plaque-heavy themes (e.g. jazz) may start from a plaque if they must.
+    const starts = usePubs || nonPlaqueCount < 25 ? ordered : nonPlaques;
     const spacing = usePubs ? 120 : 90;
-    for (const radius of [1200, 1800, 2600, 4000]) {
-      for (let index = 0; index < Math.min(starts.length, 80); index += 1) {
-        const anchor = starts[index];
-        const near = ordered.filter((place) => place !== anchor && distance(anchor, place) <= radius);
-        const main = usePubs ? near : near.filter((place) => !isPlaque(place));
-        const picks = spreadPick(main, [anchor], want, spacing, (place) => (usePubs ? place.id : place.primary));
-        if (!usePubs && picks.length === want - 1) {
-          const plaque = near.find((place) => isPlaque(place) && picks.every((pick) => distance(pick, place) >= spacing));
-          if (plaque) picks.push(plaque);
+    // First try spots with an on-theme pub close by, then anywhere.
+    const pubNear = (place) => (themedPubs || []).some((pub) => distance(place, pub) <= 800);
+    const wantPub = !usePubs && pubCount > 0 && themedPubs && themedPubs.length > 0;
+    // Gather a few good spots with an on-theme pub nearby and a few anywhere, then
+    // usually (60%) go with a pub-rich one; this keeps "Another version" varied.
+    const collect = (needPub) => {
+      const found = [];
+      const seen = new Set();
+      for (const radius of [1200, 1800, 2600, 4000]) {
+        for (let index = 0; index < Math.min(starts.length, 150) && found.length < 6; index += 1) {
+          const anchor = starts[index];
+          if (needPub && !pubNear(anchor)) continue;
+          const near = ordered.filter((place) => place !== anchor && distance(anchor, place) <= radius);
+          const main = usePubs ? near : near.filter((place) => !isPlaque(place));
+          const picks = spreadPick(main, [anchor], want, spacing, (place) => (usePubs ? place.id : place.primary));
+          if (!usePubs && picks.length < want) {
+            // Top up with plaques: one normally, more only for plaque-heavy themes.
+            const allowed = picks.length === want - 1 || nonPlaqueCount < 25;
+            near
+              .filter((place) => isPlaque(place) && !picks.includes(place))
+              .forEach((place) => {
+                if (picks.length < want && allowed && picks.every((pick) => distance(pick, place) >= spacing)) picks.push(place);
+              });
+          }
+          if (picks.length < want) continue;
+          const key = picks.map((place) => place.id).sort().join();
+          if (seen.has(key)) continue;
+          seen.add(key);
+          found.push(picks);
         }
-        if (picks.length >= want) return picks;
+        if (found.length) break;
       }
-    }
-    return null;
+      return found;
+    };
+    const withPub = wantPub ? collect(true) : [];
+    const anywhere = collect(false);
+    const pool2 = withPub.length && (rng() < 0.6 || !anywhere.length) ? withPub : anywhere;
+    return pool2.length ? pool2[Math.floor(rng() * pool2.length)] : null;
   }
 
   /** Pick and plan a themed crawl, trying a few spots in case one has no pubs nearby. */
   function generateThemedCrawl(theme, pois, pubs, sightCount, pubCount, seed, base) {
     const rng = createRng(`theme:${theme.id}:${seed}`);
     const options = themedOptions(theme, pubs, { ...base, pubCount: sightCount > 0 ? pubCount : 0, seed });
+    const themedPubs = pubs.filter((pub) => themeMatchesPub(pub, theme) && pubMatchesRequirements(pub, options));
     let lastError = `Not enough ${theme.name.toLowerCase()} places to make that crawl. Try fewer stops.`;
     for (let attempt = 0; attempt < 8; attempt += 1) {
-      const anchors = pickThemedCrawl(theme, pois, pubs, sightCount, pubCount, rng);
-      if (!anchors) break;
-      const plan = planRoute(anchors, pubs, options);
+      const sights = pickThemedCrawl(theme, pois, pubs, sightCount, pubCount, rng, themedPubs);
+      if (!sights) break;
+      // On-theme pubs near the sights become must-visit stops (leaving one pub
+      // slot so the crawl can still finish at a pub, which also favours theme pubs).
+      let anchors = sights;
+      let planOptions = options;
+      if (sightCount > 0 && pubCount >= 2) {
+        const nearby = themedPubs
+          .map((pub) => ({ pub, gap: Math.min(...sights.map((sight) => distance(sight, pub))) }))
+          .filter((entry) => entry.gap <= 700)
+          .sort((a, b) => a.gap - b.gap)
+          .map((entry) => entry.pub);
+        const chosen = [];
+        nearby.forEach((pub) => {
+          if (chosen.length < pubCount - 1 && chosen.every((other) => distance(other, pub) >= 150)) chosen.push(pub);
+        });
+        anchors = sights.concat(chosen);
+        planOptions = { ...options, pubCount: pubCount - chosen.length };
+      }
+      const plan = planRoute(anchors, pubs, planOptions);
       if (plan.ok) return { ok: true, anchors, plan, options };
       lastError = plan.error;
     }
@@ -1784,6 +1906,7 @@
     themeMatchesSight,
     themeMatchesPub,
     themeReason,
+    placeStories,
     pickThemedCrawl,
     generateThemedCrawl,
     themedOptions,
