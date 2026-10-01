@@ -144,6 +144,7 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_TIMEOUT_SECONDS,
         help="Per-request timeout in seconds. Default: %(default)s",
     )
+    parser.add_argument("--city", default="london", help="City id from v2/cities.json. Default: %(default)s")
     parser.add_argument(
         "--skip-wikidata",
         action="store_true",
@@ -194,10 +195,34 @@ def discover_openplaques_url(timeout_seconds: int) -> str:
     return match.group(0) if match else DEFAULT_OPENPLAQUES_FALLBACK_URL
 
 
+CITIES_PATH = Path(__file__).resolve().parents[1] / "cities.json"
+# Search area for Overpass: an OSM boundary relation or a bounding box.
+OVERPASS_AREA: dict[str, Any] = {"relation": DEFAULT_RELATION_ID}
+
+
+def load_city(city: str) -> dict[str, Any]:
+    cities = json.loads(CITIES_PATH.read_text(encoding="utf-8"))
+    if city not in cities:
+        raise SystemExit(f"Unknown city {city!r}; choose from {', '.join(cities)}")
+    return cities[city]
+
+
+def use_city(city: str) -> dict[str, Any]:
+    config = load_city(city)
+    OVERPASS_AREA.clear()
+    OVERPASS_AREA.update(config["overpassArea"])
+    return config
+
+
 def build_query(fragment: str, timeout_seconds: int) -> str:
+    # Fragments are written against "(area.londonArea)"; a bbox city swaps that out.
+    if "bbox" in OVERPASS_AREA:
+        south, west, north, east = OVERPASS_AREA["bbox"]
+        body = fragment.replace("(area.londonArea)", f"({south},{west},{north},{east})")
+        return f"[out:json][timeout:{timeout_seconds}];({body});out center tags;"
     return (
         f"[out:json][timeout:{timeout_seconds}];"
-        f"rel({DEFAULT_RELATION_ID});"
+        f"rel({OVERPASS_AREA['relation']});"
         "map_to_area->.londonArea;"
         f"({fragment});"
         "out center tags;"
@@ -597,6 +622,7 @@ def feature_collection(records: list[dict[str, Any]]) -> dict[str, Any]:
 
 def main() -> int:
     args = parse_args()
+    city = use_city(args.city)
     fetched_at_utc = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
     records: list[dict[str, Any]] = []
@@ -632,8 +658,9 @@ def main() -> int:
     if not records:
         raise RuntimeError(f"No OSM POI records fetched. Last errors: {query_errors}")
 
-    openplaques_url = discover_openplaques_url(args.timeout)
-    openplaques_payload = json.loads(fetch_text(openplaques_url, args.timeout))
+    # Open Plaques publishes a London export; other cities rely on OSM plaques.
+    openplaques_url = discover_openplaques_url(args.timeout) if city.get("openPlaques") else ""
+    openplaques_payload = json.loads(fetch_text(openplaques_url, args.timeout)) if openplaques_url else {}
     for feature in openplaques_payload.get("features", []):
         record = build_openplaques_record(feature, fetched_at_utc)
         if record is not None:

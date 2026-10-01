@@ -17,6 +17,7 @@ from fetch_london_pois_v2 import (  # noqa: E402
     DEFAULT_TIMEOUT_SECONDS,
     element_coordinates,
     fetch_overpass_payload,
+    use_city,
 )
 
 PUB_FRAGMENT = 'nwr["amenity"="pub"](area.londonArea);'
@@ -53,6 +54,7 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Accepted for backwards compatibility; CSV output is no longer produced.",
     )
+    parser.add_argument("--city", default="london", help="City id from v2/cities.json.")
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT_SECONDS)
     parser.add_argument("--retry-rounds", type=int, default=DEFAULT_RETRY_ROUNDS)
     return parser.parse_args()
@@ -115,6 +117,7 @@ def build_feature(
 
 def main() -> int:
     args = parse_args()
+    use_city(args.city)
     fetched_at_utc = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     payload, endpoint = fetch_overpass_payload(PUB_FRAGMENT, args.timeout, args.retry_rounds)
 

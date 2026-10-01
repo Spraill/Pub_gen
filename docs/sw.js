@@ -1,5 +1,5 @@
 /* Offline support: cache the app shell and data; the page itself is network-first. */
-const VERSION = "0a07ed9f6d83";
+const VERSION = "192e07381700";
 const CACHE = `pubgen-${VERSION}`;
 const SHELL = [
   "./",
@@ -14,7 +14,8 @@ const SHELL = [
   `./vendor/leaflet/leaflet.css?v=${VERSION}`,
   `./vendor/markercluster/leaflet.markercluster.js?v=${VERSION}`,
   `./vendor/markercluster/MarkerCluster.css?v=${VERSION}`,
-  `./data/places.json?v=${VERSION}`,
+  `./data/cities.json?v=${VERSION}`,
+  `./data/places-london.json?v=${VERSION}`,
   "./icon.svg",
   "./manifest.webmanifest",
 ];

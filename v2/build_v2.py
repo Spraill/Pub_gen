@@ -26,6 +26,7 @@ SITE_DIR = ROOT / "site"
 PUBLIC_DIR = ROOT / "public"
 DOCS_DIR = ROOT.parent / "docs"
 SCRIPTS_DIR = ROOT / "scripts"
+CITIES_PATH = ROOT / "cities.json"
 
 VERSION_PLACEHOLDER = "__BUILD_VERSION__"
 STAMPED_FILES = ("index.html", "sw.js")
@@ -121,10 +122,15 @@ OSM_TYPE_CODES = {"node": "n", "way": "w", "relation": "r"}
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build the V2 London crawl planner site and data.")
+    parser = argparse.ArgumentParser(description="Build the crawl planner site and per-city data.")
     parser.add_argument("--refresh-pubs", action="store_true", help="Refresh pub data from OpenStreetMap.")
     parser.add_argument("--refresh-pois", action="store_true", help="Refresh POI data from OSM and Open Plaques.")
     parser.add_argument("--refresh-all", action="store_true", help="Refresh both datasets.")
+    parser.add_argument(
+        "--cities",
+        default="all",
+        help="Comma-separated city ids to refresh (from cities.json), or 'all'. Default: %(default)s",
+    )
     parser.add_argument(
         "--publish-docs",
         action="store_true",
@@ -545,17 +551,36 @@ def content_version(paths: list[Path]) -> str:
     return digest.hexdigest()[:12]
 
 
-def write_site(dataset: dict[str, Any]) -> str:
+def city_public_config(city_id: str, config: dict[str, Any], dataset: dict[str, Any]) -> dict[str, Any]:
+    """What the app needs to know about a city (no fetch details)."""
+    return {
+        "id": city_id,
+        "name": config["name"],
+        "center": config["center"],
+        "bounds": config["bounds"],
+        "minZoom": config.get("minZoom", 9),
+        "dailyAreas": config.get("dailyAreas", []),
+        "data": f"data/places-{city_id}.json",
+        "pubs": len(dataset["pubs"]),
+        "pois": len(dataset["pois"]),
+    }
+
+
+def write_site(datasets: dict[str, dict[str, Any]], cities: dict[str, dict[str, Any]]) -> str:
     if PUBLIC_DIR.exists():
         shutil.rmtree(PUBLIC_DIR)
     shutil.copytree(SITE_DIR, PUBLIC_DIR)
 
     data_dir = PUBLIC_DIR / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
-    data_json = dumps_compact(dataset)
-    (data_dir / "places.json").write_text(data_json, encoding="utf-8")
-    # Fallback for opening index.html straight from disk (file:// cannot fetch JSON).
-    (data_dir / "places.js").write_text(f"window.__PUBGEN_DATA__={data_json};\n", encoding="utf-8")
+    for city_id, dataset in datasets.items():
+        data_json = dumps_compact(dataset)
+        (data_dir / f"places-{city_id}.json").write_text(data_json, encoding="utf-8")
+        # Fallback for opening index.html straight from disk (file:// cannot fetch JSON).
+        (data_dir / f"places-{city_id}.js").write_text(f"window.__PUBGEN_DATA__={data_json};\n", encoding="utf-8")
+    public_cities = [city_public_config(city_id, cities[city_id], datasets[city_id]) for city_id in datasets]
+    (data_dir / "cities.json").write_text(dumps_compact(public_cities), encoding="utf-8")
+    (data_dir / "cities.js").write_text(f"window.__PUBGEN_CITIES__={dumps_compact(public_cities)};\n", encoding="utf-8")
     (PUBLIC_DIR / ".nojekyll").write_text("", encoding="utf-8")
 
     files = [path for path in PUBLIC_DIR.rglob("*") if path.is_file()]
@@ -578,44 +603,45 @@ def mirror_public_to_docs() -> None:
 def main() -> int:
     args = parse_args()
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    pubs_path = DATA_DIR / "london_pubs.geojson"
-    pois_path = DATA_DIR / "london_pois.geojson"
+    cities = json.loads(CITIES_PATH.read_text(encoding="utf-8"))
+    refresh_cities = set(cities) if args.cities == "all" else set(filter(None, args.cities.split(",")))
+    unknown = refresh_cities - set(cities)
+    if unknown:
+        raise SystemExit(f"Unknown cities: {', '.join(sorted(unknown))}")
 
-    if args.refresh_all or args.refresh_pubs or not pubs_path.exists():
-        refresh_dataset(
-            pubs_path,
-            [sys.executable, str(SCRIPTS_DIR / "fetch_london_pubs.py"), "--require-name", "--geojson"],
-            "pubs",
-        )
-    if args.refresh_all or args.refresh_pois or not pois_path.exists():
-        refresh_dataset(
-            pois_path,
-            [sys.executable, str(SCRIPTS_DIR / "fetch_london_pois_v2.py"), "--output"],
-            "POIs",
-        )
+    datasets: dict[str, dict[str, Any]] = {}
+    summary: dict[str, Any] = {}
+    for city_id in cities:
+        pubs_path = DATA_DIR / f"{city_id}_pubs.geojson"
+        pois_path = DATA_DIR / f"{city_id}_pois.geojson"
+        refreshing = city_id in refresh_cities
+        if refreshing and (args.refresh_all or args.refresh_pubs):
+            refresh_dataset(
+                pubs_path,
+                [sys.executable, str(SCRIPTS_DIR / "fetch_london_pubs.py"), "--city", city_id, "--require-name", "--geojson"],
+                f"{city_id} pubs",
+            )
+        if refreshing and (args.refresh_all or args.refresh_pois):
+            refresh_dataset(
+                pois_path,
+                [sys.executable, str(SCRIPTS_DIR / "fetch_london_pois_v2.py"), "--city", city_id, "--output"],
+                f"{city_id} POIs",
+            )
+        if not pubs_path.exists() or not pois_path.exists():
+            print(f"Skipping {city_id}: no data yet (run with --refresh-all --cities {city_id})", flush=True)
+            continue
+        pubs_geojson = json.loads(pubs_path.read_text(encoding="utf-8"))
+        pois_geojson = json.loads(pois_path.read_text(encoding="utf-8"))
+        datasets[city_id] = build_dataset(pubs_geojson, pois_geojson)
+        summary[city_id] = {"pubs": len(datasets[city_id]["pubs"]), "pois": len(datasets[city_id]["pois"])}
 
-    pubs_geojson = json.loads(pubs_path.read_text(encoding="utf-8"))
-    pois_geojson = json.loads(pois_path.read_text(encoding="utf-8"))
-    dataset = build_dataset(pubs_geojson, pois_geojson)
-    version = write_site(dataset)
-
+    if "london" not in datasets:
+        raise SystemExit("London data is missing; the site needs it as the default city.")
+    version = write_site(datasets, cities)
     if args.publish_docs:
         mirror_public_to_docs()
 
-    print(
-        json.dumps(
-            {
-                "version": version,
-                "public_dir": str(PUBLIC_DIR),
-                "docs_dir": str(DOCS_DIR) if args.publish_docs else "",
-                "pubs": len(dataset["pubs"]),
-                "pois": len(dataset["pois"]),
-                "categories": len(dataset["categories"]),
-                "data_bytes": (PUBLIC_DIR / "data" / "places.json").stat().st_size,
-            },
-            indent=2,
-        )
-    )
+    print(json.dumps({"version": version, "public_dir": str(PUBLIC_DIR), "cities": summary}, indent=2))
     return 0
 
 

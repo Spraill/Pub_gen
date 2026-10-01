@@ -14,7 +14,8 @@ const SHELL = [
   `./vendor/leaflet/leaflet.css?v=${VERSION}`,
   `./vendor/markercluster/leaflet.markercluster.js?v=${VERSION}`,
   `./vendor/markercluster/MarkerCluster.css?v=${VERSION}`,
-  `./data/places.json?v=${VERSION}`,
+  `./data/cities.json?v=${VERSION}`,
+  `./data/places-london.json?v=${VERSION}`,
   "./icon.svg",
   "./manifest.webmanifest",
 ];

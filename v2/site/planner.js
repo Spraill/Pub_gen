@@ -11,8 +11,12 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
 
-  const REF_LAT = 51.509865;
-  const METERS_PER_DEG_LON = 111320 * Math.cos((REF_LAT * Math.PI) / 180);
+  // Distances use a flat projection around the current city's latitude.
+  let METERS_PER_DEG_LON = 111320 * Math.cos((51.509865 * Math.PI) / 180);
+
+  function setReferenceLatitude(lat) {
+    METERS_PER_DEG_LON = 111320 * Math.cos((lat * Math.PI) / 180);
+  }
   const METERS_PER_DEG_LAT = 110540;
   // Straight-line distances underestimate real walking routes.
   const STRAIGHT_LINE_DETOUR = 1.25;
@@ -874,6 +878,7 @@
       keywords: /\b(great fire|wren|stuart|plague|pepys|charles ii|james i)\b/,
       pubs: [
         [/\bye olde cheshire cheese\b/, "Rebuilt just after the Great Fire, 1667"],
+        [/\bye olde starre\b/, "Licensed in 1644, during the Civil War siege of York"],
         [/\bye olde watling\b/, "Built by Wren in 1668 from ships' timbers"],
         [/\bking charles\b/, "Named after a Stuart king"],
         [/\b(samuel pepys|the pepys)\b/, "Named after diarist Samuel Pepys"],
@@ -888,6 +893,7 @@
       keywords: /\b(tudor|henry viii|anne boleyn|wolsey|thomas more|thomas cromwell)\b/,
       pubs: [
         [/\bthe boleyn\b/, "Named after Anne Boleyn"],
+        [/\bguy fawkes\b.*\|.*\byo\d/, "Birthplace of Guy Fawkes, born 1570"],
         [/\bking henry\b/, "Named after a Tudor king"],
         [/\bye olde mitre\b/, "Founded 1546 for the Bishop of Ely's servants"],
         [/\bprospect of whitby\b/, "Riverside tavern dating from around 1520"],
@@ -920,6 +926,7 @@
         [/\bjerusalem tavern\b/, "Named after the Priory of St John (Knights Hospitaller)"],
         [/\bye olde mitre\b/, "In the grounds of the Bishops of Ely's medieval palace"],
         [/\bcittie of yorke\b/, "On the site of a pub dating from 1430"],
+        [/\bblack swan\b.*\|.*\byo\d/, "Timber-framed house dating from the 1400s"],
       ],
       historicPubs: true,
     },
@@ -1065,6 +1072,10 @@
       exclude: /police (box|call ?box|station|museum)|callbox|ghost bike|ghost sign/,
       pubs: [
         [/\bten bells\b/, "Jack the Ripper's victims drank here in 1888"],
+        [/\bgolden fleece\b.*\|.*\byo\d/, "Said to be York's most haunted pub"],
+        [/\bguy fawkes\b.*\|.*\byo\d/, "Gunpowder plotter Guy Fawkes was born here in 1570"],
+        [/\bblack swan\b.*\|.*\byo\d/, "Medieval inn said to be haunted by several ghosts"],
+        [/\bye olde starre\b/, "York's oldest licensed inn; its cellar was a Civil War hospital"],
         [/\bblind beggar\b/, "Ronnie Kray shot George Cornell at the bar in 1966"],
         [/\bcarpenters arms\b.*\|.*cheshire street/, "Bought by the Kray twins for their mother"],
         [/\bviaduct tavern\b/, "Its cellars are said to be old Newgate Prison cells, and it's reputedly haunted"],
@@ -1632,30 +1643,6 @@
 
   // ------------------------------------------------------------------ crawl of the day
 
-  // Ordered so consecutive days hop between different parts of London.
-  const DAILY_AREAS = [
-    { name: "the City", region: "City", lat: 51.5136, lon: -0.0925, radius: 900 },
-    { name: "the West End", region: "West End", lat: 51.5125, lon: -0.133, radius: 900 },
-    { name: "Shoreditch & Spitalfields", region: "East", lat: 51.5235, lon: -0.076, radius: 1000 },
-    { name: "Camden & Primrose Hill", region: "North", lat: 51.5395, lon: -0.146, radius: 1100 },
-    { name: "the South Bank & Borough", region: "South", lat: 51.505, lon: -0.096, radius: 1000 },
-    { name: "Kensington & Chelsea", region: "West", lat: 51.4965, lon: -0.172, radius: 1200 },
-    { name: "Fleet Street & Temple", region: "City", lat: 51.5135, lon: -0.109, radius: 800 },
-    { name: "Greenwich", region: "South East", lat: 51.481, lon: -0.005, radius: 1100 },
-    { name: "Hampstead", region: "North", lat: 51.5565, lon: -0.177, radius: 1200 },
-    { name: "Westminster", region: "Central", lat: 51.5005, lon: -0.13, radius: 1000 },
-    { name: "Wapping & Limehouse", region: "East", lat: 51.507, lon: -0.054, radius: 1300 },
-    { name: "Bloomsbury & Holborn", region: "Central", lat: 51.5195, lon: -0.123, radius: 900 },
-    { name: "Notting Hill & Bayswater", region: "West", lat: 51.512, lon: -0.196, radius: 1100 },
-    { name: "Islington & Clerkenwell", region: "North", lat: 51.528, lon: -0.103, radius: 1100 },
-    { name: "Bermondsey & Rotherhithe", region: "South", lat: 51.4995, lon: -0.066, radius: 1200 },
-    { name: "Marylebone", region: "West End", lat: 51.52, lon: -0.153, radius: 1000 },
-    { name: "Hackney & Victoria Park", region: "East", lat: 51.538, lon: -0.048, radius: 1400 },
-    { name: "Richmond", region: "South West", lat: 51.4605, lon: -0.304, radius: 1300 },
-    { name: "Covent Garden & the Strand", region: "West End", lat: 51.5115, lon: -0.122, radius: 800 },
-    { name: "Hammersmith & Chiswick", region: "West", lat: 51.4895, lon: -0.24, radius: 1500 },
-  ];
-
   const DAILY_OPTIONS = {
     pubCount: 4,
     maxPubsPerGap: 4,
@@ -1711,9 +1698,10 @@
    * that changes daily, with two more quality sights nearby; planRoute adds the
    * pubs (4–5 in total, finishing at a pub).
    */
-  function pickDailyCrawl(pois, pubs, dateKey) {
+  function pickDailyCrawl(pois, pubs, dateKey, areas) {
+    if (!areas || !areas.length) return null;
     const day = dayNumber(dateKey);
-    const area = DAILY_AREAS[((day % DAILY_AREAS.length) + DAILY_AREAS.length) % DAILY_AREAS.length];
+    const area = areas[((day % areas.length) + areas.length) % areas.length];
     const rng = createRng(`daily-v2:${dateKey}`);
 
     let heroes = [];
@@ -1859,6 +1847,7 @@
     FLAGS,
     CATEGORY_LABELS,
     decodeDataset,
+    setReferenceLatitude,
     distance,
     pathLength,
     straightLineEstimate,
@@ -1897,7 +1886,6 @@
     commonsFileFromUrl,
     bearing,
     pickFacingPhotos,
-    DAILY_AREAS,
     londonDateKey,
     dayNumber,
     pickDailyCrawl,
