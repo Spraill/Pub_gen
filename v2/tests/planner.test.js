@@ -410,6 +410,21 @@ test("crime is about crime and ghosts, not police boxes", () => {
   assert.ok(stories.some((story) => story.theme === "crime" && story.curated));
 });
 
+test("money theme: banks, markets and coffee houses, not the merchant navy", () => {
+  const money = P.themeById("money");
+  const lloyds = poi("n30", 51.5, -0.1, { title: "Lloyd's of London" });
+  assert.equal(P.themeReason(lloyds, money), "Linked to: “Lloyd's of London”");
+  const navy = poi("n31", 51.5, -0.1, { title: "Memorial", description: "To the merchant navy seamen lost in 1982" });
+  assert.equal(P.themeReason(navy, money), "");
+  const jamaica = pub("pn32", 51.5, -0.1);
+  jamaica.title = "Jamaica Wine House";
+  assert.match(P.themeReason(jamaica, money), /first coffee house/);
+  const exchange = pub("pn33", 51.5, -0.1);
+  exchange.title = "Royal Exchange";
+  exchange.address = "26 Sale Place, London, W2 1PU";
+  assert.equal(P.themeReason(exchange, money), "");
+});
+
 test("every curated pub rule matches a real pub", { skip: !data && "run build_v2.py first" }, () => {
   const misses = [];
   const yorkPath = path.join(__dirname, "..", "public", "data", "places-york.json");

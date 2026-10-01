@@ -1108,6 +1108,27 @@
       ],
     },
     {
+      id: "money", name: "Money, markets & merchants", icon: "💷",
+      blurb: "The Bank of England, livery halls, old markets and the coffee houses where the City's fortunes began.",
+      keywords: /\b(bank of england|royal exchange|stock exchange|lloyd'?s (of london|building|register)|coffee ?houses?|livery (hall|company)|worshipful company|guildhall|east india (company|house|dock)|royal mint|leadenhall market|smithfield|billingsgate (market|fish market)|spitalfields market|borough market|corn exchange|coal exchange|wool exchange|south sea|merchant adventurers|merchants?(?! navy| seam[ae]n| ships?\b)|bankers?|banking|economists?|financiers?|keynes|adam smith|ricardo|rothschild|goldsmiths'?|mercers'?|drapers'?|fishmongers'?|vintners'?|skinners'?|grocers'?|clothworkers'?|ironmongers'?|haberdashers'?|salters'?|custom ?house|stockbrokers?|hudson'?s bay)\b/,
+      pubs: [
+        [/\bjamaica wine house\b/, "On the site of London's first coffee house, opened in 1652"],
+        [/\bold bank of england\b/, "Built in 1888 as the Bank of England's Law Courts branch"],
+        [/\bsimpson'?s tavern\b/, "Chop house feeding City traders since 1757"],
+        [/\bcounting house\b.*\|.*cornhill/, "In a grand Victorian banking hall"],
+        [/\bcrosse keys\b.*\|.*gracechurch/, "In the former banking hall of the Hongkong and Shanghai Bank"],
+        [/\bbarrowboy (&|and) banker\b/, "In an old bank building by London Bridge"],
+        [/\bthe banker\b.*\|.*cousin lane/, "Named for the City bankers who drink there"],
+        [/\blamb tavern\b.*\|.*leadenhall/, "Inside Leadenhall Market, trading since the 1300s"],
+        [/\bmarket porter\b/, "Opens early for Borough Market's traders"],
+        [/\bthe hope\b.*\|.*cowcross/, "Early licence for Smithfield meat market workers"],
+        [/\bfox (&|and) anchor\b.*\|.*charterhouse/, "Smithfield market pub with an early licence"],
+        [/\bhand (&|and) shears\b/, "Named for the cloth traders of Bartholomew Fair"],
+        [/\beast india arms\b/, "Named for the East India Company, headquartered nearby"],
+        [/\bleather exchange\b/, "In Bermondsey's old leather market"],
+      ],
+    },
+    {
       id: "sacred", name: "Churches & cathedrals", icon: "⛪", categories: ["religious"], nameOnly: true,
       blurb: "Wren spires, cathedrals, synagogues and hidden chapels.",
       keywords: /\b(church|cathedral|abbey|chapel|synagogue|temple|mosque|priory)\b/,
@@ -1182,7 +1203,10 @@
     /resource centre|community centre|leisure centre|housing|\bestate\b|school|library|church of christ,? scientist|christian science|car park|house of fraser|business centre/;
 
   function titleCase(word) {
-    return word.replace(/\b\w/g, (letter) => letter.toUpperCase());
+    // "lloyd's of london" -> "Lloyd's of London" (no capital after an apostrophe; small words stay small)
+    return word.replace(/(^|[\s-])(\w+)/g, (match, gap, part, offset) =>
+      offset > 0 && /^(of|and|the|in|on|at|to|for)$/.test(part) ? match : gap + part[0].toUpperCase() + part.slice(1)
+    );
   }
 
   /** Why a sight fits a theme ("" if it doesn't). */
