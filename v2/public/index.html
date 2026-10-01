@@ -2,216 +2,264 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>London Crawl Planner V2</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
-  >
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
-  >
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
-  >
-  <link rel="stylesheet" href="./styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>London Crawl Planner</title>
+  <meta name="description" content="Plan walking pub crawls across London that pass museums, blue plaques, parks and other interesting sights. Save routes and share them with friends.">
+  <meta name="theme-color" content="#253050" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14171f" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="London Crawl Planner">
+  <meta property="og:description" content="Walking pub crawls through London's sights. Plan, save and share routes.">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="preload" href="./data/places.json?v=94e6876df05f" as="fetch" crossorigin>
+  <link rel="stylesheet" href="./vendor/leaflet/leaflet.css?v=94e6876df05f">
+  <link rel="stylesheet" href="./vendor/markercluster/MarkerCluster.css?v=94e6876df05f">
+  <link rel="stylesheet" href="./styles.css?v=94e6876df05f">
+  <script defer src="./vendor/leaflet/leaflet.js?v=94e6876df05f"></script>
+  <script defer src="./vendor/markercluster/leaflet.markercluster.js?v=94e6876df05f"></script>
+  <script defer src="./planner.js?v=94e6876df05f"></script>
+  <script defer src="./app.js?v=94e6876df05f" data-version="94e6876df05f" id="app-script"></script>
 </head>
 <body>
-  <div id="map"></div>
+  <div id="map" aria-label="Map of London pubs and sights"></div>
 
-  <header class="floating-card intro-card">
-    <h1>London Crawl Planner V2</h1>
-    <p>London pubs plus a wider open-data mix of museums, plaques, parks, gardens, theatres, heritage sites and other interesting stops.</p>
-    <div class="metric-inline">
-      <span id="intro-poi-count">0</span> POIs
-      <span class="separator">•</span>
-      <span id="intro-pub-count">0</span> pubs
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-mark" src="./icon.svg" alt="" width="36" height="36">
+      <div class="brand-text">
+        <h1>London Crawl Planner</h1>
+        <p class="brand-sub"><span id="count-pois">…</span> sights · <span id="count-pubs">…</span> pubs</p>
+      </div>
     </div>
-    <div class="legend-row">
-      <span class="legend-pill poi">Interesting POIs</span>
-      <span class="legend-pill pub">Pubs</span>
+    <div class="search" id="search">
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 0 1 5.96 12.06l4.24 4.24-1.4 1.4-4.24-4.24A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>
+      <input id="search-input" type="search" placeholder="Search pubs, museums, plaques…" autocomplete="off" spellcheck="false"
+        role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" aria-label="Search pubs and sights">
+      <ul id="search-results" class="search-results" role="listbox" hidden></ul>
     </div>
   </header>
 
-  <aside class="planner-shell">
-    <div class="planner-scroll">
-      <section class="panel-block">
-        <div class="panel-header-row">
-          <h2>Filters</h2>
-          <button id="mobile-collapse-button" class="ghost-button mobile-only" type="button">Hide</button>
+  <div class="map-buttons">
+    <button id="locate-button" class="map-button" type="button" aria-label="Show my location" title="Show my location">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v2.07A8 8 0 0 1 19.93 11H22v2h-2.07A8 8 0 0 1 13 19.93V22h-2v-2.07A8 8 0 0 1 4.07 13H2v-2h2.07A8 8 0 0 1 11 4.07V2Zm1 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/></svg>
+    </button>
+    <button id="layers-button" class="map-button" type="button" aria-label="Map filters" title="Map filters" aria-controls="filters-details">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 1 8l11 6 11-6-11-6Zm-8.4 10.3L1 13.7 12 20l11-6.3-2.6-1.4L12 17.1l-8.4-4.8Z"/></svg>
+    </button>
+  </div>
+
+  <aside id="sheet" class="sheet" data-state="peek" aria-label="Crawl planner">
+    <div id="sheet-grip" class="sheet-grip">
+      <button id="sheet-handle" class="sheet-handle" type="button" aria-label="Expand planner" aria-expanded="false"><span></span></button>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" type="button" id="tab-plan" data-tab="plan" aria-selected="true" aria-controls="panel-plan">Plan</button>
+        <button class="tab" role="tab" type="button" id="tab-route" data-tab="route" aria-selected="false" aria-controls="panel-route" tabindex="-1">Route <span id="route-badge" class="badge" hidden></span></button>
+        <button class="tab" role="tab" type="button" id="tab-saved" data-tab="saved" aria-selected="false" aria-controls="panel-saved" tabindex="-1">Saved <span id="saved-badge" class="badge" hidden></span></button>
+      </div>
+    </div>
+
+    <div class="sheet-body" id="sheet-body">
+      <!-- ============================== PLAN -->
+      <section id="panel-plan" class="panel" role="tabpanel" aria-labelledby="tab-plan">
+        <div class="segmented" role="radiogroup" aria-label="Planning mode">
+          <button type="button" role="radio" data-mode="pick" aria-checked="true">Choose stops</button>
+          <button type="button" role="radio" data-mode="random" aria-checked="false">Surprise me</button>
         </div>
 
-        <div class="field">
-          <label for="poi-search-input">Search POIs</label>
-          <input id="poi-search-input" type="search" placeholder="Museum, plaque, garden...">
-        </div>
-
-        <div class="field">
-          <label for="score-threshold-input">Minimum POI interest score: <output id="score-threshold-output">25</output></label>
-          <input id="score-threshold-input" type="range" min="0" max="100" step="5" value="25">
-          <small>V2 uses an open-data interest score rather than proprietary star reviews.</small>
-        </div>
-
-        <div class="toggle-grid">
-          <label class="toggle-chip"><input id="show-pois-input" type="checkbox" checked> Show POIs</label>
-          <label class="toggle-chip"><input id="show-pubs-input" type="checkbox" checked> Show pubs</label>
-        </div>
-
-        <div class="field">
-          <label>POI categories</label>
-          <div class="action-row compact-row">
-            <button id="select-all-categories-button" class="ghost-button" type="button">Select all</button>
-            <button id="clear-all-categories-button" class="ghost-button" type="button">Clear all</button>
-          </div>
-          <div id="category-filter-list" class="category-list"></div>
-        </div>
-      </section>
-
-      <section class="panel-block">
-        <div class="tab-row">
-          <button id="tab-guided" class="tab-button active" type="button" data-tab="guided">Targeted Crawl</button>
-          <button id="tab-random" class="tab-button" type="button" data-tab="random">Random Area</button>
-        </div>
-
-        <div id="panel-guided" class="tab-panel active">
-          <p class="help-note">Pick POIs from the map using the orange markers. Then generate a crawl through those exact stops.</p>
-          <div id="selected-pois-empty" class="empty-state">No POIs selected yet. Open a POI marker and press “Add to crawl”.</div>
-          <ul id="selected-pois-list" class="data-list"></ul>
-          <div class="action-row">
-            <button id="generate-guided-button" class="primary-button" type="button">Generate targeted crawl</button>
-            <button id="clear-selection-button" class="secondary-button" type="button">Clear POIs</button>
+        <div id="mode-pick" class="mode">
+          <p class="hint">Tap a marker or search, then press <strong>Add to crawl</strong>. Sights and pubs you add are must-visit stops.</p>
+          <ol id="selected-list" class="stop-list"></ol>
+          <div id="selected-empty" class="empty">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 1 7 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 0 1 7-7Zm0 4.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"/></svg>
+            <span>No stops chosen yet.</span>
           </div>
         </div>
 
-        <div id="panel-random" class="tab-panel">
-          <p class="help-note">Generate a random crawl from the current filters, or turn on a movable area to limit the crawl to a specific region. Drag the red marker or the red circle itself to move the active region.</p>
-
-          <div class="field">
-            <label class="toggle-chip area-toggle" for="enable-random-area-input">
-              <input id="enable-random-area-input" type="checkbox">
-              Constrain crawl to movable area
-            </label>
-            <small>When enabled, the red circle limits random POI picks. Drag the marker, click the map, or use the current map centre to move it.</small>
+        <div id="mode-random" class="mode" hidden>
+          <p class="hint">We'll pick well-rated sights close together, then add pubs along the way. Set sights to 0 for a pub-only crawl.</p>
+          <div class="field-row">
+            <span class="field-label" id="random-count-label">Sights to visit</span>
+            <div class="stepper" data-stepper>
+              <button type="button" class="stepper-btn" data-step="-1" aria-label="Fewer sights">−</button>
+              <input id="random-poi-count" type="number" inputmode="numeric" min="0" max="8" value="3" aria-labelledby="random-count-label">
+              <button type="button" class="stepper-btn" data-step="1" aria-label="More sights">+</button>
+            </div>
           </div>
-
-          <div id="random-area-controls" class="random-area-controls">
+          <label class="switch-row">
+            <span>Keep it within an area</span>
+            <input id="area-enabled" type="checkbox" class="switch">
+          </label>
+          <div id="area-controls" class="area-controls" hidden>
             <div class="field">
-            <label for="random-radius-input">Area radius: <output id="random-radius-output">1200 m</output></label>
-            <input id="random-radius-input" type="range" min="300" max="5000" step="100" value="1200">
+              <label for="area-radius">Area radius <output id="area-radius-output">1.2 km</output></label>
+              <input id="area-radius" type="range" min="300" max="5000" step="100" value="1200">
             </div>
-
-            <div class="action-row">
-              <button id="set-area-from-center-button" class="secondary-button" type="button">Use map centre</button>
+            <div class="button-row">
+              <button id="area-from-map" class="btn small" type="button">Use map centre</button>
+              <button id="area-from-me" class="btn small" type="button">Use my location</button>
             </div>
+            <p class="hint">Drag the red pin or tap the map to move the area.</p>
           </div>
+          <p id="area-status" class="hint subtle"></p>
+        </div>
 
-          <div class="two-col-grid">
+        <div class="field-row">
+          <span class="field-label" id="pub-count-label">Extra pubs along the way</span>
+          <div class="stepper" data-stepper>
+            <button type="button" class="stepper-btn" data-step="-1" aria-label="Fewer pubs">−</button>
+            <input id="pub-count" type="number" inputmode="numeric" min="0" max="12" value="3" aria-labelledby="pub-count-label">
+            <button type="button" class="stepper-btn" data-step="1" aria-label="More pubs">+</button>
+          </div>
+        </div>
+
+        <div id="plan-status" class="status" role="status"></div>
+
+        <details class="drawer" id="options-details">
+          <summary>Route options</summary>
+          <div class="drawer-body">
+            <div class="field-grid">
+              <div class="field">
+                <label for="order-mode">Stop order</label>
+                <select id="order-mode">
+                  <option value="optimize">Shortest walk</option>
+                  <option value="selected">As listed</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="walk-style">Pub choice</label>
+                <select id="walk-style">
+                  <option value="quiet">Quieter, scenic spots</option>
+                  <option value="balanced">Closest to route</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="meal-stop">Meal stop</label>
+                <select id="meal-stop">
+                  <option value="none">None</option>
+                  <option value="middle">Food pub midway</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="max-per-leg">Max pubs per leg</label>
+                <input id="max-per-leg" type="number" inputmode="numeric" min="1" max="6" value="3">
+              </div>
+            </div>
             <div class="field">
-              <label for="random-poi-count-input">Random POIs</label>
-              <input id="random-poi-count-input" type="number" min="1" max="8" step="1" value="3">
+              <label for="detour">Max detour to a pub <output id="detour-output">1.2 km</output></label>
+              <input id="detour" type="range" min="200" max="2500" step="100" value="1200">
+            </div>
+            <div class="chip-grid">
+              <label class="chip"><input id="round-trip" type="checkbox"> Return to start</label>
+              <label class="chip"><input id="require-food" type="checkbox"> Pubs must serve food</label>
+              <label class="chip"><input id="require-step-free" type="checkbox"> Step-free pubs only</label>
+              <label class="chip"><input id="prefer-real-ale" type="checkbox"> Prefer real ale</label>
+              <label class="chip"><input id="prefer-outdoor" type="checkbox"> Prefer outdoor seating</label>
+              <label class="chip"><input id="prefer-dog" type="checkbox"> Prefer dog friendly</label>
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="minutes-per-pub">Minutes per pub</label>
+                <input id="minutes-per-pub" type="number" inputmode="numeric" min="0" max="180" step="5" value="40">
+              </div>
+              <div class="field">
+                <label for="minutes-per-sight">Minutes per sight</label>
+                <input id="minutes-per-sight" type="number" inputmode="numeric" min="0" max="180" step="5" value="15">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="drawer" id="filters-details">
+          <summary>Map filters <span id="filter-summary" class="drawer-note"></span></summary>
+          <div class="drawer-body">
+            <div class="chip-grid two">
+              <label class="chip"><input id="show-pois" type="checkbox" checked> <span class="dot poi"></span> Show sights</label>
+              <label class="chip"><input id="show-pubs" type="checkbox" checked> <span class="dot pub"></span> Show pubs</label>
             </div>
             <div class="field">
-              <label for="random-seed-input">Shuffle seed</label>
-              <input id="random-seed-input" type="number" min="1" max="999999" step="1" value="42">
+              <label for="min-score">Minimum sight interest <output id="min-score-output">25</output></label>
+              <input id="min-score" type="range" min="0" max="100" step="5" value="25">
+              <small class="hint subtle">An open-data score: museums, listed buildings and well-documented places rank higher.</small>
+            </div>
+            <div class="field">
+              <div class="label-row">
+                <span class="field-label">Sight categories</span>
+                <span class="button-row tight">
+                  <button id="categories-all" class="btn link" type="button">All</button>
+                  <button id="categories-none" class="btn link" type="button">None</button>
+                </span>
+              </div>
+              <div id="category-list" class="category-list"></div>
             </div>
           </div>
+        </details>
+      </section>
 
-          <div class="action-row">
-            <button id="generate-random-button" class="primary-button" type="button">Generate random crawl</button>
+      <!-- ============================== ROUTE -->
+      <section id="panel-route" class="panel" role="tabpanel" aria-labelledby="tab-route" hidden>
+        <div id="route-empty" class="empty">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3a3 3 0 0 1 2.83 4H15a4 4 0 0 1 0 8H9a2 2 0 0 0 0 4h6.17A3 3 0 1 1 15 21H9a4 4 0 0 1 0-8h6a2 2 0 0 0 0-4H8.83A3 3 0 1 1 6 3Z"/></svg>
+          <span>No route yet. Choose some stops on the Plan tab.</span>
+        </div>
+        <div id="route-content" hidden>
+          <div class="route-title-row">
+            <input id="route-name" class="route-name" type="text" maxlength="80" aria-label="Route name" placeholder="Name this crawl">
+            <span id="route-saved-flag" class="saved-flag" hidden>Saved</span>
           </div>
-          <div id="random-area-status" class="status-box area-status">Turn on the movable area to constrain the crawl to a local region.</div>
+          <div class="summary">
+            <div><span>Stops</span><strong id="sum-stops">–</strong></div>
+            <div><span>Walk</span><strong id="sum-distance">–</strong></div>
+            <div><span>Walking</span><strong id="sum-walk">–</strong></div>
+            <div><span>With stops</span><strong id="sum-total">–</strong></div>
+          </div>
+          <div id="route-status" class="status" role="status"></div>
+          <ol id="route-list" class="stop-list route"></ol>
+          <div class="button-row wrap export-row">
+            <button id="gpx-button" class="btn small" type="button">Download GPX</button>
+            <button id="gmaps-button" class="btn small" type="button">Open in Google Maps</button>
+            <button id="clear-route-button" class="btn small ghost" type="button">Clear route</button>
+          </div>
         </div>
       </section>
 
-      <section class="panel-block">
-        <h2>Route Settings</h2>
-        <div class="three-col-grid">
-          <div class="field">
-            <label for="pub-count-input">Pub stops</label>
-            <input id="pub-count-input" type="number" min="0" max="12" step="1" value="3">
-          </div>
-          <div class="field">
-            <label for="max-pubs-per-gap-input">Max pubs per leg</label>
-            <input id="max-pubs-per-gap-input" type="number" min="0" max="6" step="1" value="2">
-          </div>
-          <div class="field">
-            <label for="poi-order-input">POI order</label>
-            <select id="poi-order-input">
-              <option value="selected">Keep selected order</option>
-              <option value="optimize">Optimize POI order</option>
-            </select>
-          </div>
+      <!-- ============================== SAVED -->
+      <section id="panel-saved" class="panel" role="tabpanel" aria-labelledby="tab-saved" hidden>
+        <div id="saved-empty" class="empty">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1Z"/></svg>
+          <span>Saved crawls appear here. They're stored on this device. Use <strong>Share</strong> to send one to a friend or another device.</span>
         </div>
-
-        <div class="two-col-grid">
-          <div class="field">
-            <label for="walking-style-input">Walking style</label>
-            <select id="walking-style-input">
-              <option value="quiet">Quieter / scenic bias</option>
-              <option value="balanced">Balanced</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="meal-stop-input">Meal stop</label>
-            <select id="meal-stop-input">
-              <option value="none">No meal stop</option>
-              <option value="middle">Meal pub in the middle</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="pub-detour-input">Max pub detour from POI path: <output id="pub-detour-output">1200 m</output></label>
-          <input id="pub-detour-input" type="range" min="200" max="2500" step="100" value="1200">
-        </div>
-
-        <div class="toggle-grid">
-          <label class="toggle-chip"><input id="round-trip-input" type="checkbox"> Return to start</label>
-          <label class="toggle-chip"><input id="require-food-input" type="checkbox"> Require food-serving pubs</label>
-          <label class="toggle-chip"><input id="prefer-real-ale-input" type="checkbox"> Prefer real ale</label>
-          <label class="toggle-chip"><input id="prefer-outdoor-input" type="checkbox"> Prefer outdoor seating</label>
-        </div>
+        <ul id="saved-list" class="saved-list"></ul>
       </section>
 
-      <section class="panel-block">
-        <div class="panel-header-row">
-          <h2>Current Route</h2>
-          <button id="clear-route-button" class="ghost-button" type="button">Clear route</button>
-        </div>
-        <div class="summary-grid">
-          <div class="summary-card"><span class="summary-label">Selected POIs</span><strong id="summary-pois">0</strong></div>
-          <div class="summary-card"><span class="summary-label">Pub stops</span><strong id="summary-pubs">0</strong></div>
-          <div class="summary-card"><span class="summary-label">Distance</span><strong id="summary-distance">-</strong></div>
-          <div class="summary-card"><span class="summary-label">Walk time</span><strong id="summary-duration">-</strong></div>
-        </div>
-        <div id="planner-status" class="status-box">Loading datasets...</div>
-        <div id="route-empty" class="empty-state">No route generated yet.</div>
-        <ul id="route-stop-list" class="data-list"></ul>
-      </section>
+      <footer class="data-note" id="data-note"></footer>
+    </div>
 
-      <section class="panel-block">
-        <h2>Hosting</h2>
-        <p class="help-note">This app is static. Host the whole <code>public/</code> folder with Netlify, GitHub Pages, Cloudflare Pages, or any simple web server.</p>
-      </section>
+    <div class="sheet-footer" id="sheet-footer">
+      <div id="footer-plan" class="footer-row">
+        <button id="generate-button" class="btn primary grow" type="button">Plan my crawl</button>
+        <button id="clear-selection-button" class="btn ghost" type="button" aria-label="Clear chosen stops">Clear</button>
+      </div>
+      <div id="footer-route" class="footer-row" hidden>
+        <button id="save-button" class="btn primary grow" type="button">Save</button>
+        <button id="share-button" class="btn grow" type="button">Share</button>
+      </div>
     </div>
   </aside>
 
-  <button id="mobile-open-button" class="mobile-open-button mobile-only" type="button">Planner</button>
+  <div id="banner" class="banner" hidden role="status">
+    <span id="banner-text"></span>
+    <button id="banner-action" class="btn small primary" type="button"></button>
+    <button id="banner-close" class="banner-close" type="button" aria-label="Dismiss">×</button>
+  </div>
 
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <script src="./data/payload.js"></script>
-  <script src="./app.js"></script>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="loading" class="loading" role="status">
+    <div class="spinner" aria-hidden="true"></div>
+    <p id="loading-text">Loading London…</p>
+  </div>
+
+  <noscript><p class="noscript">London Crawl Planner needs JavaScript to draw the map and plan routes.</p></noscript>
 </body>
 </html>
