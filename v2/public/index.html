@@ -13,16 +13,16 @@
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./icon.svg">
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="preload" href="./data/places.json?v=85de0982eb76" as="fetch" crossorigin>
+  <link rel="preload" href="./data/places.json?v=1616af893a8e" as="fetch" crossorigin>
   <link rel="preload" href="./fonts/fraunces-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="./vendor/leaflet/leaflet.css?v=85de0982eb76">
-  <link rel="stylesheet" href="./vendor/markercluster/MarkerCluster.css?v=85de0982eb76">
-  <link rel="stylesheet" href="./styles.css?v=85de0982eb76">
-  <script defer src="./config.js?v=85de0982eb76"></script>
-  <script defer src="./vendor/leaflet/leaflet.js?v=85de0982eb76"></script>
-  <script defer src="./vendor/markercluster/leaflet.markercluster.js?v=85de0982eb76"></script>
-  <script defer src="./planner.js?v=85de0982eb76"></script>
-  <script defer src="./app.js?v=85de0982eb76" data-version="85de0982eb76" id="app-script"></script>
+  <link rel="stylesheet" href="./vendor/leaflet/leaflet.css?v=1616af893a8e">
+  <link rel="stylesheet" href="./vendor/markercluster/MarkerCluster.css?v=1616af893a8e">
+  <link rel="stylesheet" href="./styles.css?v=1616af893a8e">
+  <script defer src="./config.js?v=1616af893a8e"></script>
+  <script defer src="./vendor/leaflet/leaflet.js?v=1616af893a8e"></script>
+  <script defer src="./vendor/markercluster/leaflet.markercluster.js?v=1616af893a8e"></script>
+  <script defer src="./planner.js?v=1616af893a8e"></script>
+  <script defer src="./app.js?v=1616af893a8e" data-version="1616af893a8e" id="app-script"></script>
 </head>
 <body>
   <div id="map" aria-label="Map of London pubs and sights"></div>
@@ -238,7 +238,7 @@
           <span class="field-label" id="theme-sights-label">Sights</span>
           <div class="stepper" data-stepper>
             <button type="button" class="stepper-btn" data-step="-1" aria-label="Fewer sights">−</button>
-            <input id="theme-sights" type="number" inputmode="numeric" min="0" max="6" value="3" aria-labelledby="theme-sights-label">
+            <input id="theme-sights" type="number" inputmode="numeric" min="0" max="10" value="3" aria-labelledby="theme-sights-label">
             <button type="button" class="stepper-btn" data-step="1" aria-label="More sights">+</button>
           </div>
         </div>
@@ -246,7 +246,7 @@
           <span class="field-label" id="theme-pubs-label">Pubs</span>
           <div class="stepper" data-stepper>
             <button type="button" class="stepper-btn" data-step="-1" aria-label="Fewer pubs">−</button>
-            <input id="theme-pubs" type="number" inputmode="numeric" min="0" max="8" value="4" aria-labelledby="theme-pubs-label">
+            <input id="theme-pubs" type="number" inputmode="numeric" min="0" max="10" value="4" aria-labelledby="theme-pubs-label">
             <button type="button" class="stepper-btn" data-step="1" aria-label="More pubs">+</button>
           </div>
         </div>
@@ -274,6 +274,7 @@
             <span class="hint">Not feeling it?</span>
             <button id="reshuffle-button" class="btn small" type="button">↻ Another version</button>
           </div>
+          <p id="route-theme-note" class="theme-note" hidden></p>
           <div id="route-status" class="status" role="status"></div>
           <ol id="route-list" class="stop-list route"></ol>
           <div class="button-row wrap export-row">

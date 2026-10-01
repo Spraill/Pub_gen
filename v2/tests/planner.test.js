@@ -345,6 +345,48 @@ test("every theme makes walkable, on-theme crawls", { skip: !data && "run build_
   pubsOnly.plan.stops.forEach((stop) => assert.ok(P.themeMatchesPub(stop.place, P.themeById("maritime")), stop.place.title));
 });
 
+test("theme pub rules are specific and explain themselves", () => {
+  const tudor = P.themeById("tudor");
+  const stuart = P.themeById("stuart");
+  const royal = P.themeById("royal");
+  const cheese = pub("pn1", 51.5, -0.1);
+  cheese.title = "The Cheshire Cheese";
+  const olde = pub("pn2", 51.5, -0.1);
+  olde.title = "Ye Olde Cheshire Cheese";
+  const golden = pub("pn3", 51.5, -0.1);
+  golden.title = "The Golden Lion";
+  const kingsRoad = pub("pn4", 51.5, -0.1);
+  kingsRoad.title = "Chelsea Potter";
+  kingsRoad.address = "119 King's Road";
+  assert.equal(P.themeReason(cheese, tudor), "");
+  assert.equal(P.themeReason(cheese, stuart), "");
+  assert.equal(P.themeReason(olde, tudor), "");
+  assert.match(P.themeReason(olde, stuart), /Great Fire/);
+  assert.equal(P.themeReason(golden, tudor), "", "'olde' must not match 'Golden'");
+  assert.equal(P.themeReason(kingsRoad, royal), "", "broad name rules ignore the address");
+});
+
+test("themed crawls rarely use plaques and allow up to 10 sights", { skip: !data && "run build_v2.py first" }, () => {
+  const base = { ...BASE_OPTIONS, finish: "pub" };
+  let plaques = 0;
+  let total = 0;
+  P.THEMES.forEach((theme) => {
+    for (const seed of ["p1", "p2", "p3"]) {
+      const result = P.generateThemedCrawl(theme, data.pois, data.pubs, 4, 3, seed, base);
+      assert.equal(result.ok, true, `${theme.id}: ${result.error}`);
+      const sightStops = result.plan.stops.filter((stop) => stop.place.kind === "poi");
+      const count = sightStops.filter((stop) => stop.place.primary === "blue_plaque").length;
+      assert.ok(count <= 1, `${theme.id} has ${count} plaques`);
+      plaques += count;
+      total += sightStops.length;
+    }
+  });
+  assert.ok(plaques / total < 0.15, `plaques are ${plaques}/${total}`);
+  const big = P.generateThemedCrawl(P.themeById("sacred"), data.pois, data.pubs, 10, 6, "big", base);
+  assert.equal(big.ok, true, big.error);
+  assert.equal(big.plan.stops.filter((stop) => stop.place.kind === "poi").length, 10);
+});
+
 test("built dataset decodes and plans a real crawl", { skip: !data && "run build_v2.py first" }, () => {
   assert.ok(data.pubs.length > 1000);
   assert.ok(data.pois.length > 1000);

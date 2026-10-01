@@ -1131,6 +1131,7 @@
     els.routeBadge.textContent = String(uniqueStops.length);
     if (document.activeElement !== els.routeName) els.routeName.value = route.name || "";
     els.routeSavedFlag.hidden = !(route.savedId && !route.dirty);
+    renderThemeNote(route);
     // The crawl of the day is fixed for everyone, so it can't be re-rolled.
     document.querySelector(".reshuffle-row").hidden = route.source === "daily";
 
@@ -1155,9 +1156,8 @@
       const tags = [];
       if (stop.mealStop) tags.push('<span class="tag meal">Meal stop</span>');
       const theme = route.theme && P.themeById(route.theme);
-      if (theme && (place.kind === "pub" ? P.themeMatchesPub(place, theme) : P.themeMatchesSight(place, theme))) {
-        tags.push(`<span class="tag theme">${escapeHtml(theme.icon)} ${escapeHtml(theme.name)}</span>`);
-      }
+      const reason = theme ? P.themeReason(place, theme) : "";
+      if (reason) tags.push(`<span class="tag theme">${escapeHtml(theme.icon)} ${escapeHtml(reason)}</span>`);
       if (place.kind === "pub") P.pubFeatures(place).slice(0, 3).forEach((f) => tags.push(`<span class="tag">${escapeHtml(f)}</span>`));
       const actions = [
         `<button type="button" class="icon-btn" data-action="info" data-id="${escapeHtml(place.id)}" aria-label="About ${escapeHtml(place.title)}" title="About this place">${ICONS.info}</button>`,
@@ -1828,6 +1828,30 @@
     const theme = P.themeById(state.theme);
     $("theme-blurb").textContent = theme ? theme.blurb : "";
     $("theme-generate").textContent = theme ? `Generate ${theme.name} crawl` : "Generate themed crawl";
+  }
+
+  /** "Why this fits": the theme's story plus how many stops are on theme. */
+  function renderThemeNote(route) {
+    const note = $("route-theme-note");
+    const theme = route && route.theme && P.themeById(route.theme);
+    note.hidden = !theme;
+    if (!theme) return;
+    const unique = route.stops.filter((stop, index) => route.stops.findIndex((other) => other.place.id === stop.place.id) === index);
+    const sights = unique.filter((stop) => stop.place.kind === "poi");
+    const pubs = unique.filter((stop) => stop.place.kind === "pub");
+    const onTheme = (list) => list.filter((stop) => P.themeReason(stop.place, theme)).length;
+    const pubLine = pubs.length
+      ? onTheme(pubs) === pubs.length
+        ? "every pub has a link to it too"
+        : `${onTheme(pubs)} of ${pubs.length} pubs have a link (the rest are good historic pubs on the way)`
+      : "";
+    note.innerHTML =
+      `<strong>${escapeHtml(theme.icon)} Why this fits:</strong> ${escapeHtml(theme.blurb)} ` +
+      escapeHtml(
+        `${sights.length ? `${onTheme(sights)} of ${sights.length} sights are on theme` : "An all-pub crawl"}` +
+          (pubLine ? `, and ${pubLine}. ` : ". ") +
+          "Each stop's gold tag says how."
+      );
   }
 
   async function generateThemed(themeId) {
