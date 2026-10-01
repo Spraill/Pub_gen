@@ -643,6 +643,8 @@
     const photoHtml = photo
       ? `<button type="button" class="popup-photo" data-action="info" data-id="${escapeHtml(place.id)}" aria-label="Photos and more about ${escapeHtml(place.title)}"><img src="${escapeHtml(photo.thumb)}" alt="" loading="lazy"></button>`
       : "";
+    const story = P.placeStories(place)[0];
+    if (story) body = `<p class="popup-story">${escapeHtml(story.icon)} ${escapeHtml(story.reason)}</p>` + body;
     return `
       ${photoHtml}
       <div class="popup-kicker">${kicker}</div>
@@ -1181,6 +1183,7 @@
           <div class="stop-main" data-action="focus" data-id="${escapeHtml(place.id)}">
             <div class="stop-title">${isReturn ? "Back to " : ""}${escapeHtml(place.title)}</div>
             <div class="stop-meta">${escapeHtml(placeMeta(place))}</div>
+            ${stopBlurb(place, route)}
             ${tags.length ? `<div class="stop-tags">${tags.join("")}</div>` : ""}
           </div>
           <div class="stop-actions">${actions.join("")}</div>
@@ -1193,6 +1196,7 @@
       }
     });
     els.routeList.innerHTML = items.join("");
+    prefetchStopInfo(route);
     renderAdSlot();
   }
 
@@ -1549,6 +1553,14 @@
       );
     }
 
+    const stories = P.placeStories(place);
+    if (stories.length) {
+      content.push(
+        `<div class="stories"><h3>Stories &amp; links</h3><ul>${stories
+          .map((story) => `<li><span aria-hidden="true">${escapeHtml(story.icon)}</span> <strong>${escapeHtml(story.name)}:</strong> ${escapeHtml(story.reason)}</li>`)
+          .join("")}</ul></div>`
+      );
+    }
     const facts = placeFacts(place).filter(Boolean);
     if (facts.length) content.push(`<ul class="facts">${facts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join("")}</ul>`);
 
@@ -1830,6 +1842,36 @@
     $("theme-generate").textContent = theme ? `Generate ${theme.name} crawl` : "Generate themed crawl";
   }
 
+  /** One line about a stop: its Wikipedia description, or its best story from another theme. */
+  function stopBlurb(place, route) {
+    const info = infoCache.get(place.id);
+    const description = info && info.wiki && info.wiki.description;
+    const other = P.placeStories(place).find((story) => story.theme !== route.theme);
+    const parts = [];
+    if (description) parts.push(`📖 ${description.charAt(0).toUpperCase()}${description.slice(1)}`);
+    if (other && other.curated) parts.push(`${other.icon} ${other.reason}`);
+    return parts.length ? `<div class="stop-blurb">${parts.map(escapeHtml).join(" · ")}</div>` : "";
+  }
+
+  let prefetching = false;
+  /** Quietly fetch Wikipedia descriptions for the route's stops, then redraw once. */
+  async function prefetchStopInfo(route) {
+    if (prefetching) return;
+    const missing = route.stops
+      .map((stop) => stop.place)
+      .filter((place, index, list) => list.indexOf(place) === index)
+      .filter((place) => (place.wikipedia || place.wikidata) && !infoCache.has(place.id))
+      .slice(0, 12);
+    if (!missing.length) return;
+    prefetching = true;
+    try {
+      for (const place of missing) await loadPlaceInfo(place);
+    } finally {
+      prefetching = false;
+    }
+    if (state.route === route) renderRoute();
+  }
+
   /** "Why this fits": the theme's story plus how many stops are on theme. */
   function renderThemeNote(route) {
     const note = $("route-theme-note");
@@ -1852,6 +1894,15 @@
           (pubLine ? `, and ${pubLine}. ` : ". ") +
           "Each stop's gold tag says how."
       );
+    const highlights = unique
+      .map((stop) => ({ place: stop.place, reason: P.themeReason(stop.place, theme) }))
+      .filter((item) => item.reason && /[a-z]{4,}.*[a-z]{4,}/i.test(item.reason) && !/^(Linked to|Plaque):/.test(item.reason))
+      .slice(0, 3);
+    if (highlights.length) {
+      note.innerHTML += `<span class="highlights">${highlights
+        .map((item) => `<span>• <strong>${escapeHtml(item.place.title)}</strong>: ${escapeHtml(item.reason)}</span>`)
+        .join("")}</span>`;
+    }
   }
 
   async function generateThemed(themeId) {
