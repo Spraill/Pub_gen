@@ -12,6 +12,7 @@ import build_v2 as build  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import osm_extract  # noqa: E402
+import wikidata_source  # noqa: E402
 
 
 def pub_feature(name: str, osm_id: int, **props):
@@ -164,6 +165,40 @@ class OsmExtractTests(unittest.TestCase):
             ]
         }
         self.assertEqual(osm_extract.pick_geofabrik_region(index, [53.925, -1.16, 53.995, -1.02]), "yorkshire")
+
+
+class WikidataSourceTests(unittest.TestCase):
+    def test_classes_and_listings_become_osm_tags(self) -> None:
+        def row(qid: str, label: str, **extra: str) -> dict:
+            out = {
+                "item": {"value": f"http://www.wikidata.org/entity/{qid}"},
+                "itemLabel": {"value": label},
+                "coord": {"value": "Point(-1.08 53.96)"},
+            }
+            out.update({key: {"value": value} for key, value in extra.items()})
+            return out
+
+        results = {
+            "results": {
+                "bindings": [
+                    row("Q1", "Golden Fleece, York", **{"class": "http://www.wikidata.org/entity/Q212198"}),
+                    row("Q2", "Black Swan Public House", heritage="x"),
+                    row("Q3", "Former Coach and Horses Inn", heritage="x"),
+                    row("Q4", "Closed Pub", ended="1990", **{"class": "http://www.wikidata.org/entity/Q212198"}),
+                    row("Q5", "Bus stop", **{"class": "http://www.wikidata.org/entity/Q953806"}),
+                    row("Q6", "York Minster", inception="+1220-01-01T00:00:00Z", **{"class": "http://www.wikidata.org/entity/Q2977"}),
+                ]
+            }
+        }
+        tags = {el["id"]: el["tags"] for el in wikidata_source.elements_from_results(results)}
+        self.assertEqual(tags[1]["amenity"], "pub")
+        self.assertEqual((tags[2]["amenity"], tags[2]["name"]), ("pub", "Black Swan"))
+        self.assertNotIn("amenity", tags[3])  # a former pub stays a listed building
+        self.assertNotIn(4, tags)
+        self.assertNotIn(5, tags)
+        self.assertEqual((tags[6]["amenity"], tags[6]["start_date"]), ("place_of_worship", "1220"))
+        self.assertEqual(build.poi_id("osm:wikidata:6"), "d6")
+        self.assertEqual(build.pub_id({"osm_type": "wikidata", "osm_id": 1}), "pd1")
 
 
 if __name__ == "__main__":

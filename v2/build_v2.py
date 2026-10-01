@@ -118,7 +118,7 @@ POI_FIELDS = [
     "id", "name", "lat", "lon", "score", "cats", "address", "description", "website", "wikipedia", "wikidata",
     "fame", "commons", "built",
 ]
-OSM_TYPE_CODES = {"node": "n", "way": "w", "relation": "r"}
+OSM_TYPE_CODES = {"node": "n", "way": "w", "relation": "r", "wikidata": "d"}
 
 
 def parse_args() -> argparse.Namespace:
@@ -461,7 +461,7 @@ def compact_pois(geojson: dict[str, Any]) -> tuple[list[list[Any]], list[str], s
             continue
         seen.add(identifier)
         tags = props.get("tags") or {}
-        if str(tags.get("amenity", "")).strip() in ("pub", "bar") and identifier[0] in "nwr":
+        if str(tags.get("amenity", "")).strip() in ("pub", "bar") and identifier[0] in "nwrd":
             historic_pub_ids.add(f"p{identifier}")
         keep, score = curate_poi(props)
         if not keep:

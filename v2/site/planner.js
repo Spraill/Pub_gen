@@ -893,7 +893,7 @@
       keywords: /\b(tudor|henry viii|anne boleyn|wolsey|thomas more|thomas cromwell)\b/,
       pubs: [
         [/\bthe boleyn\b/, "Named after Anne Boleyn"],
-        [/\bguy fawkes\b.*\|.*\byo\d/, "Birthplace of Guy Fawkes, born 1570"],
+        [/\bguy fawkes\b.*\|.*(\byo\d|, york$)/, "Birthplace of Guy Fawkes, born 1570"],
         [/\bking henry\b/, "Named after a Tudor king"],
         [/\bye olde mitre\b/, "Founded 1546 for the Bishop of Ely's servants"],
         [/\bprospect of whitby\b/, "Riverside tavern dating from around 1520"],
@@ -926,7 +926,7 @@
         [/\bjerusalem tavern\b/, "Named after the Priory of St John (Knights Hospitaller)"],
         [/\bye olde mitre\b/, "In the grounds of the Bishops of Ely's medieval palace"],
         [/\bcittie of yorke\b/, "On the site of a pub dating from 1430"],
-        [/\bblack swan\b.*\|.*\byo\d/, "Timber-framed house dating from the 1400s"],
+        [/\bblack swan\b.*\|.*(\byo\d|, york$)/, "Timber-framed house dating from the 1400s"],
       ],
       historicPubs: true,
     },
@@ -1072,9 +1072,9 @@
       exclude: /police (box|call ?box|station|museum)|callbox|ghost bike|ghost sign/,
       pubs: [
         [/\bten bells\b/, "Jack the Ripper's victims drank here in 1888"],
-        [/\bgolden fleece\b.*\|.*\byo\d/, "Said to be York's most haunted pub"],
-        [/\bguy fawkes\b.*\|.*\byo\d/, "Gunpowder plotter Guy Fawkes was born here in 1570"],
-        [/\bblack swan\b.*\|.*\byo\d/, "Medieval inn said to be haunted by several ghosts"],
+        [/\bgolden fleece\b.*\|.*(\byo\d|, york$)/, "Said to be York's most haunted pub"],
+        [/\bguy fawkes\b.*\|.*(\byo\d|, york$)/, "Gunpowder plotter Guy Fawkes was born here in 1570"],
+        [/\bblack swan\b.*\|.*(\byo\d|, york$)/, "Medieval inn said to be haunted by several ghosts"],
         [/\bye olde starre\b/, "York's oldest licensed inn; its cellar was a Civil War hospital"],
         [/\bblind beggar\b/, "Ronnie Kray shot George Cornell at the bar in 1966"],
         [/\bcarpenters arms\b.*\|.*cheshire street/, "Bought by the Kray twins for their mother"],
@@ -1426,7 +1426,7 @@
 
   // ------------------------------------------------------------------ sharing & export
 
-  const TOKEN_PATTERN = /^(p?[nwr]|q)\d{1,15}$/;
+  const TOKEN_PATTERN = /^(p?[nwrd]|q)\d{1,15}$/;
 
   // Suffixes: "*" = auto-picked meal pub, "-" = auto-picked pub (can be swapped).
   function stopToken(stop) {
@@ -1805,9 +1805,10 @@
   }
 
   function sourceUrl(place) {
-    const match = /^p?([nwrq])(\d+)$/.exec(place.id || "");
+    const match = /^p?([nwrqd])(\d+)$/.exec(place.id || "");
     if (!match) return "";
     if (match[1] === "q") return `https://openplaques.org/plaques/${match[2]}`;
+    if (match[1] === "d") return `https://www.wikidata.org/wiki/Q${match[2]}`;
     const type = { n: "node", w: "way", r: "relation" }[match[1]];
     return `https://www.openstreetmap.org/${type}/${match[2]}`;
   }
