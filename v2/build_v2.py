@@ -111,11 +111,11 @@ CLOSED_PUB_PATTERN = re.compile(r"\((closed|former|disused|demolished)\)|\bclose
 
 PUB_FIELDS = [
     "id", "name", "lat", "lon", "flags", "address", "hours", "website", "phone", "brewery", "cuisine", "brand",
-    "wikipedia", "wikidata", "commons",
+    "wikipedia", "wikidata", "commons", "built",
 ]
 POI_FIELDS = [
     "id", "name", "lat", "lon", "score", "cats", "address", "description", "website", "wikipedia", "wikidata",
-    "fame", "commons",
+    "fame", "commons", "built",
 ]
 OSM_TYPE_CODES = {"node": "n", "way": "w", "relation": "r"}
 
@@ -227,6 +227,16 @@ def wikidata_id(value: Any) -> str:
     return text if re.fullmatch(r"Q\d+", text) else ""
 
 
+def built_year(props: dict[str, Any]) -> int | str:
+    """Year from OSM start_date / construction_date ("1872", "c1650", "1890-05-01")."""
+    tags = props.get("tags") or {}
+    for key in ("start_date", "construction_date"):
+        match = re.search(r"(?<!\d)(\d{3,4})(?!\d)", str(tags.get(key, "")))
+        if match and 40 <= int(match.group(1)) <= 2030:
+            return int(match.group(1))
+    return ""
+
+
 def round_coord(value: Any) -> float:
     return round(float(value), COORD_DECIMALS)
 
@@ -296,6 +306,7 @@ def compact_pubs(geojson: dict[str, Any], historic_ids: set[str] | None = None) 
                     clean(props.get("wikipedia")),
                     wikidata_id(props.get("wikidata")),
                     commons_title(props),
+                    built_year(props),
                 ]
             )
         )
@@ -481,6 +492,7 @@ def compact_pois(geojson: dict[str, Any]) -> tuple[list[list[Any]], list[str], s
                     wikidata_id(props.get("wikidata")),
                     fame_score(props),
                     commons_title(props),
+                    built_year(props),
                 ]
             )
         )

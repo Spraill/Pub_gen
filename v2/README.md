@@ -14,6 +14,13 @@ museums, blue plaques, parks, historic buildings and historic pubs.
   on a notable historic, beautiful or culturally significant sight (and a
   historic pub on alternate days) in an area that rotates daily (City, West
   End, East, North, South, West…), with 3 sights and 4–5 pubs.
+- **Themes**: 19 themed crawls (Victorian, Georgian, Great Fire & Wren, Tudor,
+  Elizabethan & Shakespeare, Roman & Medieval, music, literary, Dickens, art,
+  science, theatre, royal, maritime, wartime, crime, politics, churches, green
+  London). Pick sights and pubs counts; it finds a walkable cluster of matching
+  places anywhere in London and favours on-theme pubs. *Another version*
+  re-rolls it. Sights match by keywords, category and period (life spans,
+  "built in" dates, OSM build dates); pubs by name, build date or history.
 - **Photos**: tapping a place shows its photo; *More info* opens a gallery
   (Wikidata lead image plus the place's Wikimedia Commons category, which often
   has pub interiors), each credited to its photographer and licence. Set

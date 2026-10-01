@@ -326,6 +326,25 @@ test("crawl of the day is stable, high quality and ends at a pub", { skip: !data
   assert.equal(today, "2026-10-02", "uses the London date (BST)");
 });
 
+test("every theme makes walkable, on-theme crawls", { skip: !data && "run build_v2.py first" }, () => {
+  const base = { ...BASE_OPTIONS, finish: "pub", walkStyle: "quiet" };
+  assert.ok(P.THEMES.length >= 10 && P.THEMES.length <= 20);
+  P.THEMES.forEach((theme) => {
+    for (const seed of ["one", "two", "three"]) {
+      const result = P.generateThemedCrawl(theme, data.pois, data.pubs, 3, 4, seed, base);
+      assert.equal(result.ok, true, `${theme.id}/${seed}: ${result.error}`);
+      const sightsInCrawl = result.plan.stops.filter((stop) => stop.place.kind === "poi");
+      assert.equal(sightsInCrawl.length, 3, theme.id);
+      sightsInCrawl.forEach((stop) => assert.ok(P.themeMatchesSight(stop.place, theme), `${theme.id}: ${stop.place.title}`));
+      assert.equal(result.plan.stops.filter((stop) => stop.place.kind === "pub").length, 4, theme.id);
+      assert.ok(P.pathLength(sightsInCrawl.map((stop) => stop.place)) < 9000, `${theme.id} is walkable`);
+    }
+  });
+  const pubsOnly = P.generateThemedCrawl(P.themeById("maritime"), data.pois, data.pubs, 0, 4, "x", base);
+  assert.equal(pubsOnly.ok, true, pubsOnly.error);
+  pubsOnly.plan.stops.forEach((stop) => assert.ok(P.themeMatchesPub(stop.place, P.themeById("maritime")), stop.place.title));
+});
+
 test("built dataset decodes and plans a real crawl", { skip: !data && "run build_v2.py first" }, () => {
   assert.ok(data.pubs.length > 1000);
   assert.ok(data.pois.length > 1000);

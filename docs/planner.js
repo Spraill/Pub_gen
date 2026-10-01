@@ -148,6 +148,7 @@
       wikipedia: pf.wikipedia == null ? "" : row[pf.wikipedia] || "",
       wikidata: pf.wikidata == null ? "" : row[pf.wikidata] || "",
       commons: pf.commons == null ? "" : row[pf.commons] || "",
+      built: pf.built == null ? 0 : row[pf.built] || 0,
     }));
 
     const pois = raw.pois.map((row) => {
@@ -168,6 +169,7 @@
         wikidata: qf.wikidata == null ? "" : row[qf.wikidata] || "",
         fame: qf.fame == null ? 0 : row[qf.fame] || 0,
         commons: qf.commons == null ? "" : row[qf.commons] || "",
+        built: qf.built == null ? 0 : row[qf.built] || 0,
       };
     });
 
@@ -322,6 +324,10 @@
     if (options.preferDog && hasFlag(pub, FLAGS.dog)) bonus += 160;
     if (options.preferHistoric && hasFlag(pub, FLAGS.historic)) bonus += 220;
     if (options.avoidChains && hasFlag(pub, FLAGS.chain)) bonus -= 260;
+    if (options.favouredIds && options.favouredIds.length) {
+      if (!options._favoured) Object.defineProperty(options, "_favoured", { value: new Set(options.favouredIds), enumerable: false });
+      if (options._favoured.has(pub.id)) bonus += 450;
+    }
     if (options.walkStyle === "quiet") {
       bonus += scenicCueScore(pub);
       bonus += metadataRichness(pub) * 8;
@@ -824,6 +830,257 @@
     const ordered = weightedOrder(candidates, rng, pubWeight);
     const picks = spreadPick(ordered, [anchor], count, 120, (pub) => pub.id);
     return picks.length >= count ? picks : null;
+  }
+
+  // ------------------------------------------------------------------ themed crawls
+
+  // Sights match by period (build date or years in a plaque/description) and/or
+  // keywords; pubs match by name, build date, or historic status for period themes.
+  const THEMES = [
+    {
+      id: "victorian", name: "Victorian", icon: "🎩", years: [1837, 1901],
+      blurb: "Gin palaces, railway engineers and the age of Dickens and Darwin.",
+      keywords: /victorian|gin palace|queen victoria|prince albert|great exhibition/,
+      pubKeywords: /victoria|albert|railway|gin|princess louise|prince alfred/,
+      historicPubs: true,
+    },
+    {
+      id: "georgian", name: "Georgian & Regency", icon: "🕯️", years: [1714, 1837],
+      blurb: "Squares, coffee houses and the London of Hogarth and Jane Austen.",
+      keywords: /georgian|regency|hogarth|coffee house/,
+      pubKeywords: /\bgeorge\b|regent|nelson|wellington|hogarth/,
+      historicPubs: true,
+    },
+    {
+      id: "stuart", name: "Great Fire & Wren", icon: "🔥", years: [1603, 1714],
+      blurb: "Plague, the Great Fire of 1666 and the rebuilding of the City by Wren.",
+      keywords: /great fire|\bwren\b|\bstuart\b|plague|pepys|restoration|charles ii|james i\b/,
+      pubKeywords: /olde|cheshire cheese|monument|samuel pepys|king charles|rose and crown/,
+      historicPubs: true,
+    },
+    {
+      id: "tudor", name: "Tudor", icon: "👑", years: [1485, 1603],
+      blurb: "Henry VIII, Anne Boleyn and half-timbered London.",
+      keywords: /tudor|henry viii|anne boleyn|wolsey|thomas more|thomas cromwell/,
+      pubKeywords: /tudor|king henry|boleyn|olde|old bell|seven stars/,
+      historicPubs: true,
+    },
+    {
+      id: "elizabethan", name: "Elizabethan & Shakespeare", icon: "🎭", years: [1558, 1625],
+      blurb: "Playhouses, Bankside and the world of Shakespeare and Marlowe.",
+      keywords: /elizabethan|elizabeth i\b|shakespeare|globe theatre|marlowe|jacobean|rose theatre|bankside/,
+      pubKeywords: /shakespeare|globe|anchor|george inn|swan|rose|bard/,
+      historicPubs: true,
+    },
+    {
+      id: "medieval", name: "Roman & Medieval", icon: "🏰", years: [43, 1484],
+      blurb: "Londinium, the City wall, monks, knights and the oldest churches.",
+      keywords: /roman|londinium|medieval|norman|saxon|crusade|templar|city wall|priory|monastery|friary/,
+      pubKeywords: /olde|friar|monk|knight|templar|abbey|crusader|crown|mitre/,
+      historicPubs: true,
+    },
+    {
+      id: "music", name: "Music legends", icon: "🎸", categories: ["music"],
+      blurb: "Rock, jazz, punk and classical: where the greats lived and played.",
+      keywords: /music|musician|composer|singer|songwriter|jazz|\brock\b|punk|\bband\b|opera|pianist|violinist|beatles|bowie|hendrix|handel|mozart/,
+      pubKeywords: /music|guitar|piano|harp|fiddle|jazz|band|drum|lyre|ballad/,
+      pubFlags: [32],
+    },
+    {
+      id: "literary", name: "Literary London", icon: "📚", categories: ["literary"],
+      blurb: "Poets, novelists and the pubs they drank in.",
+      keywords: /\bpoet|novelist|writer|author|playwright|literary|essayist|keats|woolf|orwell|wilde|byron|dickens|bloomsbury group/,
+      pubKeywords: /cheshire cheese|dickens|\bpen\b|book|poet|lamb|george inn|wordsworth|keats|chaucer|pickwick|museum tavern|fitzroy/,
+    },
+    {
+      id: "dickens", name: "Dickens's London", icon: "🖋️",
+      blurb: "Follow Charles Dickens through the streets of his novels.",
+      keywords: /dickens|pickwick|oliver twist|marshalsea|copperfield|old curiosity|great expectations|fagin/,
+      pubKeywords: /dickens|cheshire cheese|george inn|grapes|pickwick|old curiosity|lamb|jack straw|seven stars/,
+      historicPubs: true,
+    },
+    {
+      id: "art", name: "Artists & galleries", icon: "🎨", categories: ["art"],
+      blurb: "Galleries, studios and the homes of painters and sculptors.",
+      keywords: /painter|artist|sculptor|gallery|turner|hogarth|constable|pre-raphaelite|whistler|blake/,
+      pubKeywords: /artist|painter|palette|hogarth|turner|blake|whistler|easel|canvas/,
+    },
+    {
+      id: "science", name: "Science & invention", icon: "🔬", categories: ["science"],
+      blurb: "Scientists, engineers and inventors who changed the world.",
+      keywords: /scientist|engineer|inventor|invented|physicist|chemist|astronomer|mathematician|naturalist|brunel|faraday|darwin|newton|science|telephone|television/,
+      pubKeywords: /engine|railway|telegraph|brunel|steam|electric|globe|telescope|newton/,
+    },
+    {
+      id: "theatre", name: "Theatreland", icon: "🎟️",
+      blurb: "Stages, music halls and the actors' pubs of the West End.",
+      keywords: /theatre|actor|actress|stage|music hall|playhouse|pantomime|comedian/,
+      pubKeywords: /theatre|actor|stage|harlequin|shakespeare|garrick|lamb and flag|nell gwynne|coach and horses|salisbury|opera/,
+    },
+    {
+      id: "royal", name: "Royal London", icon: "👑",
+      blurb: "Palaces, coronations and the pubs named after kings and queens.",
+      keywords: /\broyal\b|\bking\b|\bqueen\b|palace|prince|princess|monarch|coronation|crown jewels/,
+      pubKeywords: /crown|\bking|\bqueen|prince|royal|duke|sceptre|throne|regent|windsor|victoria/,
+    },
+    {
+      id: "maritime", name: "Maritime & Thames", icon: "⚓",
+      blurb: "Docks, ships, explorers and riverside taverns.",
+      keywords: /maritime|\bship|naval|admiral|\bdock|wharf|\briver\b|thames|sailor|navy|explorer|captain|lighthouse|cutty sark/,
+      pubKeywords: /ship|anchor|mariner|sailor|admiral|nelson|dock|wharf|prospect of whitby|mayflower|grapes|captain|boat|barge|ferry|waterman|trafalgar|compass|cutty sark|town of ramsgate/,
+    },
+    {
+      id: "wartime", name: "Wartime London", icon: "🎖️",
+      blurb: "The Blitz, the Few and the memorials to London's fallen.",
+      keywords: /\bwar\b|\bblitz|soldier|regiment|\bbattle|veteran|\braf\b|\bbomb(s|ed|ing|er)?\b|wartime|churchill|spitfire/,
+      pubKeywords: /soldier|guard|grenadier|granby|volunteer|rifle|nelson|wellington|churchill|spitfire|victory|trafalgar|waterloo/,
+    },
+    {
+      id: "crime", name: "Crime & mystery", icon: "🔍",
+      blurb: "Murders, gallows, gaols and great detectives.",
+      keywords: /murder|police|crime|executed|execution|prison|gaol|gallows|ripper|sherlock|detective|highwayman|scotland yard|old bailey/,
+      pubKeywords: /ten bells|prison|gaol|highwayman|bow street|old bailey|magpie and stump|police|sherlock|jamaica wine|blind beggar|viaduct|hand and shears/,
+    },
+    {
+      id: "politics", name: "Politics & protest", icon: "✊",
+      blurb: "Prime ministers, suffragettes, radicals and reformers.",
+      keywords: /prime minister|politician|parliament|suffrag|reformer|radical|activist|revolutionar|marx|chartist|campaigner|abolition/,
+      pubKeywords: /red lion|parliament|westminster|marx|chartist|red|liberty|reform/,
+    },
+    {
+      id: "sacred", name: "Churches & cathedrals", icon: "⛪", categories: ["religious"],
+      blurb: "Wren spires, cathedrals, synagogues and hidden chapels.",
+      nameOnly: true,
+      keywords: /church|cathedral|abbey|chapel|synagogue|temple|mosque|priory/,
+      pubKeywords: /bishop|abbey|friar|monk|mitre|church|cross keys|blackfriar|angel|nun|parson|vicar|bell/,
+      historicPubs: true,
+    },
+    {
+      id: "green", name: "Green London", icon: "🌳", categories: ["park", "garden", "natural", "scenic"],
+      blurb: "Parks, gardens and views, with beer gardens in between.",
+      nameOnly: true,
+      keywords: /\bpark\b|garden|heath|common|viewpoint|nature reserve/,
+      pubKeywords: /garden|tree|\boak|\bgreen\b|park|heath|elm|willow|orchard|meadow/,
+      pubFlags: [4],
+    },
+  ];
+
+  function themeById(id) {
+    return THEMES.find((theme) => theme.id === id) || null;
+  }
+
+  function placeText(place) {
+    if (place._themeText == null) {
+      Object.defineProperty(place, "_themeText", {
+        value: [place.title, place.description, place.wikipedia].join(" ").toLowerCase(),
+        enumerable: false,
+      });
+    }
+    return place._themeText;
+  }
+
+  // Dates that say when a place is "from": a life span ("1812-1870" -> its middle),
+  // "built/erected/founded ... 1850", or the OSM build date. Stray numbers don't count.
+  function placeYears(place) {
+    if (place._years == null) {
+      const text = placeText(place);
+      const years = [];
+      const spans = /\b(1[0-9]{3})\s*(?:-|–|—|to)\s*(1[0-9]{3}|20[0-2][0-9])\b/g;
+      let match;
+      while ((match = spans.exec(text))) {
+        const from = Number(match[1]);
+        const to = Number(match[2]);
+        if (to >= from && to - from <= 110) years.push(Math.round((from + to) / 2));
+      }
+      const events = /\b(?:built|erected|founded|opened|rebuilt|completed|constructed|established|dates from|designed|consecrated)\b[^.\d]{0,25}(1[0-9]{3})\b/g;
+      while ((match = events.exec(text))) years.push(Number(match[1]));
+      if (place.built) years.push(place.built);
+      Object.defineProperty(place, "_years", { value: years, enumerable: false });
+    }
+    return place._years;
+  }
+
+  function inEra(place, theme) {
+    return Boolean(theme.years && placeYears(place).some((year) => year >= theme.years[0] && year <= theme.years[1]));
+  }
+
+  const THEME_EXCLUDE =
+    /resource centre|community centre|leisure centre|housing|\bestate\b|school|library|church of christ,? scientist|christian science|car park|house of fraser|business centre/;
+
+  function themeMatchesSight(poi, theme) {
+    if (poi.kind !== "poi" || THEME_EXCLUDE.test(poi.title.toLowerCase())) return false;
+    if (theme.nameOnly) {
+      // Places, not people: judge by the name and the place's own category.
+      if (poi.primary === "blue_plaque") return false;
+      return theme.keywords.test(poi.title.toLowerCase()) || poi.categories.some((c) => (theme.categories || []).includes(c));
+    }
+    if (theme.keywords.test(placeText(poi))) return true;
+    if (theme.categories && poi.categories.some((category) => theme.categories.includes(category))) return true;
+    return inEra(poi, theme);
+  }
+
+  function themeMatchesPub(pub, theme) {
+    if (pub.kind !== "pub") return false;
+    const name = pub.title.toLowerCase();
+    if (theme.pubKeywords && theme.pubKeywords.test(name)) return true;
+    if (theme.pubFlags && theme.pubFlags.some((flag) => hasFlag(pub, flag))) return true;
+    if (theme.years && pub.built && pub.built >= theme.years[0] && pub.built <= theme.years[1]) return true;
+    return Boolean(theme.historicPubs && hasFlag(pub, FLAGS.historic) && theme.keywords.test(placeText(pub)));
+  }
+
+  /**
+   * A walkable themed crawl anywhere in London: find a spot where enough on-theme
+   * places sit within walking distance, then pick a varied set of them.
+   * sightCount sights (or, with 0 sights, pubCount on-theme pubs as stops).
+   */
+  function pickThemedCrawl(theme, pois, pubs, sightCount, pubCount, rng) {
+    const usePubs = sightCount <= 0;
+    const want = usePubs ? Math.max(2, pubCount) : sightCount;
+    const pool = usePubs
+      ? pubs.filter((pub) => themeMatchesPub(pub, theme))
+      : pois.filter((poi) => poi.score >= 30 && themeMatchesSight(poi, theme));
+    if (pool.length < want) return null;
+    // Cut-off plaque inscriptions make clumsy stop names, so they come up less often.
+    const weight = usePubs ? (pub) => 1 + metadataRichness(pub) : (poi) => sightWeight(poi) * (poi.title.endsWith("…") ? 0.35 : 1);
+    const ordered = weightedOrder(pool, rng, weight);
+    for (const radius of [1200, 1800, 2600, 4000]) {
+      for (let index = 0; index < Math.min(ordered.length, 80); index += 1) {
+        const anchor = ordered[index];
+        const near = ordered.filter((place) => place !== anchor && distance(anchor, place) <= radius);
+        if (near.length < want - 1) continue;
+        const picks = spreadPick(near, [anchor], want, usePubs ? 120 : 90, (place) => (usePubs ? place.id : place.primary));
+        if (picks.length >= want) return picks;
+      }
+    }
+    return null;
+  }
+
+  /** Pick and plan a themed crawl, trying a few spots in case one has no pubs nearby. */
+  function generateThemedCrawl(theme, pois, pubs, sightCount, pubCount, seed, base) {
+    const rng = createRng(`theme:${theme.id}:${seed}`);
+    const options = themedOptions(theme, pubs, { ...base, pubCount: sightCount > 0 ? pubCount : 0, seed });
+    let lastError = `Not enough ${theme.name.toLowerCase()} places to make that crawl. Try fewer stops.`;
+    for (let attempt = 0; attempt < 8; attempt += 1) {
+      const anchors = pickThemedCrawl(theme, pois, pubs, sightCount, pubCount, rng);
+      if (!anchors) break;
+      const plan = planRoute(anchors, pubs, options);
+      if (plan.ok) return { ok: true, anchors, plan, options };
+      lastError = plan.error;
+    }
+    return { ok: false, error: lastError };
+  }
+
+  /** Planner options for a themed crawl: on-theme pubs are strongly favoured. */
+  function themedOptions(theme, pubs, base) {
+    return {
+      ...base,
+      favouredIds: pubs.filter((pub) => themeMatchesPub(pub, theme)).map((pub) => pub.id),
+      preferHistoric: Boolean(theme.historicPubs) || base.preferHistoric,
+      avoidChains: true,
+      orderMode: "optimize",
+      maxPubsPerGap: Math.max(base.maxPubsPerGap || 3, 4),
+      maxDetourMeters: Math.max(base.maxDetourMeters || 0, 900),
+    };
   }
 
   // ------------------------------------------------------------------ search
@@ -1379,6 +1636,13 @@
     londonDateKey,
     dayNumber,
     pickDailyCrawl,
+    THEMES,
+    themeById,
+    themeMatchesSight,
+    themeMatchesPub,
+    pickThemedCrawl,
+    generateThemedCrawl,
+    themedOptions,
     isQualitySight,
     safeUrl,
     sourceUrl,

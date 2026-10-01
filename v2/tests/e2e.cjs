@@ -277,6 +277,30 @@ async function run() {
     }, before);
   });
 
+  await scenario("mobile: themed crawl", { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, async (page) => {
+    await page.goto(base);
+    await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });
+    await page.tap("#tab-themes");
+    await page.waitForSelector('#theme-grid [data-theme="dickens"]');
+    assert.ok((await page.locator("#theme-grid .theme-card").count()) >= 10);
+    await page.tap('#theme-grid [data-theme="dickens"]');
+    assert.match(await page.textContent("#theme-generate"), /Dickens/);
+    await shot(page, "mobile-themes");
+    await page.tap("#theme-generate");
+    await page.waitForSelector("#route-list .stop");
+    assert.match(await page.inputValue("#route-name"), /Dickens/);
+    assert.ok((await page.locator("#route-list .tag.theme").count()) >= 3, "stops tagged on-theme");
+    await page.waitForSelector(".reshuffle-row:not([hidden])");
+    const before = await page.locator("#route-list .stop-title").allTextContents();
+    await page.tap("#reshuffle-button");
+    await page.waitForFunction((old) => {
+      const now = [...document.querySelectorAll("#route-list .stop-title")].map((el) => el.textContent);
+      return now.length && now.join("|") !== old.join("|");
+    }, before);
+    assert.match(await page.inputValue("#route-name"), /Dickens/);
+    await shot(page, "mobile-theme-route");
+  });
+
   await scenario("desktop: surprise me (sights and pub-only)", { viewport: { width: 1280, height: 800 } }, async (page) => {
     await page.goto(base);
     await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });

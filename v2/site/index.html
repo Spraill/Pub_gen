@@ -68,6 +68,7 @@
       <button id="sheet-handle" class="sheet-handle" type="button" aria-label="Expand planner" aria-expanded="false"><span></span></button>
       <div class="tabs" role="tablist">
         <button class="tab" role="tab" type="button" id="tab-plan" data-tab="plan" aria-selected="true" aria-controls="panel-plan">Plan</button>
+        <button class="tab" role="tab" type="button" id="tab-themes" data-tab="themes" aria-selected="false" aria-controls="panel-themes" tabindex="-1">Themes</button>
         <button class="tab" role="tab" type="button" id="tab-route" data-tab="route" aria-selected="false" aria-controls="panel-route" tabindex="-1">Route <span id="route-badge" class="badge" hidden></span></button>
         <button class="tab" role="tab" type="button" id="tab-saved" data-tab="saved" aria-selected="false" aria-controls="panel-saved" tabindex="-1">Saved <span id="saved-badge" class="badge" hidden></span></button>
       </div>
@@ -228,6 +229,31 @@
         </details>
       </section>
 
+      <!-- ============================== THEMES -->
+      <section id="panel-themes" class="panel" role="tabpanel" aria-labelledby="tab-themes" hidden>
+        <p class="hint">Pick a theme and we'll find a walkable crawl of matching sights and pubs somewhere in London. Don't like it? Hit <strong>Another version</strong>.</p>
+        <div id="theme-grid" class="theme-grid" role="radiogroup" aria-label="Crawl theme"></div>
+        <p id="theme-blurb" class="theme-blurb"></p>
+        <div class="field-row">
+          <span class="field-label" id="theme-sights-label">Sights</span>
+          <div class="stepper" data-stepper>
+            <button type="button" class="stepper-btn" data-step="-1" aria-label="Fewer sights">−</button>
+            <input id="theme-sights" type="number" inputmode="numeric" min="0" max="6" value="3" aria-labelledby="theme-sights-label">
+            <button type="button" class="stepper-btn" data-step="1" aria-label="More sights">+</button>
+          </div>
+        </div>
+        <div class="field-row">
+          <span class="field-label" id="theme-pubs-label">Pubs</span>
+          <div class="stepper" data-stepper>
+            <button type="button" class="stepper-btn" data-step="-1" aria-label="Fewer pubs">−</button>
+            <input id="theme-pubs" type="number" inputmode="numeric" min="0" max="8" value="4" aria-labelledby="theme-pubs-label">
+            <button type="button" class="stepper-btn" data-step="1" aria-label="More pubs">+</button>
+          </div>
+        </div>
+        <p class="hint subtle">Set sights to 0 for an all-pub themed crawl. Food and step-free choices from Route options still apply.</p>
+        <div id="theme-status" class="status" role="status"></div>
+      </section>
+
       <!-- ============================== ROUTE -->
       <section id="panel-route" class="panel" role="tabpanel" aria-labelledby="tab-route" hidden>
         <div id="route-empty" class="empty">
@@ -275,6 +301,9 @@
       <div id="footer-plan" class="footer-row">
         <button id="generate-button" class="btn primary grow" type="button">Plan my crawl</button>
         <button id="clear-selection-button" class="btn ghost" type="button" aria-label="Clear chosen stops">Clear</button>
+      </div>
+      <div id="footer-themes" class="footer-row" hidden>
+        <button id="theme-generate" class="btn primary grow" type="button">Generate themed crawl</button>
       </div>
       <div id="footer-route" class="footer-row" hidden>
         <button id="start-crawl-button" class="btn primary grow" type="button">Start crawl</button>
