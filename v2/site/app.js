@@ -900,7 +900,7 @@
   /** Same settings and stops, different luck: new random sights (Surprise me) or different pubs. */
   async function reshuffleRoute() {
     const route = state.route;
-    if (!route) return;
+    if (!route || route.source === "daily") return;
     if (route.source === "random") {
       const previousMode = state.mode;
       state.mode = "random";
@@ -1121,6 +1121,8 @@
     els.routeBadge.textContent = String(uniqueStops.length);
     if (document.activeElement !== els.routeName) els.routeName.value = route.name || "";
     els.routeSavedFlag.hidden = !(route.savedId && !route.dirty);
+    // The crawl of the day is fixed for everyone, so it can't be re-rolled.
+    document.querySelector(".reshuffle-row").hidden = route.source === "daily";
 
     els.sumStops.textContent = `${uniqueStops.length - pubCount} + ${pubCount} 🍺`;
     els.sumDistance.textContent = route.distance != null ? P.formatDistance(route.distance) : "…";

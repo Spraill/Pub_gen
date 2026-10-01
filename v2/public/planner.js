@@ -51,7 +51,7 @@
   ];
 
   const CATEGORY_LABELS = {
-    blue_plaque: "Blue plaques",
+    blue_plaque: "Plaques",
     museum: "Museums",
     historical: "Historical",
     cultural: "Cultural",
@@ -71,7 +71,7 @@
   };
 
   const CATEGORY_SINGULAR = {
-    blue_plaque: "Blue plaque",
+    blue_plaque: "Plaque",
     museum: "Museum",
     historical: "Historic site",
     cultural: "Culture",
@@ -1192,7 +1192,7 @@
   function pickDailyCrawl(pois, pubs, dateKey) {
     const day = dayNumber(dateKey);
     const area = DAILY_AREAS[((day % DAILY_AREAS.length) + DAILY_AREAS.length) % DAILY_AREAS.length];
-    const rng = createRng(`daily:${dateKey}`);
+    const rng = createRng(`daily-v2:${dateKey}`);
 
     let heroes = [];
     for (const factor of [1, 1.5, 2.2, 3.5]) {
@@ -1223,17 +1223,18 @@
     const sightCount = () => anchors.filter((place) => place.kind === "poi").length;
     const categories = new Set([hero.primary]);
     const tooClose = (poi) => anchors.some((place) => distance(place, poi) < 180);
+    const sightsWanted = rng() < 0.5 ? 3 : 4;
     support.forEach((poi) => {
-      if (sightCount() >= 3 || categories.has(poi.primary) || tooClose(poi)) return;
+      if (sightCount() >= sightsWanted || categories.has(poi.primary) || tooClose(poi)) return;
       anchors.push(poi);
       categories.add(poi.primary);
     });
     support.forEach((poi) => {
-      if (sightCount() >= 3 || anchors.includes(poi) || tooClose(poi)) return;
+      if (sightCount() >= sightsWanted || anchors.includes(poi) || tooClose(poi)) return;
       anchors.push(poi);
     });
 
-    const totalPubs = rng() < 0.5 ? 4 : 5;
+    const totalPubs = 4 + Math.floor(rng() * 3); // 4–6
     return {
       dateKey,
       area,
@@ -1242,7 +1243,7 @@
       anchors,
       title: pubHero ? `${hero.title} & ${pubHero.title}` : hero.title,
       // A pub hero counts towards the total.
-      options: { ...DAILY_OPTIONS, pubCount: totalPubs - (pubHero ? 1 : 0), seed: `daily:${dateKey}` },
+      options: { ...DAILY_OPTIONS, pubCount: totalPubs - (pubHero ? 1 : 0), seed: `daily-v2:${dateKey}` },
     };
   }
 
