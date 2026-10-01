@@ -953,6 +953,15 @@ input[type="range"] {
   display: none;
 }
 
+.theme-note {
+  margin: 0;
+  padding: 10px 12px;
+  border-left: 3px solid var(--brass);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--surface-2);
+  font-size: 13.5px;
+}
+
 .tag.theme {
   background: var(--brass-soft);
   border-color: transparent;

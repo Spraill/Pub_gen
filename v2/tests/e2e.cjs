@@ -290,6 +290,7 @@ async function run() {
     await page.waitForSelector("#route-list .stop");
     assert.match(await page.inputValue("#route-name"), /Dickens/);
     assert.ok((await page.locator("#route-list .tag.theme").count()) >= 3, "stops tagged on-theme");
+    assert.match(await page.textContent("#route-theme-note"), /Why this fits/);
     await page.waitForSelector(".reshuffle-row:not([hidden])");
     const before = await page.locator("#route-list .stop-title").allTextContents();
     await page.tap("#reshuffle-button");

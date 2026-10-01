@@ -834,134 +834,238 @@
 
   // ------------------------------------------------------------------ themed crawls
 
-  // Sights match by period (build date or years in a plaque/description) and/or
-  // keywords; pubs match by name, build date, or historic status for period themes.
+  // Each theme says *why* a place fits, so the app can show it.
+  // Sights: keywords (word-bounded) in name/description/plaque, category, or period
+  // (life spans, "built in" dates, OSM build date). Pubs: specific, curated rules
+  // tested against "name | address" (never bare common names), or build date.
+  const PERSON_PLAQUE = /\b(lived|born|died|worked|stayed|wrote|composed|founded)\b/;
+
   const THEMES = [
     {
       id: "victorian", name: "Victorian", icon: "🎩", years: [1837, 1901],
       blurb: "Gin palaces, railway engineers and the age of Dickens and Darwin.",
-      keywords: /victorian|gin palace|queen victoria|prince albert|great exhibition/,
-      pubKeywords: /victoria|albert|railway|gin|princess louise|prince alfred/,
+      keywords: /\b(victorian|gin palace|queen victoria|prince albert|great exhibition)\b/,
+      pubs: [
+        [/\bprincess louise\b/, "Famous Victorian gin palace (1872)"],
+        [/\b(queen victoria|princess victoria)\b/, "Named after Queen Victoria"],
+        [/\bprince albert\b/, "Named after Prince Albert"],
+        [/\bprince alfred\b/, "Victorian pub with original snob screens"],
+        [/\brailway (tavern|arms|inn|bell|hotel|telegraph)\b|\bgreat northern railway\b/, "A railway-age pub"],
+        [/\bblackfriar\b.*\|.*queen victoria street/, "Arts & Crafts pub, remodelled 1905"],
+      ],
       historicPubs: true,
     },
     {
       id: "georgian", name: "Georgian & Regency", icon: "🕯️", years: [1714, 1837],
       blurb: "Squares, coffee houses and the London of Hogarth and Jane Austen.",
-      keywords: /georgian|regency|hogarth|coffee house/,
-      pubKeywords: /\bgeorge\b|regent|nelson|wellington|hogarth/,
+      keywords: /\b(georgian|regency|hogarth|coffee house)\b/,
+      pubs: [
+        [/\bgeorge (ii|iii|iv)\b|\bprince regent\b/, "Named after a Georgian king"],
+        [/\b(lord nelson|admiral nelson|duke of wellington|marquis of wellington|prince blucher)\b/, "Named after a hero of the Napoleonic wars"],
+        [/\bgeorge and vulture\b/, "Georgian tavern Dickens wrote into Pickwick"],
+        [/\bjamaica wine house\b/, "Site of London's first coffee house"],
+      ],
       historicPubs: true,
     },
     {
       id: "stuart", name: "Great Fire & Wren", icon: "🔥", years: [1603, 1714],
       blurb: "Plague, the Great Fire of 1666 and the rebuilding of the City by Wren.",
-      keywords: /great fire|\bwren\b|\bstuart\b|plague|pepys|restoration|charles ii|james i\b/,
-      pubKeywords: /olde|cheshire cheese|monument|samuel pepys|king charles|rose and crown/,
+      keywords: /\b(great fire|wren|stuart|plague|pepys|charles ii|james i)\b/,
+      pubs: [
+        [/\bye olde cheshire cheese\b/, "Rebuilt just after the Great Fire, 1667"],
+        [/\bye olde watling\b/, "Built by Wren in 1668 from ships' timbers"],
+        [/\bking charles\b/, "Named after a Stuart king"],
+        [/\b(samuel pepys|the pepys)\b/, "Named after diarist Samuel Pepys"],
+        [/\bthe george inn\b|\bgeorge inn\b.*\|.*borough/, "London's last galleried coaching inn (1677)"],
+        [/\bseven stars\b/, "Dates from 1602 and survived the Great Fire"],
+      ],
       historicPubs: true,
     },
     {
       id: "tudor", name: "Tudor", icon: "👑", years: [1485, 1603],
       blurb: "Henry VIII, Anne Boleyn and half-timbered London.",
-      keywords: /tudor|henry viii|anne boleyn|wolsey|thomas more|thomas cromwell/,
-      pubKeywords: /tudor|king henry|boleyn|olde|old bell|seven stars/,
+      keywords: /\b(tudor|henry viii|anne boleyn|wolsey|thomas more|thomas cromwell)\b/,
+      pubs: [
+        [/\bthe boleyn\b/, "Named after Anne Boleyn"],
+        [/\bking henry\b/, "Named after a Tudor king"],
+        [/\bye olde mitre\b/, "Founded 1546 for the Bishop of Ely's servants"],
+        [/\bprospect of whitby\b/, "Riverside tavern dating from around 1520"],
+        [/\bmayflower\b.*\|.*rotherhithe/, "Rotherhithe inn with Tudor origins (c.1550)"],
+        [/\bseven stars\b/, "Dates from 1602, the last year of Elizabeth I"],
+      ],
       historicPubs: true,
     },
     {
       id: "elizabethan", name: "Elizabethan & Shakespeare", icon: "🎭", years: [1558, 1625],
       blurb: "Playhouses, Bankside and the world of Shakespeare and Marlowe.",
-      keywords: /elizabethan|elizabeth i\b|shakespeare|globe theatre|marlowe|jacobean|rose theatre|bankside/,
-      pubKeywords: /shakespeare|globe|anchor|george inn|swan|rose|bard/,
+      keywords: /\b(elizabethan|elizabeth i|shakespeare|globe theatre|marlowe|jacobean|rose theatre|bankside)\b/,
+      pubs: [
+        [/\bshakespeare/, "Named after Shakespeare"],
+        [/\bthe anchor\b.*\|.*bankside/, "Bankside tavern of Shakespeare's era"],
+        [/\bswan at the globe\b/, "At Shakespeare's Globe"],
+        [/\bseven stars\b/, "Dates from 1602, late Elizabethan"],
+        [/\bmayflower\b.*\|.*rotherhithe/, "Elizabethan-era Rotherhithe inn"],
+        [/\bprospect of whitby\b/, "Tudor riverside tavern (c.1520)"],
+      ],
       historicPubs: true,
     },
     {
       id: "medieval", name: "Roman & Medieval", icon: "🏰", years: [43, 1484],
       blurb: "Londinium, the City wall, monks, knights and the oldest churches.",
-      keywords: /roman|londinium|medieval|norman|saxon|crusade|templar|city wall|priory|monastery|friary/,
-      pubKeywords: /olde|friar|monk|knight|templar|abbey|crusader|crown|mitre/,
+      keywords: /\b(roman|londinium|medieval|norman (church|arch|conquest|chapel)|saxon|crusade[rs]?|templars?|city wall|priory|monastery|friary)\b/,
+      pubs: [
+        [/\bblack ?friar\b/, "Built on the site of a medieval Dominican friary"],
+        [/\bcrutched friar\b/, "Named after the medieval Crutched Friars"],
+        [/\bjerusalem tavern\b/, "Named after the Priory of St John (Knights Hospitaller)"],
+        [/\bye olde mitre\b/, "In the grounds of the Bishops of Ely's medieval palace"],
+        [/\bcittie of yorke\b/, "On the site of a pub dating from 1430"],
+      ],
       historicPubs: true,
     },
     {
       id: "music", name: "Music legends", icon: "🎸", categories: ["music"],
       blurb: "Rock, jazz, punk and classical: where the greats lived and played.",
-      keywords: /music|musician|composer|singer|songwriter|jazz|\brock\b|punk|\bband\b|opera|pianist|violinist|beatles|bowie|hendrix|handel|mozart/,
-      pubKeywords: /music|guitar|piano|harp|fiddle|jazz|band|drum|lyre|ballad/,
-      pubFlags: [32],
+      keywords: /\b(music|musician|composer|singer|songwriter|jazz|rock|punk|opera|pianist|violinist|beatles|bowie|hendrix|handel|mozart)\b/,
+      pubs: [
+        [/\b(dublin castle)\b/, "Camden venue where Madness and Blur played"],
+        [/\bhope (and|&) anchor\b.*\|.*islington|\bhope (and|&) anchor\b.*\|.*upper street/, "Legendary punk venue"],
+        [/\b(the lexington|old blue last|the windmill|half moon|the troubadour|the bull'?s head)\b/, "Well-known live music pub"],
+        [/\b(music|guitar|piano|fiddle|fiddler|jazz|drum)\b/, "Music in the name"],
+      ],
+      pubFlags: [[32, "Has live music"]],
     },
     {
       id: "literary", name: "Literary London", icon: "📚", categories: ["literary"],
       blurb: "Poets, novelists and the pubs they drank in.",
-      keywords: /\bpoet|novelist|writer|author|playwright|literary|essayist|keats|woolf|orwell|wilde|byron|dickens|bloomsbury group/,
-      pubKeywords: /cheshire cheese|dickens|\bpen\b|book|poet|lamb|george inn|wordsworth|keats|chaucer|pickwick|museum tavern|fitzroy/,
+      keywords: /\b(poet|novelist|writer|author|playwright|literary|essayist|keats|woolf|orwell|wilde|byron|dickens|bloomsbury group)\b/,
+      pubs: [
+        [/\bye olde cheshire cheese\b/, "Dr Johnson and Dickens drank here"],
+        [/\bmuseum tavern\b/, "Karl Marx and Conan Doyle's local"],
+        [/\bfitzroy tavern\b/, "Haunt of Dylan Thomas and George Orwell"],
+        [/\bwheatsheaf\b.*\|.*rathbone/, "Dylan Thomas and Orwell's Fitzrovia pub"],
+        [/\bthe lamb\b.*\|.*lamb'?s conduit/, "Dickens and Ted Hughes drank here"],
+        [/\blamb (and|&) flag\b.*\|.*(rose street|covent garden)/, "Dickens's Covent Garden haunt"],
+        [/\b(spaniards inn)\b/, "Keats, Dickens and Byron's Hampstead inn"],
+        [/\bjack straw'?s castle\b|\bthe flask\b.*\|.*hampstead/, "Hampstead literary haunt"],
+        [/\bdickens (inn|tavern)\b|\bkeats\b/, "Named after a great writer"],
+      ],
     },
     {
       id: "dickens", name: "Dickens's London", icon: "🖋️",
       blurb: "Follow Charles Dickens through the streets of his novels.",
-      keywords: /dickens|pickwick|oliver twist|marshalsea|copperfield|old curiosity|great expectations|fagin/,
-      pubKeywords: /dickens|cheshire cheese|george inn|grapes|pickwick|old curiosity|lamb|jack straw|seven stars/,
+      keywords: /\b(dickens|pickwick|oliver twist|marshalsea|copperfield|old curiosity|great expectations|fagin)\b/,
+      pubs: [
+        [/\bye olde cheshire cheese\b/, "One of Dickens's regular haunts"],
+        [/\bgeorge inn\b/, "Mentioned in Little Dorrit"],
+        [/\bthe grapes\b.*\|.*narrow street/, "Inspired the inn in Our Mutual Friend"],
+        [/\bgeorge and vulture\b/, "Mr Pickwick's base in The Pickwick Papers"],
+        [/\bspaniards inn\b/, "Appears in The Pickwick Papers"],
+        [/\btrafalgar tavern\b/, "Scene of a wedding feast in Our Mutual Friend"],
+        [/\bthe lamb\b.*\|.*lamb'?s conduit|\blamb (and|&) flag\b.*\|.*rose street/, "A Dickens local"],
+        [/\bdickens (inn|tavern)\b/, "Named after Dickens"],
+      ],
       historicPubs: true,
     },
     {
       id: "art", name: "Artists & galleries", icon: "🎨", categories: ["art"],
       blurb: "Galleries, studios and the homes of painters and sculptors.",
-      keywords: /painter|artist|sculptor|gallery|turner|hogarth|constable|pre-raphaelite|whistler|blake/,
-      pubKeywords: /artist|painter|palette|hogarth|turner|blake|whistler|easel|canvas/,
+      keywords: /\b(painter|artist|sculptor|gallery|turner|hogarth|constable|pre-raphaelite|whistler)\b/,
+      pubs: [
+        [/\bhogarth\b/, "Named after William Hogarth"],
+        [/\bturner'?s old star\b/, "Owned by J.M.W. Turner for his mistress"],
+        [/\bfrench house\b/, "Soho haunt of Francis Bacon and Lucian Freud"],
+        [/\bfitzroy tavern\b|\bwheatsheaf\b.*\|.*rathbone/, "Fitzrovia artists' pub (Augustus John)"],
+        [/\bcolony room\b|\bchelsea arts\b/, "Artists' drinking den"],
+      ],
     },
     {
       id: "science", name: "Science & invention", icon: "🔬", categories: ["science"],
       blurb: "Scientists, engineers and inventors who changed the world.",
-      keywords: /scientist|engineer|inventor|invented|physicist|chemist|astronomer|mathematician|naturalist|brunel|faraday|darwin|newton|science|telephone|television/,
-      pubKeywords: /engine|railway|telegraph|brunel|steam|electric|globe|telescope|newton/,
+      keywords: /\b(scientist|engineer|inventor|invented|physicist|chemist|astronomer|mathematician|naturalist|brunel|faraday|darwin|newton|telephone|television)\b/,
+      pubs: [
+        [/\b(railway telegraph|the engineer|the brunel|steam passage|the telegraph)\b/, "Named for the age of engineering"],
+        [/\bthe sir isaac newton\b|\bnewton arms\b/, "Named after Isaac Newton"],
+      ],
     },
     {
       id: "theatre", name: "Theatreland", icon: "🎟️",
       blurb: "Stages, music halls and the actors' pubs of the West End.",
-      keywords: /theatre|actor|actress|stage|music hall|playhouse|pantomime|comedian/,
-      pubKeywords: /theatre|actor|stage|harlequin|shakespeare|garrick|lamb and flag|nell gwynne|coach and horses|salisbury|opera/,
+      keywords: /\b(theatre|actor|actress|music hall|playhouse|pantomime|comedian)\b/,
+      pubs: [
+        [/\b(garrick|harlequin|nell gwynne?)\b/, "Named after a theatrical legend"],
+        [/\bshakespeare/, "Named after Shakespeare"],
+        [/\btheatre\b/, "Theatre pub with its own stage"],
+        [/\bthe salisbury\b.*\|.*st\.? martin'?s lane/, "Ornate West End actors' pub"],
+        [/\blamb (and|&) flag\b.*\|.*rose street/, "Covent Garden actors' pub"],
+      ],
     },
     {
       id: "royal", name: "Royal London", icon: "👑",
       blurb: "Palaces, coronations and the pubs named after kings and queens.",
-      keywords: /\broyal\b|\bking\b|\bqueen\b|palace|prince|princess|monarch|coronation|crown jewels/,
-      pubKeywords: /crown|\bking|\bqueen|prince|royal|duke|sceptre|throne|regent|windsor|victoria/,
+      keywords: /\b(royal|king|queen|palace|prince|princess|monarch|coronation|crown jewels)\b/,
+      pubs: [[/\b(crown|kings?|queens?|prince|princess|royal|duke of (york|cambridge|edinburgh|kent|cornwall|clarence)|sceptre|throne)\b/, "Named after royalty"]],
     },
     {
       id: "maritime", name: "Maritime & Thames", icon: "⚓",
       blurb: "Docks, ships, explorers and riverside taverns.",
-      keywords: /maritime|\bship|naval|admiral|\bdock|wharf|\briver\b|thames|sailor|navy|explorer|captain|lighthouse|cutty sark/,
-      pubKeywords: /ship|anchor|mariner|sailor|admiral|nelson|dock|wharf|prospect of whitby|mayflower|grapes|captain|boat|barge|ferry|waterman|trafalgar|compass|cutty sark|town of ramsgate/,
+      keywords: /\b(maritime|ship|ships|naval|admiral|dock|docks|wharf|river|thames|sailor|navy|explorer|captain|lighthouse|cutty sark)\b/,
+      pubs: [
+        [/\b(prospect of whitby|mayflower|town of ramsgate|captain kidd)\b/, "Historic riverside pub"],
+        [/\bthe grapes\b.*\|.*narrow street/, "Limehouse riverside tavern"],
+        [/\b(trafalgar tavern|cutty sark)\b/, "Greenwich riverside pub"],
+        [/\b(ship|anchor|mariner|sailor|admiral|captain|dock|wharf|ferry|waterman|barge|boat|compass)\b/, "Seafaring name"],
+      ],
     },
     {
       id: "wartime", name: "Wartime London", icon: "🎖️",
       blurb: "The Blitz, the Few and the memorials to London's fallen.",
-      keywords: /\bwar\b|\bblitz|soldier|regiment|\bbattle|veteran|\braf\b|\bbomb(s|ed|ing|er)?\b|wartime|churchill|spitfire/,
-      pubKeywords: /soldier|guard|grenadier|granby|volunteer|rifle|nelson|wellington|churchill|spitfire|victory|trafalgar|waterloo/,
+      keywords: /\b(war|blitz|soldier|regiment|battle|veteran|raf|bomb|bombs|bombed|bombing|wartime|churchill|spitfire)\b/,
+      pubs: [
+        [/\bchurchill/, "Named after Winston Churchill"],
+        [/\b(grenadier|guardsman|marquis of granby|rifleman|volunteer)\b/, "Named for soldiers and regiments"],
+        [/\b(lord nelson|admiral nelson|duke of wellington|victory|waterloo|spitfire)\b/, "Named after a famous victory or commander"],
+      ],
     },
     {
       id: "crime", name: "Crime & mystery", icon: "🔍",
       blurb: "Murders, gallows, gaols and great detectives.",
-      keywords: /murder|police|crime|executed|execution|prison|gaol|gallows|ripper|sherlock|detective|highwayman|scotland yard|old bailey/,
-      pubKeywords: /ten bells|prison|gaol|highwayman|bow street|old bailey|magpie and stump|police|sherlock|jamaica wine|blind beggar|viaduct|hand and shears/,
+      keywords: /\b(murder|murdered|police|crime|executed|execution|prison|gaol|gallows|ripper|sherlock|detective|highwayman|scotland yard|old bailey)\b/,
+      pubs: [
+        [/\bten bells\b/, "Linked to Jack the Ripper's victims"],
+        [/\bblind beggar\b/, "Where Ronnie Kray shot George Cornell in 1966"],
+        [/\bviaduct tavern\b/, "Its cellars are said to be old Newgate cells"],
+        [/\bsherlock holmes\b/, "Home of Sherlock Holmes memorabilia"],
+        [/\bhung,? drawn (and|&) quartered\b/, "Named for the executions on Tower Hill"],
+        [/\b(prospect of whitby|town of ramsgate)\b/, "Linked to 'Hanging Judge' Jeffreys"],
+        [/\bmagpie (and|&) stump\b/, "Crowds watched Newgate hangings from here"],
+      ],
     },
     {
       id: "politics", name: "Politics & protest", icon: "✊",
       blurb: "Prime ministers, suffragettes, radicals and reformers.",
-      keywords: /prime minister|politician|parliament|suffrag|reformer|radical|activist|revolutionar|marx|chartist|campaigner|abolition/,
-      pubKeywords: /red lion|parliament|westminster|marx|chartist|red|liberty|reform/,
+      keywords: /\b(prime minister|politician|parliament|suffragette|suffragist|reformer|radical|activist|revolutionary|marx|chartist|campaigner|abolitionist)\b/,
+      pubs: [
+        [/\b(westminster arms|st\.? stephen'?s tavern)\b/, "Has a division bell for MPs"],
+        [/\bred lion\b.*\|.*(whitehall|parliament street)/, "Whitehall pub of MPs and civil servants"],
+        [/\bmuseum tavern\b/, "Karl Marx drank here"],
+      ],
     },
     {
-      id: "sacred", name: "Churches & cathedrals", icon: "⛪", categories: ["religious"],
+      id: "sacred", name: "Churches & cathedrals", icon: "⛪", categories: ["religious"], nameOnly: true,
       blurb: "Wren spires, cathedrals, synagogues and hidden chapels.",
-      nameOnly: true,
-      keywords: /church|cathedral|abbey|chapel|synagogue|temple|mosque|priory/,
-      pubKeywords: /bishop|abbey|friar|monk|mitre|church|cross keys|blackfriar|angel|nun|parson|vicar|bell/,
-      historicPubs: true,
+      keywords: /\b(church|cathedral|abbey|chapel|synagogue|temple|mosque|priory)\b/,
+      pubs: [
+        [/\bblack ?friar\b/, "Built on a Dominican friary; monks in the decor"],
+        [/\bye olde mitre\b/, "Built for the Bishop of Ely's household"],
+        [/\b(bishops?|abbey|mitre|cross keys|friar|monk|vicar|parson)\b/, "Name with a church link"],
+      ],
     },
     {
-      id: "green", name: "Green London", icon: "🌳", categories: ["park", "garden", "natural", "scenic"],
+      id: "green", name: "Green London", icon: "🌳", categories: ["park", "garden", "natural", "scenic"], nameOnly: true,
       blurb: "Parks, gardens and views, with beer gardens in between.",
-      nameOnly: true,
-      keywords: /\bpark\b|garden|heath|common|viewpoint|nature reserve/,
-      pubKeywords: /garden|tree|\boak|\bgreen\b|park|heath|elm|willow|orchard|meadow/,
-      pubFlags: [4],
+      keywords: /\b(park|garden|gardens|heath|common|viewpoint|nature reserve)\b/,
+      pubs: [],
+      pubFlags: [[4, "Has a beer garden or outdoor seating"]],
     },
   ];
 
@@ -979,53 +1083,82 @@
     return place._themeText;
   }
 
-  // Dates that say when a place is "from": a life span ("1812-1870" -> its middle),
-  // "built/erected/founded ... 1850", or the OSM build date. Stray numbers don't count.
-  function placeYears(place) {
-    if (place._years == null) {
+  // Dates that say when a place is "from", each with how we know.
+  function placeDates(place) {
+    if (place._dates == null) {
       const text = placeText(place);
-      const years = [];
+      const dates = [];
       const spans = /\b(1[0-9]{3})\s*(?:-|–|—|to)\s*(1[0-9]{3}|20[0-2][0-9])\b/g;
       let match;
       while ((match = spans.exec(text))) {
         const from = Number(match[1]);
         const to = Number(match[2]);
-        if (to >= from && to - from <= 110) years.push(Math.round((from + to) / 2));
+        if (to >= from && to - from <= 110) {
+          dates.push({ year: Math.round((from + to) / 2), label: PERSON_PLAQUE.test(text) ? `Life of someone who lived ${from}–${to}` : `Dates from ${from}–${to}` });
+        }
       }
-      const events = /\b(?:built|erected|founded|opened|rebuilt|completed|constructed|established|dates from|designed|consecrated)\b[^.\d]{0,25}(1[0-9]{3})\b/g;
-      while ((match = events.exec(text))) years.push(Number(match[1]));
-      if (place.built) years.push(place.built);
-      Object.defineProperty(place, "_years", { value: years, enumerable: false });
+      const events = /\b(built|erected|founded|opened|rebuilt|completed|constructed|established|dates from|designed|consecrated)\b[^.\d]{0,25}(1[0-9]{3})\b/g;
+      while ((match = events.exec(text))) dates.push({ year: Number(match[2]), label: `${match[1][0].toUpperCase()}${match[1].slice(1)} ${match[2]}` });
+      if (place.built) dates.push({ year: place.built, label: `Built ${place.built}` });
+      Object.defineProperty(place, "_dates", { value: dates, enumerable: false });
     }
-    return place._years;
+    return place._dates;
   }
 
-  function inEra(place, theme) {
-    return Boolean(theme.years && placeYears(place).some((year) => year >= theme.years[0] && year <= theme.years[1]));
+  function eraReason(place, theme) {
+    if (!theme.years) return "";
+    const hit = placeDates(place).find((date) => date.year >= theme.years[0] && date.year <= theme.years[1]);
+    return hit ? hit.label : "";
   }
 
   const THEME_EXCLUDE =
     /resource centre|community centre|leisure centre|housing|\bestate\b|school|library|church of christ,? scientist|christian science|car park|house of fraser|business centre/;
 
-  function themeMatchesSight(poi, theme) {
-    if (poi.kind !== "poi" || THEME_EXCLUDE.test(poi.title.toLowerCase())) return false;
+  function titleCase(word) {
+    return word.replace(/\b\w/g, (letter) => letter.toUpperCase());
+  }
+
+  /** Why a sight fits a theme ("" if it doesn't). */
+  function themeSightReason(poi, theme) {
+    if (!poi || poi.kind !== "poi" || THEME_EXCLUDE.test(poi.title.toLowerCase())) return "";
+    const categoryHit = (poi.categories || []).find((category) => (theme.categories || []).includes(category));
     if (theme.nameOnly) {
-      // Places, not people: judge by the name and the place's own category.
-      if (poi.primary === "blue_plaque") return false;
-      return theme.keywords.test(poi.title.toLowerCase()) || poi.categories.some((c) => (theme.categories || []).includes(c));
+      if (poi.primary === "blue_plaque") return "";
+      const nameHit = theme.keywords.exec(poi.title.toLowerCase());
+      if (nameHit) return titleCase(nameHit[0]);
+      return categoryHit ? CATEGORY_SINGULAR[categoryHit] || categoryLabel(categoryHit) : "";
     }
-    if (theme.keywords.test(placeText(poi))) return true;
-    if (theme.categories && poi.categories.some((category) => theme.categories.includes(category))) return true;
-    return inEra(poi, theme);
+    const era = eraReason(poi, theme);
+    if (era) return era;
+    const keyword = theme.keywords.exec(placeText(poi));
+    if (keyword) return `${poi.primary === "blue_plaque" ? "Plaque" : "Linked to"}: “${titleCase(keyword[0])}”`;
+    return categoryHit ? CATEGORY_SINGULAR[categoryHit] || categoryLabel(categoryHit) : "";
+  }
+
+  /** Why a pub fits a theme ("" if it doesn't). */
+  function themePubReason(pub, theme) {
+    if (!pub || pub.kind !== "pub") return "";
+    const name = pub.title.toLowerCase();
+    const withAddress = `${name} | ${(pub.address || "").toLowerCase()}`;
+    // Only rules that name a specific street (they contain "|") look at the address.
+    for (const [pattern, reason] of theme.pubs || []) {
+      if (pattern.test(pattern.source.includes("\\|") ? withAddress : name)) return reason;
+    }
+    for (const [flag, reason] of theme.pubFlags || []) if (hasFlag(pub, flag)) return reason;
+    if (theme.years && pub.built && pub.built >= theme.years[0] && pub.built <= theme.years[1]) return `Built ${pub.built}`;
+    return "";
+  }
+
+  function themeMatchesSight(poi, theme) {
+    return Boolean(themeSightReason(poi, theme));
   }
 
   function themeMatchesPub(pub, theme) {
-    if (pub.kind !== "pub") return false;
-    const name = pub.title.toLowerCase();
-    if (theme.pubKeywords && theme.pubKeywords.test(name)) return true;
-    if (theme.pubFlags && theme.pubFlags.some((flag) => hasFlag(pub, flag))) return true;
-    if (theme.years && pub.built && pub.built >= theme.years[0] && pub.built <= theme.years[1]) return true;
-    return Boolean(theme.historicPubs && hasFlag(pub, FLAGS.historic) && theme.keywords.test(placeText(pub)));
+    return Boolean(themePubReason(pub, theme));
+  }
+
+  function themeReason(place, theme) {
+    return place.kind === "pub" ? themePubReason(place, theme) : themeSightReason(place, theme);
   }
 
   /**
@@ -1040,15 +1173,25 @@
       ? pubs.filter((pub) => themeMatchesPub(pub, theme))
       : pois.filter((poi) => poi.score >= 30 && themeMatchesSight(poi, theme));
     if (pool.length < want) return null;
-    // Cut-off plaque inscriptions make clumsy stop names, so they come up less often.
-    const weight = usePubs ? (pub) => 1 + metadataRichness(pub) : (poi) => sightWeight(poi) * (poi.title.endsWith("…") ? 0.35 : 1);
+    const isPlaque = (place) => place.primary === "blue_plaque";
+    // Plaques are rare in themed crawls: weighted right down, never the starting
+    // point, and at most one per crawl.
+    const weight = usePubs
+      ? (pub) => 1 + metadataRichness(pub)
+      : (poi) => sightWeight(poi) * (isPlaque(poi) ? 0.08 : 1);
     const ordered = weightedOrder(pool, rng, weight);
+    const starts = usePubs ? ordered : ordered.filter((place) => !isPlaque(place));
+    const spacing = usePubs ? 120 : 90;
     for (const radius of [1200, 1800, 2600, 4000]) {
-      for (let index = 0; index < Math.min(ordered.length, 80); index += 1) {
-        const anchor = ordered[index];
+      for (let index = 0; index < Math.min(starts.length, 80); index += 1) {
+        const anchor = starts[index];
         const near = ordered.filter((place) => place !== anchor && distance(anchor, place) <= radius);
-        if (near.length < want - 1) continue;
-        const picks = spreadPick(near, [anchor], want, usePubs ? 120 : 90, (place) => (usePubs ? place.id : place.primary));
+        const main = usePubs ? near : near.filter((place) => !isPlaque(place));
+        const picks = spreadPick(main, [anchor], want, spacing, (place) => (usePubs ? place.id : place.primary));
+        if (!usePubs && picks.length === want - 1) {
+          const plaque = near.find((place) => isPlaque(place) && picks.every((pick) => distance(pick, place) >= spacing));
+          if (plaque) picks.push(plaque);
+        }
         if (picks.length >= want) return picks;
       }
     }
@@ -1640,6 +1783,7 @@
     themeById,
     themeMatchesSight,
     themeMatchesPub,
+    themeReason,
     pickThemedCrawl,
     generateThemedCrawl,
     themedOptions,

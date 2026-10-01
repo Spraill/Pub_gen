@@ -238,7 +238,7 @@
           <span class="field-label" id="theme-sights-label">Sights</span>
           <div class="stepper" data-stepper>
             <button type="button" class="stepper-btn" data-step="-1" aria-label="Fewer sights">−</button>
-            <input id="theme-sights" type="number" inputmode="numeric" min="0" max="6" value="3" aria-labelledby="theme-sights-label">
+            <input id="theme-sights" type="number" inputmode="numeric" min="0" max="10" value="3" aria-labelledby="theme-sights-label">
             <button type="button" class="stepper-btn" data-step="1" aria-label="More sights">+</button>
           </div>
         </div>
@@ -246,7 +246,7 @@
           <span class="field-label" id="theme-pubs-label">Pubs</span>
           <div class="stepper" data-stepper>
             <button type="button" class="stepper-btn" data-step="-1" aria-label="Fewer pubs">−</button>
-            <input id="theme-pubs" type="number" inputmode="numeric" min="0" max="8" value="4" aria-labelledby="theme-pubs-label">
+            <input id="theme-pubs" type="number" inputmode="numeric" min="0" max="10" value="4" aria-labelledby="theme-pubs-label">
             <button type="button" class="stepper-btn" data-step="1" aria-label="More pubs">+</button>
           </div>
         </div>
@@ -274,6 +274,7 @@
             <span class="hint">Not feeling it?</span>
             <button id="reshuffle-button" class="btn small" type="button">↻ Another version</button>
           </div>
+          <p id="route-theme-note" class="theme-note" hidden></p>
           <div id="route-status" class="status" role="status"></div>
           <ol id="route-list" class="stop-list route"></ol>
           <div class="button-row wrap export-row">
