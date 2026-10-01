@@ -17,11 +17,14 @@ from urllib.request import Request, urlopen
 
 DEFAULT_RELATION_ID = 175342
 DEFAULT_TIMEOUT_SECONDS = 240
-DEFAULT_RETRY_ROUNDS = 2
+DEFAULT_RETRY_ROUNDS = 3
+# Public Overpass mirrors; busy ones answer 429/504, so we rotate through all of them.
 DEFAULT_ENDPOINTS = (
     "https://overpass-api.de/api/interpreter",
-    "https://lz4.overpass-api.de/api/interpreter",
     "https://overpass.private.coffee/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://lz4.overpass-api.de/api/interpreter",
+    "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
 )
 DEFAULT_USER_AGENT = "pub-crawl-planner-v2/1.0 (+local build)"
 DEFAULT_OPENPLAQUES_DATA_PAGE = "https://openplaques.org/pages/data"
@@ -235,6 +238,9 @@ def fetch_overpass_payload(
     retry_rounds: int,
     start_offset: int = 0,
 ) -> tuple[dict[str, Any], str]:
+    # Small (bounding-box) cities don't need long server-side timeouts.
+    if "bbox" in OVERPASS_AREA:
+        timeout_seconds = min(timeout_seconds, 90)
     query = build_query(fragment, timeout_seconds)
     last_error: Exception | None = None
     endpoint_count = len(DEFAULT_ENDPOINTS)
@@ -242,12 +248,14 @@ def fetch_overpass_payload(
         for endpoint_index in range(endpoint_count):
             endpoint = DEFAULT_ENDPOINTS[(start_offset + endpoint_index) % endpoint_count]
             try:
-                return post_json(endpoint, query, timeout_seconds), endpoint
-            except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
+                # Give the server its own timeout plus a margin before giving up on it.
+                return post_json(endpoint, query, timeout_seconds + 30), endpoint
+            except (HTTPError, URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
                 last_error = exc
+                print(json.dumps({"overpass_retry": endpoint, "round": round_number, "error": str(exc)[:120]}), flush=True)
                 continue
         if round_number < retry_rounds:
-            time.sleep(round_number * 2)
+            time.sleep(20 * round_number)
     raise RuntimeError(f"Failed Overpass POI fetch: {last_error}") from last_error
 
 
