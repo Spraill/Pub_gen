@@ -68,6 +68,18 @@ CLASS_TAGS: dict[str, dict[str, str]] = {
 # Listed-building names that are (or contain) a pub.
 PUB_NAME = re.compile(r"\b(public house|inn|inne|tavern)\b", re.I)
 NOT_A_PUB = re.compile(r"\b(former|formerly|old|site of)\b", re.I)
+# Heritage-listing records that describe a fixture or a stretch of street, not a place to visit.
+LISTING_JUNK = re.compile(
+    r"approximately|\bmetres\b|adjacent to|to (the )?rear|\battached\b|boundary wall|railings|gate ?piers"
+    r"|\blamp|telephone kiosk|bollard|mounting block|\bwalls? to\b|steps to|forecourt|outbuilding|gazebo"
+    r"|\bstable\b|ice house|pinfold|\bnos?\.? \d",
+    re.I,
+)
+STARTS_WITH_NUMBER = re.compile(r"^\d")
+# Listing-style suffixes on pub names.
+PUB_SUFFIX = re.compile(r",? (public house|and attached buildings.*|\(number \d+\))$", re.I)
+# Historic England grades (P1435 values) worth a fame boost.
+GRADES = {"Q15700818": "grade i", "Q15700831": "grade ii*", "Q15700834": "grade ii"}
 
 _cache: dict[str, list[dict[str, Any]]] = {}
 
@@ -133,6 +145,9 @@ def elements_from_results(results: dict[str, Any]) -> list[dict[str, Any]]:
             item["classes"].add(value("class").rsplit("/", 1)[-1])
         if value("heritage"):
             item["heritage"] = True
+            grade = GRADES.get(value("heritage").rsplit("/", 1)[-1])
+            if grade and (item.get("grade") is None or grade < item["grade"]):
+                item["grade"] = grade
         if value("ended"):
             item["ended"] = True
         if value("article") and "wikipedia" not in item:
@@ -155,13 +170,29 @@ def elements_from_results(results: dict[str, Any]) -> list[dict[str, Any]]:
         for wd_class in sorted(item["classes"]):
             for key, val in CLASS_TAGS.get(wd_class, {}).items():
                 tags.setdefault(key, val)
+        has_class = len(tags) > 2
+        if tags.get("amenity") != "pub" and item["heritage"] and PUB_NAME.search(label) and not NOT_A_PUB.search(label):
+            tags["amenity"] = "pub"
+        is_pub = tags.get("amenity") == "pub"
+        if is_pub:
+            previous = None
+            while previous != label:  # "X Public House (Number 19)" -> "X"
+                previous, label = label, PUB_SUFFIX.sub("", label).strip()
+            tags["name"] = label
+        # Listing records for fixtures ("Gazebo 50 Metres North Of ...") or bare addresses ("19, Market Street")
+        # are not pubs, and only make sights when Wikipedia has an article on them.
+        junk = LISTING_JUNK.search(label) or STARTS_WITH_NUMBER.search(label) or len(label) > 70
+        if junk and (is_pub or not item.get("wikipedia")):
+            continue
+        # A plain listed house with no article and no class is a poor crawl stop.
+        if not is_pub and not has_class and not item.get("wikipedia"):
+            continue
         if item["heritage"]:
             tags["heritage"] = "2"
             tags.setdefault("historic", "building")
-        if tags.get("amenity") != "pub" and item["heritage"] and PUB_NAME.search(label) and not NOT_A_PUB.search(label):
-            tags["amenity"] = "pub"
-        if tags.get("amenity") == "pub":
-            tags["name"] = re.sub(r",? public house$", "", label, flags=re.I).strip()
+            if item.get("grade"):
+                tags["listed_status"] = item["grade"]
+
         for key in ("wikipedia", "start_date"):
             if item.get(key):
                 tags[key] = item[key]
@@ -196,7 +227,7 @@ def wikidata_payload(bbox: list[float], fragment: str, city_name: str = "") -> d
     found = [el for el in load(bbox) if any(matches(el["tags"], filters) for filters in statements)]
     if city_name:
         # "Golden Fleece, York" -> "Golden Fleece": Wikipedia-style disambiguation isn't part of the name.
-        suffix = re.compile(rf",? \(?{re.escape(city_name)}\)?$", re.I)
+        suffix = re.compile(rf"(, | \(){re.escape(city_name)}\)?$", re.I)
         found = [
             {
                 **el,

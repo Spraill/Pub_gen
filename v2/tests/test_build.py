@@ -186,6 +186,8 @@ class WikidataSourceTests(unittest.TestCase):
                     row("Q3", "Former Coach and Horses Inn", heritage="x"),
                     row("Q4", "Closed Pub", ended="1990", **{"class": "http://www.wikidata.org/entity/Q212198"}),
                     row("Q5", "Bus stop", **{"class": "http://www.wikidata.org/entity/Q953806"}),
+                    row("Q7", "Gazebo 50 Metres To North Of The Fox Inn", heritage="x"),
+                    row("Q8", "The Snickleway Inn And Attached Buildings At Rear", heritage="x"),
                     row("Q6", "York Minster", inception="+1220-01-01T00:00:00Z", **{"class": "http://www.wikidata.org/entity/Q2977"}),
                 ]
             }
@@ -193,10 +195,12 @@ class WikidataSourceTests(unittest.TestCase):
         tags = {el["id"]: el["tags"] for el in wikidata_source.elements_from_results(results)}
         self.assertEqual(tags[1]["amenity"], "pub")
         self.assertEqual((tags[2]["amenity"], tags[2]["name"]), ("pub", "Black Swan"))
-        self.assertNotIn("amenity", tags[3])  # a former pub stays a listed building
+        self.assertNotIn(3, tags)  # a former pub, and a plain listing with no article
         self.assertNotIn(4, tags)
         self.assertNotIn(5, tags)
         self.assertEqual((tags[6]["amenity"], tags[6]["start_date"]), ("place_of_worship", "1220"))
+        self.assertNotIn(7, tags)
+        self.assertEqual((tags[8]["amenity"], tags[8]["name"]), ("pub", "The Snickleway Inn"))
         self.assertEqual(build.poi_id("osm:wikidata:6"), "d6")
         self.assertEqual(build.pub_id({"osm_type": "wikidata", "osm_id": 1}), "pd1")
 
