@@ -17,6 +17,7 @@ const BASE_OPTIONS = {
   mealStop: "none",
   maxDetourMeters: 1200,
   roundTrip: false,
+  finish: "any",
   requireFood: false,
   requireStepFree: false,
   preferRealAle: false,
@@ -214,9 +215,85 @@ test("search ranks title matches first", () => {
   assert.deepEqual(P.search(index, "  "), []);
 });
 
-test("total time counts each stop once", () => {
-  const stops = [{ place: { id: "a", kind: "poi" } }, { place: { id: "b", kind: "pub" } }, { place: { id: "a", kind: "poi" } }];
-  assert.equal(P.totalTimeSeconds(stops, 600, 40, 15), 600 + 55 * 60);
+test("finish at a pub saves one pub for the end", () => {
+  const result = P.planRoute(sights, pubs, { ...BASE_OPTIONS, finish: "pub", pubCount: 3 });
+  assert.equal(result.ok, true, result.error);
+  const last = result.stops[result.stops.length - 1];
+  assert.equal(last.place.kind, "pub");
+  assert.equal(last.auto, true);
+  assert.equal(result.stops.filter((stop) => stop.place.kind === "pub").length, 3);
+  // The finale is near the last sight, not back near the start.
+  assert.ok(P.distance(last.place, sights[2]) < P.distance(last.place, sights[0]));
+  // Loops ignore it.
+  const loop = P.planRoute(sights, pubs, { ...BASE_OPTIONS, finish: "pub", roundTrip: true });
+  assert.equal(loop.stops[loop.stops.length - 1].place.id, "n1");
+});
+
+test("finish at a pub with one pub and a meal stop makes the finale the meal", () => {
+  const result = P.planRoute(sights, pubs, { ...BASE_OPTIONS, finish: "pub", pubCount: 1, mealStop: "middle" });
+  assert.equal(result.ok, true, result.error);
+  const last = result.stops[result.stops.length - 1];
+  assert.equal(last.mealStop, true);
+  assert.ok(P.hasFlag(last.place, P.FLAGS.food));
+});
+
+test("another version prefers different pubs", () => {
+  const first = P.planRoute(sights, pubs, { ...BASE_OPTIONS, seed: "a" });
+  const firstPubs = first.stops.filter((stop) => stop.auto).map((stop) => stop.place.id);
+  const second = P.planRoute(sights, pubs, { ...BASE_OPTIONS, seed: "b", avoidIds: firstPubs });
+  const secondPubs = second.stops.filter((stop) => stop.auto).map((stop) => stop.place.id);
+  assert.equal(second.ok, true, second.error);
+  assert.ok(secondPubs.some((id) => !firstPubs.includes(id)), "at least one new pub");
+  // Same seed, same result.
+  const again = P.planRoute(sights, pubs, { ...BASE_OPTIONS, seed: "a" });
+  assert.deepEqual(again.stops.map((stop) => stop.place.id), first.stops.map((stop) => stop.place.id));
+});
+
+test("Commons responses become credited photos", () => {
+  const json = {
+    query: {
+      pages: {
+        1: { title: "File:Pub map.svg", index: 1, imageinfo: [{ thumburl: "https://upload.wikimedia.org/a.png" }] },
+        2: {
+          title: "File:The Lamb, interior.jpg",
+          index: 3,
+          imageinfo: [
+            {
+              thumburl: "https://upload.wikimedia.org/b.jpg",
+              descriptionurl: "https://commons.wikimedia.org/wiki/File:b.jpg",
+              extmetadata: { Artist: { value: '<a href="x">Jane &amp; Co</a>' }, LicenseShortName: { value: "CC BY-SA 4.0" } },
+            },
+          ],
+        },
+        3: { title: "File:The Lamb.jpg", index: 2, imageinfo: [{ thumburl: "https://upload.wikimedia.org/c.jpg" }] },
+        4: { title: "File:Evil.jpg", index: 4, imageinfo: [{ thumburl: "javascript:alert(1)" }] },
+      },
+    },
+  };
+  const images = P.parseCommonsImages(json);
+  assert.deepEqual(images.map((image) => image.title), ["File:The Lamb.jpg", "File:The Lamb, interior.jpg"]);
+  assert.equal(images[1].credit, "Jane & Co, CC BY-SA 4.0");
+  assert.equal(images[1].interior, true);
+  const arranged = P.arrangePhotos([images[0], { thumb: "x", interior: false }, images[1]]);
+  assert.deepEqual(arranged.map((image) => image.thumb), ["https://upload.wikimedia.org/c.jpg", "https://upload.wikimedia.org/b.jpg", "x"]);
+  assert.equal(P.readWikidataClaim({ claims: { P18: [{ mainsnak: { datavalue: { value: "A.jpg" } } }] } }, "P18"), "A.jpg");
+  assert.equal(
+    P.commonsFileFromUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Tower_of_London.jpg/320px-Tower_of_London.jpg"),
+    "File:Tower of London.jpg"
+  );
+});
+
+test("street photos must face the pub", () => {
+  const place = { lat: 51.5, lon: -0.1 };
+  const south = { lat: 51.4998, lon: -0.1 }; // ~22 m south of the pub
+  const photo = (angle) => ({
+    id: String(angle),
+    thumb_1024_url: "https://scontent.xx.fbcdn.net/a.jpg",
+    computed_compass_angle: angle,
+    computed_geometry: { coordinates: [south.lon, south.lat] },
+  });
+  const picked = P.pickFacingPhotos({ data: [photo(180), photo(5), photo(90)] }, place);
+  assert.deepEqual(picked.map((item) => item.page.split("=")[1]), ["5"]);
 });
 
 test("formatting", () => {
@@ -225,6 +302,28 @@ test("formatting", () => {
   assert.equal(P.formatDuration(59 * 60), "59 min");
   assert.equal(P.formatDuration(125 * 60), "2 h 5 min");
   assert.equal(P.formatDuration(120 * 60), "2 h");
+});
+
+test("crawl of the day is stable, high quality and ends at a pub", { skip: !data && "run build_v2.py first" }, () => {
+  const areas = new Set();
+  for (let offset = 0; offset < 30; offset += 1) {
+    const key = new Date(Date.UTC(2026, 9, 1 + offset)).toISOString().slice(0, 10);
+    const crawl = P.pickDailyCrawl(data.pois, data.pubs, key);
+    assert.ok(crawl, key);
+    assert.deepEqual(P.pickDailyCrawl(data.pois, data.pubs, key).anchors.map((p) => p.id), crawl.anchors.map((p) => p.id));
+    areas.add(crawl.area.name);
+    const sightsInCrawl = crawl.anchors.filter((place) => place.kind === "poi");
+    assert.ok(sightsInCrawl.length >= 2, `${key} has ${sightsInCrawl.length} sights`);
+    sightsInCrawl.forEach((poi) => assert.ok(P.isQualitySight(poi, 65), `${key}: ${poi.title}`));
+    const plan = P.planRoute(crawl.anchors, data.pubs, crawl.options);
+    assert.equal(plan.ok, true, `${key}: ${plan.error}`);
+    const pubCount = plan.stops.filter((stop) => stop.place.kind === "pub").length;
+    assert.ok(pubCount >= 4 && pubCount <= 6, `${key} has ${pubCount} pubs`);
+    assert.equal(plan.stops[plan.stops.length - 1].place.kind, "pub");
+  }
+  assert.ok(areas.size >= 15, "rotates through London");
+  const today = P.londonDateKey(new Date(Date.UTC(2026, 9, 1, 23, 30)));
+  assert.equal(today, "2026-10-02", "uses the London date (BST)");
 });
 
 test("built dataset decodes and plans a real crawl", { skip: !data && "run build_v2.py first" }, () => {

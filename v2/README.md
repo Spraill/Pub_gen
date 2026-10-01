@@ -7,8 +7,18 @@ museums, blue plaques, parks, historic buildings and historic pubs.
   for a walkable random crawl (set sights to 0 for a pub-only crawl). Pubs are
   added along the walk, with options for food, step-free access, historic pubs,
   real ale, beer gardens, dog-friendly pubs and avoiding chains.
-- **Route**: real walking directions with per-leg times, swap or remove any
-  pub, GPX download and Google Maps hand-off.
+- **Route**: real walking directions with per-leg times, finishing at a pub by
+  default, swap or remove any pub, *Another version* (same settings, new luck),
+  GPX download and Google Maps hand-off.
+- **Crawl of the day**: the same for everyone on a given London date. It hinges
+  on a notable historic, beautiful or culturally significant sight (and a
+  historic pub on alternate days) in an area that rotates daily (City, West
+  End, East, North, South, West…), with 3 sights and 4–5 pubs.
+- **Photos**: tapping a place shows its photo; *More info* opens a gallery
+  (Wikidata lead image plus the place's Wikimedia Commons category, which often
+  has pub interiors), each credited to its photographer and licence. Set
+  `mapillaryToken` in `config.js` to add street-level exterior photos for pubs
+  without a Commons photo.
 - **Crawl mode**: *Start crawl* follows your location. When you reach a stop
   you get its story (Wikipedia summary, plaque inscription, pub details), then
   the walk to the next one. *I'm here* works without GPS.
@@ -63,6 +73,7 @@ Python 3.10+ and Node 18+; no other dependencies.
 | Plaques | Open Plaques London export | CC BY-SA |
 | Popularity | Wikidata sitelink counts (number of Wikipedia languages) | CC0 |
 | Stop stories | Wikipedia page summaries, fetched in the browser on demand | CC BY-SA 4.0, credited in the app |
+| Photos | Wikimedia Commons (via Wikidata P18/P373 and OSM tags); optional Mapillary | per-photo licence, credited in the app |
 | Walking routes | FOSSGIS OSRM (`routing.openstreetmap.de`) | free demo service, fair use |
 
 **Freshness.** `.github/workflows/refresh-data.yml` re-fetches everything weekly
@@ -71,6 +82,7 @@ more than 30% is rejected, so a flaky upstream API cannot empty the map.
 
 **Curation** (`build_v2.py`) runs on every build:
 
+- blue plaques are off by default on the map (switch them on in Map filters);
 - drops zoo exhibits and rides, shops, toilets, allotments, playing fields and
   plain local libraries (unless notable: listed, on Wikipedia or Wikidata);
 - removes pubs marked closed or disused;
@@ -94,8 +106,8 @@ used here are OSM `real_ale`, listed-building status and `microbrewery`.
 - Sharing puts only stop IDs and the route name in the URL fragment (`#r=…`).
   Fragments are not sent to the web server.
 - Third-party requests: map tiles (OSM), walking routes (FOSSGIS OSRM; stop
-  coordinates only), Wikipedia/Wikidata (the place being viewed). Location
-  never leaves the device.
+  coordinates only), Wikipedia/Wikidata/Commons (the place being viewed).
+  Location never leaves the device.
 - A Content-Security-Policy restricts scripts to the site itself and network
   access to those services. All data is HTML-escaped before rendering, links
   are restricted to `http(s)`, and shared links are validated against a strict

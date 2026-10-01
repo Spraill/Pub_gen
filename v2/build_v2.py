@@ -18,6 +18,7 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
@@ -110,9 +111,12 @@ CLOSED_PUB_PATTERN = re.compile(r"\((closed|former|disused|demolished)\)|\bclose
 
 PUB_FIELDS = [
     "id", "name", "lat", "lon", "flags", "address", "hours", "website", "phone", "brewery", "cuisine", "brand",
-    "wikipedia", "wikidata",
+    "wikipedia", "wikidata", "commons",
 ]
-POI_FIELDS = ["id", "name", "lat", "lon", "score", "cats", "address", "description", "website", "wikipedia", "wikidata"]
+POI_FIELDS = [
+    "id", "name", "lat", "lon", "score", "cats", "address", "description", "website", "wikipedia", "wikidata",
+    "fame", "commons",
+]
 OSM_TYPE_CODES = {"node": "n", "way": "w", "relation": "r"}
 
 
@@ -291,6 +295,7 @@ def compact_pubs(geojson: dict[str, Any], historic_ids: set[str] | None = None) 
                     clean((props.get("tags") or {}).get("brand")),
                     clean(props.get("wikipedia")),
                     wikidata_id(props.get("wikidata")),
+                    commons_title(props),
                 ]
             )
         )
@@ -333,7 +338,7 @@ def curate_poi(props: dict[str, Any]) -> tuple[bool, int]:
         return False, score
     if not notable and tags.get("amenity") == "library":
         return False, score
-    if not title or title.casefold() == "london point of interest":
+    if not title or title.casefold() == "london point of interest" or re.fullmatch(r"[\d\s./:#-]+", title):
         return False, score
 
     listed = str(tags.get("listed_status", "")).strip().lower()
@@ -356,6 +361,47 @@ def curate_poi(props: dict[str, Any]) -> tuple[bool, int]:
     if not notable and tags.get("tourism") == "artwork" and not tags.get("artist_name"):
         score -= 4
     return True, max(10, min(100, score))
+
+
+def fame_score(props: dict[str, Any]) -> int:
+    """Uncapped "how famous is this" signal, used to pick the hero of the daily crawl.
+
+    Interest scores saturate at 100 for hundreds of places; fame separates
+    Westminster Abbey from a minor listed church. Wikidata sitelinks (added by the
+    weekly refresh) dominate when present; otherwise OSM name translations do.
+    """
+    tags = props.get("tags") or {}
+    title = clean(props.get("title"))
+    if re.search(r"\bstation\b", title, re.IGNORECASE) or tags.get("railway") or tags.get("public_transport"):
+        return 0
+    fame = 3 * sum(1 for key in tags if key.startswith("name:") and not key.startswith("name:etymology"))
+    fame += 2 * int(props.get("sitelinks") or 0)
+    if tags.get("tourism") in ("attraction", "museum", "zoo", "aquarium", "viewpoint", "gallery"):
+        fame += 12
+    if props.get("wikipedia"):
+        fame += 6
+    if props.get("wikidata"):
+        fame += 3
+    listed = str(tags.get("listed_status", "")).strip().lower()
+    fame += 8 if listed == "grade i" else 4 if listed == "grade ii*" else 0
+    if any(name in str(tags.get("operator", "")).lower() for name in NOTABLE_OPERATORS[:4]):
+        fame += 6
+    return fame
+
+
+def commons_title(props: dict[str, Any]) -> str:
+    """Normalise OSM wikimedia_commons / image tags to "File:…" or "Category:…"."""
+    tags = props.get("tags") or {}
+    for value in (tags.get("wikimedia_commons"), tags.get("image")):
+        text = clean(value).split(";")[0].strip()
+        if not text:
+            continue
+        if re.match(r"^(File|Category):", text):
+            return text.replace("_", " ")
+        match = re.match(r"^https?://(?:commons\.wikimedia\.org|[a-z-]+\.wikipedia\.org)/wiki/(?:File|Datei|Fichier|Bestand):(.+)$", text)
+        if match:
+            return "File:" + unquote(match.group(1)).replace("_", " ")
+    return ""
 
 
 def plaque_title(props: dict[str, Any]) -> str:
@@ -419,6 +465,8 @@ def compact_pois(geojson: dict[str, Any]) -> tuple[list[list[Any]], list[str], s
                     clean(props.get("website")),
                     clean(props.get("wikipedia")),
                     wikidata_id(props.get("wikidata")),
+                    fame_score(props),
+                    commons_title(props),
                 ]
             )
         )
