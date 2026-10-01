@@ -383,8 +383,12 @@
       // private mode: the city just isn't remembered
     }
     P.setReferenceLatitude(city.center[0]);
-    map.setMinZoom(city.minZoom || 9);
-    map.fitBounds(city.bounds);
+    // Jump straight to the city with no animation. map.setMinZoom() would start an animated
+    // zoom that swallows the move (York opened on London) or, on phones where the city fits
+    // below its minZoom, leaves the marker clusters empty when it ends. fitBounds clamps to
+    // options.minZoom by itself.
+    map.options.minZoom = city.minZoom || 9;
+    map.fitBounds(city.bounds, { animate: false });
     const title = `${city.name} Crawl Planner`;
     document.title = title;
     document.querySelector(".brand h1").textContent = title;
@@ -2780,7 +2784,9 @@
     if (session.mode === "random" || session.mode === "pick") state.mode = session.mode;
     if (["plan", "themes", "route", "saved"].includes(session.tab)) state.tab = session.tab;
     if (session.theme && P.themeById(session.theme)) state.theme = session.theme;
-    if (session.view && Number.isFinite(session.view.lat)) {
+    // Ignore a remembered view that isn't over this city.
+    const inCity = (view) => L.latLngBounds(state.city.bounds).pad(0.5).contains([view.lat, view.lon]);
+    if (session.view && Number.isFinite(session.view.lat) && inCity(session.view)) {
       map.setView([session.view.lat, session.view.lon], session.view.zoom || 12, { animate: false });
     }
     if (session.route && Array.isArray(session.route.stops)) {
@@ -2791,9 +2797,16 @@
 
   function renderDataNote() {
     const fetched = state.data.dataFetchedAt ? formatDate(state.data.dataFetchedAt) : "";
+    // Credit the sources this city's data actually came from (ids: n/w/r OSM, d Wikidata, q Open Plaques).
+    const places = state.data.pois.concat(state.data.pubs);
+    const uses = (pattern) => places.some((place) => pattern.test(place.id));
+    const sources = [
+      uses(/^p?[nwr]\d/) && `<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>`,
+      uses(/^p?d\d/) && `<a href="https://www.wikidata.org" target="_blank" rel="noopener">Wikidata</a>`,
+      uses(/^q\d/) && `<a href="https://openplaques.org" target="_blank" rel="noopener">Open Plaques</a>`,
+    ].filter(Boolean);
     els.dataNote.innerHTML =
-      `Data: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a> ` +
-      `and <a href="https://openplaques.org" target="_blank" rel="noopener">Open Plaques</a>` +
+      `Data: ${sources.join(" and ")}` +
       (fetched ? `, updated ${escapeHtml(fetched)}` : "") +
       `. Walking routes by <a href="https://routing.openstreetmap.de" target="_blank" rel="noopener">FOSSGIS OSRM</a>. ` +
       `Stories from Wikipedia. <button type="button" data-action="show-help">How it works</button>`;

@@ -304,6 +304,19 @@ async function run() {
   });
 
   if (fs.existsSync(path.join(ROOT, "data", "places-york.json"))) {
+    await scenario("mobile: York opens on York with its pins drawn", { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, async (page) => {
+      await page.goto(`${base}?city=york`);
+      await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });
+      await page.waitForTimeout(1000);
+      const pinsOnScreen = await page.evaluate(() =>
+        [...document.querySelectorAll("#map .leaflet-marker-icon")].filter((el) => {
+          const box = el.getBoundingClientRect();
+          return box.right > 0 && box.bottom > 0 && box.left < innerWidth && box.top < innerHeight;
+        }).length
+      );
+      assert.ok(pinsOnScreen > 5, `York pins on a phone: ${pinsOnScreen}`);
+      await shot(page, "mobile-york");
+    });
     await scenario("desktop: switch to York and share a York crawl", { viewport: { width: 1280, height: 800 } }, async (page, routerCalls, context) => {
       await page.goto(base);
       await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });
@@ -312,6 +325,16 @@ async function run() {
       await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });
       assert.match(await page.textContent(".brand h1"), /York Crawl Planner/);
       assert.ok(Number((await page.textContent("#count-pubs")).replace(/\D/g, "")) > 20, "York has pubs");
+      // The map jumps to York: its pins are on screen (it used to stay over an empty London).
+      await page.waitForTimeout(800);
+      const pinsOnScreen = await page.evaluate(() =>
+        [...document.querySelectorAll("#map .leaflet-marker-icon")].filter((el) => {
+          const box = el.getBoundingClientRect();
+          return box.right > 0 && box.bottom > 0 && box.left < innerWidth && box.top < innerHeight;
+        }).length
+      );
+      assert.ok(pinsOnScreen > 5, `York pins on screen: ${pinsOnScreen}`);
+      assert.match(await page.textContent("#data-note"), /Wikidata/);
       await shot(page, "desktop-york");
       await page.click('[data-mode="random"]');
       await page.click("#generate-button");
