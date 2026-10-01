@@ -201,7 +201,7 @@ def discover_openplaques_url(timeout_seconds: int) -> str:
 CITIES_PATH = Path(__file__).resolve().parents[1] / "cities.json"
 # Search area for Overpass: an OSM boundary relation or a bounding box.
 OVERPASS_AREA: dict[str, Any] = {"relation": DEFAULT_RELATION_ID}
-# Optional downloaded OSM extract (URL or local path) used instead of Overpass.
+# Optional OSM extract (URL, local path or "geofabrik" to look one up) used instead of Overpass.
 OSM_EXTRACT: dict[str, str] = {}
 
 

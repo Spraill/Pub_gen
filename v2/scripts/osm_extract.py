@@ -11,12 +11,14 @@ response, so the rest of the pipeline doesn't change.
 
 from __future__ import annotations
 
+import json
 import re
 import shutil
 from pathlib import Path
 from typing import Any
 from urllib.request import Request, urlopen
 
+GEOFABRIK_INDEX = "https://download.geofabrik.de/index-v1.json"
 CACHE_DIR = Path(__file__).resolve().parents[1] / ".cache"
 # Only objects carrying one of these keys can match a fetcher fragment.
 INTERESTING_KEYS = ("amenity", "tourism", "historic", "heritage", "leisure", "memorial", "plaque")
@@ -60,6 +62,50 @@ def download(url: str) -> Path:
             shutil.copyfileobj(response, handle)
         tmp.rename(target)
     return target
+
+
+def _ring_contains(ring: list[list[float]], lon: float, lat: float) -> bool:
+    inside = False
+    for (x1, y1), (x2, y2) in zip(ring, ring[1:] + ring[:1]):
+        if (y1 > lat) != (y2 > lat) and lon < (x2 - x1) * (lat - y1) / (y2 - y1) + x1:
+            inside = not inside
+    return inside
+
+
+def pick_geofabrik_region(index: dict[str, Any], bbox: list[float]) -> str:
+    """The smallest Geofabrik region whose outline contains every corner of bbox."""
+    south, west, north, east = bbox
+    corners = [(west, south), (west, north), (east, south), (east, north)]
+    best: tuple[float, str] | None = None
+    for feature in index.get("features", []):
+        geometry = feature.get("geometry") or {}
+        pbf = ((feature.get("properties") or {}).get("urls") or {}).get("pbf")
+        if not pbf or geometry.get("type") not in ("Polygon", "MultiPolygon"):
+            continue
+        polygons = geometry["coordinates"] if geometry["type"] == "MultiPolygon" else [geometry["coordinates"]]
+        if not all(any(_ring_contains(poly[0], lon, lat) for poly in polygons) for lon, lat in corners):
+            continue
+        points = [pt for poly in polygons for pt in poly[0]]
+        lons = [pt[0] for pt in points]
+        lats = [pt[1] for pt in points]
+        size = (max(lons) - min(lons)) * (max(lats) - min(lats))
+        if best is None or size < best[0]:
+            best = (size, pbf)
+    if best is None:
+        raise RuntimeError("No Geofabrik region covers this city.")
+    return best[1]
+
+
+def resolve_source(source: str, bbox: list[float]) -> str:
+    """"geofabrik" means: look the right regional extract up in Geofabrik's index."""
+    if source != "geofabrik":
+        return source
+    request = Request(GEOFABRIK_INDEX, headers={"User-Agent": "pub-gen-data-refresh/1.0"})
+    with urlopen(request, timeout=120) as response:
+        index = json.load(response)
+    url = pick_geofabrik_region(index, bbox)
+    print(json.dumps({"osm_extract": url}), flush=True)
+    return url
 
 
 def load_elements(path: Path, bbox: list[float]) -> list[dict[str, Any]]:
@@ -113,6 +159,8 @@ def load_elements(path: Path, bbox: list[float]) -> list[dict[str, Any]]:
 
 
 def extract_payload(url_or_path: str, bbox: list[float], fragment: str) -> dict[str, Any]:
+    if not Path(url_or_path).exists():
+        url_or_path = resolve_source(url_or_path, bbox)
     path = Path(url_or_path) if Path(url_or_path).exists() else download(url_or_path)
     key = (str(path), tuple(bbox))
     if key not in _loaded:
