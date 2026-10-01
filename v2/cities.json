@@ -33,7 +33,11 @@
     "name": "York",
     "overpassArea": { "bbox": [53.925, -1.16, 53.995, -1.02] },
     "openPlaques": false,
-    "osmExtract": "geofabrik",
+    "osmExtract": [
+      "geofabrik",
+      "https://download.openstreetmap.fr/extracts/europe/united_kingdom/england/north_yorkshire-latest.osm.pbf",
+      "https://download.bbbike.org/osm/bbbike/York/York.osm.pbf"
+    ],
     "center": [53.959, -1.0815],
     "bounds": [[53.925, -1.16], [53.995, -1.02]],
     "minZoom": 12,

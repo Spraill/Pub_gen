@@ -202,7 +202,7 @@ CITIES_PATH = Path(__file__).resolve().parents[1] / "cities.json"
 # Search area for Overpass: an OSM boundary relation or a bounding box.
 OVERPASS_AREA: dict[str, Any] = {"relation": DEFAULT_RELATION_ID}
 # Optional OSM extract (URL, local path or "geofabrik" to look one up) used instead of Overpass.
-OSM_EXTRACT: dict[str, str] = {}
+OSM_EXTRACT: dict[str, Any] = {}
 
 
 def load_city(city: str) -> dict[str, Any]:
@@ -246,8 +246,11 @@ def fetch_overpass_payload(
     if OSM_EXTRACT:
         from osm_extract import extract_payload
 
-        source = OSM_EXTRACT["source"]
-        return extract_payload(source, OVERPASS_AREA["bbox"], fragment), f"extract:{source.rsplit('/', 1)[-1]}"
+        try:
+            return extract_payload(OSM_EXTRACT["source"], OVERPASS_AREA["bbox"], fragment), "osm-extract"
+        except RuntimeError as exc:
+            # No extract could be downloaded: fall back to the Overpass servers.
+            print(json.dumps({"osm_extract_unavailable": str(exc)[:160]}), flush=True)
     # Small (bounding-box) cities don't need long server-side timeouts.
     if "bbox" in OVERPASS_AREA:
         timeout_seconds = min(timeout_seconds, 90)

@@ -11,6 +11,7 @@ response, so the rest of the pipeline doesn't change.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import shutil
@@ -29,6 +30,7 @@ INTERESTING_KEYS = ("amenity", "tourism", "historic", "heritage", "leisure", "me
 STATEMENT_RE = re.compile(r"nwr((?:\[[^\]]*\])+)\([^)]*\);")
 FILTER_RE = re.compile(r'\["([^"]+)"(?:(=|~)"([^"]*)")?\]')
 
+_failed: list[bool] = []
 _loaded: dict[tuple[str, tuple[float, ...]], list[dict[str, Any]]] = {}
 
 
@@ -113,22 +115,43 @@ def candidate_sources(source: str, bbox: list[float]) -> list[str]:
     return covering_geofabrik_regions(index, bbox)[:3]
 
 
-def obtain(source: str, bbox: list[float]) -> Path:
-    """A local .osm.pbf for the city: downloaded (falling back to bigger regions) and cut to bbox."""
-    if Path(source).exists():
-        return Path(source)
+def obtain(source: str | list[str], bbox: list[float]) -> Path:
+    """A local .osm.pbf for the city: the first source that downloads, cut to bbox.
+
+    source is a local path, a URL, "geofabrik" (every covering Geofabrik region,
+    smallest first) or a list of these tried in order.
+    """
+    sources = source if isinstance(source, list) else [source]
+    for item in sources:
+        if Path(item).exists():
+            return clip(Path(item), bbox)
+    # Pubs and sights are fetched by separate processes: a recent failure is remembered on disk.
+    digest = hashlib.sha1(json.dumps([sources, bbox]).encode()).hexdigest()[:10]
+    failed_marker = CACHE_DIR / f"failed-{digest}"
+    recently_failed = failed_marker.exists() and time.time() - failed_marker.stat().st_mtime < 3600
+    if _failed or recently_failed:
+        raise RuntimeError("OSM extract download already failed in this run.")
     last_error: Exception | None = None
-    for url in candidate_sources(source, bbox):
-        for attempt in range(2):
+    for item in sources:
+        try:
+            urls = candidate_sources(item, bbox)
+        except (HTTPError, URLError, TimeoutError, OSError, ValueError) as exc:
+            last_error = exc
+            print(json.dumps({"osm_extract_index_failed": item, "error": str(exc)[:160]}), flush=True)
+            continue
+        for url in urls:
             try:
                 path = download(url)
             except (HTTPError, URLError, TimeoutError, OSError) as exc:
                 last_error = exc
-                print(json.dumps({"osm_extract_failed": url, "attempt": attempt + 1, "error": str(exc)[:160]}), flush=True)
-                time.sleep(15)
+                final = getattr(exc, "url", "") or ""
+                print(json.dumps({"osm_extract_failed": url, "redirected_to": final, "error": str(exc)[:160]}), flush=True)
                 continue
             print(json.dumps({"osm_extract": url}), flush=True)
             return clip(path, bbox)
+    _failed.append(True)
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    failed_marker.write_text(str(last_error), encoding="utf-8")
     raise RuntimeError(f"Could not download an OSM extract: {last_error}") from last_error
 
 
@@ -196,7 +219,7 @@ def load_elements(path: Path, bbox: list[float]) -> list[dict[str, Any]]:
     return elements
 
 
-def extract_payload(url_or_path: str, bbox: list[float], fragment: str) -> dict[str, Any]:
+def extract_payload(url_or_path: str | list[str], bbox: list[float], fragment: str) -> dict[str, Any]:
     path = obtain(url_or_path, bbox)
     key = (str(path), tuple(bbox))
     if key not in _loaded:
