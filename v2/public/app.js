@@ -112,6 +112,8 @@
     ["show-pois", "showPois", "bool"],
     ["show-pubs", "showPubs", "bool"],
     ["min-score", "minScore", "int"],
+    ["theme-sights", "themeSights", "int"],
+    ["theme-pubs", "themePubs", "int"],
   ];
 
   const state = {
@@ -128,6 +130,7 @@
     visiblePubs: [],
     markerSignature: "",
     crawl: null,
+    theme: "victorian",
     highlighted: new Set(),
     route: null,
     routeRequest: 0,
@@ -435,6 +438,7 @@
       dirty: Boolean(route.dirty),
       visited: route.visited || [],
       source: route.source || "",
+      theme: route.theme || "",
     };
   }
 
@@ -464,6 +468,7 @@
         savedId: record.savedId || null,
         dirty: Boolean(record.dirty),
         source: record.source || "",
+        theme: record.theme || "",
         visited: Array.isArray(record.visited) && intact ? record.visited.filter(Number.isInteger) : [],
         analyzed: null,
         rejected: new Set(),
@@ -482,6 +487,7 @@
       settings: readSettings(),
       categories: [...state.categories],
       categoryVersion: CATEGORY_SETTINGS_VERSION,
+      theme: state.theme,
       area: state.area,
       view: { lat: center.lat, lon: center.lng, zoom: map.getZoom() },
       route: state.route ? serializeRoute(state.route) : null,
@@ -901,6 +907,10 @@
   async function reshuffleRoute() {
     const route = state.route;
     if (!route || route.source === "daily") return;
+    if (route.source === "theme") {
+      await generateThemed(route.theme);
+      return;
+    }
     if (route.source === "random") {
       const previousMode = state.mode;
       state.mode = "random";
@@ -1144,6 +1154,10 @@
       const number = isReturn ? 1 : index + 1;
       const tags = [];
       if (stop.mealStop) tags.push('<span class="tag meal">Meal stop</span>');
+      const theme = route.theme && P.themeById(route.theme);
+      if (theme && (place.kind === "pub" ? P.themeMatchesPub(place, theme) : P.themeMatchesSight(place, theme))) {
+        tags.push(`<span class="tag theme">${escapeHtml(theme.icon)} ${escapeHtml(theme.name)}</span>`);
+      }
       if (place.kind === "pub") P.pubFeatures(place).slice(0, 3).forEach((f) => tags.push(`<span class="tag">${escapeHtml(f)}</span>`));
       const actions = [
         `<button type="button" class="icon-btn" data-action="info" data-id="${escapeHtml(place.id)}" aria-label="About ${escapeHtml(place.title)}" title="About this place">${ICONS.info}</button>`,
@@ -1787,6 +1801,81 @@
     await updateRouteGeometry(true);
   }
 
+
+  // ================================================================== themed crawls
+
+  let themeCounts = null;
+
+  function renderThemes() {
+    if (!themeCounts) {
+      themeCounts = {};
+      P.THEMES.forEach((theme) => {
+        themeCounts[theme.id] = {
+          sights: state.data.pois.filter((poi) => poi.score >= 30 && P.themeMatchesSight(poi, theme)).length,
+          pubs: state.data.pubs.filter((pub) => P.themeMatchesPub(pub, theme)).length,
+        };
+      });
+    }
+    $("theme-grid").innerHTML = P.THEMES.map((theme) => {
+      const counts = themeCounts[theme.id];
+      return `
+        <button type="button" class="theme-card" role="radio" aria-checked="${theme.id === state.theme}" data-theme="${escapeHtml(theme.id)}">
+          <span class="theme-icon" aria-hidden="true">${escapeHtml(theme.icon)}</span>
+          <span><span class="theme-name">${escapeHtml(theme.name)}</span>
+          <span class="theme-count">${formatCount(counts.sights)} sights · ${formatCount(counts.pubs)} pubs</span></span>
+        </button>`;
+    }).join("");
+    const theme = P.themeById(state.theme);
+    $("theme-blurb").textContent = theme ? theme.blurb : "";
+    $("theme-generate").textContent = theme ? `Generate ${theme.name} crawl` : "Generate themed crawl";
+  }
+
+  async function generateThemed(themeId) {
+    const theme = P.themeById(themeId || state.theme);
+    if (!theme) return;
+    const settings = readSettings();
+    if (settings.themeSights + settings.themePubs < 2) {
+      setStatus($("theme-status"), "A crawl needs at least two stops.", "error");
+      return;
+    }
+    setStatus($("theme-status"), "");
+    const base = { ...settings, finish: settings.finish, mealStop: "none" };
+    const result = P.generateThemedCrawl(
+      theme,
+      state.data.pois,
+      state.data.pubs,
+      settings.themeSights,
+      settings.themePubs,
+      newSeed(),
+      base
+    );
+    if (!result.ok) {
+      setStatus($("theme-status"), result.error, "error");
+      if (state.tab !== "themes") toast(result.error, 4000);
+      return;
+    }
+    setRoute({
+      name: `${theme.name} crawl`,
+      source: "theme",
+      theme: theme.id,
+      stops: result.plan.stops,
+      options: result.options,
+      analyzed: result.plan.analyzed,
+      rejected: new Set(),
+      geometry: null,
+      legs: null,
+      distance: null,
+      duration: null,
+      routerMode: null,
+      savedId: null,
+      dirty: true,
+      visited: [],
+    });
+    switchTab("route");
+    if (isMobile()) setSheet("half");
+    await updateRouteGeometry(true);
+  }
+
   // ================================================================== crawl mode
 
   function firstUnvisited(route) {
@@ -1950,7 +2039,7 @@
       button.setAttribute("aria-selected", String(active));
       button.tabIndex = active ? 0 : -1;
     });
-    ["plan", "route", "saved"].forEach((name) => {
+    ["plan", "themes", "route", "saved"].forEach((name) => {
       $(`panel-${name}`).hidden = name !== tab;
     });
     els.sheetBody.scrollTop = 0;
@@ -1960,8 +2049,9 @@
 
   function updateFooter() {
     els.footerPlan.hidden = state.tab !== "plan";
+    $("footer-themes").hidden = state.tab !== "themes";
     els.footerRoute.hidden = !(state.tab === "route" && state.route);
-    els.sheetFooter.hidden = els.footerPlan.hidden && els.footerRoute.hidden;
+    els.sheetFooter.hidden = els.footerPlan.hidden && els.footerRoute.hidden && $("footer-themes").hidden;
     if (state.route) {
       const saved = state.route.savedId && !state.route.dirty;
       els.saveButton.textContent = saved ? "Saved ✓" : state.route.savedId ? "Save changes" : "Save";
@@ -2316,6 +2406,22 @@
       }
     });
     $("daily-button").addEventListener("click", openDaily);
+    $("theme-grid").addEventListener("click", (event) => {
+      const card = event.target.closest("[data-theme]");
+      if (!card) return;
+      state.theme = card.dataset.theme;
+      renderThemes();
+      persistSession();
+    });
+    $("theme-generate").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      button.classList.add("busy");
+      try {
+        await generateThemed(state.theme);
+      } finally {
+        button.classList.remove("busy");
+      }
+    });
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible" && state.data) renderDaily();
     });
@@ -2512,7 +2618,8 @@
     }
     if (Array.isArray(session.selected)) state.selected = session.selected.filter((id) => state.byId.has(id));
     if (session.mode === "random" || session.mode === "pick") state.mode = session.mode;
-    if (["plan", "route", "saved"].includes(session.tab)) state.tab = session.tab;
+    if (["plan", "themes", "route", "saved"].includes(session.tab)) state.tab = session.tab;
+    if (session.theme && P.themeById(session.theme)) state.theme = session.theme;
     if (session.view && Number.isFinite(session.view.lat)) {
       map.setView([session.view.lat, session.view.lon], session.view.zoom || 12, { animate: false });
     }
@@ -2566,6 +2673,7 @@
     renderSaved();
     renderDataNote();
     renderDaily();
+    renderThemes();
     setMode(state.mode);
     switchTab(state.route || state.tab !== "route" ? state.tab : "plan");
     renderRoute();
