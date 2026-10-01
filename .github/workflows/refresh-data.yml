@@ -1,0 +1,44 @@
+name: Refresh map data
+
+# Weekly refresh of pubs (OpenStreetMap) and sights (OpenStreetMap, Open Plaques,
+# Wikidata popularity). The build refuses a refresh that shrinks a dataset by
+# more than 30%, so a flaky upstream API cannot wipe the map.
+on:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Fetch fresh data and rebuild the site
+        run: python3 v2/build_v2.py --refresh-all --publish-docs
+      - name: Unit tests against the new data
+        run: npm test
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet -- v2/data; then
+            echo "Data unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data v2/public docs
+          git commit -m "Refresh London pub and sight data"
+          git push

@@ -54,6 +54,29 @@ function serve() {
 }
 
 async function stubNetwork(context, routerCalls) {
+  await context.route(/wikidata\.org/, (route) => {
+    const id = new URL(route.request().url()).searchParams.get("ids");
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: { "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify({ entities: { [id]: { sitelinks: { enwiki: { title: "Test Place" } } } } }),
+    });
+  });
+  await context.route(/wikipedia\.org\/api/, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: { "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify({
+        type: "standard",
+        title: "Test Place",
+        description: "Famous London landmark",
+        extract: "This is the Wikipedia summary for the stop.",
+        content_urls: { desktop: { page: "https://en.wikipedia.org/wiki/Test_Place" } },
+      }),
+    })
+  );
   await context.route(/tile\.openstreetmap\.org/, (route) =>
     route.fulfill({ status: 200, contentType: "image/png", body: BLANK_PNG })
   );
@@ -138,6 +161,15 @@ async function run() {
     assert.equal(await page.locator(".leaflet-marker-pane .pin").count(), 5);
     await shot(page, "desktop-route");
 
+    // Place info from Wikipedia.
+    await page.locator('#route-list [data-action="info"]').first().click();
+    await page.waitForSelector("#place-dialog[open]");
+    await page.waitForFunction(() => document.querySelector("#place-content").textContent.includes("Wikipedia summary"));
+    assert.match(await page.textContent("#place-credit"), /Wikipedia/);
+    await shot(page, "desktop-place-info");
+    await page.click("#place-dialog [data-close]");
+    await page.waitForFunction(() => !document.querySelector("#place-dialog").open);
+
     // Swap a pub and remove a stop.
     const before = await page.locator("#route-list .stop-title").allTextContents();
     await page.locator('[data-action="swap"]').first().click();
@@ -206,7 +238,17 @@ async function run() {
     await shot(page, "desktop-pub-only");
   });
 
-  await scenario("mobile: bottom sheet and planning", { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }, async (page) => {
+  await scenario(
+    "mobile: bottom sheet, planning and crawl mode",
+    {
+      viewport: { width: 390, height: 844 },
+      isMobile: true,
+      hasTouch: true,
+      deviceScaleFactor: 2,
+      geolocation: { latitude: 51.5, longitude: -0.2 },
+      permissions: ["geolocation"],
+    },
+    async (page, routerCalls, context) => {
     await page.goto(base);
     await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });
     assert.equal(await page.getAttribute("#sheet", "data-state"), "peek");
@@ -229,7 +271,33 @@ async function run() {
 
     await page.tap("#sheet-handle");
     await page.waitForFunction(() => document.querySelector("#sheet").dataset.state === "peek");
-  });
+
+    // Crawl mode: walking up to the first stop shows its story.
+    await page.waitForFunction(() => {
+      const session = JSON.parse(localStorage.getItem("pubgen.session.v1") || "null");
+      return session && session.route && session.route.geometry;
+    });
+    await page.tap("#tab-route");
+    await page.tap("#start-crawl-button");
+    await page.waitForSelector("#crawl-bar:not([hidden])");
+    await shot(page, "mobile-crawl");
+    const target = await page.evaluate(() => JSON.parse(localStorage.getItem("pubgen.session.v1")).route.geometry[0]);
+    await context.setGeolocation({ latitude: target[0], longitude: target[1], accuracy: 10 });
+    await page.waitForSelector("#place-dialog[open]", { timeout: 10000 });
+    assert.match(await page.textContent("#place-arrival"), /stop 1/);
+    await shot(page, "mobile-arrival");
+    await page.click("#place-dialog [data-close]");
+    await page.waitForFunction(() => !document.querySelector("#place-dialog").open);
+    assert.match(await page.textContent("#crawl-step"), /Stop 2/);
+    await page.click("#crawl-here");
+    await page.waitForSelector("#place-dialog[open]");
+    await page.click("#place-dialog [data-close]");
+    await page.waitForFunction(() => !document.querySelector("#place-dialog").open);
+    assert.match(await page.textContent("#crawl-step"), /Stop 3/);
+    await page.click("#crawl-stop");
+    await page.waitForSelector("#crawl-bar", { state: "hidden" });
+    }
+  );
 
   await browser.close();
   server.close();

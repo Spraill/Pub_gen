@@ -1,0 +1,16 @@
+{
+  "name": "london-crawl-planner",
+  "private": true,
+  "description": "Plan walking pub crawls through London's sights. Static site in v2/.",
+  "scripts": {
+    "build": "python3 v2/build_v2.py",
+    "publish": "python3 v2/build_v2.py --publish-docs",
+    "refresh": "python3 v2/build_v2.py --refresh-all --publish-docs",
+    "test": "node --test v2/tests/*.test.js && python3 -m unittest discover -s v2/tests -p 'test_*.py'",
+    "test:e2e": "node v2/tests/e2e.cjs",
+    "serve": "python3 -m http.server 8000 -d v2/public"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

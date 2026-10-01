@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
+from urllib.parse import unquote, urlencode
 from urllib.request import Request, urlopen
 
 DEFAULT_RELATION_ID = 175342
@@ -143,6 +143,11 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=DEFAULT_TIMEOUT_SECONDS,
         help="Per-request timeout in seconds. Default: %(default)s",
+    )
+    parser.add_argument(
+        "--skip-wikidata",
+        action="store_true",
+        help="Skip the Wikidata popularity enrichment step.",
     )
     parser.add_argument(
         "--retry-rounds",
@@ -432,24 +437,42 @@ def build_openplaques_record(feature: dict[str, Any], fetched_at_utc: str) -> di
         return None
 
     plaque_id = props.get("id")
-    title = guess_title_from_inscription(inscription)
+    # Prefer Open Plaques' own curated fields; fall back to guessing from the inscription.
+    lead_subject = " ".join(str(props.get("lead_subject_name") or "").split())
+    curated_title = " ".join(str(props.get("title") or "").split())
+    title = curated_title or lead_subject or guess_title_from_inscription(inscription)
+    colour = str(props.get("colour") or "").strip().lower()
+    categories = ["historical", "memorial"] if colour and colour != "blue" else ["blue_plaque", "historical"]
+    wikipedia_url = str(props.get("lead_subject_wikipedia") or "").strip()
+    wikipedia = ""
+    match = re.match(r"https?://([a-z-]+)\.wikipedia\.org/wiki/(.+)$", wikipedia_url)
+    if match:
+        wikipedia = f"{match.group(1)}:{unquote(match.group(2)).replace('_', ' ')}"
+    score = score_openplaques_record(inscription, bool(geometry.get("is_accurate")))
+    if wikipedia:
+        score = min(100, score + 16)
     return {
         "id": f"openplaques:{plaque_id}",
         "source": "openplaques",
         "title": title,
         "lat": float(coordinates[1]),
         "lon": float(coordinates[0]),
-        "address": "",
+        "address": str(props.get("address") or "").strip(),
         "description": inscription,
-        "categories": ["blue_plaque", "historical"],
-        "primary_category": "blue_plaque",
-        "interest_score": score_openplaques_record(inscription, bool(geometry.get("is_accurate"))),
+        "categories": categories,
+        "primary_category": primary_category(categories),
+        "interest_score": score,
         "website": "",
-        "wikipedia": "",
+        "wikipedia": wikipedia,
         "wikidata": "",
         "source_url": f"https://openplaques.org/plaques/{plaque_id}",
         "fetched_at_utc": fetched_at_utc,
-        "tags": {"is_accurate": bool(geometry.get("is_accurate")), "openplaques_id": plaque_id},
+        "tags": {
+            "is_accurate": bool(geometry.get("is_accurate")),
+            "openplaques_id": plaque_id,
+            "colour": colour,
+            "title_source": "openplaques" if (curated_title or lead_subject) else "inscription",
+        },
     }
 
 
@@ -526,6 +549,36 @@ def dedupe_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return sorted(deduped, key=lambda item: (-item["interest_score"], item["title"].casefold()))
 
 
+WIKIDATA_API = "https://www.wikidata.org/w/api.php"
+
+
+def enrich_with_wikidata(records: list[dict[str, Any]], timeout_seconds: int) -> int:
+    """Add ``sitelinks`` (number of Wikipedia/Wikimedia language editions) to records
+    that have a Wikidata id. It is a free, reputable proxy for how well known a place
+    is. Failures are non-fatal: the build simply scores without it."""
+    ids = sorted({str(r.get("wikidata", "")).strip() for r in records if re.fullmatch(r"Q\d+", str(r.get("wikidata", "")).strip())})
+    counts: dict[str, int] = {}
+    for start in range(0, len(ids), 50):
+        batch = ids[start : start + 50]
+        url = WIKIDATA_API + "?" + urlencode(
+            {"action": "wbgetentities", "ids": "|".join(batch), "props": "sitelinks", "format": "json"}
+        )
+        try:
+            payload = json.loads(fetch_text(url, timeout_seconds))
+        except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
+            print(json.dumps({"wikidata_enrichment": "stopped", "error": str(exc)}), flush=True)
+            break
+        for entity_id, entity in (payload.get("entities") or {}).items():
+            sitelinks = entity.get("sitelinks") or {}
+            counts[entity_id] = sum(1 for key in sitelinks if key.endswith("wiki") and key != "commonswiki")
+        time.sleep(0.2)
+    for record in records:
+        count = counts.get(str(record.get("wikidata", "")).strip())
+        if count is not None:
+            record["sitelinks"] = count
+    return len(counts)
+
+
 def feature_collection(records: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "type": "FeatureCollection",
@@ -587,6 +640,7 @@ def main() -> int:
             records.append(record)
 
     deduped = dedupe_records(records)
+    enriched = 0 if args.skip_wikidata else enrich_with_wikidata(deduped, args.timeout)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(feature_collection(deduped), ensure_ascii=False, indent=2),
@@ -599,6 +653,7 @@ def main() -> int:
                 "output": str(args.output),
                 "records": len(deduped),
                 "openplaques_url": openplaques_url,
+                "wikidata_enriched": enriched,
                 "query_summaries": query_summaries,
                 "query_errors": query_errors,
             },

@@ -5,15 +5,22 @@
   const P = window.PubGenPlanner;
   const scriptEl = document.getElementById("app-script");
   const VERSION = (scriptEl && scriptEl.dataset.version) || "dev";
-  const ROUTER_URL = "https://routing.openstreetmap.de/routed-foot/route/v1/driving/";
+  const CONFIG = window.PubGenConfig || {};
+  const ROUTER_URL = CONFIG.routerUrl || "https://routing.openstreetmap.de/routed-foot/route/v1/driving/";
+  const TILE_URL = CONFIG.tileUrl || "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
   const ROUTER_TIMEOUT_MS = 12000;
   const LONDON_BOUNDS = [
     [51.286, -0.51],
     [51.692, 0.334],
   ];
-  const STORAGE = { session: "pubgen.session.v1", saved: "pubgen.saved.v1" };
+  const STORAGE = {
+    session: "pubgen.session.v1",
+    saved: "pubgen.saved.v1",
+    info: "pubgen.info.v1",
+    howDismissed: "pubgen.how.v1",
+  };
   const MAX_SAVED = 100;
-  const COLORS = { poi: "#d85b04", pub: "#1d5fd1", selected: "#0e8a62", route: "#253050", area: "#cf2f45" };
+  const COLORS = { poi: "#2a66b8", pub: "#c97c10", selected: "#1f4a37", route: "#7a2430", area: "#b8322f" };
 
   const $ = (id) => document.getElementById(id);
   const els = {
@@ -97,6 +104,8 @@
     ["prefer-real-ale", "preferRealAle", "bool"],
     ["prefer-outdoor", "preferOutdoor", "bool"],
     ["prefer-dog", "preferDog", "bool"],
+    ["prefer-historic", "preferHistoric", "bool"],
+    ["avoid-chains", "avoidChains", "bool"],
     ["minutes-per-pub", "minutesPerPub", "int"],
     ["minutes-per-sight", "minutesPerSight", "int"],
     ["show-pois", "showPois", "bool"],
@@ -116,7 +125,8 @@
     area: { enabled: false, lat: 51.509865, lon: -0.118092, radius: 1200 },
     filteredPois: [],
     visiblePubs: [],
-    pubSignature: "",
+    markerSignature: "",
+    crawl: null,
     highlighted: new Set(),
     route: null,
     routeRequest: 0,
@@ -218,6 +228,7 @@
   }
 
   const ICONS = {
+    info: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm1 8h-2v7h2v-7Zm0-4h-2v2h2V6Z"/></svg>',
     up: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 7 7 7-1.4 1.4L12 9.8l-5.6 5.6L5 14z"/></svg>',
     down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 17-7-7 1.4-1.4 5.6 5.6 5.6-5.6L19 10z"/></svg>',
     remove:
@@ -241,44 +252,45 @@
   map.attributionControl.setPosition("bottomleft");
   map.attributionControl.setPrefix(false);
 
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  L.tileLayer(TILE_URL, {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
 
   const MARKER_STYLES = {
-    poi: { radius: 6.5, color: "#ffffff", weight: 1.5, fillColor: COLORS.poi, fillOpacity: 0.95 },
-    pub: { radius: 6.5, color: "#ffffff", weight: 1.5, fillColor: COLORS.pub, fillOpacity: 0.95 },
-    active: { radius: 8.5, color: "#ffffff", weight: 2, fillColor: COLORS.selected, fillOpacity: 1 },
+    poi: { radius: 6.5, color: "#fffaf0", weight: 1.5, fillColor: COLORS.poi, fillOpacity: 0.95 },
+    pub: { radius: 7, color: "#fffaf0", weight: 1.5, fillColor: COLORS.pub, fillOpacity: 0.95 },
+    active: { radius: 8.5, color: "#fffaf0", weight: 2, fillColor: COLORS.selected, fillOpacity: 1 },
   };
 
-  function clusterGroup(kind) {
-    return L.markerClusterGroup({
-      showCoverageOnHover: false,
-      spiderfyOnMaxZoom: false,
-      disableClusteringAtZoom: 17,
-      maxClusterRadius: (zoom) => (zoom < 13 ? 60 : 45),
-      chunkedLoading: true,
-      removeOutsideVisibleBounds: true,
-      iconCreateFunction(cluster) {
-        const count = cluster.getChildCount();
-        const size = count < 10 ? 30 : count < 100 ? 36 : count < 1000 ? 42 : 48;
-        const label = count >= 1000 ? `${(count / 1000).toFixed(count >= 10000 ? 0 : 1)}k` : count;
-        return L.divIcon({
-          html: `<div class="cluster ${kind}" style="width:${size}px;height:${size}px">${label}</div>`,
-          className: "",
-          iconSize: [size, size],
-        });
-      },
-    });
-  }
+  // One cluster layer for both kinds; each bubble's ring shows the pub/sight mix.
+  const placeLayer = L.markerClusterGroup({
+    showCoverageOnHover: false,
+    spiderfyOnMaxZoom: false,
+    disableClusteringAtZoom: 17,
+    maxClusterRadius: (zoom) => (zoom < 13 ? 70 : zoom < 15 ? 55 : 45),
+    chunkedLoading: true,
+    removeOutsideVisibleBounds: true,
+    iconCreateFunction(cluster) {
+      const children = cluster.getAllChildMarkers();
+      const count = children.length;
+      let pubs = 0;
+      for (let index = 0; index < count; index += 1) if (children[index].placeKind === "pub") pubs += 1;
+      const size = count < 10 ? 32 : count < 100 ? 38 : count < 1000 ? 44 : 50;
+      const label = count >= 1000 ? `${(count / 1000).toFixed(count >= 10000 ? 0 : 1)}k` : count;
+      const pubDeg = Math.round((pubs / count) * 360);
+      const ring = `conic-gradient(${COLORS.pub} 0 ${pubDeg}deg, ${COLORS.poi} ${pubDeg}deg 360deg)`;
+      const title = `${pubs} pub${pubs === 1 ? "" : "s"}, ${count - pubs} sight${count - pubs === 1 ? "" : "s"}`;
+      return L.divIcon({
+        html: `<div class="cluster" title="${title}" style="width:${size}px;height:${size}px;background:${ring}"><span>${label}</span></div>`,
+        className: "",
+        iconSize: [size, size],
+      });
+    },
+  });
+  map.addLayer(placeLayer);
 
-  const poiLayer = clusterGroup("poi");
-  const pubLayer = clusterGroup("pub");
-  map.addLayer(poiLayer);
-  map.addLayer(pubLayer);
-
-  const routeOutline = L.polyline([], { color: "#ffffff", weight: 9, opacity: 0.85, lineJoin: "round", interactive: false }).addTo(map);
+  const routeOutline = L.polyline([], { color: "#fffaf0", weight: 9, opacity: 0.9, lineJoin: "round", interactive: false }).addTo(map);
   const routeLine = L.polyline([], { color: COLORS.route, weight: 5, opacity: 0.95, lineJoin: "round", interactive: false }).addTo(map);
   const pinLayer = L.layerGroup().addTo(map);
 
@@ -302,9 +314,9 @@
   let userMarker = null;
   const popup = L.popup({ maxWidth: 320, closeButton: true, autoPanPaddingTopLeft: [16, 110] });
 
-  function pinIcon(kind, label, pending) {
+  function pinIcon(kind, label, pending, extra) {
     return L.divIcon({
-      html: `<div class="pin ${kind}${pending ? " pending" : ""}"><span>${escapeHtml(label)}</span></div>`,
+      html: `<div class="pin ${kind}${pending ? " pending" : ""}${extra ? ` ${extra}` : ""}"><span>${escapeHtml(label)}</span></div>`,
       className: "",
       iconSize: [30, 30],
       iconAnchor: [15, 36],
@@ -343,6 +355,7 @@
     const add = (place) => {
       const marker = L.circleMarker([place.lat, place.lon], MARKER_STYLES[place.kind]);
       marker.placeId = place.id;
+      marker.placeKind = place.kind;
       state.markers.set(place.id, marker);
     };
     state.data.pois.forEach(add);
@@ -416,6 +429,7 @@
       routerMode: route.routerMode,
       savedId: route.savedId || null,
       dirty: Boolean(route.dirty),
+      visited: route.visited || [],
     };
   }
 
@@ -444,6 +458,7 @@
         routerMode: intact ? record.routerMode : null,
         savedId: record.savedId || null,
         dirty: Boolean(record.dirty),
+        visited: Array.isArray(record.visited) && intact ? record.visited.filter(Number.isInteger) : [],
         analyzed: null,
         rejected: new Set(),
       },
@@ -490,15 +505,15 @@
   function refreshMarkers() {
     const settings = readSettings();
     state.filteredPois = state.data.pois.filter((poi) => poiPassesFilters(poi, settings));
-    poiLayer.clearLayers();
-    if (settings.showPois) poiLayer.addLayers(state.filteredPois.map((poi) => state.markers.get(poi.id)));
-
-    const pubSignature = [settings.showPubs, settings.requireFood, settings.requireStepFree].join("|");
-    if (pubSignature !== state.pubSignature) {
-      state.pubSignature = pubSignature;
-      state.visiblePubs = state.data.pubs.filter((pub) => P.pubMatchesRequirements(pub, settings));
-      pubLayer.clearLayers();
-      if (settings.showPubs) pubLayer.addLayers(state.visiblePubs.map((pub) => state.markers.get(pub.id)));
+    state.visiblePubs = state.data.pubs.filter((pub) => P.pubMatchesRequirements(pub, settings));
+    const visible = [];
+    if (settings.showPois) state.filteredPois.forEach((poi) => visible.push(state.markers.get(poi.id)));
+    if (settings.showPubs) state.visiblePubs.forEach((pub) => visible.push(state.markers.get(pub.id)));
+    const signature = `${visible.length}|${settings.showPois}|${settings.showPubs}|${settings.minScore}|${[...state.categories].join(",")}|${settings.requireFood}|${settings.requireStepFree}`;
+    if (signature !== state.markerSignature) {
+      state.markerSignature = signature;
+      placeLayer.clearLayers();
+      placeLayer.addLayers(visible);
     }
 
     els.countPois.textContent = formatCount(settings.showPois ? state.filteredPois.length : 0);
@@ -532,9 +547,9 @@
 
   function renderPins() {
     pinLayer.clearLayers();
-    const addPin = (place, label, pending) => {
+    const addPin = (place, label, pending, extra) => {
       const pin = L.marker([place.lat, place.lon], {
-        icon: pinIcon(place.kind, label, pending),
+        icon: pinIcon(place.kind, label, pending, extra),
         title: place.title,
         zIndexOffset: 500,
         keyboard: true,
@@ -545,7 +560,14 @@
     if (state.route) {
       const stops = state.route.stops;
       const loop = stops.length > 2 && stops[0].place.id === stops[stops.length - 1].place.id;
-      (loop ? stops.slice(0, -1) : stops).forEach((stop, index) => addPin(stop.place, index + 1, false));
+      const crawl = state.crawl;
+      const visited = new Set(state.route.visited || []);
+      (loop ? stops.slice(0, -1) : stops).forEach((stop, index) => {
+        let extra = "";
+        if (visited.has(index)) extra = "done";
+        else if (crawl && crawl.next === index) extra = "next";
+        addPin(stop.place, visited.has(index) ? "✓" : index + 1, false, extra);
+      });
     } else {
       state.selected.forEach((id, index) => {
         const place = state.byId.get(id);
@@ -584,6 +606,7 @@
       }
       if (place.address) body += `<p class="popup-line">${escapeHtml(place.address)}</p>`;
       if (place.hours) body += `<p class="popup-line">Hours: ${escapeHtml(place.hours)}</p>`;
+      if (place.brand) body += `<p class="popup-line">Part of ${escapeHtml(place.brand)}</p>`;
       if (place.brewery) body += `<p class="popup-line">Brewery: ${escapeHtml(place.brewery)}</p>`;
       if (place.cuisine) body += `<p class="popup-line">Food: ${escapeHtml(place.cuisine)}</p>`;
       if (place.phone) {
@@ -609,6 +632,7 @@
         <button type="button" class="btn ${selected ? "" : "primary"} grow" data-action="toggle-stop" data-id="${escapeHtml(place.id)}">
           ${selected ? "Remove from crawl" : "Add to crawl"}
         </button>
+        <button type="button" class="btn" data-action="info" data-id="${escapeHtml(place.id)}">More info</button>
       </div>`;
   }
 
@@ -986,6 +1010,11 @@
     }
     route.stops = remaining;
     route.dirty = true;
+    if (route.visited) {
+      route.visited = route.visited.filter((i) => i !== index).map((i) => (i > index ? i - 1 : i));
+      if (state.crawl) state.crawl.next = firstUnvisited(route);
+      renderCrawl();
+    }
     renderRoute();
     renderPins();
     updateHighlights();
@@ -993,6 +1022,7 @@
   }
 
   function clearRoute() {
+    stopCrawl(true);
     state.route = null;
     state.routeRequest += 1;
     drawRouteLine(false, []);
@@ -1036,6 +1066,7 @@
 
     const legs = route.legs || [];
     const canRemove = uniqueStops.length > 2;
+    const visited = new Set(route.visited || []);
     const items = [];
     stops.forEach((stop, index) => {
       const place = stop.place;
@@ -1045,6 +1076,7 @@
       if (stop.mealStop) tags.push('<span class="tag meal">Meal stop</span>');
       if (place.kind === "pub") P.pubFeatures(place).slice(0, 3).forEach((f) => tags.push(`<span class="tag">${escapeHtml(f)}</span>`));
       const actions = [
+        `<button type="button" class="icon-btn" data-action="info" data-id="${escapeHtml(place.id)}" aria-label="About ${escapeHtml(place.title)}" title="About this place">${ICONS.info}</button>`,
         `<a class="icon-btn" href="${escapeHtml(P.directionsUrl(place))}" target="_blank" rel="noopener" aria-label="Walking directions to ${escapeHtml(place.title)}" title="Directions">${ICONS.directions}</a>`,
       ];
       if (place.kind === "pub" && stop.auto && !isReturn) {
@@ -1057,9 +1089,11 @@
           `<button type="button" class="icon-btn" data-action="remove-stop" data-index="${index}" aria-label="Remove ${escapeHtml(place.title)} from route" title="Remove">${ICONS.remove}</button>`
         );
       }
+      const done = visited.has(index);
+      const isNext = Boolean(state.crawl && state.crawl.next === index);
       items.push(`
-        <li class="stop">
-          <span class="stop-num ${place.kind}">${number}</span>
+        <li class="stop${done ? " visited" : ""}${isNext ? " next" : ""}">
+          <span class="stop-num ${done ? "done" : place.kind}">${done ? "✓" : number}</span>
           <div class="stop-main" data-action="focus" data-id="${escapeHtml(place.id)}">
             <div class="stop-title">${isReturn ? "Back to " : ""}${escapeHtml(place.title)}</div>
             <div class="stop-meta">${escapeHtml(placeMeta(place))}</div>
@@ -1075,6 +1109,23 @@
       }
     });
     els.routeList.innerHTML = items.join("");
+    renderAdSlot();
+  }
+
+  function renderAdSlot() {
+    const slot = $("ad-slot");
+    const premium = Boolean(window.PubGenPremium && window.PubGenPremium.active);
+    const ads = window.PubGenAds;
+    const show = Boolean(CONFIG.ads && CONFIG.ads.enabled && !premium && ads && typeof ads.render === "function");
+    slot.hidden = !show;
+    if (show && !slot.dataset.rendered) {
+      slot.dataset.rendered = "1";
+      try {
+        ads.render(slot);
+      } catch (error) {
+        slot.hidden = true;
+      }
+    }
   }
 
   // ================================================================== saving & sharing
@@ -1087,6 +1138,7 @@
     const record = { ...serializeRoute(route), savedId: undefined, dirty: undefined };
     delete record.savedId;
     delete record.dirty;
+    delete record.visited;
     const existing = route.savedId ? state.saved.find((item) => item.id === route.savedId) : null;
     if (existing) {
       Object.assign(existing, record, { updatedAt: now });
@@ -1305,6 +1357,330 @@
     window.open(url, "_blank", "noopener");
   }
 
+
+  // ================================================================== place info (Wikipedia, Open Plaques, OSM)
+
+  const INFO_TTL = 30 * 24 * 3600 * 1000;
+  const INFO_MAX = 150;
+  const infoCache = new Map();
+  (function loadInfoCache() {
+    const stored = store.get(STORAGE.info, {});
+    if (stored && typeof stored === "object") Object.keys(stored).forEach((key) => infoCache.set(key, stored[key]));
+  })();
+
+  function rememberInfo(id, info) {
+    const entry = { ...info, at: Date.now() };
+    infoCache.delete(id);
+    infoCache.set(id, entry);
+    while (infoCache.size > INFO_MAX) infoCache.delete(infoCache.keys().next().value);
+    store.set(STORAGE.info, Object.fromEntries(infoCache));
+    return entry;
+  }
+
+  async function fetchJson(url, timeout) {
+    const controller = typeof AbortController === "function" ? new AbortController() : null;
+    const timer = controller ? setTimeout(() => controller.abort(), timeout || 8000) : 0;
+    try {
+      const response = await fetch(url, { signal: controller ? controller.signal : undefined });
+      if (!response.ok) {
+        const error = new Error(`HTTP ${response.status}`);
+        error.status = response.status;
+        throw error;
+      }
+      return await response.json();
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  /** Encyclopedia summary for a place, from Wikipedia (via Wikidata when needed). Cached for 30 days. */
+  async function loadPlaceInfo(place) {
+    const cached = infoCache.get(place.id);
+    if (cached && Date.now() - cached.at < INFO_TTL) return cached;
+    let wiki = P.parseWikipedia(place.wikipedia);
+    try {
+      if (!wiki && place.wikidata) {
+        const data = await fetchJson(P.wikidataSitelinkUrl(place.wikidata, "en"));
+        const entity = data && data.entities && data.entities[place.wikidata];
+        const link = entity && entity.sitelinks && entity.sitelinks.enwiki;
+        if (link && link.title) wiki = { lang: "en", title: link.title };
+      }
+      if (!wiki) return rememberInfo(place.id, { none: true });
+      const summary = P.summarizeWikipedia(await fetchJson(P.wikipediaSummaryUrl(wiki)));
+      return rememberInfo(place.id, summary ? { wiki: summary } : { none: true });
+    } catch (error) {
+      if (error && error.status === 404) return rememberInfo(place.id, { none: true });
+      return { offline: true }; // not cached, so it is retried next time
+    }
+  }
+
+  const dialog = $("place-dialog");
+  let dialogPlaceId = null;
+
+  function placeFacts(place) {
+    const facts = [];
+    if (place.kind === "pub") {
+      const features = P.pubFeatures(place);
+      if (features.length) facts.push(features.join(" · "));
+      if (place.brand) facts.push(`Part of ${place.brand}`);
+      if (place.brewery) facts.push(`Brewery: ${place.brewery}`);
+      if (place.cuisine) facts.push(`Food: ${place.cuisine}`);
+      if (place.hours) facts.push(`Hours: ${place.hours}`);
+    } else {
+      facts.push(place.categories.map(P.categoryLabel).join(" · "));
+    }
+    if (place.address) facts.push(place.address);
+    return facts;
+  }
+
+  function renderPlaceContent(place, info) {
+    const content = [];
+    const credits = [];
+    const isPlaque = place.kind === "poi" && place.id.startsWith("q");
+    const wiki = info && info.wiki;
+
+    $("place-tagline").textContent = wiki && wiki.description ? wiki.description : "";
+    const figure = $("place-figure");
+    const image = $("place-image");
+    if (wiki && wiki.image) {
+      image.src = wiki.image;
+      image.alt = wiki.title;
+      figure.hidden = false;
+    } else {
+      figure.hidden = true;
+      image.removeAttribute("src");
+    }
+
+    if (isPlaque && place.description) {
+      content.push(`<p class="inscription">${escapeHtml(place.description)}</p>`);
+      credits.push(`Plaque text: <a href="${escapeHtml(P.sourceUrl(place))}" target="_blank" rel="noopener">Open Plaques</a>`);
+    }
+    if (wiki) {
+      wiki.extract
+        .split(/\n+/)
+        .filter(Boolean)
+        .forEach((paragraph) => content.push(`<p>${escapeHtml(paragraph)}</p>`));
+      credits.push(
+        `From <a href="${escapeHtml(wiki.url || P.wikipediaUrl(place.wikipedia))}" target="_blank" rel="noopener">Wikipedia</a> (CC BY-SA 4.0)`
+      );
+    } else if (!info) {
+      content.push('<p class="loading-line">Looking this up on Wikipedia…</p>');
+    } else if (!isPlaque && place.description) {
+      content.push(`<p>${escapeHtml(place.description)}</p>`);
+    }
+    if (info && info.offline && !wiki) content.push('<p class="loading-line">Couldn\'t reach Wikipedia just now. Try again with a signal.</p>');
+    if (info && info.none && !place.description && !isPlaque) {
+      content.push(
+        `<p class="loading-line">No encyclopedia entry for this one. ${place.kind === "pub" ? "Ask the bar staff for the story." : "Have a look around!"}</p>`
+      );
+    }
+
+    const facts = placeFacts(place).filter(Boolean);
+    if (facts.length) content.push(`<ul class="facts">${facts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join("")}</ul>`);
+
+    const links = [];
+    const website = P.safeUrl(place.website);
+    if (website) links.push(`<a href="${escapeHtml(website)}" target="_blank" rel="noopener">Website</a>`);
+    const source = P.sourceUrl(place);
+    if (source && !isPlaque) links.push(`<a href="${escapeHtml(source)}" target="_blank" rel="noopener">OpenStreetMap</a>`);
+    if (links.length) content.push(`<p class="popup-links">${links.join("")}</p>`);
+
+    $("place-content").innerHTML = content.join("");
+    if (!credits.length) credits.push('Details: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>');
+    $("place-credit").innerHTML = credits.join(" · ");
+  }
+
+  function renderPlaceActions(place, context) {
+    const actions = [];
+    const next = context && context.nextStop;
+    if (context && context.arrival) {
+      actions.push(
+        `<button type="button" class="btn primary grow" data-close>${next ? "On to the next one" : "Finish"}</button>`
+      );
+      if (next) {
+        actions.push(
+          `<a class="btn" href="${escapeHtml(P.directionsUrl(next.place))}" target="_blank" rel="noopener">Directions</a>`
+        );
+      }
+    } else {
+      const selected = state.selected.includes(place.id);
+      actions.push(
+        `<button type="button" class="btn ${selected ? "" : "primary"} grow" data-action="toggle-stop" data-id="${escapeHtml(place.id)}" data-refresh-dialog>${selected ? "Remove from crawl" : "Add to crawl"}</button>`
+      );
+      actions.push(`<a class="btn" href="${escapeHtml(P.directionsUrl(place))}" target="_blank" rel="noopener">Directions</a>`);
+    }
+    $("place-actions").innerHTML = actions.join("");
+  }
+
+  function openPlaceDialog(place, context) {
+    dialogPlaceId = place.id;
+    dialog.dataset.context = context && context.arrival ? "arrival" : "";
+    const arrival = $("place-arrival");
+    arrival.hidden = !(context && context.arrival);
+    if (context && context.arrival) {
+      arrival.innerHTML = `${escapeHtml(context.arrival.title)}<small>${escapeHtml(context.arrival.sub)}</small>`;
+    }
+    const kind = place.kind === "pub" ? "Pub" : P.categorySingular(place.primary);
+    $("place-kicker").innerHTML = `<span class="dot ${place.kind}"></span>${escapeHtml(kind)}`;
+    $("place-title").textContent = place.title;
+    const cached = infoCache.get(place.id);
+    renderPlaceContent(place, cached && Date.now() - cached.at < INFO_TTL ? cached : null);
+    renderPlaceActions(place, context);
+    if (!dialog.open) {
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+    }
+    $("place-dialog").querySelector(".place-body").scrollTop = 0;
+    map.closePopup();
+    loadPlaceInfo(place).then((info) => {
+      if (dialogPlaceId === place.id && dialog.open) renderPlaceContent(place, info);
+    });
+  }
+
+  function closePlaceDialog() {
+    dialogPlaceId = null;
+    if (typeof dialog.close === "function") dialog.close();
+    else dialog.removeAttribute("open");
+  }
+
+  // ================================================================== crawl mode
+
+  function firstUnvisited(route) {
+    const visited = new Set(route.visited || []);
+    for (let index = 0; index < route.stops.length; index += 1) if (!visited.has(index)) return index;
+    return -1;
+  }
+
+  function startCrawl() {
+    const route = state.route;
+    if (!route) return;
+    if (firstUnvisited(route) < 0) route.visited = [];
+    state.crawl = { next: firstUnvisited(route), watchId: null, distance: null, accuracy: null };
+    document.body.classList.add("crawling");
+    hideBanner();
+    if (navigator.geolocation && window.isSecureContext !== false) {
+      state.crawl.watchId = navigator.geolocation.watchPosition(onCrawlPosition, onCrawlError, {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 30000,
+      });
+    } else {
+      toast("Location isn't available here, so tap “I'm here” at each stop.", 4000);
+    }
+    renderCrawl();
+    renderRoute();
+    renderPins();
+    if (isMobile()) setSheet("peek");
+    const next = route.stops[state.crawl.next];
+    if (next) map.flyTo([next.place.lat, next.place.lon], Math.max(map.getZoom(), 16), { duration: 0.6 });
+    persistSession();
+  }
+
+  function stopCrawl(silent) {
+    if (!state.crawl) return;
+    if (state.crawl.watchId != null && navigator.geolocation) navigator.geolocation.clearWatch(state.crawl.watchId);
+    state.crawl = null;
+    document.body.classList.remove("crawling");
+    renderCrawl();
+    if (state.route) {
+      renderRoute();
+      renderPins();
+    }
+    if (!silent) toast("Crawl paused. Your progress is kept. Tap Resume crawl to carry on.");
+  }
+
+  function onCrawlPosition(position) {
+    const crawl = state.crawl;
+    const route = state.route;
+    if (!crawl || !route) return;
+    const here = { lat: position.coords.latitude, lon: position.coords.longitude };
+    state.userLocation = here;
+    showUserMarker([here.lat, here.lon]);
+    const stop = route.stops[crawl.next];
+    if (!stop) return;
+    crawl.distance = P.distance(here, stop.place);
+    crawl.accuracy = position.coords.accuracy;
+    const threshold = Math.max(40, Math.min(position.coords.accuracy || 0, 90));
+    if (crawl.distance <= threshold && !dialog.open) arriveAt(crawl.next);
+    else renderCrawl();
+  }
+
+  function onCrawlError(error) {
+    if (!state.crawl) return;
+    if (error.code === 1) {
+      toast("Location is off, so tap “I'm here” when you reach each stop.", 4500);
+      if (state.crawl.watchId != null) navigator.geolocation.clearWatch(state.crawl.watchId);
+      state.crawl.watchId = null;
+    }
+    renderCrawl();
+  }
+
+  function arriveAt(index) {
+    const route = state.route;
+    if (!route || index < 0) return;
+    const visited = new Set(route.visited || []);
+    visited.add(index);
+    route.visited = [...visited].sort((a, b) => a - b);
+    const next = firstUnvisited(route);
+    if (state.crawl) {
+      state.crawl.next = next;
+      state.crawl.distance = null;
+    }
+    const stop = route.stops[index];
+    const nextStop = next >= 0 ? route.stops[next] : null;
+    const leg = route.legs && route.legs[index];
+    const isReturn = index === route.stops.length - 1 && index > 0 && stop.place.id === route.stops[0].place.id;
+    openPlaceDialog(stop.place, {
+      arrival: {
+        title: nextStop ? (isReturn ? "Back where you started" : `You've made it to stop ${index + 1}`) : "That's the crawl done. Cheers!",
+        sub: nextStop
+          ? `Next: ${nextStop.place.title}${leg ? ` · ${P.formatDistance(leg.distance)}, about ${P.formatDuration(leg.duration)}` : ""}`
+          : `${route.stops.length} stops${route.distance ? `, ${P.formatDistance(route.distance)} walked` : ""}. Get home safe.`,
+      },
+      nextStop,
+    });
+    if (!nextStop) stopCrawl(true);
+    renderCrawl();
+    renderRoute();
+    renderPins();
+    persistSession();
+  }
+
+  function skipStop() {
+    const route = state.route;
+    if (!route || !state.crawl || state.crawl.next < 0) return;
+    const visited = new Set(route.visited || []);
+    visited.add(state.crawl.next);
+    route.visited = [...visited].sort((a, b) => a - b);
+    state.crawl.next = firstUnvisited(route);
+    state.crawl.distance = null;
+    if (state.crawl.next < 0) {
+      stopCrawl(true);
+      toast("That was the last stop.");
+    }
+    renderCrawl();
+    renderRoute();
+    renderPins();
+    persistSession();
+  }
+
+  function renderCrawl() {
+    const bar = $("crawl-bar");
+    const crawl = state.crawl;
+    const route = state.route;
+    bar.hidden = !(crawl && route && crawl.next >= 0);
+    updateFooter();
+    if (bar.hidden) return;
+    const stop = route.stops[crawl.next];
+    $("crawl-step").textContent = `Stop ${crawl.next + 1} of ${route.stops.length}`;
+    $("crawl-next").textContent = stop.place.title;
+    let distance = "Finding you…";
+    if (crawl.watchId == null) distance = "Location off";
+    else if (crawl.distance != null) distance = `${P.formatDistance(crawl.distance)} away`;
+    $("crawl-distance").textContent = distance;
+    $("crawl-directions").href = P.directionsUrl(stop.place);
+  }
+
   // ================================================================== banner
 
   let bannerHandler = null;
@@ -1346,6 +1722,9 @@
       const saved = state.route.savedId && !state.route.dirty;
       els.saveButton.textContent = saved ? "Saved ✓" : state.route.savedId ? "Save changes" : "Save";
       els.saveButton.disabled = Boolean(saved);
+      const startButton = $("start-crawl-button");
+      startButton.textContent = state.crawl ? "End crawl" : state.route.visited && state.route.visited.length ? "Resume crawl" : "Start crawl";
+      startButton.classList.toggle("primary", !state.crawl);
     }
     updatePeek();
   }
@@ -1522,6 +1901,19 @@
 
   // ================================================================== geolocation
 
+  function showUserMarker(latlng) {
+    if (!userMarker) {
+      userMarker = L.marker(latlng, {
+        icon: L.divIcon({ html: '<div class="user-dot"></div>', className: "", iconSize: [18, 18] }),
+        interactive: false,
+        keyboard: false,
+        zIndexOffset: 2000,
+      }).addTo(map);
+    } else {
+      userMarker.setLatLng(latlng);
+    }
+  }
+
   function locateUser(callback) {
     if (!navigator.geolocation) {
       toast("Location isn't available in this browser.");
@@ -1532,16 +1924,7 @@
       (position) => {
         const latlng = [position.coords.latitude, position.coords.longitude];
         state.userLocation = { lat: latlng[0], lon: latlng[1] };
-        if (!userMarker) {
-          userMarker = L.marker(latlng, {
-            icon: L.divIcon({ html: '<div class="user-dot"></div>', className: "", iconSize: [18, 18] }),
-            interactive: false,
-            keyboard: false,
-            zIndexOffset: 2000,
-          }).addTo(map);
-        } else {
-          userMarker.setLatLng(latlng);
-        }
+        showUserMarker(latlng);
         if (callback) callback(state.userLocation);
         else map.flyTo(latlng, Math.max(map.getZoom(), 15), { duration: 0.6 });
       },
@@ -1680,6 +2063,21 @@
       persistSession();
     });
     els.saveButton.addEventListener("click", saveCurrentRoute);
+    $("start-crawl-button").addEventListener("click", () => (state.crawl ? stopCrawl(false) : startCrawl()));
+    $("crawl-here").addEventListener("click", () => state.crawl && arriveAt(state.crawl.next));
+    $("crawl-skip").addEventListener("click", skipStop);
+    $("crawl-stop").addEventListener("click", () => stopCrawl(false));
+    dialog.addEventListener("click", (event) => {
+      // Close on the backdrop or any [data-close] control.
+      if (event.target === dialog || event.target.closest("[data-close]")) closePlaceDialog();
+    });
+    dialog.addEventListener("close", () => {
+      dialogPlaceId = null;
+    });
+    $("how-dismiss").addEventListener("click", () => {
+      $("how-it-works").hidden = true;
+      store.set(STORAGE.howDismissed, true);
+    });
     els.shareButton.addEventListener("click", shareCurrentRoute);
     els.gpxButton.addEventListener("click", downloadGpx);
     els.gmapsButton.addEventListener("click", openGoogleMaps);
@@ -1704,6 +2102,17 @@
       switch (action) {
         case "toggle-stop":
           toggleStop(id);
+          if (target.hasAttribute("data-refresh-dialog") && state.byId.get(id)) renderPlaceActions(state.byId.get(id), null);
+          break;
+        case "info": {
+          const place = state.byId.get(id);
+          if (place) openPlaceDialog(place, null);
+          break;
+        }
+        case "show-help":
+          $("how-it-works").hidden = false;
+          switchTab("plan");
+          if (isMobile()) setSheet("full");
           break;
         case "focus": {
           const place = state.byId.get(id);
@@ -1786,10 +2195,8 @@
       setTimeout(() => els.filtersDetails.scrollIntoView({ behavior: "smooth", block: "start" }), 260);
     });
 
-    poiLayer.on("click", onMarkerClick);
-    pubLayer.on("click", onMarkerClick);
-    poiLayer.on("mouseover", onMarkerHover);
-    pubLayer.on("mouseover", onMarkerHover);
+    placeLayer.on("click", onMarkerClick);
+    placeLayer.on("mouseover", onMarkerHover);
     map.on("popupclose", () => {
       state.popupPlaceId = null;
     });
@@ -1862,7 +2269,8 @@
       `Data: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a> ` +
       `and <a href="https://openplaques.org" target="_blank" rel="noopener">Open Plaques</a>` +
       (fetched ? `, updated ${escapeHtml(fetched)}` : "") +
-      `. Walking routes by <a href="https://routing.openstreetmap.de" target="_blank" rel="noopener">FOSSGIS OSRM</a>.`;
+      `. Walking routes by <a href="https://routing.openstreetmap.de" target="_blank" rel="noopener">FOSSGIS OSRM</a>. ` +
+      `Stories from Wikipedia. <button type="button" data-action="show-help">How it works</button>`;
   }
 
   function registerServiceWorker() {
@@ -1890,6 +2298,7 @@
 
     restoreSession();
     loadSaved();
+    $("how-it-works").hidden = Boolean(store.get(STORAGE.howDismissed, false));
     createMarkers();
     renderCategories();
     syncOutputs();

@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -64,9 +65,54 @@ FLAG_DOG = 16
 FLAG_LIVE_MUSIC = 32
 FLAG_REAL_CIDER = 64
 FLAG_PARTIAL_ACCESS = 128
+FLAG_HISTORIC = 256
+FLAG_CHAIN = 512
+FLAG_BREWPUB = 1024
+FLAG_REAL_FIRE = 2048
 
-PUB_FIELDS = ["id", "name", "lat", "lon", "flags", "address", "hours", "website", "phone", "brewery", "cuisine"]
-POI_FIELDS = ["id", "name", "lat", "lon", "score", "cats", "address", "description", "website", "wikipedia"]
+# ---- POI curation ------------------------------------------------------------
+# Raw fetches are deliberately broad; these rules keep the map to places worth
+# walking to on a crawl. Scores are adjusted here (not in the fetchers) so the
+# rules apply to existing data without a re-fetch.
+
+DROP_ATTRACTION_TYPES = {
+    "animal",
+    "train",
+    "roller_coaster",
+    "amusement_ride",
+    "carousel",
+    "water_slide",
+    "kiddie_ride",
+    "dark_ride",
+    "swing_carousel",
+    "bumper_car",
+}
+DROP_TITLE_PATTERN = re.compile(
+    r"\b(allotments?|playing fields?|gift shop|shop|toilets?|car park|bowling|kiosk|caf[eé]|"
+    r"restaurant|play ?ground|sports? (centre|ground)|leisure centre|community centre|school)\b",
+    re.IGNORECASE,
+)
+GENERIC_GREEN_PATTERN = re.compile(
+    r"^(the )?(rose|kitchen|community|rest|memorial|walled|secret|sensory|wildlife|herb|peace|"
+    r"pocket|sunken|water|japanese|millennium)? ?(garden|gardens|park|green|open space|pocket park)$",
+    re.IGNORECASE,
+)
+NOTABLE_OPERATORS = (
+    "royal parks",
+    "national trust",
+    "english heritage",
+    "historic royal palaces",
+    "kew",
+    "city of london",
+    "corporation of london",
+)
+CLOSED_PUB_PATTERN = re.compile(r"\((closed|former|disused|demolished)\)|\bclosed\b|\bformerly\b", re.IGNORECASE)
+
+PUB_FIELDS = [
+    "id", "name", "lat", "lon", "flags", "address", "hours", "website", "phone", "brewery", "cuisine", "brand",
+    "wikipedia", "wikidata",
+]
+POI_FIELDS = ["id", "name", "lat", "lon", "score", "cats", "address", "description", "website", "wikipedia", "wikidata"]
 OSM_TYPE_CODES = {"node": "n", "way": "w", "relation": "r"}
 
 
@@ -145,13 +191,36 @@ def pub_flags(props: dict[str, Any]) -> int:
         flags |= FLAG_LIVE_MUSIC
     if present_and_not_no(clean(props.get("real_cider"))):
         flags |= FLAG_REAL_CIDER
+    tags = props.get("tags") or {}
+    if tags.get("heritage") or tags.get("listed_status") or tags.get("wikipedia") or tags.get("historic"):
+        flags |= FLAG_HISTORIC
+    if tags.get("brand") or tags.get("brand:wikidata"):
+        flags |= FLAG_CHAIN
+    if is_yes(clean(tags.get("microbrewery"))):
+        flags |= FLAG_BREWPUB
+    if is_yes(clean(tags.get("real_fire"))):
+        flags |= FLAG_REAL_FIRE
     return flags
+
+
+def pub_is_closed(props: dict[str, Any]) -> bool:
+    tags = props.get("tags") or {}
+    if CLOSED_PUB_PATTERN.search(clean(props.get("name"))):
+        return True
+    if clean(tags.get("opening_hours")).lower() == "closed":
+        return True
+    return any(key.startswith(("disused:", "abandoned:", "was:")) or key == "end_date" for key in tags)
 
 
 def trim_row(row: list[Any]) -> list[Any]:
     while row and row[-1] in ("", None, []):
         row.pop()
     return row
+
+
+def wikidata_id(value: Any) -> str:
+    text = clean(value).split(";")[0].strip()
+    return text if re.fullmatch(r"Q\d+", text) else ""
 
 
 def round_coord(value: Any) -> float:
@@ -190,17 +259,21 @@ def poi_id(raw_id: str) -> str | None:
     return None
 
 
-def compact_pubs(geojson: dict[str, Any]) -> list[list[Any]]:
+def compact_pubs(geojson: dict[str, Any], historic_ids: set[str] | None = None) -> list[list[Any]]:
     rows = []
     seen: set[str] = set()
+    historic_ids = historic_ids or set()
     for feature in geojson.get("features", []):
         coords = point_coordinates(feature)
         props = feature.get("properties") or {}
         identifier = pub_id(props)
         name = clean(props.get("name"))
-        if coords is None or identifier is None or not name or identifier in seen:
+        if coords is None or identifier is None or not name or identifier in seen or pub_is_closed(props):
             continue
         seen.add(identifier)
+        flags = pub_flags(props)
+        if identifier in historic_ids:
+            flags |= FLAG_HISTORIC
         rows.append(
             trim_row(
                 [
@@ -208,13 +281,16 @@ def compact_pubs(geojson: dict[str, Any]) -> list[list[Any]]:
                     name,
                     round_coord(coords[0]),
                     round_coord(coords[1]),
-                    pub_flags(props),
+                    flags,
                     clean(props.get("address")),
                     clean(props.get("opening_hours")),
                     clean(props.get("website")),
                     clean(props.get("phone")),
                     clean(props.get("brewery")),
-                    clean(props.get("cuisine")).replace("_", " "),
+                    clean(props.get("cuisine")).replace("_", " ").replace(";", ", "),
+                    clean((props.get("tags") or {}).get("brand")),
+                    clean(props.get("wikipedia")),
+                    wikidata_id(props.get("wikidata")),
                 ]
             )
         )
@@ -231,10 +307,78 @@ def sort_categories(values: set[str]) -> list[str]:
     )
 
 
-def compact_pois(geojson: dict[str, Any]) -> tuple[list[list[Any]], list[str]]:
+def is_notable(props: dict[str, Any]) -> bool:
+    tags = props.get("tags") or {}
+    return bool(
+        props.get("wikipedia")
+        or props.get("wikidata")
+        or tags.get("heritage")
+        or tags.get("listed_status")
+        or (props.get("sitelinks") or 0) > 0
+    )
+
+
+def curate_poi(props: dict[str, Any]) -> tuple[bool, int]:
+    """Return (keep, adjusted interest score) for a raw POI record."""
+    tags = props.get("tags") or {}
+    title = clean(props.get("title"))
+    notable = is_notable(props)
+    score = int(props.get("interest_score") or 0)
+
+    if str(tags.get("attraction", "")).strip() in DROP_ATTRACTION_TYPES:
+        return False, score
+    if str(tags.get("amenity", "")).strip() in ("pub", "bar", "biergarten"):
+        return False, score  # becomes a "historic pub" badge on the pub instead
+    if not notable and DROP_TITLE_PATTERN.search(title):
+        return False, score
+    if not notable and tags.get("amenity") == "library":
+        return False, score
+    if not title or title.casefold() == "london point of interest":
+        return False, score
+
+    listed = str(tags.get("listed_status", "")).strip().lower()
+    if listed == "grade i":
+        score += 15
+    elif listed == "grade ii*":
+        score += 8
+    elif listed == "grade ii":
+        score += 3
+    translations = sum(1 for key in tags if key.startswith("name:"))
+    score += min(12, translations * 2)
+    operator = str(tags.get("operator", "")).lower()
+    if any(name in operator for name in NOTABLE_OPERATORS):
+        score += 10
+    # Optional enrichment from the weekly refresh: number of Wikipedia
+    # language editions covering the place (a free, reputable fame signal).
+    score += min(25, int(props.get("sitelinks") or 0))
+    if not notable and GENERIC_GREEN_PATTERN.match(title):
+        score -= 10
+    if not notable and tags.get("tourism") == "artwork" and not tags.get("artist_name"):
+        score -= 4
+    return True, max(10, min(100, score))
+
+
+def plaque_title(props: dict[str, Any]) -> str:
+    """Mark titles that were cut from a longer plaque inscription."""
+    title = clean(props.get("title"))
+    description = clean(props.get("description"))
+    if (
+        props.get("source") == "openplaques"
+        and len(title) >= 60
+        and description.startswith(title)
+        and len(description) > len(title)
+        and description[len(title)] not in ".!?"
+        and not title.endswith("…")
+    ):
+        return title.rstrip(" ,;:-") + "…"
+    return title
+
+
+def compact_pois(geojson: dict[str, Any]) -> tuple[list[list[Any]], list[str], set[str]]:
     records = []
     seen: set[str] = set()
     all_categories: set[str] = set()
+    historic_pub_ids: set[str] = set()
     for feature in geojson.get("features", []):
         coords = point_coordinates(feature)
         props = feature.get("properties") or {}
@@ -242,6 +386,13 @@ def compact_pois(geojson: dict[str, Any]) -> tuple[list[list[Any]], list[str]]:
         if coords is None or identifier is None or identifier in seen:
             continue
         seen.add(identifier)
+        tags = props.get("tags") or {}
+        if str(tags.get("amenity", "")).strip() in ("pub", "bar") and identifier[0] in "nwr":
+            historic_pub_ids.add(f"p{identifier}")
+        keep, score = curate_poi(props)
+        if not keep:
+            continue
+        props = {**props, "interest_score": score, "title": plaque_title(props)}
         categories = sort_categories(set(props.get("categories") or []) or {"landmark"})
         all_categories.update(categories)
         records.append((identifier, coords, props, categories))
@@ -267,11 +418,12 @@ def compact_pois(geojson: dict[str, Any]) -> tuple[list[list[Any]], list[str]]:
                     truncate(description),
                     clean(props.get("website")),
                     clean(props.get("wikipedia")),
+                    wikidata_id(props.get("wikidata")),
                 ]
             )
         )
     rows.sort(key=lambda row: (-row[4], row[1].casefold()))
-    return rows, category_order
+    return rows, category_order, historic_pub_ids
 
 
 def latest_fetch_time(*geojsons: dict[str, Any]) -> str:
@@ -285,8 +437,8 @@ def latest_fetch_time(*geojsons: dict[str, Any]) -> str:
 
 
 def build_dataset(pubs_geojson: dict[str, Any], pois_geojson: dict[str, Any]) -> dict[str, Any]:
-    pubs = compact_pubs(pubs_geojson)
-    pois, categories = compact_pois(pois_geojson)
+    pois, categories, historic_pub_ids = compact_pois(pois_geojson)
+    pubs = compact_pubs(pubs_geojson, historic_pub_ids)
     category_counts = {category: 0 for category in categories}
     for row in pois:
         for index in row[5] if len(row) > 5 else []:

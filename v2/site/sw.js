@@ -7,6 +7,9 @@ const SHELL = [
   `./styles.css?v=${VERSION}`,
   `./planner.js?v=${VERSION}`,
   `./app.js?v=${VERSION}`,
+  `./config.js?v=${VERSION}`,
+  "./fonts/fraunces-latin-700-normal.woff2",
+  "./fonts/fraunces-latin-900-normal.woff2",
   `./vendor/leaflet/leaflet.js?v=${VERSION}`,
   `./vendor/leaflet/leaflet.css?v=${VERSION}`,
   `./vendor/markercluster/leaflet.markercluster.js?v=${VERSION}`,
@@ -58,7 +61,7 @@ self.addEventListener("fetch", (event) => {
       (cached) =>
         cached ||
         fetch(request).then((response) => {
-          if (response.ok && url.search.includes("v=")) {
+          if (response.ok && (url.search.includes("v=") || url.pathname.includes("/fonts/"))) {
             const copy = response.clone();
             caches.open(CACHE).then((cache) => cache.put(request, copy));
           }

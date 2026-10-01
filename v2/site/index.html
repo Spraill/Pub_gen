@@ -4,18 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>London Crawl Planner</title>
-  <meta name="description" content="Plan walking pub crawls across London that pass museums, blue plaques, parks and other interesting sights. Save routes and share them with friends.">
-  <meta name="theme-color" content="#253050" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#14171f" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="Plan walking pub crawls across London past museums, blue plaques, parks and historic pubs. Save routes, share them with friends and get the story of each stop as you arrive.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://upload.wikimedia.org; connect-src 'self' https://routing.openstreetmap.de https://*.wikipedia.org https://www.wikidata.org; font-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#1f4a37">
   <meta property="og:title" content="London Crawl Planner">
   <meta property="og:description" content="Walking pub crawls through London's sights. Plan, save and share routes.">
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./icon.svg">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="preload" href="./data/places.json?v=__BUILD_VERSION__" as="fetch" crossorigin>
+  <link rel="preload" href="./fonts/fraunces-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./vendor/leaflet/leaflet.css?v=__BUILD_VERSION__">
   <link rel="stylesheet" href="./vendor/markercluster/MarkerCluster.css?v=__BUILD_VERSION__">
   <link rel="stylesheet" href="./styles.css?v=__BUILD_VERSION__">
+  <script defer src="./config.js?v=__BUILD_VERSION__"></script>
   <script defer src="./vendor/leaflet/leaflet.js?v=__BUILD_VERSION__"></script>
   <script defer src="./vendor/markercluster/leaflet.markercluster.js?v=__BUILD_VERSION__"></script>
   <script defer src="./planner.js?v=__BUILD_VERSION__"></script>
@@ -26,15 +29,15 @@
 
   <header class="topbar">
     <div class="brand">
-      <img class="brand-mark" src="./icon.svg" alt="" width="36" height="36">
+      <img class="brand-mark" src="./icon.svg" alt="" width="40" height="40">
       <div class="brand-text">
         <h1>London Crawl Planner</h1>
-        <p class="brand-sub"><span id="count-pois">…</span> sights · <span id="count-pubs">…</span> pubs</p>
+        <p class="brand-sub"><span id="count-pubs">…</span> pubs · <span id="count-pois">…</span> sights</p>
       </div>
     </div>
     <div class="search" id="search">
       <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 0 1 5.96 12.06l4.24 4.24-1.4 1.4-4.24-4.24A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>
-      <input id="search-input" type="search" placeholder="Search pubs, museums, plaques…" autocomplete="off" spellcheck="false"
+      <input id="search-input" type="search" placeholder="Find a pub, museum, plaque…" autocomplete="off" spellcheck="false"
         role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" aria-label="Search pubs and sights">
       <ul id="search-results" class="search-results" role="listbox" hidden></ul>
     </div>
@@ -44,9 +47,20 @@
     <button id="locate-button" class="map-button" type="button" aria-label="Show my location" title="Show my location">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v2.07A8 8 0 0 1 19.93 11H22v2h-2.07A8 8 0 0 1 13 19.93V22h-2v-2.07A8 8 0 0 1 4.07 13H2v-2h2.07A8 8 0 0 1 11 4.07V2Zm1 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/></svg>
     </button>
-    <button id="layers-button" class="map-button" type="button" aria-label="Map filters" title="Map filters" aria-controls="filters-details">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 1 8l11 6 11-6-11-6Zm-8.4 10.3L1 13.7 12 20l11-6.3-2.6-1.4L12 17.1l-8.4-4.8Z"/></svg>
+    <button id="layers-button" class="map-button" type="button" aria-label="Map filters" title="Map filters">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v2H3zm3 6h12v2H6zm3 6h6v2H9z"/></svg>
     </button>
+  </div>
+
+  <div id="crawl-bar" class="crawl-bar" hidden role="status" aria-live="polite">
+    <div class="crawl-progress"><span id="crawl-step">Stop 1 of 5</span><span id="crawl-distance"></span></div>
+    <div class="crawl-next" id="crawl-next">…</div>
+    <div class="crawl-actions">
+      <button id="crawl-here" class="btn small primary" type="button">I'm here</button>
+      <a id="crawl-directions" class="btn small" href="#" target="_blank" rel="noopener">Directions</a>
+      <button id="crawl-skip" class="btn small ghost" type="button">Skip</button>
+      <button id="crawl-stop" class="btn small ghost" type="button" aria-label="End crawl">End</button>
+    </div>
   </div>
 
   <aside id="sheet" class="sheet" data-state="peek" aria-label="Crawl planner">
@@ -62,22 +76,31 @@
     <div class="sheet-body" id="sheet-body">
       <!-- ============================== PLAN -->
       <section id="panel-plan" class="panel" role="tabpanel" aria-labelledby="tab-plan">
+        <div id="how-it-works" class="how" hidden>
+          <h2>How it works</h2>
+          <ol>
+            <li><strong>Pick a few sights</strong> on the map (museums, plaques, parks), or tap <em>Surprise me</em>.</li>
+            <li><strong>We add pubs</strong> along the walk between them. Swap any you don't fancy.</li>
+            <li><strong>Start the crawl.</strong> We'll tell you about each stop as you arrive. Save it or share it with your mates.</li>
+          </ol>
+          <button id="how-dismiss" class="btn small" type="button">Got it, cheers</button>
+        </div>
+
         <div class="segmented" role="radiogroup" aria-label="Planning mode">
           <button type="button" role="radio" data-mode="pick" aria-checked="true">Choose stops</button>
           <button type="button" role="radio" data-mode="random" aria-checked="false">Surprise me</button>
         </div>
 
         <div id="mode-pick" class="mode">
-          <p class="hint">Tap a marker or search, then press <strong>Add to crawl</strong>. Sights and pubs you add are must-visit stops.</p>
           <ol id="selected-list" class="stop-list"></ol>
           <div id="selected-empty" class="empty">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 1 7 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 0 1 7-7Zm0 4.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"/></svg>
-            <span>No stops chosen yet.</span>
+            <span>Tap a <span class="dot poi inline"></span> sight or <span class="dot pub inline"></span> pub on the map, or search above, then press <strong>Add to crawl</strong>.</span>
           </div>
         </div>
 
         <div id="mode-random" class="mode" hidden>
-          <p class="hint">We'll pick well-rated sights close together, then add pubs along the way. Set sights to 0 for a pub-only crawl.</p>
+          <p class="hint">We'll pick well-known sights close together, then add pubs along the way. Set sights to 0 for a proper pub-only crawl.</p>
           <div class="field-row">
             <span class="field-label" id="random-count-label">Sights to visit</span>
             <div class="stepper" data-stepper>
@@ -105,7 +128,7 @@
         </div>
 
         <div class="field-row">
-          <span class="field-label" id="pub-count-label">Extra pubs along the way</span>
+          <span class="field-label" id="pub-count-label">Pubs along the way</span>
           <div class="stepper" data-stepper>
             <button type="button" class="stepper-btn" data-step="-1" aria-label="Fewer pubs">−</button>
             <input id="pub-count" type="number" inputmode="numeric" min="0" max="12" value="3" aria-labelledby="pub-count-label">
@@ -118,44 +141,46 @@
         <details class="drawer" id="options-details">
           <summary>Route options</summary>
           <div class="drawer-body">
+            <div class="chip-grid">
+              <label class="chip"><input id="round-trip" type="checkbox"> Finish where I started</label>
+              <label class="chip"><input id="require-food" type="checkbox"> Pubs must serve food</label>
+              <label class="chip"><input id="require-step-free" type="checkbox"> Step-free pubs only</label>
+              <label class="chip"><input id="prefer-historic" type="checkbox"> Prefer historic pubs</label>
+              <label class="chip"><input id="avoid-chains" type="checkbox"> Avoid chain pubs</label>
+              <label class="chip"><input id="prefer-real-ale" type="checkbox"> Prefer real ale</label>
+              <label class="chip"><input id="prefer-outdoor" type="checkbox"> Prefer beer gardens</label>
+              <label class="chip"><input id="prefer-dog" type="checkbox"> Prefer dog friendly</label>
+            </div>
             <div class="field-grid">
               <div class="field">
                 <label for="order-mode">Stop order</label>
                 <select id="order-mode">
                   <option value="optimize">Shortest walk</option>
-                  <option value="selected">As listed</option>
+                  <option value="selected">As I listed them</option>
                 </select>
               </div>
               <div class="field">
                 <label for="walk-style">Pub choice</label>
                 <select id="walk-style">
                   <option value="quiet">Quieter, scenic spots</option>
-                  <option value="balanced">Closest to route</option>
+                  <option value="balanced">Closest to the route</option>
                 </select>
               </div>
               <div class="field">
                 <label for="meal-stop">Meal stop</label>
                 <select id="meal-stop">
                   <option value="none">None</option>
-                  <option value="middle">Food pub midway</option>
+                  <option value="middle">Food pub halfway</option>
                 </select>
               </div>
               <div class="field">
-                <label for="max-per-leg">Max pubs per leg</label>
+                <label for="max-per-leg">Max pubs between sights</label>
                 <input id="max-per-leg" type="number" inputmode="numeric" min="1" max="6" value="3">
               </div>
             </div>
             <div class="field">
-              <label for="detour">Max detour to a pub <output id="detour-output">1.2 km</output></label>
+              <label for="detour">How far off-route for a pub <output id="detour-output">1.2 km</output></label>
               <input id="detour" type="range" min="200" max="2500" step="100" value="1200">
-            </div>
-            <div class="chip-grid">
-              <label class="chip"><input id="round-trip" type="checkbox"> Return to start</label>
-              <label class="chip"><input id="require-food" type="checkbox"> Pubs must serve food</label>
-              <label class="chip"><input id="require-step-free" type="checkbox"> Step-free pubs only</label>
-              <label class="chip"><input id="prefer-real-ale" type="checkbox"> Prefer real ale</label>
-              <label class="chip"><input id="prefer-outdoor" type="checkbox"> Prefer outdoor seating</label>
-              <label class="chip"><input id="prefer-dog" type="checkbox"> Prefer dog friendly</label>
             </div>
             <div class="field-grid">
               <div class="field">
@@ -174,17 +199,17 @@
           <summary>Map filters <span id="filter-summary" class="drawer-note"></span></summary>
           <div class="drawer-body">
             <div class="chip-grid two">
-              <label class="chip"><input id="show-pois" type="checkbox" checked> <span class="dot poi"></span> Show sights</label>
               <label class="chip"><input id="show-pubs" type="checkbox" checked> <span class="dot pub"></span> Show pubs</label>
+              <label class="chip"><input id="show-pois" type="checkbox" checked> <span class="dot poi"></span> Show sights</label>
             </div>
             <div class="field">
-              <label for="min-score">Minimum sight interest <output id="min-score-output">25</output></label>
-              <input id="min-score" type="range" min="0" max="100" step="5" value="25">
-              <small class="hint subtle">An open-data score: museums, listed buildings and well-documented places rank higher.</small>
+              <label for="min-score">Only well-known sights <output id="min-score-output">35</output></label>
+              <input id="min-score" type="range" min="0" max="100" step="5" value="35">
+              <small class="hint subtle">Higher hides minor sights. Rated from open data: listed buildings, Wikipedia coverage, museums and so on.</small>
             </div>
             <div class="field">
               <div class="label-row">
-                <span class="field-label">Sight categories</span>
+                <span class="field-label">Kinds of sight</span>
                 <span class="button-row tight">
                   <button id="categories-all" class="btn link" type="button">All</button>
                   <button id="categories-none" class="btn link" type="button">None</button>
@@ -209,9 +234,9 @@
           </div>
           <div class="summary">
             <div><span>Stops</span><strong id="sum-stops">–</strong></div>
-            <div><span>Walk</span><strong id="sum-distance">–</strong></div>
+            <div><span>Distance</span><strong id="sum-distance">–</strong></div>
             <div><span>Walking</span><strong id="sum-walk">–</strong></div>
-            <div><span>With stops</span><strong id="sum-total">–</strong></div>
+            <div><span>All in</span><strong id="sum-total">–</strong></div>
           </div>
           <div id="route-status" class="status" role="status"></div>
           <ol id="route-list" class="stop-list route"></ol>
@@ -220,6 +245,7 @@
             <button id="gmaps-button" class="btn small" type="button">Open in Google Maps</button>
             <button id="clear-route-button" class="btn small ghost" type="button">Clear route</button>
           </div>
+          <div id="ad-slot" class="ad-slot" hidden aria-label="Advertisement"></div>
         </div>
       </section>
 
@@ -227,7 +253,7 @@
       <section id="panel-saved" class="panel" role="tabpanel" aria-labelledby="tab-saved" hidden>
         <div id="saved-empty" class="empty">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1Z"/></svg>
-          <span>Saved crawls appear here. They're stored on this device. Use <strong>Share</strong> to send one to a friend or another device.</span>
+          <span>Saved crawls live here, on this device. Use <strong>Share</strong> to send one to a friend or open it on another phone.</span>
         </div>
         <ul id="saved-list" class="saved-list"></ul>
       </section>
@@ -241,23 +267,40 @@
         <button id="clear-selection-button" class="btn ghost" type="button" aria-label="Clear chosen stops">Clear</button>
       </div>
       <div id="footer-route" class="footer-row" hidden>
-        <button id="save-button" class="btn primary grow" type="button">Save</button>
-        <button id="share-button" class="btn grow" type="button">Share</button>
+        <button id="start-crawl-button" class="btn primary grow" type="button">Start crawl</button>
+        <button id="save-button" class="btn" type="button">Save</button>
+        <button id="share-button" class="btn" type="button">Share</button>
       </div>
     </div>
   </aside>
 
+  <dialog id="place-dialog" class="place-dialog" aria-labelledby="place-title">
+    <div class="place-card">
+      <button class="place-close" type="button" data-close aria-label="Close">×</button>
+      <div id="place-arrival" class="place-arrival" hidden></div>
+      <figure id="place-figure" class="place-figure" hidden><img id="place-image" alt=""></figure>
+      <div class="place-body">
+        <div id="place-kicker" class="popup-kicker"></div>
+        <h2 id="place-title" class="place-title"></h2>
+        <p id="place-tagline" class="place-tagline"></p>
+        <div id="place-content" class="place-content"></div>
+        <p id="place-credit" class="place-credit"></p>
+      </div>
+      <div class="place-actions" id="place-actions"></div>
+    </div>
+  </dialog>
+
   <div id="banner" class="banner" hidden role="status">
     <span id="banner-text"></span>
-    <button id="banner-action" class="btn small primary" type="button"></button>
+    <button id="banner-action" class="btn small" type="button"></button>
     <button id="banner-close" class="banner-close" type="button" aria-label="Dismiss">×</button>
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <div id="loading" class="loading" role="status">
-    <div class="spinner" aria-hidden="true"></div>
-    <p id="loading-text">Loading London…</p>
+    <img src="./icon.svg" alt="" width="72" height="72" class="loading-mark">
+    <p id="loading-text">Pulling a map of London…</p>
   </div>
 
   <noscript><p class="noscript">London Crawl Planner needs JavaScript to draw the map and plan routes.</p></noscript>

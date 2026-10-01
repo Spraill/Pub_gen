@@ -30,15 +30,22 @@
     liveMusic: 32,
     realCider: 64,
     partialAccess: 128,
+    historic: 256,
+    chain: 512,
+    brewpub: 1024,
+    realFire: 2048,
   };
 
   const PUB_FEATURE_LABELS = [
+    [FLAGS.historic, "Historic pub"],
+    [FLAGS.brewpub, "Brews its own"],
     [FLAGS.food, "Food"],
     [FLAGS.realAle, "Real ale"],
     [FLAGS.realCider, "Real cider"],
     [FLAGS.outdoor, "Outdoor seating"],
     [FLAGS.dog, "Dog friendly"],
     [FLAGS.liveMusic, "Live music"],
+    [FLAGS.realFire, "Real fire"],
     [FLAGS.stepFree, "Step-free"],
     [FLAGS.partialAccess, "Partial access"],
   ];
@@ -137,6 +144,9 @@
       phone: row[pf.phone] || "",
       brewery: row[pf.brewery] || "",
       cuisine: row[pf.cuisine] || "",
+      brand: pf.brand == null ? "" : row[pf.brand] || "",
+      wikipedia: pf.wikipedia == null ? "" : row[pf.wikipedia] || "",
+      wikidata: pf.wikidata == null ? "" : row[pf.wikidata] || "",
     }));
 
     const pois = raw.pois.map((row) => {
@@ -154,6 +164,7 @@
         description: row[qf.description] || "",
         website: row[qf.website] || "",
         wikipedia: row[qf.wikipedia] || "",
+        wikidata: qf.wikidata == null ? "" : row[qf.wikidata] || "",
       };
     });
 
@@ -306,6 +317,8 @@
     if (options.preferRealAle && hasFlag(pub, FLAGS.realAle)) bonus += 180;
     if (options.preferOutdoor && hasFlag(pub, FLAGS.outdoor)) bonus += 120;
     if (options.preferDog && hasFlag(pub, FLAGS.dog)) bonus += 160;
+    if (options.preferHistoric && hasFlag(pub, FLAGS.historic)) bonus += 220;
+    if (options.avoidChains && hasFlag(pub, FLAGS.chain)) bonus -= 260;
     if (options.walkStyle === "quiet") {
       bonus += scenicCueScore(pub);
       bonus += metadataRichness(pub) * 8;
@@ -753,7 +766,7 @@
       const extra =
         place.kind === "poi"
           ? [place.address, place.description, place.categories.map((c) => CATEGORY_LABELS[c] || c).join(" ")]
-          : [place.address, place.brewery, place.cuisine, "pub"];
+          : [place.address, place.brewery, place.brand, place.cuisine, "pub"];
       return { place, title, hay: `${title} ${normalizeSearch(extra.join(" "))}` };
     });
   }
@@ -920,10 +933,50 @@
     return `https://www.openstreetmap.org/${type}/${match[2]}`;
   }
 
+  /** "en:Tower of London" -> { lang: "en", title: "Tower of London" } */
+  function parseWikipedia(value) {
+    const match = /^([a-z][a-z-]{1,11}):(.+)$/i.exec(String(value || "").trim());
+    if (!match) return null;
+    return { lang: match[1].toLowerCase(), title: match[2].trim() };
+  }
+
+  function wikiPath(title) {
+    return encodeURIComponent(title.replace(/ /g, "_"));
+  }
+
   function wikipediaUrl(value) {
-    const match = /^([a-z-]{2,12}):(.+)$/i.exec(String(value || "").trim());
-    if (!match) return "";
-    return `https://${match[1].toLowerCase()}.wikipedia.org/wiki/${encodeURIComponent(match[2].replace(/ /g, "_"))}`;
+    const wiki = parseWikipedia(value);
+    return wiki ? `https://${wiki.lang}.wikipedia.org/wiki/${wikiPath(wiki.title)}` : "";
+  }
+
+  function wikipediaSummaryUrl(wiki) {
+    return `https://${wiki.lang}.wikipedia.org/api/rest_v1/page/summary/${wikiPath(wiki.title)}?redirect=true`;
+  }
+
+  function wikidataSitelinkUrl(qid, lang) {
+    const params = new URLSearchParams({
+      action: "wbgetentities",
+      ids: qid,
+      props: "sitelinks",
+      sitefilter: `${lang || "en"}wiki`,
+      format: "json",
+      origin: "*",
+    });
+    return `https://www.wikidata.org/w/api.php?${params.toString()}`;
+  }
+
+  /** Reduce a Wikipedia REST summary to the fields we show, validating URLs. */
+  function summarizeWikipedia(summary) {
+    if (!summary || summary.type === "disambiguation" || !summary.extract) return null;
+    const thumb = summary.thumbnail && summary.thumbnail.source;
+    const page = summary.content_urls && summary.content_urls.desktop && summary.content_urls.desktop.page;
+    return {
+      title: String(summary.title || ""),
+      description: String(summary.description || ""),
+      extract: String(summary.extract || ""),
+      image: /^https:\/\/upload\.wikimedia\.org\//.test(thumb || "") ? thumb : "",
+      url: /^https:\/\/[a-z-]+\.(m\.)?wikipedia\.org\//.test(page || "") ? page : "",
+    };
   }
 
   function categoryLabel(category) {
@@ -971,6 +1024,10 @@
     safeUrl,
     sourceUrl,
     wikipediaUrl,
+    parseWikipedia,
+    wikipediaSummaryUrl,
+    wikidataSitelinkUrl,
+    summarizeWikipedia,
     categoryLabel,
     categorySingular,
   };
