@@ -12,4 +12,7 @@ window.PubGenConfig = Object.freeze({
   premium: { enabled: false, productId: "crawl_pass" },
   routerUrl: "https://routing.openstreetmap.de/routed-foot/route/v1/driving/",
   tileUrl: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  // Optional: a free Mapillary client token (https://www.mapillary.com/dashboard/developers)
+  // adds street-level exterior photos for pubs that have no Wikimedia Commons photo.
+  mapillaryToken: "",
 });

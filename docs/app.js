@@ -17,9 +17,13 @@
     session: "pubgen.session.v1",
     saved: "pubgen.saved.v1",
     info: "pubgen.info.v1",
+    media: "pubgen.media.v1",
     howDismissed: "pubgen.how.v1",
   };
   const MAX_SAVED = 100;
+  // Off until switched on in Map filters (there are ~3,800 plaques; they swamp the map).
+  const DEFAULT_HIDDEN_CATEGORIES = ["blue_plaque"];
+  const CATEGORY_SETTINGS_VERSION = 2;
   const COLORS = { poi: "#2a66b8", pub: "#c97c10", selected: "#1f4a37", route: "#7a2430", area: "#b8322f" };
 
   const $ = (id) => document.getElementById(id);
@@ -71,7 +75,6 @@
     sumStops: $("sum-stops"),
     sumDistance: $("sum-distance"),
     sumWalk: $("sum-walk"),
-    sumTotal: $("sum-total"),
     routeStatus: $("route-status"),
     routeList: $("route-list"),
     gpxButton: $("gpx-button"),
@@ -98,7 +101,7 @@
     ["meal-stop", "mealStop", "value"],
     ["max-per-leg", "maxPubsPerGap", "int"],
     ["detour", "maxDetourMeters", "int"],
-    ["round-trip", "roundTrip", "bool"],
+    ["finish", "finish", "value"],
     ["require-food", "requireFood", "bool"],
     ["require-step-free", "requireStepFree", "bool"],
     ["prefer-real-ale", "preferRealAle", "bool"],
@@ -106,8 +109,6 @@
     ["prefer-dog", "preferDog", "bool"],
     ["prefer-historic", "preferHistoric", "bool"],
     ["avoid-chains", "avoidChains", "bool"],
-    ["minutes-per-pub", "minutesPerPub", "int"],
-    ["minutes-per-sight", "minutesPerSight", "int"],
     ["show-pois", "showPois", "bool"],
     ["show-pubs", "showPubs", "bool"],
     ["min-score", "minScore", "int"],
@@ -348,7 +349,9 @@
     state.data = data;
     data.pubs.forEach((pub) => state.byId.set(pub.id, pub));
     data.pois.forEach((poi) => state.byId.set(poi.id, poi));
-    data.categories.forEach((category) => state.categories.add(category));
+    data.categories.forEach((category) => {
+      if (!DEFAULT_HIDDEN_CATEGORIES.includes(category)) state.categories.add(category);
+    });
   }
 
   function createMarkers() {
@@ -391,6 +394,7 @@
         settings[key] = Math.min(max, Math.max(min, Number.isFinite(value) ? value : Number(input.defaultValue) || min));
       } else settings[key] = input.value;
     });
+    settings.roundTrip = settings.finish === "start";
     return settings;
   }
 
@@ -430,6 +434,7 @@
       savedId: route.savedId || null,
       dirty: Boolean(route.dirty),
       visited: route.visited || [],
+      source: route.source || "",
     };
   }
 
@@ -458,6 +463,7 @@
         routerMode: intact ? record.routerMode : null,
         savedId: record.savedId || null,
         dirty: Boolean(record.dirty),
+        source: record.source || "",
         visited: Array.isArray(record.visited) && intact ? record.visited.filter(Number.isInteger) : [],
         analyzed: null,
         rejected: new Set(),
@@ -475,6 +481,7 @@
       selected: state.selected,
       settings: readSettings(),
       categories: [...state.categories],
+      categoryVersion: CATEGORY_SETTINGS_VERSION,
       area: state.area,
       view: { lat: center.lat, lon: center.lng, zoom: map.getZoom() },
       route: state.route ? serializeRoute(state.route) : null,
@@ -499,6 +506,8 @@
 
   function poiPassesFilters(poi, settings) {
     if (poi.score < settings.minScore) return false;
+    // Plaques are usually also "historical"; hide them whenever their own chip is off.
+    if (poi.primary === "blue_plaque" && !state.categories.has("blue_plaque")) return false;
     return poi.categories.some((category) => state.categories.has(category));
   }
 
@@ -623,7 +632,13 @@
       }
     }
 
+    const media = cachedMedia(place);
+    const photo = media && media.images && media.images[0];
+    const photoHtml = photo
+      ? `<button type="button" class="popup-photo" data-action="info" data-id="${escapeHtml(place.id)}" aria-label="Photos and more about ${escapeHtml(place.title)}"><img src="${escapeHtml(photo.thumb)}" alt="" loading="lazy"></button>`
+      : "";
     return `
+      ${photoHtml}
       <div class="popup-kicker">${kicker}</div>
       <h3 class="popup-title">${escapeHtml(place.title)}</h3>
       ${body}
@@ -649,6 +664,13 @@
     popup.options.autoPanPaddingBottomRight = padding.bottomRight;
     state.popupPlaceId = place.id;
     popup.setLatLng([place.lat, place.lon]).setContent(popupHtml(place)).openOn(map);
+    if (!cachedMedia(place) && hasMediaSource(place)) {
+      loadPlaceMedia(place).then((media) => {
+        if (state.popupPlaceId === place.id && map.hasLayer(popup) && media.images && media.images.length) {
+          popup.setContent(popupHtml(place));
+        }
+      });
+    }
   }
 
   function refreshOpenPopup() {
@@ -811,7 +833,9 @@
         return;
       }
     } else {
-      const rng = P.createRng(`${Date.now()}:${Math.random()}`);
+      const seed = newSeed();
+      options.seed = seed;
+      const rng = P.createRng(seed);
       const constrained = state.area.enabled;
       if (settings.randomPoiCount > 0) {
         const pool = constrained ? poisInArea() : state.filteredPois;
@@ -836,7 +860,7 @@
           setStatus(els.planStatus, `Only ${pool.length} matching pubs${constrained ? " in the area" : ""}. Widen the area or ask for fewer pubs.`, "error");
           return;
         }
-        options = { ...settings, pubCount: 0, mealStop: "none", orderMode: "optimize" };
+        options = { ...settings, seed, pubCount: 0, mealStop: "none", orderMode: "optimize" };
       }
       state.selected = anchors.map((place) => place.id);
       renderSelected();
@@ -851,6 +875,7 @@
 
     setRoute({
       name: defaultRouteName(result.stops),
+      source: state.mode,
       stops: result.stops,
       options,
       analyzed: result.analyzed,
@@ -865,6 +890,49 @@
     });
     switchTab("route");
     if (isMobile()) setSheet("half");
+    await updateRouteGeometry(true);
+  }
+
+  function newSeed() {
+    return `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+  }
+
+  /** Same settings and stops, different luck: new random sights (Surprise me) or different pubs. */
+  async function reshuffleRoute() {
+    const route = state.route;
+    if (!route) return;
+    if (route.source === "random") {
+      const previousMode = state.mode;
+      state.mode = "random";
+      await generate();
+      state.mode = previousMode;
+      return;
+    }
+    const anchors = routeAnchors(route);
+    if (!anchors.length) return;
+    const previousPubs = route.stops.filter((stop) => stop.auto).map((stop) => stop.place.id);
+    const base = route.options && Object.keys(route.options).length ? route.options : readSettings();
+    const options = { ...base, orderMode: "selected", seed: newSeed(), avoidIds: previousPubs };
+    const result = P.planRoute(anchors, state.data.pubs, options);
+    if (!result.ok) {
+      toast(result.error, 4000);
+      return;
+    }
+    const fresh = result.stops.filter((stop) => stop.auto && !previousPubs.includes(stop.place.id)).length;
+    setRoute({
+      ...route,
+      stops: result.stops,
+      options: { ...base },
+      analyzed: result.analyzed,
+      rejected: new Set(),
+      geometry: null,
+      legs: null,
+      distance: null,
+      duration: null,
+      visited: [],
+      dirty: true,
+    });
+    toast(fresh ? `${fresh} new pub${fresh === 1 ? "" : "s"} this time` : "No other pubs nearby fit. Try a bigger detour.");
     await updateRouteGeometry(true);
   }
 
@@ -954,7 +1022,12 @@
         maxZoom: 17,
       });
     } else {
-      map.fitBounds(bounds, { paddingTopLeft: [40, 40], paddingBottomRight: [els.sheet.offsetWidth + 48, 40], maxZoom: 17 });
+      const topbar = document.querySelector(".topbar").getBoundingClientRect();
+      map.fitBounds(bounds, {
+        paddingTopLeft: [40, topbar.bottom + 24],
+        paddingBottomRight: [els.sheet.offsetWidth + 48, 40],
+        maxZoom: 17,
+      });
     }
   }
 
@@ -1049,14 +1122,9 @@
     if (document.activeElement !== els.routeName) els.routeName.value = route.name || "";
     els.routeSavedFlag.hidden = !(route.savedId && !route.dirty);
 
-    const settings = readSettings();
     els.sumStops.textContent = `${uniqueStops.length - pubCount} + ${pubCount} 🍺`;
     els.sumDistance.textContent = route.distance != null ? P.formatDistance(route.distance) : "…";
     els.sumWalk.textContent = route.duration != null ? P.formatDuration(route.duration) : "…";
-    els.sumTotal.textContent =
-      route.duration != null
-        ? P.formatDuration(P.totalTimeSeconds(stops, route.duration, settings.minutesPerPub, settings.minutesPerSight))
-        : "…";
 
     if (route.routerMode === "fallback") {
       setStatus(els.routeStatus, "Walking directions are unavailable right now, so lines are straight and times are estimates.", "error");
@@ -1440,16 +1508,6 @@
     const wiki = info && info.wiki;
 
     $("place-tagline").textContent = wiki && wiki.description ? wiki.description : "";
-    const figure = $("place-figure");
-    const image = $("place-image");
-    if (wiki && wiki.image) {
-      image.src = wiki.image;
-      image.alt = wiki.title;
-      figure.hidden = false;
-    } else {
-      figure.hidden = true;
-      image.removeAttribute("src");
-    }
 
     if (isPlaque && place.description) {
       content.push(`<p class="inscription">${escapeHtml(place.description)}</p>`);
@@ -1525,6 +1583,7 @@
     $("place-title").textContent = place.title;
     const cached = infoCache.get(place.id);
     renderPlaceContent(place, cached && Date.now() - cached.at < INFO_TTL ? cached : null);
+    renderGallery(place, cachedMedia(place));
     renderPlaceActions(place, context);
     if (!dialog.open) {
       if (typeof dialog.showModal === "function") dialog.showModal();
@@ -1535,12 +1594,195 @@
     loadPlaceInfo(place).then((info) => {
       if (dialogPlaceId === place.id && dialog.open) renderPlaceContent(place, info);
     });
+    if (hasMediaSource(place)) {
+      loadPlaceMedia(place).then((media) => {
+        if (dialogPlaceId === place.id && dialog.open) renderGallery(place, media);
+      });
+    }
   }
 
   function closePlaceDialog() {
     dialogPlaceId = null;
     if (typeof dialog.close === "function") dialog.close();
     else dialog.removeAttribute("open");
+  }
+
+
+  // ================================================================== photos (Wikimedia Commons, optional Mapillary)
+
+  const MEDIA_MAX = 200;
+  const mediaCache = new Map();
+  (function loadMediaCache() {
+    const stored = store.get(STORAGE.media, {});
+    if (stored && typeof stored === "object") Object.keys(stored).forEach((key) => mediaCache.set(key, stored[key]));
+  })();
+
+  function cachedMedia(place) {
+    const entry = mediaCache.get(place.id);
+    return entry && Date.now() - entry.at < INFO_TTL ? entry : null;
+  }
+
+  function rememberMedia(id, media) {
+    const entry = { ...media, at: Date.now() };
+    mediaCache.delete(id);
+    mediaCache.set(id, entry);
+    while (mediaCache.size > MEDIA_MAX) mediaCache.delete(mediaCache.keys().next().value);
+    store.set(STORAGE.media, Object.fromEntries(mediaCache));
+    return entry;
+  }
+
+  function hasMediaSource(place) {
+    return Boolean(place.commons || place.wikidata || place.wikipedia || (CONFIG.mapillaryToken && place.kind === "pub"));
+  }
+
+  const mediaRequests = new Map();
+
+  /** Up to six credited photos: the Wikidata lead image, then the place's Commons category (often interiors for pubs). */
+  function loadPlaceMedia(place) {
+    const cached = cachedMedia(place);
+    if (cached) return Promise.resolve(cached);
+    if (mediaRequests.has(place.id)) return mediaRequests.get(place.id);
+    const request = (async () => {
+      const files = [];
+      let category = "";
+      if (place.commons.startsWith("File:")) files.push(place.commons);
+      else if (place.commons.startsWith("Category:")) category = place.commons;
+      try {
+        let qid = place.wikidata;
+        let info = null;
+        if (!qid && place.wikipedia) {
+          info = await loadPlaceInfo(place);
+          qid = (info && info.wiki && info.wiki.qid) || "";
+        }
+        if (qid) {
+          const [lead, cat] = await Promise.all([
+            fetchJson(P.wikidataClaimUrl(qid, "P18")).catch(() => null),
+            fetchJson(P.wikidataClaimUrl(qid, "P373")).catch(() => null),
+          ]);
+          const file = P.readWikidataClaim(lead, "P18");
+          if (file) files.unshift(`File:${file}`);
+          const commonsCategory = P.readWikidataClaim(cat, "P373");
+          if (!category && commonsCategory) category = `Category:${commonsCategory}`;
+        }
+        if (!files.length && place.wikipedia) {
+          info = info || (await loadPlaceInfo(place));
+          const fromSummary = P.commonsFileFromUrl(info && info.wiki && info.wiki.image);
+          if (fromSummary) files.push(fromSummary);
+        }
+        let images = [];
+        if (files.length) {
+          const found = P.parseCommonsImages(await fetchJson(P.commonsFilesUrl(files)));
+          const order = files.map((title) => title.toLowerCase());
+          found.sort((a, b) => order.indexOf(a.title.toLowerCase()) - order.indexOf(b.title.toLowerCase()));
+          images = images.concat(found);
+        }
+        if (category) images = images.concat(P.parseCommonsImages(await fetchJson(P.commonsCategoryUrl(category))));
+        if (!images.length && CONFIG.mapillaryToken && place.kind === "pub") images = await loadStreetPhotos(place);
+        return rememberMedia(place.id, { images: P.arrangePhotos(images, 6) });
+      } catch (error) {
+        return { images: [], offline: true };
+      } finally {
+        mediaRequests.delete(place.id);
+      }
+    })();
+    mediaRequests.set(place.id, request);
+    return request;
+  }
+
+  async function loadStreetPhotos(place) {
+    const dLat = 0.00045;
+    const dLon = 0.0007;
+    const params = new URLSearchParams({
+      access_token: CONFIG.mapillaryToken,
+      fields: "id,thumb_1024_url,computed_compass_angle,computed_geometry,creator",
+      bbox: [place.lon - dLon, place.lat - dLat, place.lon + dLon, place.lat + dLat].map((n) => n.toFixed(6)).join(","),
+      limit: "30",
+    });
+    try {
+      return P.pickFacingPhotos(await fetchJson(`https://graph.mapillary.com/images?${params.toString()}`), place, 2);
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function renderGallery(place, media) {
+    const gallery = $("place-gallery");
+    const images = (media && media.images) || [];
+    gallery.hidden = !images.length;
+    if (!images.length) {
+      gallery.innerHTML = "";
+      return;
+    }
+    gallery.innerHTML = images
+      .map((image, index) => {
+        const source = image.source || "Wikimedia Commons";
+        const credit = image.credit ? `${escapeHtml(image.credit)} · ` : "";
+        const link = image.page ? `<a href="${escapeHtml(image.page)}" target="_blank" rel="noopener">${escapeHtml(source)}</a>` : escapeHtml(source);
+        return `
+          <figure class="slide">
+            <img src="${escapeHtml(image.thumb)}" alt="${escapeHtml(place.title)}${image.interior ? " (inside)" : ""}" ${index ? 'loading="lazy"' : ""}>
+            ${image.interior ? '<span class="slide-tag">Inside</span>' : ""}
+            ${images.length > 1 ? `<span class="slide-count">${index + 1}/${images.length}</span>` : ""}
+            <figcaption>Photo: ${credit}${link}</figcaption>
+          </figure>`;
+      })
+      .join("");
+    gallery.scrollLeft = 0;
+  }
+
+  // ================================================================== crawl of the day
+
+  let daily = null;
+
+  function renderDaily() {
+    const card = $("daily-card");
+    const dateKey = P.londonDateKey();
+    if (!daily || daily.dateKey !== dateKey) {
+      daily = P.pickDailyCrawl(state.data.pois, state.data.pubs, dateKey);
+      if (daily) daily.plan = P.planRoute(daily.anchors, state.data.pubs, daily.options);
+    }
+    card.hidden = !(daily && daily.plan && daily.plan.ok);
+    if (card.hidden) return;
+    const stops = daily.plan.stops;
+    const pubs = stops.filter((stop) => stop.place.kind === "pub").length;
+    const day = new Date(`${dateKey}T12:00:00Z`).toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
+    $("daily-kicker").textContent = `Crawl of the day · ${day}`;
+    $("daily-title").textContent = daily.title;
+    const walk = P.formatDistance(P.pathLength(stops.map((stop) => stop.place)) * 1.25);
+    $("daily-meta").textContent = `${daily.area.name.replace(/^the /, "The ")} · ${stops.length - pubs} sights, ${pubs} pubs · about ${walk} · ends at a pub`;
+    const photo = $("daily-photo");
+    const showPhoto = (media) => {
+      const image = media && media.images && media.images[0];
+      if (!image) return;
+      photo.innerHTML = `<img src="${escapeHtml(image.thumb)}" alt="${escapeHtml(daily.hero.title)}">`;
+      photo.hidden = false;
+    };
+    showPhoto(cachedMedia(daily.hero));
+    if (!cachedMedia(daily.hero) && hasMediaSource(daily.hero)) loadPlaceMedia(daily.hero).then(showPhoto);
+  }
+
+  async function openDaily() {
+    if (!daily || !daily.plan || !daily.plan.ok) return;
+    const weekday = new Date(`${daily.dateKey}T12:00:00Z`).toLocaleDateString("en-GB", { weekday: "long" });
+    setRoute({
+      name: `${weekday}'s crawl: ${daily.area.name.replace(/^the /, "")}`,
+      source: "daily",
+      stops: daily.plan.stops.map((stop) => ({ ...stop })),
+      options: daily.options,
+      analyzed: daily.plan.analyzed,
+      rejected: new Set(),
+      geometry: null,
+      legs: null,
+      distance: null,
+      duration: null,
+      routerMode: null,
+      savedId: null,
+      dirty: true,
+      visited: [],
+    });
+    switchTab("route");
+    if (isMobile()) setSheet("half");
+    await updateRouteGeometry(true);
   }
 
   // ================================================================== crawl mode
@@ -1946,7 +2188,6 @@
         syncOutputs();
         if (["showPois", "showPubs", "minScore", "requireFood", "requireStepFree"].includes(key)) refreshMarkersSoon();
         if (key === "randomPoiCount") updateAreaStatus();
-        if ((key === "minutesPerPub" || key === "minutesPerSight") && state.route) renderRoute();
         persistSession();
       };
       input.addEventListener("input", handler);
@@ -2063,6 +2304,19 @@
       persistSession();
     });
     els.saveButton.addEventListener("click", saveCurrentRoute);
+    $("reshuffle-button").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      button.classList.add("busy");
+      try {
+        await reshuffleRoute();
+      } finally {
+        button.classList.remove("busy");
+      }
+    });
+    $("daily-button").addEventListener("click", openDaily);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && state.data) renderDaily();
+    });
     $("start-crawl-button").addEventListener("click", () => (state.crawl ? stopCrawl(false) : startCrawl()));
     $("crawl-here").addEventListener("click", () => state.crawl && arriveAt(state.crawl.next));
     $("crawl-skip").addEventListener("click", skipStop);
@@ -2241,6 +2495,9 @@
     applySettings(session.settings);
     if (Array.isArray(session.categories)) {
       state.categories = new Set(session.categories.filter((category) => state.data.categories.includes(category)));
+      if (session.categoryVersion !== CATEGORY_SETTINGS_VERSION) {
+        DEFAULT_HIDDEN_CATEGORIES.forEach((category) => state.categories.delete(category));
+      }
     }
     if (session.area && Number.isFinite(session.area.lat) && Number.isFinite(session.area.lon)) {
       state.area = {
@@ -2306,6 +2563,7 @@
     renderSelected();
     renderSaved();
     renderDataNote();
+    renderDaily();
     setMode(state.mode);
     switchTab(state.route || state.tab !== "route" ? state.tab : "plan");
     renderRoute();

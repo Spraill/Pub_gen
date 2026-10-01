@@ -54,15 +54,37 @@ function serve() {
 }
 
 async function stubNetwork(context, routerCalls) {
+  const json = (route, body) =>
+    route.fulfill({ status: 200, contentType: "application/json", headers: { "Access-Control-Allow-Origin": "*" }, body: JSON.stringify(body) });
   await context.route(/wikidata\.org/, (route) => {
-    const id = new URL(route.request().url()).searchParams.get("ids");
-    route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      headers: { "Access-Control-Allow-Origin": "*" },
-      body: JSON.stringify({ entities: { [id]: { sitelinks: { enwiki: { title: "Test Place" } } } } }),
+    const params = new URL(route.request().url()).searchParams;
+    if (params.get("action") === "wbgetclaims") {
+      const property = params.get("property");
+      const value = property === "P18" ? "Test photo.jpg" : "Test category";
+      return json(route, { claims: { [property]: [{ mainsnak: { datavalue: { value } } }] } });
+    }
+    const id = params.get("ids");
+    return json(route, { entities: { [id]: { sitelinks: { enwiki: { title: "Test Place" } } } } });
+  });
+  await context.route(/commons\.wikimedia\.org/, (route) => {
+    const params = new URL(route.request().url()).searchParams;
+    const category = params.get("generator") === "categorymembers";
+    const page = (title, index) => ({
+      title,
+      index,
+      imageinfo: [
+        {
+          thumburl: `https://upload.wikimedia.org/test/${index}.jpg`,
+          descriptionurl: "https://commons.wikimedia.org/wiki/File:Test.jpg",
+          extmetadata: { Artist: { value: "Test Photographer" }, LicenseShortName: { value: "CC BY-SA 4.0" } },
+        },
+      ],
+    });
+    return json(route, {
+      query: { pages: category ? { 2: page("File:Saloon bar interior.jpg", 2), 3: page("File:Front.jpg", 3) } : { 1: page("File:Test photo.jpg", 1) } },
     });
   });
+  await context.route(/upload\.wikimedia\.org/, (route) => route.fulfill({ status: 200, contentType: "image/png", body: BLANK_PNG }));
   await context.route(/wikipedia\.org\/api/, (route) =>
     route.fulfill({
       status: 200,
@@ -147,7 +169,13 @@ async function run() {
     assert.notEqual(await page.textContent("#count-pois"), "…");
     await shot(page, "desktop-start");
 
+    // Crawl of the day card.
+    await page.waitForSelector("#daily-card:not([hidden])");
+    assert.ok((await page.textContent("#daily-title")).length > 3);
+    await shot(page, "desktop-daily-card");
+
     await searchAndAdd(page, "British Museum");
+    await page.waitForSelector(".leaflet-popup .popup-photo img");
     await searchAndAdd(page, "Tower of London");
     assert.equal(await page.locator("#selected-list .stop").count(), 2);
     await shot(page, "desktop-selected");
@@ -158,6 +186,7 @@ async function run() {
     assert.ok(routerCalls.length >= 1, "router was called");
     const stops = await page.locator("#route-list .stop").count();
     assert.equal(stops, 5, "2 sights + 3 pubs");
+    assert.equal(await page.locator("#route-list .stop-num").last().getAttribute("class"), "stop-num pub", "finishes at a pub");
     assert.equal(await page.locator(".leaflet-marker-pane .pin").count(), 5);
     await shot(page, "desktop-route");
 
@@ -165,6 +194,10 @@ async function run() {
     await page.locator('#route-list [data-action="info"]').first().click();
     await page.waitForSelector("#place-dialog[open]");
     await page.waitForFunction(() => document.querySelector("#place-content").textContent.includes("Wikipedia summary"));
+    await page.waitForSelector("#place-gallery:not([hidden]) .slide");
+    assert.equal(await page.locator("#place-gallery .slide").count(), 3);
+    assert.match(await page.textContent("#place-gallery"), /Test Photographer/);
+    assert.equal(await page.locator("#place-gallery .slide-tag").count(), 1, "interior labelled");
     assert.match(await page.textContent("#place-credit"), /Wikipedia/);
     await shot(page, "desktop-place-info");
     await page.click("#place-dialog [data-close]");
@@ -217,6 +250,27 @@ async function run() {
     await friend.waitForSelector("#saved-badge:not([hidden])");
     await shot(friend, "desktop-shared-link");
     await other.close();
+  });
+
+  await scenario("desktop: crawl of the day and another version", { viewport: { width: 1280, height: 800 } }, async (page) => {
+    await page.goto(base);
+    await page.waitForSelector("#loading", { state: "detached", timeout: 20000 });
+    await page.click("#daily-button");
+    await page.waitForSelector("#route-list .stop");
+    const pubs = await page.locator("#route-list .stop-num.pub").count();
+    assert.ok(pubs >= 4 && pubs <= 6, `daily crawl has ${pubs} pubs`);
+    assert.match(await page.inputValue("#route-name"), /crawl/);
+    await page.waitForFunction(() => document.querySelector("#sum-distance").textContent !== "…");
+    await shot(page, "desktop-daily-route");
+    const before = await page.locator("#route-list .stop-title").allTextContents();
+    await page.click("#reshuffle-button");
+    await page.waitForFunction((old) => {
+      const now = [...document.querySelectorAll("#route-list .stop-title")].map((el) => el.textContent);
+      return now.join("|") !== old.join("|");
+    }, before);
+    const after = await page.locator("#route-list .stop-title").allTextContents();
+    assert.notDeepEqual(after, before);
+    assert.equal(after.length >= 6, true);
   });
 
   await scenario("desktop: surprise me (sights and pub-only)", { viewport: { width: 1280, height: 800 } }, async (page) => {

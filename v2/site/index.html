@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>London Crawl Planner</title>
   <meta name="description" content="Plan walking pub crawls across London past museums, blue plaques, parks and historic pubs. Save routes, share them with friends and get the story of each stop as you arrive.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://upload.wikimedia.org; connect-src 'self' https://routing.openstreetmap.de https://*.wikipedia.org https://www.wikidata.org; font-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://upload.wikimedia.org https://*.fbcdn.net; connect-src 'self' https://routing.openstreetmap.de https://*.wikipedia.org https://www.wikidata.org https://commons.wikimedia.org https://graph.mapillary.com; font-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#1f4a37">
   <meta property="og:title" content="London Crawl Planner">
@@ -86,6 +86,16 @@
           <button id="how-dismiss" class="btn small" type="button">Got it, cheers</button>
         </div>
 
+        <article id="daily-card" class="daily" hidden>
+          <div class="daily-photo" id="daily-photo" hidden></div>
+          <div class="daily-body">
+            <div class="daily-kicker" id="daily-kicker">Crawl of the day</div>
+            <h2 class="daily-title" id="daily-title"></h2>
+            <p class="daily-meta" id="daily-meta"></p>
+            <button id="daily-button" class="btn small primary" type="button">Take me there</button>
+          </div>
+        </article>
+
         <div class="segmented" role="radiogroup" aria-label="Planning mode">
           <button type="button" role="radio" data-mode="pick" aria-checked="true">Choose stops</button>
           <button type="button" role="radio" data-mode="random" aria-checked="false">Surprise me</button>
@@ -142,7 +152,6 @@
           <summary>Route options</summary>
           <div class="drawer-body">
             <div class="chip-grid">
-              <label class="chip"><input id="round-trip" type="checkbox"> Finish where I started</label>
               <label class="chip"><input id="require-food" type="checkbox"> Pubs must serve food</label>
               <label class="chip"><input id="require-step-free" type="checkbox"> Step-free pubs only</label>
               <label class="chip"><input id="prefer-historic" type="checkbox"> Prefer historic pubs</label>
@@ -152,6 +161,14 @@
               <label class="chip"><input id="prefer-dog" type="checkbox"> Prefer dog friendly</label>
             </div>
             <div class="field-grid">
+              <div class="field">
+                <label for="finish">Finish</label>
+                <select id="finish">
+                  <option value="pub">At a pub</option>
+                  <option value="start">Back where I started</option>
+                  <option value="any">Wherever</option>
+                </select>
+              </div>
               <div class="field">
                 <label for="order-mode">Stop order</label>
                 <select id="order-mode">
@@ -181,16 +198,6 @@
             <div class="field">
               <label for="detour">How far off-route for a pub <output id="detour-output">1.2 km</output></label>
               <input id="detour" type="range" min="200" max="2500" step="100" value="1200">
-            </div>
-            <div class="field-grid">
-              <div class="field">
-                <label for="minutes-per-pub">Minutes per pub</label>
-                <input id="minutes-per-pub" type="number" inputmode="numeric" min="0" max="180" step="5" value="40">
-              </div>
-              <div class="field">
-                <label for="minutes-per-sight">Minutes per sight</label>
-                <input id="minutes-per-sight" type="number" inputmode="numeric" min="0" max="180" step="5" value="15">
-              </div>
             </div>
           </div>
         </details>
@@ -236,7 +243,10 @@
             <div><span>Stops</span><strong id="sum-stops">–</strong></div>
             <div><span>Distance</span><strong id="sum-distance">–</strong></div>
             <div><span>Walking</span><strong id="sum-walk">–</strong></div>
-            <div><span>All in</span><strong id="sum-total">–</strong></div>
+          </div>
+          <div class="reshuffle-row">
+            <span class="hint">Not feeling it?</span>
+            <button id="reshuffle-button" class="btn small" type="button">↻ Another version</button>
           </div>
           <div id="route-status" class="status" role="status"></div>
           <ol id="route-list" class="stop-list route"></ol>
@@ -278,7 +288,7 @@
     <div class="place-card">
       <button class="place-close" type="button" data-close aria-label="Close">×</button>
       <div id="place-arrival" class="place-arrival" hidden></div>
-      <figure id="place-figure" class="place-figure" hidden><img id="place-image" alt=""></figure>
+      <div id="place-gallery" class="gallery" hidden></div>
       <div class="place-body">
         <div id="place-kicker" class="popup-kicker"></div>
         <h2 id="place-title" class="place-title"></h2>

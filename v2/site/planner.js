@@ -147,6 +147,7 @@
       brand: pf.brand == null ? "" : row[pf.brand] || "",
       wikipedia: pf.wikipedia == null ? "" : row[pf.wikipedia] || "",
       wikidata: pf.wikidata == null ? "" : row[pf.wikidata] || "",
+      commons: pf.commons == null ? "" : row[pf.commons] || "",
     }));
 
     const pois = raw.pois.map((row) => {
@@ -165,6 +166,8 @@
         website: row[qf.website] || "",
         wikipedia: row[qf.wikipedia] || "",
         wikidata: qf.wikidata == null ? "" : row[qf.wikidata] || "",
+        fame: qf.fame == null ? 0 : row[qf.fame] || 0,
+        commons: qf.commons == null ? "" : row[qf.commons] || "",
       };
     });
 
@@ -481,7 +484,50 @@
   }
 
   function placementScore(candidate, options) {
-    return candidate.distanceToPath - pubPreferenceBonus(candidate.feature, options);
+    // jitter (seeded) and penalty (pubs from the previous version) make "another version" differ.
+    return (
+      candidate.distanceToPath -
+      pubPreferenceBonus(candidate.feature, options) +
+      (candidate.jitter || 0) +
+      (candidate.penalty || 0)
+    );
+  }
+
+  const RESHUFFLE_JITTER = 320;
+  const RESHUFFLE_PENALTY = 450;
+
+  function decorateCandidates(candidates, options) {
+    const rng = options.seed != null ? createRng(`pubs:${options.seed}`) : null;
+    const avoid = new Set(options.avoidIds || []);
+    candidates.forEach((candidate) => {
+      candidate.jitter = rng ? rng() * RESHUFFLE_JITTER : 0;
+      candidate.penalty = avoid.has(candidate.feature.id) ? RESHUFFLE_PENALTY : 0;
+    });
+    return candidates;
+  }
+
+  /** Pick the pub to finish at: close to the last sight and not back the way you came. */
+  function chooseFinalePub(ordered, pool, options, requireFood) {
+    const last = ordered[ordered.length - 1];
+    const prev = ordered.length > 1 ? ordered[ordered.length - 2] : null;
+    const radius = Math.max(400, options.maxDetourMeters);
+    const candidates = decorateCandidates(
+      pool
+        .filter((pub) => (!requireFood || hasFlag(pub, FLAGS.food)) && distance(last, pub) <= radius)
+        .map((pub) => ({ feature: pub, segmentIndex: null, progress: null, distanceToPath: distance(last, pub) })),
+      options
+    );
+    let best = null;
+    let bestScore = Infinity;
+    candidates.forEach((candidate) => {
+      let score = placementScore(candidate, options) + candidate.distanceToPath * 0.3;
+      if (prev && distance(prev, candidate.feature) < distance(prev, last)) score += 200;
+      if (score < bestScore) {
+        bestScore = score;
+        best = candidate;
+      }
+    });
+    return { finale: best, candidates };
   }
 
   function choosePubsAroundSingleStop(analyzed, options) {
@@ -636,33 +682,64 @@
     }
 
     const ordered = orderAnchors(anchors, options.orderMode, options.roundTrip);
+    const anchorIds = new Set(anchors.map((place) => place.id));
+    let pool = pubPool.filter((pub) => !anchorIds.has(pub.id) && pubMatchesRequirements(pub, options));
+
+    // Save one pub for the end, unless it's a loop or already finishes at a pub.
+    let finale = null;
+    let finaleCandidates = [];
+    const wantsFinale =
+      options.finish === "pub" &&
+      !options.roundTrip &&
+      options.pubCount > 0 &&
+      ordered.length > 1 &&
+      ordered[ordered.length - 1].kind !== "pub";
+    if (wantsFinale) {
+      const mealAtEnd = options.mealStop === "middle" && options.pubCount === 1;
+      const result = chooseFinalePub(ordered, pool, options, mealAtEnd);
+      finale = result.finale;
+      finaleCandidates = result.candidates;
+      if (finale) {
+        finale.isMealStop = mealAtEnd;
+        pool = pool.filter((pub) => pub.id !== finale.feature.id);
+      }
+    }
+    const alongOptions = finale
+      ? { ...options, pubCount: options.pubCount - 1, mealStop: finale.isMealStop ? "none" : options.mealStop }
+      : options;
+
     if (ordered.length > 1) {
       const legs = segmentCount(ordered, options.roundTrip);
-      const capacity = legs * options.maxPubsPerGap;
+      const capacity = legs * options.maxPubsPerGap + (finale ? 1 : 0);
       if (options.pubCount > capacity) {
         return {
           ok: false,
-          error: `${options.pubCount} pub stops won't fit: ${legs} leg${legs === 1 ? "" : "s"} × ${options.maxPubsPerGap} pubs per leg allows ${capacity}. Raise "Max pubs per leg" or add more sights.`,
+          error: `${options.pubCount} pubs won't fit: ${legs} stretch${legs === 1 ? "" : "es"} between sights × ${options.maxPubsPerGap} pubs each allows ${capacity}. Raise "Max pubs between sights" or add more sights.`,
         };
       }
     }
 
-    const anchorIds = new Set(anchors.map((place) => place.id));
-    const pool = pubPool.filter((pub) => !anchorIds.has(pub.id) && pubMatchesRequirements(pub, options));
-    const analyzed = options.pubCount > 0 ? analyzePubsAlongPath(ordered, pool, options) : [];
-    const chosen = choosePubsAlongPath(ordered, analyzed, options);
-    if (chosen.length < options.pubCount) {
+    const analyzed =
+      alongOptions.pubCount > 0 ? decorateCandidates(analyzePubsAlongPath(ordered, pool, alongOptions), options) : [];
+    const chosen = choosePubsAlongPath(ordered, analyzed, alongOptions);
+    if (chosen.length < alongOptions.pubCount) {
       const hint =
-        options.mealStop === "middle" && !chosen.length
+        alongOptions.mealStop === "middle" && !chosen.length
           ? "No food-serving pub was found near the route."
-          : `Only ${chosen.length} of ${options.pubCount} pubs could be placed.`;
+          : `Only ${chosen.length + (finale ? 1 : 0)} of ${options.pubCount} pubs could be placed.`;
       return {
         ok: false,
-        error: `${hint} Try a larger pub detour, fewer requirements, or more pubs per leg.`,
+        error: `${hint} Try a larger pub detour, fewer requirements, or more pubs between sights.`,
       };
     }
 
-    return { ok: true, stops: buildStops(ordered, chosen, options), ordered, analyzed };
+    const stops = buildStops(ordered, chosen, options);
+    if (finale) stops.push(makeStop(finale.feature, { auto: true, mealStop: finale.isMealStop }));
+    const seen = new Set(analyzed.map((candidate) => candidate.feature.id));
+    finaleCandidates.forEach((candidate) => {
+      if (!seen.has(candidate.feature.id)) analyzed.push(candidate);
+    });
+    return { ok: true, stops, ordered, analyzed };
   }
 
   /** Best replacement for an auto-picked pub, or null. */
@@ -890,6 +967,285 @@
     return `https://www.google.com/maps/dir/?${params.toString()}`;
   }
 
+  // ------------------------------------------------------------------ photos (Wikimedia Commons)
+
+  const COMMONS_API = "https://commons.wikimedia.org/w/api.php";
+  const SKIP_IMAGE = /\.(svg|pdf|tiff?|djvu|ogg|oga|webm|gif|mid)$|\b(map|plan|logo|diagram|coat of arms|signature|locator|floor)\b/i;
+  const INTERIOR_IMAGE = /\b(interior|inside|saloon|snug|lounge|bar room|public bar|taproom|ceiling)\b/i;
+
+  function commonsQuery(params) {
+    const search = new URLSearchParams({
+      action: "query",
+      prop: "imageinfo",
+      iiprop: "url|extmetadata",
+      iiurlwidth: "800",
+      iiextmetadatafilter: "Artist|LicenseShortName",
+      format: "json",
+      origin: "*",
+      ...params,
+    });
+    return `${COMMONS_API}?${search.toString()}`;
+  }
+
+  function commonsFilesUrl(titles) {
+    return commonsQuery({ titles: titles.slice(0, 10).join("|") });
+  }
+
+  function commonsCategoryUrl(category) {
+    return commonsQuery({ generator: "categorymembers", gcmtitle: category, gcmtype: "file", gcmlimit: "16" });
+  }
+
+  function wikidataClaimUrl(qid, property) {
+    const params = new URLSearchParams({ action: "wbgetclaims", entity: qid, property, format: "json", origin: "*" });
+    return `https://www.wikidata.org/w/api.php?${params.toString()}`;
+  }
+
+  function readWikidataClaim(json, property) {
+    const claims = json && json.claims && json.claims[property];
+    const snak = claims && claims[0] && claims[0].mainsnak;
+    const value = snak && snak.datavalue && snak.datavalue.value;
+    return typeof value === "string" ? value : "";
+  }
+
+  function plainText(html) {
+    return String(html || "")
+      .replace(/<[^>]*>/g, " ")
+      .replace(/&nbsp;/g, " ")
+      .replace(/&quot;/g, '"')
+      .replace(/&#0?39;/g, "'")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&amp;/g, "&")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  /** Photos from a Commons API response, keeping only real photographs with credit details. */
+  function parseCommonsImages(json) {
+    const pages = json && json.query && json.query.pages;
+    if (!pages) return [];
+    return Object.keys(pages)
+      .map((key) => pages[key])
+      .sort((a, b) => (a.index || 0) - (b.index || 0))
+      .map((page) => {
+        const info = page.imageinfo && page.imageinfo[0];
+        if (!info) return null;
+        const title = String(page.title || "");
+        const thumb = String(info.thumburl || "");
+        if (SKIP_IMAGE.test(title) || !/^https:\/\/upload\.wikimedia\.org\//.test(thumb)) return null;
+        const meta = info.extmetadata || {};
+        const artist = plainText(meta.Artist && meta.Artist.value).slice(0, 80);
+        const license = plainText(meta.LicenseShortName && meta.LicenseShortName.value);
+        return {
+          title,
+          thumb,
+          page: /^https:\/\/commons\.wikimedia\.org\//.test(info.descriptionurl || "") ? info.descriptionurl : "",
+          credit: [artist, license].filter(Boolean).join(", "),
+          interior: INTERIOR_IMAGE.test(title),
+        };
+      })
+      .filter(Boolean);
+  }
+
+  /** "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Foo_bar.jpg/320px-Foo_bar.jpg" -> "File:Foo bar.jpg" */
+  function commonsFileFromUrl(url) {
+    const match = /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/(?:thumb\/)?[0-9a-f]\/[0-9a-f]{2}\/([^/?#]+)/.exec(
+      String(url || "")
+    );
+    if (!match) return "";
+    try {
+      return `File:${decodeURIComponent(match[1]).replace(/_/g, " ")}`;
+    } catch (error) {
+      return "";
+    }
+  }
+
+  /** Compass bearing in degrees from a to b. */
+  function bearing(a, b) {
+    const dx = (b.lon - a.lon) * METERS_PER_DEG_LON;
+    const dy = (b.lat - a.lat) * METERS_PER_DEG_LAT;
+    return (Math.atan2(dx, dy) * 180) / Math.PI + (dx < 0 ? 360 : 0);
+  }
+
+  /**
+   * Street-level photos (Mapillary API response) that look towards the place:
+   * taken 5–45 m away with the camera pointing within 50° of it.
+   */
+  function pickFacingPhotos(json, place, limit) {
+    const items = (json && Array.isArray(json.data) ? json.data : [])
+      .map((item) => {
+        const coords = item.computed_geometry && item.computed_geometry.coordinates;
+        if (!coords || !/^https:\/\/[^/]+\.fbcdn\.net\//.test(item.thumb_1024_url || "")) return null;
+        const from = { lat: coords[1], lon: coords[0] };
+        const meters = distance(from, place);
+        const offset = Math.abs((((bearing(from, place) - (item.computed_compass_angle || 0)) % 360) + 540) % 360 - 180);
+        if (meters < 5 || meters > 45 || offset > 50) return null;
+        return {
+          thumb: item.thumb_1024_url,
+          page: `https://www.mapillary.com/app/?pKey=${encodeURIComponent(item.id)}`,
+          credit: `${(item.creator && item.creator.username) || "Mapillary contributor"}, CC BY-SA 4.0`,
+          source: "Mapillary",
+          rank: offset + meters,
+        };
+      })
+      .filter(Boolean)
+      .sort((a, b) => a.rank - b.rank);
+    return items.slice(0, limit || 2);
+  }
+
+  /** Lead photo first, then up to two interior shots, then the rest. */
+  function arrangePhotos(images, limit) {
+    const seen = new Set();
+    const unique = images.filter((image) => {
+      if (seen.has(image.thumb)) return false;
+      seen.add(image.thumb);
+      return true;
+    });
+    if (!unique.length) return [];
+    const [lead, ...rest] = unique;
+    const interior = rest.filter((image) => image.interior);
+    const others = rest.filter((image) => !image.interior);
+    return [lead].concat(interior.slice(0, 2), others, interior.slice(2)).slice(0, limit || 6);
+  }
+
+  // ------------------------------------------------------------------ crawl of the day
+
+  // Ordered so consecutive days hop between different parts of London.
+  const DAILY_AREAS = [
+    { name: "the City", region: "City", lat: 51.5136, lon: -0.0925, radius: 900 },
+    { name: "the West End", region: "West End", lat: 51.5125, lon: -0.133, radius: 900 },
+    { name: "Shoreditch & Spitalfields", region: "East", lat: 51.5235, lon: -0.076, radius: 1000 },
+    { name: "Camden & Primrose Hill", region: "North", lat: 51.5395, lon: -0.146, radius: 1100 },
+    { name: "the South Bank & Borough", region: "South", lat: 51.505, lon: -0.096, radius: 1000 },
+    { name: "Kensington & Chelsea", region: "West", lat: 51.4965, lon: -0.172, radius: 1200 },
+    { name: "Fleet Street & Temple", region: "City", lat: 51.5135, lon: -0.109, radius: 800 },
+    { name: "Greenwich", region: "South East", lat: 51.481, lon: -0.005, radius: 1100 },
+    { name: "Hampstead", region: "North", lat: 51.5565, lon: -0.177, radius: 1200 },
+    { name: "Westminster", region: "Central", lat: 51.5005, lon: -0.13, radius: 1000 },
+    { name: "Wapping & Limehouse", region: "East", lat: 51.507, lon: -0.054, radius: 1300 },
+    { name: "Bloomsbury & Holborn", region: "Central", lat: 51.5195, lon: -0.123, radius: 900 },
+    { name: "Notting Hill & Bayswater", region: "West", lat: 51.512, lon: -0.196, radius: 1100 },
+    { name: "Islington & Clerkenwell", region: "North", lat: 51.528, lon: -0.103, radius: 1100 },
+    { name: "Bermondsey & Rotherhithe", region: "South", lat: 51.4995, lon: -0.066, radius: 1200 },
+    { name: "Marylebone", region: "West End", lat: 51.52, lon: -0.153, radius: 1000 },
+    { name: "Hackney & Victoria Park", region: "East", lat: 51.538, lon: -0.048, radius: 1400 },
+    { name: "Richmond", region: "South West", lat: 51.4605, lon: -0.304, radius: 1300 },
+    { name: "Covent Garden & the Strand", region: "West End", lat: 51.5115, lon: -0.122, radius: 800 },
+    { name: "Hammersmith & Chiswick", region: "West", lat: 51.4895, lon: -0.24, radius: 1500 },
+  ];
+
+  const DAILY_OPTIONS = {
+    pubCount: 4,
+    maxPubsPerGap: 4,
+    orderMode: "optimize",
+    walkStyle: "quiet",
+    mealStop: "none",
+    maxDetourMeters: 800,
+    roundTrip: false,
+    finish: "pub",
+    requireFood: false,
+    requireStepFree: false,
+    preferHistoric: true,
+    avoidChains: true,
+    preferRealAle: true,
+    preferOutdoor: false,
+    preferDog: false,
+  };
+
+  function londonDateKey(date) {
+    try {
+      return new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Europe/London",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(date || new Date());
+    } catch (error) {
+      return (date || new Date()).toISOString().slice(0, 10);
+    }
+  }
+
+  function dayNumber(dateKey) {
+    const [year, month, day] = String(dateKey).split("-").map(Number);
+    return Math.floor(Date.UTC(year, month - 1, day) / 86400000);
+  }
+
+  const DAILY_CATEGORIES = new Set(["historical", "architecture", "religious", "museum", "cultural", "art", "garden", "scenic", "memorial"]);
+  const DAILY_EXCLUDE =
+    /\b(embassy|high commission|club|offices?|headquarters|hotel|school|college|university|hospital|station|studios?|centre|center|library|shop|market hall|bank|tower block|house of fraser|apartments?|flats|estate|sainsbury'?s?|tesco|waitrose|lidl|aldi|primark|pret)\b/i;
+  // Weighting cap: famous places still feature, but the crawl isn't always Buckingham Palace.
+  const FAME_CAP = 45;
+
+  /** Historic, beautiful or culturally significant, and well documented. */
+  function isQualitySight(poi, minScore) {
+    if (poi.primary === "blue_plaque" || poi.score < minScore || DAILY_EXCLUDE.test(poi.title)) return false;
+    if (!poi.categories.some((category) => DAILY_CATEGORIES.has(category))) return false;
+    return Boolean(poi.wikipedia || poi.wikidata || poi.fame >= 10);
+  }
+
+  /**
+   * Today's crawl: the same for everyone on a given London date. It hinges on a
+   * notable sight (plus a historic pub on alternate days) in an area of London
+   * that changes daily, with two more quality sights nearby; planRoute adds the
+   * pubs (4–5 in total, finishing at a pub).
+   */
+  function pickDailyCrawl(pois, pubs, dateKey) {
+    const day = dayNumber(dateKey);
+    const area = DAILY_AREAS[((day % DAILY_AREAS.length) + DAILY_AREAS.length) % DAILY_AREAS.length];
+    const rng = createRng(`daily:${dateKey}`);
+
+    let heroes = [];
+    for (const factor of [1, 1.5, 2.2, 3.5]) {
+      heroes = pois.filter((poi) => isQualitySight(poi, 75) && poi.wikipedia && distance(area, poi) <= area.radius * factor);
+      if (heroes.length >= 4) break;
+    }
+    if (!heroes.length) return null;
+    heroes.sort((a, b) => b.fame - a.fame || b.score - a.score);
+    const hero = weightedOrder(heroes.slice(0, 10), rng, (poi) => Math.min(poi.fame, FAME_CAP) + 5)[0];
+    const anchors = [hero];
+
+    const historicPubs = pubs
+      .filter((pub) => hasFlag(pub, FLAGS.historic) && !hasFlag(pub, FLAGS.chain) && distance(hero, pub) <= 1400)
+      .sort((a, b) => Number(Boolean(b.wikipedia || b.wikidata)) - Number(Boolean(a.wikipedia || a.wikidata)));
+    const pubHero =
+      day % 2 === 0 ? weightedOrder(historicPubs.slice(0, 6), rng, (pub) => (pub.wikipedia || pub.wikidata ? 3 : 1))[0] : null;
+    if (pubHero) anchors.push(pubHero);
+
+    let support = [];
+    for (const radius of [1200, 1800, 2600]) {
+      support = pois.filter(
+        (poi) =>
+          isQualitySight(poi, 65) && (poi.wikipedia || poi.fame >= 15) && poi !== hero && distance(hero, poi) <= radius
+      );
+      if (support.length >= 4) break;
+    }
+    support = weightedOrder(support, rng, (poi) => Math.min(poi.fame, FAME_CAP) + poi.score / 4);
+    const sightCount = () => anchors.filter((place) => place.kind === "poi").length;
+    const categories = new Set([hero.primary]);
+    const tooClose = (poi) => anchors.some((place) => distance(place, poi) < 180);
+    support.forEach((poi) => {
+      if (sightCount() >= 3 || categories.has(poi.primary) || tooClose(poi)) return;
+      anchors.push(poi);
+      categories.add(poi.primary);
+    });
+    support.forEach((poi) => {
+      if (sightCount() >= 3 || anchors.includes(poi) || tooClose(poi)) return;
+      anchors.push(poi);
+    });
+
+    const totalPubs = rng() < 0.5 ? 4 : 5;
+    return {
+      dateKey,
+      area,
+      hero,
+      pubHero: pubHero || null,
+      anchors,
+      title: pubHero ? `${hero.title} & ${pubHero.title}` : hero.title,
+      // A pub hero counts towards the total.
+      options: { ...DAILY_OPTIONS, pubCount: totalPubs - (pubHero ? 1 : 0), seed: `daily:${dateKey}` },
+    };
+  }
+
   // ------------------------------------------------------------------ formatting & links
 
   function formatDistance(meters) {
@@ -904,18 +1260,6 @@
     const hours = Math.floor(minutes / 60);
     const rest = minutes % 60;
     return rest ? `${hours} h ${rest} min` : `${hours} h`;
-  }
-
-  /** Walk time plus dwell time at each distinct stop (the return leg of a loop isn't counted twice). */
-  function totalTimeSeconds(stops, walkSeconds, minutesPerPub, minutesPerSight) {
-    const seen = new Set();
-    let dwell = 0;
-    stops.forEach((stop) => {
-      if (seen.has(stop.place.id)) return;
-      seen.add(stop.place.id);
-      dwell += (stop.place.kind === "pub" ? minutesPerPub : minutesPerSight) * 60;
-    });
-    return (walkSeconds || 0) + dwell;
   }
 
   function safeUrl(value) {
@@ -975,6 +1319,7 @@
       description: String(summary.description || ""),
       extract: String(summary.extract || ""),
       image: /^https:\/\/upload\.wikimedia\.org\//.test(thumb || "") ? thumb : "",
+      qid: /^Q\d+$/.test(summary.wikibase_item || "") ? summary.wikibase_item : "",
       url: /^https:\/\/[a-z-]+\.(m\.)?wikipedia\.org\//.test(page || "") ? page : "",
     };
   }
@@ -1020,7 +1365,20 @@
     directionsUrl,
     formatDistance,
     formatDuration,
-    totalTimeSeconds,
+    commonsFilesUrl,
+    commonsCategoryUrl,
+    wikidataClaimUrl,
+    readWikidataClaim,
+    parseCommonsImages,
+    arrangePhotos,
+    commonsFileFromUrl,
+    bearing,
+    pickFacingPhotos,
+    DAILY_AREAS,
+    londonDateKey,
+    dayNumber,
+    pickDailyCrawl,
+    isQualitySight,
     safeUrl,
     sourceUrl,
     wikipediaUrl,
