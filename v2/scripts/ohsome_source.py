@@ -11,15 +11,12 @@ the notable ones. Data lags OpenStreetMap by a few days, which is fine here.
 from __future__ import annotations
 
 import json
-import time
+import subprocess
 from typing import Any
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
 
 from osm_extract import parse_fragment
 
 ENDPOINT = "https://api.ohsome.org/v1/elements/centroid"
-USER_AGENT = "pub-gen-data-refresh/1.0 (https://github.com/Spraill/Pub_gen)"
 
 
 def ohsome_value(value: str) -> str:
@@ -45,19 +42,23 @@ def build_filter(fragment: str) -> str:
 
 
 def run(bbox: list[float], ohsome_filter: str) -> dict[str, Any]:
+    """POST one query. Sent with curl: ohsome answers Python's urllib with 403 but curl with 200."""
     south, west, north, east = bbox
-    body = urlencode({"bboxes": f"{west},{south},{east},{north}", "filter": ohsome_filter, "properties": "tags"}).encode()
-    last_error: Exception | None = None
-    for attempt in range(2):
-        try:
-            request = Request(ENDPOINT, data=body, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
-            with urlopen(request, timeout=120) as response:
-                return json.load(response)
-        except Exception as exc:  # noqa: BLE001 - every network error gets a retry
-            last_error = exc
-            print(json.dumps({"ohsome_retry": attempt + 1, "error": str(exc)[:160]}), flush=True)
-            time.sleep(10)
-    raise RuntimeError(f"ohsome request failed: {last_error}") from last_error
+    command = [
+        "curl", "-sS", "--fail", "--max-time", "180", "--retry", "2", "--retry-delay", "10",
+        "--data-urlencode", f"bboxes={west},{south},{east},{north}",
+        "--data-urlencode", f"filter={ohsome_filter}",
+        "--data-urlencode", "properties=tags",
+        ENDPOINT,
+    ]
+    result = subprocess.run(command, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(json.dumps({"ohsome_error": result.stderr.strip()[:160]}), flush=True)
+        raise RuntimeError(f"ohsome request failed: {result.stderr.strip()[:160]}")
+    try:
+        return json.loads(result.stdout)
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f"ohsome sent something that isn't JSON: {result.stdout[:120]!r}") from exc
 
 
 def elements_from_geojson(collection: dict[str, Any]) -> list[dict[str, Any]]:
