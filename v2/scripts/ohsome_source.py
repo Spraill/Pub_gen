@@ -12,11 +12,12 @@ from __future__ import annotations
 
 import json
 import time
+from pathlib import Path
 from typing import Any
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-from osm_extract import parse_fragment
+from osm_extract import CACHE_DIR, parse_fragment
 
 ENDPOINT = "https://api.ohsome.org/v1/elements/centroid"
 USER_AGENT = "pub-gen-data-refresh/1.0 (https://github.com/Spraill/Pub_gen)"
@@ -44,19 +45,32 @@ def build_filter(fragment: str) -> str:
     return " or ".join(clauses)
 
 
+# Pubs and sights are fetched by separate processes: an outage is remembered on disk for an
+# hour so every later query goes straight to the next source instead of retrying again.
+FAILED_MARKER = CACHE_DIR / "ohsome-failed"
+
+
+def recently_failed() -> bool:
+    return FAILED_MARKER.exists() and time.time() - FAILED_MARKER.stat().st_mtime < 3600
+
+
 def run(bbox: list[float], ohsome_filter: str) -> dict[str, Any]:
+    if recently_failed():
+        raise RuntimeError("ohsome failed earlier in this run")
     south, west, north, east = bbox
     body = urlencode({"bboxes": f"{west},{south},{east},{north}", "filter": ohsome_filter, "properties": "tags"}).encode()
     last_error: Exception | None = None
-    for attempt in range(3):
+    for attempt in range(2):
         try:
             request = Request(ENDPOINT, data=body, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
-            with urlopen(request, timeout=180) as response:
+            with urlopen(request, timeout=120) as response:
                 return json.load(response)
         except Exception as exc:  # noqa: BLE001 - every network error gets a retry
             last_error = exc
             print(json.dumps({"ohsome_retry": attempt + 1, "error": str(exc)[:160]}), flush=True)
-            time.sleep(10 * (attempt + 1))
+            time.sleep(10)
+    Path(CACHE_DIR).mkdir(parents=True, exist_ok=True)
+    FAILED_MARKER.write_text(str(last_error), encoding="utf-8")
     raise RuntimeError(f"ohsome request failed: {last_error}") from last_error
 
 
