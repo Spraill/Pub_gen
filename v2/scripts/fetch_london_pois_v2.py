@@ -246,23 +246,26 @@ def fetch_overpass_payload(
     start_offset: int = 0,
 ) -> tuple[dict[str, Any], str]:
     if OSM_EXTRACT:
-        # Sources in order: downloaded OSM extracts, then "wikidata"; Overpass is the last resort.
+        # Sources tried in the order the city lists them: "ohsome" (OpenStreetMap via the ohsome API),
+        # "wikidata", or downloaded OSM extracts. Overpass is the last resort.
         sources = OSM_EXTRACT["source"] if isinstance(OSM_EXTRACT["source"], list) else [OSM_EXTRACT["source"]]
-        extracts = [item for item in sources if item != "wikidata"]
-        if extracts:
-            from osm_extract import extract_payload
-
+        bbox = OVERPASS_AREA["bbox"]
+        extracts = [item for item in sources if item not in ("wikidata", "ohsome")]
+        for source in dict.fromkeys("extract" if item in extracts else item for item in sources):
             try:
-                return extract_payload(extracts, OVERPASS_AREA["bbox"], fragment), "osm-extract"
-            except RuntimeError as exc:
-                print(json.dumps({"osm_extract_unavailable": str(exc)[:160]}), flush=True)
-        if "wikidata" in sources:
-            from wikidata_source import wikidata_payload
+                if source == "ohsome":
+                    from ohsome_source import ohsome_payload
 
-            try:
-                return wikidata_payload(OVERPASS_AREA["bbox"], fragment, CITY_NAME["name"]), "wikidata"
+                    return ohsome_payload(bbox, fragment), "ohsome"
+                if source == "wikidata":
+                    from wikidata_source import wikidata_payload
+
+                    return wikidata_payload(bbox, fragment, CITY_NAME["name"]), "wikidata"
+                from osm_extract import extract_payload
+
+                return extract_payload(extracts, bbox, fragment), "osm-extract"
             except RuntimeError as exc:
-                print(json.dumps({"wikidata_unavailable": str(exc)[:160]}), flush=True)
+                print(json.dumps({"source_unavailable": source, "error": str(exc)[:160]}), flush=True)
     # Small (bounding-box) cities don't need long server-side timeouts.
     if "bbox" in OVERPASS_AREA:
         timeout_seconds = min(timeout_seconds, 90)
