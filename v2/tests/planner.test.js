@@ -427,12 +427,15 @@ test("money theme: banks, markets and coffee houses, not the merchant navy", () 
 
 test("every curated pub rule matches a real pub", { skip: !data && "run build_v2.py first" }, () => {
   const misses = [];
-  const yorkPath = path.join(__dirname, "..", "public", "data", "places-york.json");
-  const allPubs = data.pubs.concat(fs.existsSync(yorkPath) ? P.decodeDataset(JSON.parse(fs.readFileSync(yorkPath, "utf8"))).pubs : []);
-  const yorkOnly = (pattern) => /yo\\d|starre/.test(pattern.source);
+  // Rules guarded to another city only count once that city's data is built.
+  const cityRules = { york: /yo\\d|starre/, edinburgh: /eh\\d|edinburgh/, oxford: /ox\\d|oxford\$/, manchester: /\\bm\\d|manchester/ };
+  const cityPath = (id) => path.join(__dirname, "..", "public", "data", `places-${id}.json`);
+  const built = Object.keys(cityRules).filter((id) => fs.existsSync(cityPath(id)));
+  const allPubs = data.pubs.concat(...built.map((id) => P.decodeDataset(JSON.parse(fs.readFileSync(cityPath(id), "utf8"))).pubs));
   P.THEMES.forEach((theme) => {
     (theme.pubs || []).forEach(([pattern, reason]) => {
-      if (yorkOnly(pattern) && !fs.existsSync(yorkPath)) return;
+      const city = Object.keys(cityRules).find((id) => cityRules[id].test(pattern.source));
+      if (city && !built.includes(city)) return;
       const hit = allPubs.some((place) => P.themeReason(place, theme) === reason);
       if (!hit) misses.push(`${theme.id}: ${reason}`);
     });

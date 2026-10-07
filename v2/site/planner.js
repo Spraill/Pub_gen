@@ -852,6 +852,7 @@
       keywords: /\b(victorian|gin palace|queen victoria|prince albert|great exhibition)\b/,
       pubs: [
         [/\bprincess louise\b/, "Famous Victorian gin palace (1872)"],
+        [/\bmarble arch\b.*\|.*(\bm\d|\bmanchester$)/, "Victorian pub (1888) with a sloping mosaic floor and tiled ceiling"],
         [/\b(queen victoria|princess victoria)\b/, "Named after Queen Victoria"],
         [/\bprince albert\b/, "Named after Prince Albert"],
         [/\bprince alfred\b/, "Victorian pub with original snob screens"],
@@ -893,6 +894,7 @@
       keywords: /\b(tudor|henry viii|anne boleyn|wolsey|thomas more|thomas cromwell)\b/,
       pubs: [
         [/\bthe boleyn\b/, "Named after Anne Boleyn"],
+        [/\bold wellington\b.*\|.*(\bm\d|\bmanchester$)/, "Timber-framed Tudor inn, moved 300 m in 1999 when the city centre was rebuilt"],
         [/\bguy fawkes\b.*\|.*(\byo\d|\byork$)/, "Birthplace of Guy Fawkes, born 1570"],
         [/\bking henry\b/, "Named after a Tudor king"],
         [/\bye olde mitre\b/, "Founded 1546 for the Bishop of Ely's servants"],
@@ -987,6 +989,10 @@
         [/\b(spaniards inn)\b/, "Keats, Dickens and Byron's Hampstead inn"],
         [/\bjack straw'?s castle\b|\bthe flask\b.*\|.*hampstead/, "Hampstead literary haunt"],
         [/\bdickens (inn|tavern)\b|\bkeats\b/, "Named after a great writer"],
+        [/\beagle (and|&) child\b.*\|.*(\box\d|\boxford$)/, "The Inklings, Tolkien and C. S. Lewis, met here"],
+        [/\bmilne'?s bar\b.*\|.*(\beh\d|\bedinburgh$)/, "The 'poets' pub' of Hugh MacDiarmid and Norman MacCaig"],
+        [/\bthe oxford bar\b.*\|.*(\beh\d|\bedinburgh$)/, "Inspector Rebus's local in Ian Rankin's novels"],
+        [/\bconan doyle\b.*\|.*(\beh\d|\bedinburgh$)/, "Named after Arthur Conan Doyle, born nearby"],
       ],
     },
     {
@@ -1095,6 +1101,8 @@
         [/\bthe gun\b.*\|.*cold harbour/, "Riverside pub with a smugglers' spy-hole"],
         [/\bthe anchor\b.*\|.*bank end/, "Bankside tavern beside the old Clink prison"],
         [/\bsherlock holmes\b/, "Full of Sherlock Holmes memorabilia"],
+        [/\bdeacon brodie'?s\b.*\|.*(\beh\d|\bedinburgh$)/, "Named after the councillor by day, burglar by night, hanged in 1788"],
+        [/\bthe last drop\b.*\|.*(\beh\d|\bedinburgh$)/, "Named for the public hangings in the Grassmarket"],
       ],
     },
     {
@@ -1105,6 +1113,8 @@
         [/\b(westminster arms|st\.? stephen'?s tavern)\b/, "Has a division bell for MPs"],
         [/\bred lion\b.*\|.*(whitehall|parliament street)/, "Whitehall pub of MPs and civil servants"],
         [/\bmuseum tavern\b/, "Karl Marx drank here"],
+        [/\bbriton'?s protection\b.*\|.*(\bm\d|\bmanchester$)/, "Its murals tell the story of the 1819 Peterloo Massacre nearby"],
+        [/\bturf tavern\b.*\|.*(\box\d|\boxford$)/, "Future Australian PM Bob Hawke downed a yard of ale here in 11 seconds"],
       ],
     },
     {
