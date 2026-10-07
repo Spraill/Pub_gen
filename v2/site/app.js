@@ -383,6 +383,7 @@
       // private mode: the city just isn't remembered
     }
     P.setReferenceLatitude(city.center[0]);
+    P.setCity(city.id);
     // Jump straight to the city with no animation. map.setMinZoom() would start an animated
     // zoom that swallows the move (York opened on London) or, on phones where the city fits
     // below its minZoom, leaves the marker clusters empty when it ends. fitBounds clamps to

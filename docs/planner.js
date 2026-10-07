@@ -17,6 +17,13 @@
   function setReferenceLatitude(lat) {
     METERS_PER_DEG_LON = 111320 * Math.cos((lat * Math.PI) / 180);
   }
+
+  // Curated pub stories are about London pubs unless a rule names its street or city
+  // (it contains "|"), or the story is only about the name ("Seafaring name").
+  let CURRENT_CITY = "london";
+  function setCity(id) {
+    CURRENT_CITY = String(id || "london");
+  }
   const METERS_PER_DEG_LAT = 110540;
   // Straight-line distances underestimate real walking routes.
   const STRAIGHT_LINE_DETOUR = 1.25;
@@ -1237,6 +1244,10 @@
     return categoryHit ? CATEGORY_SINGULAR[categoryHit] || categoryLabel(categoryHit) : "";
   }
 
+  // Stories that hold for any pub with the name, wherever it is.
+  const NAME_ONLY_STORY =
+    /^(Named after (Queen Victoria|Prince Albert|a Georgian king|a hero of the Napoleonic wars|a Stuart king|diarist Samuel Pepys|Anne Boleyn|a Tudor king|Shakespeare|a great writer|Dickens|William Hogarth|Isaac Newton|a theatrical legend|royalty|Winston Churchill|the pirate hanged)|Named for the age of engineering|Jazz or blues in the name|Music in the name|Seafaring name|Name with a church link)/;
+
   /** Why a pub fits a theme ("" if it doesn't). */
   function themePubReason(pub, theme) {
     if (!pub || pub.kind !== "pub") return "";
@@ -1244,7 +1255,10 @@
     const withAddress = `${name} | ${(pub.address || "").toLowerCase()}`;
     // Only rules that name a specific street (they contain "|") look at the address.
     for (const [pattern, reason] of theme.pubs || []) {
-      if (pattern.test(pattern.source.includes("\\|") ? withAddress : name)) return reason;
+      const guarded = pattern.source.includes("\\|");
+      // Manchester's Seven Stars didn't survive London's Great Fire.
+      if (!guarded && CURRENT_CITY !== "london" && !NAME_ONLY_STORY.test(reason)) continue;
+      if (pattern.test(guarded ? withAddress : name)) return reason;
     }
     for (const [flag, reason] of theme.pubFlags || []) if (hasFlag(pub, flag)) return reason;
     if (theme.years && pub.built && pub.built >= theme.years[0] && pub.built <= theme.years[1]) return `Built ${pub.built}`;
@@ -1715,7 +1729,7 @@
 
   const DAILY_CATEGORIES = new Set(["historical", "architecture", "religious", "museum", "cultural", "art", "garden", "scenic", "memorial"]);
   const DAILY_EXCLUDE =
-    /\b(embassy|high commission|club|offices?|headquarters|hotel|school|college|university|hospital|station|studios?|centre|center|library|shop|market hall|bank|tower block|house of fraser|apartments?|flats|estate|sainsbury'?s?|tesco|waitrose|lidl|aldi|primark|pret|dungeon|madame tussauds)\b/i;
+    /\b(embassy|high commission|club|offices?|headquarters|hotel|school|college|university|hospital|station|studios?|centre|center|library|shop|market hall|bank|tower block|house of fraser|apartments?|flats|estate|sainsbury'?s?|tesco|waitrose|lidl|aldi|primark|pret|dungeon|madame tussauds|telephone (box|kiosk)|k6)\b/i;
   // Weighting cap: famous places still feature, but the crawl isn't always Buckingham Palace.
   const FAME_CAP = 45;
 
@@ -1900,6 +1914,7 @@
     CATEGORY_LABELS,
     decodeDataset,
     setReferenceLatitude,
+    setCity,
     distance,
     pathLength,
     straightLineEstimate,

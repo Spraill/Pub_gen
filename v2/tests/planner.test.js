@@ -425,6 +425,21 @@ test("money theme: banks, markets and coffee houses, not the merchant navy", () 
   assert.equal(P.themeReason(exchange, money), "");
 });
 
+test("London pub stories stay in London; name stories travel", () => {
+  const sevenStars = pub("pn40", 53.48, -2.24);
+  sevenStars.title = "Seven Stars";
+  const crown = pub("pn41", 53.48, -2.24);
+  crown.title = "The Crown";
+  try {
+    P.setCity("manchester");
+    assert.ok(!P.placeStories(sevenStars).some((story) => /Great Fire/.test(story.reason)));
+    assert.ok(P.placeStories(crown).some((story) => story.reason === "Named after royalty"));
+  } finally {
+    P.setCity("london");
+  }
+  assert.ok(P.placeStories(sevenStars).some((story) => /Great Fire/.test(story.reason)));
+});
+
 test("every curated pub rule matches a real pub", { skip: !data && "run build_v2.py first" }, () => {
   const misses = [];
   const cityMisses = [];

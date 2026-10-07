@@ -1,5 +1,5 @@
 /* Offline support: cache the app shell and data; the page itself is network-first. */
-const VERSION = "0ef910b4e05b";
+const VERSION = "011e91780937";
 const CACHE = `pubgen-${VERSION}`;
 const SHELL = [
   "./",

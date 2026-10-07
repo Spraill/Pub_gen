@@ -72,12 +72,17 @@ NOT_A_PUB = re.compile(r"\b(former|formerly|old|site of)\b", re.I)
 LISTING_JUNK = re.compile(
     r"approximately|\bmetres\b|adjacent to|to (the )?rear|\battached\b|boundary wall|railings|gate ?piers"
     r"|\blamp|telephone kiosk|bollard|mounting block|\bwalls? to\b|steps to|forecourt|outbuilding|gazebo"
-    r"|\bstable\b|ice house|pinfold|\bnos?\.? \d",
+    r"|\bstable\b|ice house|pinfold|\bnos?\.? \d|\byards (to|from)\b|in front of|\boutside\b|telephone box"
+    r"|\bincluding\b|stained glass",
     re.I,
 )
 STARTS_WITH_NUMBER = re.compile(r"^(numbers? )?\d", re.I)
 # Listing-style suffixes on pub names.
 PUB_SUFFIX = re.compile(r",? (public house|and attached buildings.*|\(number \d+\))$", re.I)
+# Scottish listings: "Bennets Bar, 8, 10, 12 Leven Street" -> "Bennets Bar".
+ADDRESS_TAIL = re.compile(r",\s*(\d|[^,]*\b(street|road|row|place|terrace|square|lane|close|walk|shore|wynd|court)\b).*$", re.I)
+# A listing with no pub name at all ("Public House, 14 Market Street", "Warehouse and Public House, 45 Shore").
+UNNAMED_PUB = re.compile(r"^((warehouse|tenement|restaurant|shop)s? and )?public house( and (tenement|restaurant|warehouse)s?)?$", re.I)
 # Historic England grades (P1435 values) worth a fame boost.
 GRADES = {"Q15700818": "grade i", "Q15700831": "grade ii*", "Q15700834": "grade ii"}
 
@@ -181,9 +186,14 @@ def elements_from_results(results: dict[str, Any]) -> list[dict[str, Any]]:
             tags["name"] = label
         is_pub = tags.get("amenity") == "pub"
         if is_pub:
+            label = ADDRESS_TAIL.sub("", label).strip()
             previous = None
             while previous != label:  # "X Public House (Number 19)" -> "X"
                 previous, label = label, PUB_SUFFIX.sub("", label).strip()
+            if UNNAMED_PUB.match(label) or not label:
+                if not article:
+                    continue
+                label = re.sub(r" \([^)]*\)$", "", article)
             tags["name"] = label
         # Listing records for fixtures ("Gazebo 50 Metres North Of ...") or bare addresses ("19, Market Street")
         # are not pubs, and only make sights when Wikipedia has an article on them.
