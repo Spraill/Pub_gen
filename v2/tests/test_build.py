@@ -12,6 +12,7 @@ import build_v2 as build  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import osm_extract  # noqa: E402
+import ohsome_source  # noqa: E402
 import wikidata_source  # noqa: E402
 
 
@@ -203,6 +204,29 @@ class WikidataSourceTests(unittest.TestCase):
         self.assertEqual((tags[8]["amenity"], tags[8]["name"]), ("pub", "The Snickleway Inn"))
         self.assertEqual(build.poi_id("osm:wikidata:6"), "d6")
         self.assertEqual(build.pub_id({"osm_type": "wikidata", "osm_id": 1}), "pd1")
+
+
+class OhsomeSourceTests(unittest.TestCase):
+    def test_fragments_become_ohsome_filters(self) -> None:
+        self.assertEqual(ohsome_source.build_filter('nwr["amenity"="pub"](area.londonArea);'), "(amenity=pub)")
+        self.assertEqual(
+            ohsome_source.build_filter('nwr["tourism"~"attraction|viewpoint"]["name"](area.londonArea);nwr["heritage"](area.londonArea);'),
+            "(tourism in (attraction, viewpoint) and name=*) or (heritage=*)",
+        )
+
+    def test_centroids_become_overpass_elements(self) -> None:
+        collection = {
+            "features": [
+                {"geometry": {"type": "Point", "coordinates": [-1.08, 53.96]}, "properties": {"@osmId": "node/1", "amenity": "pub", "name": "A"}},
+                {"geometry": {"type": "Point", "coordinates": [-1.09, 53.97]}, "properties": {"@osmId": "way/2", "amenity": "pub", "name": "B"}},
+                {"geometry": {"type": "Point", "coordinates": [0, 0]}, "properties": {"@osmId": "nonsense"}},
+            ]
+        }
+        elements = ohsome_source.elements_from_geojson(collection)
+        self.assertEqual([(el["type"], el["id"]) for el in elements], [("node", 1), ("way", 2)])
+        self.assertEqual(elements[0]["lat"], 53.96)
+        self.assertEqual(elements[1]["center"], {"lat": 53.97, "lon": -1.09})
+        self.assertEqual(elements[1]["tags"], {"amenity": "pub", "name": "B"})
 
 
 if __name__ == "__main__":

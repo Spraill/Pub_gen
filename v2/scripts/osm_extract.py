@@ -20,7 +20,6 @@ import time
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
 
 GEOFABRIK_INDEX = "https://download.geofabrik.de/index-v1.json"
 CACHE_DIR = Path(__file__).resolve().parents[1] / ".cache"
@@ -57,14 +56,23 @@ def matches(tags: dict[str, str], filters: list[tuple[str, str, str]]) -> bool:
     return True
 
 
+def curl(url: str, target: Path, timeout: int = 1800) -> None:
+    """Download with curl: Geofabrik's redirect answered Python's urllib with a 404, curl with the file."""
+    result = subprocess.run(
+        ["curl", "-sS", "-L", "--fail", "--retry", "2", "--max-time", str(timeout), "-o", str(target), url],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise OSError(f"curl {url}: {result.stderr.strip()[:200]}")
+
+
 def download(url: str) -> Path:
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     target = CACHE_DIR / url.rstrip("/").rsplit("/", 1)[-1]
     if not target.exists():
         tmp = target.with_suffix(target.suffix + ".part")
-        request = Request(url, headers={"User-Agent": "pub-gen-data-refresh/1.0"})
-        with urlopen(request, timeout=600) as response, tmp.open("wb") as handle:
-            shutil.copyfileobj(response, handle)
+        curl(url, tmp)
         tmp.rename(target)
     return target
 
@@ -108,9 +116,11 @@ def candidate_sources(source: str, bbox: list[float]) -> list[str]:
     """"geofabrik" means: the Geofabrik extracts covering the city, smallest first."""
     if source != "geofabrik":
         return [source]
-    request = Request(GEOFABRIK_INDEX, headers={"User-Agent": "pub-gen-data-refresh/1.0"})
-    with urlopen(request, timeout=120) as response:
-        index = json.load(response)
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    index_path = CACHE_DIR / "geofabrik-index-v1.json"
+    if not index_path.exists():
+        curl(GEOFABRIK_INDEX, index_path, timeout=300)
+    index = json.loads(index_path.read_text(encoding="utf-8"))
     # Up to country level (county, region, country); a continent is too big to download.
     return covering_geofabrik_regions(index, bbox)[:3]
 
@@ -141,7 +151,7 @@ def obtain(source: str | list[str], bbox: list[float]) -> Path:
             continue
         for url in urls:
             try:
-                path = download(url)
+                path = Path(url) if Path(url).exists() else download(url)
             except (HTTPError, URLError, TimeoutError, OSError) as exc:
                 last_error = exc
                 final = getattr(exc, "url", "") or ""

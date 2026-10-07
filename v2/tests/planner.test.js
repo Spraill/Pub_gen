@@ -425,18 +425,40 @@ test("money theme: banks, markets and coffee houses, not the merchant navy", () 
   assert.equal(P.themeReason(exchange, money), "");
 });
 
+test("London pub stories stay in London; name stories travel", () => {
+  const sevenStars = pub("pn40", 53.48, -2.24);
+  sevenStars.title = "Seven Stars";
+  const crown = pub("pn41", 53.48, -2.24);
+  crown.title = "The Crown";
+  try {
+    P.setCity("manchester");
+    assert.ok(!P.placeStories(sevenStars).some((story) => /Great Fire/.test(story.reason)));
+    assert.ok(P.placeStories(crown).some((story) => story.reason === "Named after royalty"));
+  } finally {
+    P.setCity("london");
+  }
+  assert.ok(P.placeStories(sevenStars).some((story) => /Great Fire/.test(story.reason)));
+});
+
 test("every curated pub rule matches a real pub", { skip: !data && "run build_v2.py first" }, () => {
   const misses = [];
-  const yorkPath = path.join(__dirname, "..", "public", "data", "places-york.json");
-  const allPubs = data.pubs.concat(fs.existsSync(yorkPath) ? P.decodeDataset(JSON.parse(fs.readFileSync(yorkPath, "utf8"))).pubs : []);
-  const yorkOnly = (pattern) => /yo\\d|starre/.test(pattern.source);
+  const cityMisses = [];
+  // Rules guarded to another city only count once that city's data is built.
+  const cityRules = { york: /yo\\d|starre/, edinburgh: /eh\\d|edinburgh/, oxford: /ox\\d|oxford\$/, manchester: /\\bm\\d|manchester/ };
+  const cityPath = (id) => path.join(__dirname, "..", "public", "data", `places-${id}.json`);
+  const built = Object.keys(cityRules).filter((id) => fs.existsSync(cityPath(id)));
+  const allPubs = data.pubs.concat(...built.map((id) => P.decodeDataset(JSON.parse(fs.readFileSync(cityPath(id), "utf8"))).pubs));
   P.THEMES.forEach((theme) => {
     (theme.pubs || []).forEach(([pattern, reason]) => {
-      if (yorkOnly(pattern) && !fs.existsSync(yorkPath)) return;
+      const city = Object.keys(cityRules).find((id) => cityRules[id].test(pattern.source));
+      if (city && !built.includes(city)) return;
       const hit = allPubs.some((place) => P.themeReason(place, theme) === reason);
-      if (!hit) misses.push(`${theme.id}: ${reason}`);
+      // Wikidata-sourced cities only list some pubs: report their misses, don't fail the data refresh.
+      if (!hit && city) cityMisses.push(`${city}/${theme.id}: ${reason}`);
+      else if (!hit) misses.push(`${theme.id}: ${reason}`);
     });
   });
+  if (cityMisses.length) console.log(`city pub rules with no matching pub yet:\n${cityMisses.join("\n")}`);
   assert.ok(misses.length <= 12, `unused pub rules:\n${misses.join("\n")}`);
 });
 

@@ -33,7 +33,7 @@
     "name": "York",
     "overpassArea": { "bbox": [53.925, -1.16, 53.995, -1.02] },
     "openPlaques": false,
-    "osmExtract": ["wikidata"],
+    "osmExtract": ["geofabrik", "overpass", "wikidata"],
     "center": [53.959, -1.0815],
     "bounds": [[53.925, -1.16], [53.995, -1.02]],
     "minZoom": 12,
@@ -42,11 +42,88 @@
       { "name": "the Shambles & Stonegate", "lat": 53.9594, "lon": -1.0805, "radius": 400 },
       { "name": "Micklegate", "lat": 53.9566, "lon": -1.0889, "radius": 500 },
       { "name": "Walmgate & Fossgate", "lat": 53.9575, "lon": -1.0745, "radius": 500 },
-      { "name": "Museum Gardens & Bootham", "lat": 53.9617, "lon": -1.0880, "radius": 500 },
+      { "name": "Museum Gardens & Bootham", "lat": 53.9617, "lon": -1.088, "radius": 500 },
       { "name": "Clifford's Tower & the Castle", "lat": 53.9556, "lon": -1.0798, "radius": 450 },
       { "name": "the riverside", "lat": 53.9578, "lon": -1.0855, "radius": 600 },
-      { "name": "Gillygate & the city walls", "lat": 53.9640, "lon": -1.0850, "radius": 500 },
-      { "name": "Bishophill & Bishopthorpe Road", "lat": 53.9510, "lon": -1.0850, "radius": 700 }
+      { "name": "Gillygate & the city walls", "lat": 53.964, "lon": -1.085, "radius": 500 },
+      { "name": "Bishophill & Bishopthorpe Road", "lat": 53.951, "lon": -1.085, "radius": 700 }
+    ]
+  },
+  "edinburgh": {
+    "name": "Edinburgh",
+    "overpassArea": { "bbox": [55.925, -3.25, 55.985, -3.15] },
+    "openPlaques": false,
+    "osmExtract": ["geofabrik", "overpass", "wikidata"],
+    "center": [55.9533, -3.1883],
+    "bounds": [[55.925, -3.25], [55.985, -3.15]],
+    "minZoom": 11,
+    "dailyAreas": [
+      { "name": "the Royal Mile", "lat": 55.95, "lon": -3.188, "radius": 500 },
+      { "name": "the Grassmarket & Cowgate", "lat": 55.9475, "lon": -3.196, "radius": 400 },
+      { "name": "the New Town", "lat": 55.9545, "lon": -3.2, "radius": 600 },
+      { "name": "Calton Hill & Broughton", "lat": 55.956, "lon": -3.182, "radius": 500 },
+      { "name": "Stockbridge & Dean Village", "lat": 55.958, "lon": -3.213, "radius": 600 },
+      { "name": "Leith & the Shore", "lat": 55.976, "lon": -3.17, "radius": 700 },
+      { "name": "Holyrood & the Canongate", "lat": 55.951, "lon": -3.176, "radius": 500 },
+      { "name": "Bruntsfield & the Meadows", "lat": 55.94, "lon": -3.195, "radius": 700 },
+      { "name": "Southside & Newington", "lat": 55.942, "lon": -3.181, "radius": 600 }
+    ]
+  },
+  "oxford": {
+    "name": "Oxford",
+    "overpassArea": { "bbox": [51.735, -1.29, 51.775, -1.22] },
+    "openPlaques": false,
+    "osmExtract": ["geofabrik", "overpass", "wikidata"],
+    "center": [51.752, -1.2577],
+    "bounds": [[51.735, -1.29], [51.775, -1.22]],
+    "minZoom": 12,
+    "dailyAreas": [
+      { "name": "Radcliffe Square & the High", "lat": 51.7534, "lon": -1.254, "radius": 400 },
+      { "name": "Broad Street & the Bodleian", "lat": 51.7545, "lon": -1.256, "radius": 350 },
+      { "name": "Jericho", "lat": 51.759, "lon": -1.265, "radius": 500 },
+      { "name": "St Giles & the Ashmolean", "lat": 51.7565, "lon": -1.26, "radius": 400 },
+      { "name": "Christ Church & St Aldates", "lat": 51.75, "lon": -1.256, "radius": 400 },
+      { "name": "Cowley Road & St Clement's", "lat": 51.749, "lon": -1.238, "radius": 600 },
+      { "name": "the Castle & Westgate", "lat": 51.7515, "lon": -1.263, "radius": 400 },
+      { "name": "Holywell & the river", "lat": 51.755, "lon": -1.248, "radius": 500 }
+    ]
+  },
+  "bath": {
+    "name": "Bath",
+    "overpassArea": { "bbox": [51.365, -2.4, 51.4, -2.33] },
+    "openPlaques": false,
+    "osmExtract": ["geofabrik", "overpass", "wikidata"],
+    "center": [51.3811, -2.359],
+    "bounds": [[51.365, -2.4], [51.4, -2.33]],
+    "minZoom": 12,
+    "dailyAreas": [
+      { "name": "the Abbey & Roman Baths", "lat": 51.3812, "lon": -2.3593, "radius": 350 },
+      { "name": "the Royal Crescent & Circus", "lat": 51.386, "lon": -2.366, "radius": 450 },
+      { "name": "Pulteney Bridge & Great Pulteney Street", "lat": 51.383, "lon": -2.355, "radius": 450 },
+      { "name": "Walcot & the Paragon", "lat": 51.388, "lon": -2.359, "radius": 450 },
+      { "name": "Kingsmead & Green Park", "lat": 51.38, "lon": -2.365, "radius": 400 },
+      { "name": "Widcombe", "lat": 51.3765, "lon": -2.353, "radius": 500 },
+      { "name": "Lansdown", "lat": 51.392, "lon": -2.364, "radius": 500 }
+    ]
+  },
+  "manchester": {
+    "name": "Manchester",
+    "overpassArea": { "bbox": [53.455, -2.28, 53.505, -2.2] },
+    "openPlaques": false,
+    "osmExtract": ["geofabrik", "overpass", "wikidata"],
+    "center": [53.4808, -2.2426],
+    "bounds": [[53.455, -2.28], [53.505, -2.2]],
+    "minZoom": 12,
+    "dailyAreas": [
+      { "name": "the Northern Quarter", "lat": 53.484, "lon": -2.236, "radius": 450 },
+      { "name": "Ancoats", "lat": 53.485, "lon": -2.227, "radius": 500 },
+      { "name": "Castlefield", "lat": 53.475, "lon": -2.255, "radius": 450 },
+      { "name": "Deansgate & Spinningfields", "lat": 53.48, "lon": -2.25, "radius": 450 },
+      { "name": "Albert Square & the Town Hall", "lat": 53.4794, "lon": -2.2445, "radius": 400 },
+      { "name": "Chinatown & Piccadilly", "lat": 53.479, "lon": -2.238, "radius": 450 },
+      { "name": "Canal Street & the Village", "lat": 53.477, "lon": -2.235, "radius": 400 },
+      { "name": "the Cathedral & Exchange Square", "lat": 53.485, "lon": -2.244, "radius": 400 },
+      { "name": "Chapel Street, Salford", "lat": 53.485, "lon": -2.256, "radius": 600 }
     ]
   }
 }

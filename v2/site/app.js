@@ -383,6 +383,7 @@
       // private mode: the city just isn't remembered
     }
     P.setReferenceLatitude(city.center[0]);
+    P.setCity(city.id);
     // Jump straight to the city with no animation. map.setMinZoom() would start an animated
     // zoom that swallows the move (York opened on London) or, on phones where the city fits
     // below its minZoom, leaves the marker clusters empty when it ends. fitBounds clamps to
@@ -1916,7 +1917,7 @@
         };
       });
     }
-    $("theme-grid").innerHTML = P.THEMES.filter((theme) => themeCounts[theme.id].sights >= 3).map((theme) => {
+    $("theme-grid").innerHTML = P.THEMES.filter((theme) => themeCounts[theme.id].sights >= 4).map((theme) => {
       const counts = themeCounts[theme.id];
       return `
         <button type="button" class="theme-card" role="radio" aria-checked="${theme.id === state.theme}" data-theme="${escapeHtml(theme.id)}">

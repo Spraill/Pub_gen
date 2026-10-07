@@ -334,7 +334,7 @@ async function run() {
         }).length
       );
       assert.ok(pinsOnScreen > 5, `York pins on screen: ${pinsOnScreen}`);
-      assert.match(await page.textContent("#data-note"), /Wikidata/);
+      assert.match(await page.textContent("#data-note"), /OpenStreetMap|Wikidata/);
       await shot(page, "desktop-york");
       await page.click('[data-mode="random"]');
       await page.click("#generate-button");
