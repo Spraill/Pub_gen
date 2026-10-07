@@ -37,6 +37,16 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
           pip install osmium
+      - name: Which data sources can this runner reach?
+        continue-on-error: true
+        run: |
+          q='[out:json][timeout:25];node["amenity"="pub"](53.955,-1.09,53.965,-1.07);out 1;'
+          for u in https://overpass-api.de/api/interpreter https://overpass.private.coffee/api/interpreter https://overpass.kumi.systems/api/interpreter https://maps.mail.ru/osm/tools/overpass/api/interpreter; do
+            echo "overpass $u -> $(curl -s -m 40 -o /dev/null -w '%{http_code} %{time_total}s' --data-urlencode "data=$q" "$u")"
+          done
+          echo "ohsome GET metadata -> $(curl -s -m 30 -o /dev/null -w '%{http_code}' https://api.ohsome.org/v1/metadata)"
+          echo "ohsome POST -> $(curl -s -m 60 -o /dev/null -w '%{http_code}' -d 'bboxes=-1.09,53.955,-1.07,53.965' -d 'filter=amenity=pub' https://api.ohsome.org/v1/elements/count)"
+          echo "geofabrik -> $(curl -s -m 30 -o /dev/null -L -I -w '%{http_code} %{url_effective}' https://download.geofabrik.de/europe/united-kingdom/england-latest.osm.pbf)"
       - name: Fetch fresh data and rebuild the site
         run: python3 v2/build_v2.py --refresh-all --cities "${{ github.event.inputs.cities || 'all' }}" --publish-docs
       - name: Unit tests against the new data

@@ -246,13 +246,19 @@ def fetch_overpass_payload(
     start_offset: int = 0,
 ) -> tuple[dict[str, Any], str]:
     if OSM_EXTRACT:
-        # Sources tried in the order the city lists them: "ohsome" (OpenStreetMap via the ohsome API),
-        # "wikidata", or downloaded OSM extracts. Overpass is the last resort.
+        # Sources tried in the order the city lists them: "overpass" (one quick round), "ohsome"
+        # (OpenStreetMap via the ohsome API), "wikidata", or downloaded OSM extracts. A source that
+        # fails is remembered for an hour (pubs and sights are fetched by separate processes).
         sources = OSM_EXTRACT["source"] if isinstance(OSM_EXTRACT["source"], list) else [OSM_EXTRACT["source"]]
         bbox = OVERPASS_AREA["bbox"]
-        extracts = [item for item in sources if item not in ("wikidata", "ohsome")]
+        extracts = [item for item in sources if item not in ("wikidata", "ohsome", "overpass")]
         for source in dict.fromkeys("extract" if item in extracts else item for item in sources):
+            marker = source_failed_marker(source)
+            if source != "wikidata" and marker.exists() and time.time() - marker.stat().st_mtime < 3600:
+                continue
             try:
+                if source == "overpass":
+                    return query_overpass(fragment, min(timeout_seconds, 60), 1, start_offset)
                 if source == "ohsome":
                     from ohsome_source import ohsome_payload
 
@@ -266,6 +272,21 @@ def fetch_overpass_payload(
                 return extract_payload(extracts, bbox, fragment), "osm-extract"
             except RuntimeError as exc:
                 print(json.dumps({"source_unavailable": source, "error": str(exc)[:160]}), flush=True)
+                marker.parent.mkdir(parents=True, exist_ok=True)
+                marker.write_text(str(exc)[:500], encoding="utf-8")
+    return query_overpass(fragment, timeout_seconds, retry_rounds, start_offset)
+
+
+def source_failed_marker(source: str) -> Path:
+    return Path(__file__).resolve().parents[1] / ".cache" / f"source-failed-{source}"
+
+
+def query_overpass(
+    fragment: str,
+    timeout_seconds: int,
+    retry_rounds: int,
+    start_offset: int = 0,
+) -> tuple[dict[str, Any], str]:
     # Small (bounding-box) cities don't need long server-side timeouts.
     if "bbox" in OVERPASS_AREA:
         timeout_seconds = min(timeout_seconds, 90)
