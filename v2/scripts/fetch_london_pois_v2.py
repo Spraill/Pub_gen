@@ -254,11 +254,13 @@ def fetch_overpass_payload(
         extracts = [item for item in sources if item not in ("wikidata", "ohsome", "overpass")]
         for source in dict.fromkeys("extract" if item in extracts else item for item in sources):
             marker = source_failed_marker(source)
-            if source != "wikidata" and marker.exists() and time.time() - marker.stat().st_mtime < 3600:
+            if source != "wikidata" and source_recently_failed(marker):
                 continue
             try:
                 if source == "overpass":
-                    return query_overpass(fragment, min(timeout_seconds, 60), 1, start_offset)
+                    payload = query_overpass(fragment, min(timeout_seconds, 60), 1, start_offset)
+                    marker.unlink(missing_ok=True)
+                    return payload
                 if source == "ohsome":
                     from ohsome_source import ohsome_payload
 
@@ -273,12 +275,27 @@ def fetch_overpass_payload(
             except RuntimeError as exc:
                 print(json.dumps({"source_unavailable": source, "error": str(exc)[:160]}), flush=True)
                 marker.parent.mkdir(parents=True, exist_ok=True)
-                marker.write_text(str(exc)[:500], encoding="utf-8")
+                # Overpass mirrors come and go: give up on them only after three failures in a row.
+                failures = source_failures(marker) + 1 if source == "overpass" else 99
+                marker.write_text(json.dumps({"failures": failures, "error": str(exc)[:300]}), encoding="utf-8")
     return query_overpass(fragment, timeout_seconds, retry_rounds, start_offset)
 
 
 def source_failed_marker(source: str) -> Path:
     return Path(__file__).resolve().parents[1] / ".cache" / f"source-failed-{source}"
+
+
+def source_failures(marker: Path) -> int:
+    if not marker.exists() or time.time() - marker.stat().st_mtime > 3600:
+        return 0
+    try:
+        return int(json.loads(marker.read_text(encoding="utf-8")).get("failures", 0))
+    except (ValueError, AttributeError):
+        return 99
+
+
+def source_recently_failed(marker: Path) -> bool:
+    return source_failures(marker) >= 3
 
 
 def query_overpass(
