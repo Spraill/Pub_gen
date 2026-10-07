@@ -1729,7 +1729,7 @@
 
   const DAILY_CATEGORIES = new Set(["historical", "architecture", "religious", "museum", "cultural", "art", "garden", "scenic", "memorial"]);
   const DAILY_EXCLUDE =
-    /\b(embassy|high commission|club|offices?|headquarters|hotel|school|college|university|hospital|station|studios?|centre|center|library|shop|market hall|bank|tower block|house of fraser|apartments?|flats|estate|sainsbury'?s?|tesco|waitrose|lidl|aldi|primark|pret|dungeon|madame tussauds|telephone (box|kiosk)|k6)\b/i;
+    /\b(embassy|high commission|club|offices?|headquarters|hotel|school|college|university|hospital|station|studios?|centre|center|library|shop|market hall|bank|tower block|house of fraser|apartments?|flats|estate|sainsbury'?s?|tesco|waitrose|lidl|aldi|primark|pret|dungeon|madame tussauds|telephone (box|kiosk)|k6|arena|stadium)\b/i;
   // Weighting cap: famous places still feature, but the crawl isn't always Buckingham Palace.
   const FAME_CAP = 45;
 

@@ -1917,7 +1917,7 @@
         };
       });
     }
-    $("theme-grid").innerHTML = P.THEMES.filter((theme) => themeCounts[theme.id].sights >= 3).map((theme) => {
+    $("theme-grid").innerHTML = P.THEMES.filter((theme) => themeCounts[theme.id].sights >= 4).map((theme) => {
       const counts = themeCounts[theme.id];
       return `
         <button type="button" class="theme-card" role="radio" aria-checked="${theme.id === state.theme}" data-theme="${escapeHtml(theme.id)}">
