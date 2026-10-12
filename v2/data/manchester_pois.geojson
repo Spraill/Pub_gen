@@ -27,7 +27,7 @@
         "wikipedia": "en:84 Plymouth Grove",
         "wikidata": "Q4644775",
         "source_url": "https://www.openstreetmap.org/way/201520529",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "Manchester",
@@ -80,7 +80,7 @@
         "wikipedia": "en:Manchester Cathedral",
         "wikidata": "Q971811",
         "source_url": "https://www.openstreetmap.org/way/130040953",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "Manchester",
@@ -140,7 +140,7 @@
         "wikipedia": "en:Manchester Jewish Museum",
         "wikidata": "Q6747441",
         "source_url": "https://www.openstreetmap.org/node/9921205514",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "Manchester",
@@ -185,7 +185,7 @@
         "wikipedia": "en:Museum of Transport, Greater Manchester",
         "wikidata": "Q3330152",
         "source_url": "https://www.openstreetmap.org/way/143926783",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "Manchester",
@@ -230,7 +230,7 @@
         "wikipedia": "en:National Football Museum",
         "wikidata": "Q2265733",
         "source_url": "https://www.openstreetmap.org/way/96396472",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "Manchester",
@@ -289,7 +289,7 @@
         "wikipedia": "en:Pankhurst Centre",
         "wikidata": "Q7131318",
         "source_url": "https://www.openstreetmap.org/way/172944636",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "building": "yes",
@@ -333,7 +333,7 @@
         "wikipedia": "en:People's History Museum",
         "wikidata": "Q3374980",
         "source_url": "https://www.openstreetmap.org/relation/14016276",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "Manchester",
@@ -382,7 +382,7 @@
         "wikipedia": "en:Salford Museum and Art Gallery",
         "wikidata": "Q7404381",
         "source_url": "https://www.openstreetmap.org/way/67191154",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "Salford",
@@ -430,7 +430,7 @@
         "wikipedia": "en:Science and Industry Museum",
         "wikidata": "Q2638616",
         "source_url": "https://www.openstreetmap.org/node/6684605685",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "Manchester",
@@ -487,7 +487,7 @@
         "wikipedia": "en:St Ann's Church, Manchester",
         "wikidata": "Q7592459",
         "source_url": "https://www.openstreetmap.org/way/37140526",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "Manchester",
@@ -542,7 +542,7 @@
         "wikipedia": "de:Manchester Museum",
         "wikidata": "Q2087619",
         "source_url": "https://www.openstreetmap.org/node/258851218",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "check_date": "2026-01-12",
@@ -588,7 +588,7 @@
         "wikipedia": "en:Salford Town Hall",
         "wikidata": "Q26665832",
         "source_url": "https://www.openstreetmap.org/way/248791093",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "HE_ref": "1386076",
@@ -636,7 +636,7 @@
         "wikipedia": "en:Corn Exchange, Manchester",
         "wikidata": "Q3523085",
         "source_url": "https://www.openstreetmap.org/way/4947738",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "HE_ref": "1282970",
@@ -687,7 +687,7 @@
         "wikipedia": "en:The Old Wellington Inn",
         "wikidata": "Q7754934",
         "source_url": "https://www.openstreetmap.org/way/282756725",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "HE_ref": "1270698",
@@ -751,7 +751,7 @@
         "wikipedia": "en:Mamucium",
         "wikidata": "Q3285089",
         "source_url": "https://www.openstreetmap.org/way/205061197",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "archaeological_site": "fortification",
@@ -798,7 +798,7 @@
         "wikipedia": "en:John Rylands Research Institute and Library",
         "wikidata": "Q1236267",
         "source_url": "https://www.openstreetmap.org/way/29460499",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -850,7 +850,7 @@
         "wikipedia": "",
         "wikidata": "Q26561100",
         "source_url": "https://www.openstreetmap.org/node/2868946921",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist:wikidata": "Q8006455",
@@ -896,7 +896,7 @@
         "wikipedia": "",
         "wikidata": "Q26539302",
         "source_url": "https://www.openstreetmap.org/node/2651681809",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist:wikidata": "Q2065439",
@@ -945,7 +945,7 @@
         "wikipedia": "",
         "wikidata": "Q26539303",
         "source_url": "https://www.openstreetmap.org/node/10858266805",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist:wikidata": "Q2580751",
@@ -990,7 +990,7 @@
         "wikipedia": "en:Albert Square, Manchester#The Albert Memorial",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/570278857",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist:wikidata": "Q6791021;Q7795316",
@@ -1036,7 +1036,7 @@
         "wikipedia": "",
         "wikidata": "Q17361850",
         "source_url": "https://www.openstreetmap.org/node/6358514139",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "Manchester",
@@ -1084,7 +1084,7 @@
         "wikipedia": "",
         "wikidata": "Q43988806",
         "source_url": "https://www.openstreetmap.org/node/2777508135",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "Manchester",
@@ -1130,7 +1130,7 @@
         "wikipedia": "",
         "wikidata": "Q113207964",
         "source_url": "https://www.openstreetmap.org/node/12557411153",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "fixme": "location within building?",
@@ -1168,7 +1168,7 @@
         "wikipedia": "",
         "wikidata": "Q116738936",
         "source_url": "https://www.openstreetmap.org/node/12565815777",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "alt_name": "Manchester Metropolitan University Special Collections",
@@ -1206,7 +1206,7 @@
         "wikipedia": "en:Grove House, Manchester",
         "wikidata": "Q5611412",
         "source_url": "https://www.openstreetmap.org/way/135999847",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "building": "university",
@@ -1248,7 +1248,7 @@
         "wikipedia": "en:Albert Hall, Manchester",
         "wikidata": "Q4710402",
         "source_url": "https://www.openstreetmap.org/way/30343319",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "Manchester",
@@ -1294,7 +1294,7 @@
         "wikipedia": "en:Canada House, Manchester",
         "wikidata": "Q5029388",
         "source_url": "https://www.openstreetmap.org/way/114604597",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "building": "office",
@@ -1332,7 +1332,7 @@
         "wikipedia": "en:Great Northern Warehouse",
         "wikidata": "Q5599692",
         "source_url": "https://www.openstreetmap.org/way/448484293",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "building": "commercial",
@@ -1374,7 +1374,7 @@
         "wikipedia": "en:100 King Street",
         "wikidata": "Q4546141",
         "source_url": "https://www.openstreetmap.org/way/60904356",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "HE_ref": "1219241",
@@ -1421,7 +1421,7 @@
         "wikipedia": "en:Store Street Aqueduct",
         "wikidata": "Q7619961",
         "source_url": "https://www.openstreetmap.org/way/662334622",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "bridge": "aqueduct",
@@ -1460,7 +1460,7 @@
         "wikipedia": "en:Manchester Town Hall",
         "wikidata": "Q2578415",
         "source_url": "https://www.openstreetmap.org/relation/5409378",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "Manchester",
@@ -1513,7 +1513,7 @@
         "wikipedia": "en:Ordsall Hall",
         "wikidata": "Q7100933",
         "source_url": "https://www.openstreetmap.org/way/119908560",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "Salford",
@@ -1570,7 +1570,7 @@
         "wikipedia": "en:River Irwell Railway Bridge",
         "wikidata": "Q7337521",
         "source_url": "https://www.openstreetmap.org/way/526744918",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "heritage": "yes",
@@ -1609,7 +1609,7 @@
         "wikipedia": "en:Victoria Bridge, Manchester",
         "wikidata": "Q7926602",
         "source_url": "https://www.openstreetmap.org/way/570246727",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "bridge:structure": "arch",
@@ -1650,7 +1650,7 @@
         "wikipedia": "",
         "wikidata": "Q26561101",
         "source_url": "https://www.openstreetmap.org/node/2739269168",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist:wikidata": "Q6791021",
@@ -1690,7 +1690,7 @@
         "wikipedia": "en:Ellen Wilkinson High School",
         "wikidata": "Q5365060",
         "source_url": "https://www.openstreetmap.org/way/611896749",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "Manchester",
@@ -1734,7 +1734,7 @@
         "wikipedia": "en:Theatre Royal, Manchester",
         "wikidata": "Q7777435",
         "source_url": "https://www.openstreetmap.org/way/1002569390",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "Manchester",
@@ -1776,7 +1776,7 @@
         "wikipedia": "en:Smithfield Market Hall",
         "wikidata": "Q17361869",
         "source_url": "https://www.openstreetmap.org/way/198741713",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "building": "retail",
@@ -1815,7 +1815,7 @@
         "wikipedia": "en:Alan Turing Memorial",
         "wikidata": "Q3736114",
         "source_url": "https://www.openstreetmap.org/node/1295097482",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "artist_name": "Glyn Hughes",
@@ -1859,7 +1859,7 @@
         "wikipedia": "en:Factory International",
         "wikidata": "Q28451599",
         "source_url": "https://www.openstreetmap.org/way/1089886229",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -1903,7 +1903,7 @@
         "wikipedia": "en:Bridgewater Hall",
         "wikidata": "Q2925178",
         "source_url": "https://www.openstreetmap.org/way/165386099",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -1950,7 +1950,7 @@
         "wikipedia": "en:Manchester Cenotaph",
         "wikidata": "Q6747297",
         "source_url": "https://www.openstreetmap.org/node/1634316329",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "monument",
@@ -1990,7 +1990,7 @@
         "wikipedia": "en:Contact Theatre",
         "wikidata": "Q2995405",
         "source_url": "https://www.openstreetmap.org/way/136502886",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -2035,7 +2035,7 @@
         "wikipedia": "en:Edward VII",
         "wikidata": "Q20875",
         "source_url": "https://www.openstreetmap.org/node/1977807672",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -2073,7 +2073,7 @@
         "wikipedia": "en:Manchester Art Gallery",
         "wikidata": "Q2638817",
         "source_url": "https://www.openstreetmap.org/way/30957808",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -2128,7 +2128,7 @@
         "wikipedia": "en:Manchester Opera House",
         "wikidata": "Q1327556",
         "source_url": "https://www.openstreetmap.org/way/31192029",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -2175,7 +2175,7 @@
         "wikipedia": "en:Palace Theatre, Manchester",
         "wikidata": "Q3360751",
         "source_url": "https://www.openstreetmap.org/way/31178728",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -2221,7 +2221,7 @@
         "wikipedia": "en:Peterloo Memorial",
         "wikidata": "Q60751168",
         "source_url": "https://www.openstreetmap.org/way/948368918",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -2259,7 +2259,7 @@
         "wikipedia": "en:Rise up, Women (Emmeline Pankhurst statue)",
         "wikidata": "Q59773345",
         "source_url": "https://www.openstreetmap.org/node/6138345832",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "artist:wikidata": "Q59779567",
@@ -2303,7 +2303,7 @@
         "wikipedia": "en:The Glade of Light",
         "wikidata": "Q109973918",
         "source_url": "https://www.openstreetmap.org/way/1018626643",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -2341,7 +2341,7 @@
         "wikipedia": "",
         "wikidata": "Q26512899",
         "source_url": "https://www.openstreetmap.org/way/182517482",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "Manchester",
@@ -2383,7 +2383,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4438213390",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "HE_ref": "1386163",
@@ -2428,7 +2428,7 @@
         "wikipedia": "",
         "wikidata": "Q26496603",
         "source_url": "https://www.openstreetmap.org/way/178409260",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "Manchester",
@@ -2468,7 +2468,7 @@
         "wikipedia": "en:Cathedral Gardens",
         "wikidata": "Q5052227",
         "source_url": "https://www.openstreetmap.org/way/135978254",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:city": "Manchester",
@@ -2514,7 +2514,7 @@
         "wikipedia": "en:Hulme Hippodrome",
         "wikidata": "Q5936195",
         "source_url": "https://www.openstreetmap.org/way/201689009",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "theatre",
@@ -2554,7 +2554,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13972279448",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "fee": "no",
@@ -2589,7 +2589,7 @@
         "wikipedia": "en:Peel Park, Salford",
         "wikidata": "Q7160242",
         "source_url": "https://www.openstreetmap.org/way/4818853",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:city": "Salford",
@@ -2631,7 +2631,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/242966918",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "building": "yes",
@@ -2668,7 +2668,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/590377952",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "museums",
         "tags": {
           "name": "Science and Industry Museum",
@@ -2701,7 +2701,7 @@
         "wikipedia": "en:Manchester Arena",
         "wikidata": "Q1461465",
         "source_url": "https://www.openstreetmap.org/way/354135390",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "Manchester",
@@ -2751,7 +2751,7 @@
         "wikipedia": "en:Victoria Baths",
         "wikidata": "Q7926585",
         "source_url": "https://www.openstreetmap.org/way/79712589",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "Manchester",
@@ -2796,7 +2796,7 @@
         "wikipedia": "en:53two",
         "wikidata": "Q123532321",
         "source_url": "https://www.openstreetmap.org/node/11312018869",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -2845,7 +2845,7 @@
         "wikipedia": "en:Castlefield Gallery",
         "wikidata": "Q5050498",
         "source_url": "https://www.openstreetmap.org/node/4301828631",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -2888,7 +2888,7 @@
         "wikipedia": "en:Chetham's Library",
         "wikidata": "Q2901355",
         "source_url": "https://www.openstreetmap.org/node/3931275877",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -2930,7 +2930,7 @@
         "wikipedia": "en:HOME (Manchester)",
         "wikidata": "Q16994217",
         "source_url": "https://www.openstreetmap.org/way/431832634",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -2978,7 +2978,7 @@
         "wikipedia": "en:Manchester Central Library",
         "wikidata": "Q3285343",
         "source_url": "https://www.openstreetmap.org/way/570282715",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -3033,7 +3033,7 @@
         "wikipedia": "en:O2 Apollo Manchester",
         "wikidata": "Q1068548",
         "source_url": "https://www.openstreetmap.org/node/11910862238",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -3074,7 +3074,7 @@
         "wikipedia": "en:The Ritz (Manchester)",
         "wikidata": "Q7760946",
         "source_url": "https://www.openstreetmap.org/way/705574571",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "music_venue",
@@ -3114,7 +3114,7 @@
         "wikipedia": "en:The Portico Library",
         "wikidata": "Q7231808",
         "source_url": "https://www.openstreetmap.org/node/6321368786",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -3160,7 +3160,7 @@
         "wikipedia": "en:The Whitworth",
         "wikidata": "Q3567825",
         "source_url": "https://www.openstreetmap.org/way/79713962",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -3215,7 +3215,7 @@
         "wikipedia": "en:Working Class Movement Library",
         "wikidata": "Q8034902",
         "source_url": "https://www.openstreetmap.org/node/2773413885",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Salford",
@@ -3264,7 +3264,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6377831040",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist:wikidata": "Q2280558",
@@ -3307,7 +3307,7 @@
         "wikipedia": "en:St Michael's Flags and Angel Meadow Park",
         "wikidata": "Q7594802",
         "source_url": "https://www.openstreetmap.org/way/195773695",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -3343,7 +3343,7 @@
         "wikipedia": "en:Ardwick Green",
         "wikidata": "Q4788327",
         "source_url": "https://www.openstreetmap.org/way/171630350",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -3379,7 +3379,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/136038212",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "HE_ref": "1217858",
@@ -3425,7 +3425,7 @@
         "wikipedia": "en:Mayfield Park, Manchester",
         "wikidata": "Q114143980",
         "source_url": "https://www.openstreetmap.org/way/918962739",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "access": "permissive",
@@ -3473,7 +3473,7 @@
         "wikipedia": "en:Piccadilly Gardens",
         "wikidata": "Q7190558",
         "source_url": "https://www.openstreetmap.org/relation/3485876",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:city": "Manchester",
@@ -3511,7 +3511,7 @@
         "wikipedia": "en:Sackville Gardens",
         "wikidata": "Q3460953",
         "source_url": "https://www.openstreetmap.org/way/155767483",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -3548,7 +3548,7 @@
         "wikipedia": "en:Whitworth Park",
         "wikidata": "Q7996971",
         "source_url": "https://www.openstreetmap.org/way/4705157",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -3587,7 +3587,7 @@
         "wikipedia": "",
         "wikidata": "Q55183957",
         "source_url": "https://www.openstreetmap.org/way/254829387",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "access": "yes",
@@ -3645,7 +3645,7 @@
         "wikipedia": "en:Dancehouse",
         "wikidata": "Q5215363",
         "source_url": "https://www.openstreetmap.org/node/1502881831",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -3685,7 +3685,7 @@
         "wikipedia": "en:The Tree of Knowledge (mural)",
         "wikidata": "Q26672595",
         "source_url": "https://www.openstreetmap.org/node/4494380540",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Alan Boyson",
@@ -3724,7 +3724,7 @@
         "wikipedia": "en:Victory Over Blindness",
         "wikidata": "Q58482871",
         "source_url": "https://www.openstreetmap.org/node/7296569555",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "statue",
@@ -3762,7 +3762,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1295065994",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -3802,7 +3802,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2867748961",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist:wikidata": "Q4709820",
@@ -3844,7 +3844,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5816078515",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "statue",
@@ -3882,7 +3882,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/70380745",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "Manchester",
@@ -3926,7 +3926,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6283509710",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist:wikidata": "Q16031480",
@@ -3968,7 +3968,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/130421037",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "markets",
         "tags": {
           "addr:city": "Manchester",
@@ -4009,7 +4009,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/8733867822",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4044,7 +4044,7 @@
         "wikipedia": "",
         "wikidata": "Q106619407",
         "source_url": "https://www.openstreetmap.org/node/12554653674",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "level": "1",
@@ -4082,7 +4082,7 @@
         "wikipedia": "",
         "wikidata": "Q141626045",
         "source_url": "https://www.openstreetmap.org/way/1083009789",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -4117,7 +4117,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/152076256",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "amenity": "disused_station",
@@ -4153,7 +4153,7 @@
         "wikipedia": "",
         "wikidata": "Q24677620",
         "source_url": "https://www.openstreetmap.org/way/136033841",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "barrier": "wall",
@@ -4191,7 +4191,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1286141414",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "building",
@@ -4225,7 +4225,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/865331996",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "Manchester",
@@ -4263,7 +4263,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6319327258",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4299,7 +4299,7 @@
         "wikipedia": "en:Albert Square, Manchester#Lincoln Square",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2641977197",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "George Grey Barnard",
@@ -4336,7 +4336,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10703718393",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4372,7 +4372,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5633373205",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4408,7 +4408,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/353267811",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "markets",
         "tags": {
           "amenity": "marketplace",
@@ -4443,7 +4443,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/778705817",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4480,7 +4480,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7455114117",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4517,7 +4517,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/778705816",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4552,7 +4552,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13300259680",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "monument",
@@ -4586,7 +4586,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3687364163",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4623,7 +4623,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1447118039",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4658,7 +4658,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9687844489",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4694,7 +4694,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5633367296",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4730,7 +4730,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1436433514",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "monument",
@@ -4763,7 +4763,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/307768960",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "monument",
@@ -4796,7 +4796,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2868822439",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4830,7 +4830,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5628820433",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4866,7 +4866,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/589470165",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4902,7 +4902,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10860351105",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "artist:wikidata": "Q7288610",
@@ -4944,7 +4944,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3597286142",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4980,7 +4980,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5633380620",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5016,7 +5016,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2641956330",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "315",
@@ -5053,7 +5053,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6028333543",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5089,7 +5089,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14242813753",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "330",
@@ -5127,7 +5127,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9608417000",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5163,7 +5163,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2385437159",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5197,7 +5197,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13303102672",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5231,7 +5231,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11063527381",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "monument",
@@ -5265,7 +5265,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3403995150",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5301,7 +5301,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1177048964",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5335,7 +5335,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1700801440",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5369,7 +5369,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10899303422",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "105",
@@ -5409,7 +5409,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/relation/19386704",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "construction:leisure": "park",
@@ -5452,7 +5452,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1066894506",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "bridge": "yes",
@@ -5490,7 +5490,7 @@
         "wikipedia": "",
         "wikidata": "Q26672595",
         "source_url": "https://www.openstreetmap.org/way/1467980194",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Alan Boyson",
@@ -5529,7 +5529,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5347306872",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -5565,7 +5565,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4655437142",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist:wikidata": "Q24336846",
@@ -5604,7 +5604,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/209615820",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:city": "Salford",
@@ -5645,7 +5645,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/263689257",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:city": "Salford",
@@ -5685,7 +5685,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/269603753",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -5719,7 +5719,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1214134574",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -5753,7 +5753,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/171597155",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:city": "Salford",
@@ -5790,7 +5790,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/148325237",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -5825,7 +5825,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/27683085",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:street": "Kincardine Road",
@@ -5863,7 +5863,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/426679430",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:city": "Salford",
@@ -5899,7 +5899,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/relation/17580303",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -5934,7 +5934,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/254957243",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "library",
@@ -5970,7 +5970,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/135939584",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "alt_name": "Broadfield Park",
@@ -6005,7 +6005,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/136104903",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -6039,7 +6039,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/263475245",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:city": "Salford",
@@ -6075,7 +6075,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/136032361",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:city": "Salford",
@@ -6111,7 +6111,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/307168490",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -6145,7 +6145,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11391418301",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Axel Void",
@@ -6182,7 +6182,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3590482371",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "markets",
         "tags": {
           "amenity": "marketplace",
@@ -6215,7 +6215,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11093004053",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "markets",
         "tags": {
           "amenity": "marketplace",
@@ -6249,7 +6249,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2626249338",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -6289,7 +6289,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/101096169",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Salford",
@@ -6333,7 +6333,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/357207748",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -6376,7 +6376,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2779623335",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Paul Frank Lewthwaite",
@@ -6414,7 +6414,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/662519909",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "markets",
         "tags": {
           "amenity": "marketplace",
@@ -6447,7 +6447,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2212744003",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Salford",
@@ -6488,7 +6488,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/298658974",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "markets",
         "tags": {
           "amenity": "marketplace",
@@ -6521,7 +6521,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11981680615",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "markets",
         "tags": {
           "amenity": "marketplace",
@@ -6554,7 +6554,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11221272063",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -6591,7 +6591,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1551797579",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -6631,7 +6631,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7997455502",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -6670,7 +6670,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9621584470",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -6710,7 +6710,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4989906109",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -6748,7 +6748,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1223174136",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist:wikidata": "Q133600",
@@ -6766,8 +6766,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -2.2340720595238097,
-          53.4644834904762
+          -2.234433838805971,
+          53.46448272089551
         ]
       },
       "properties": {
@@ -6786,7 +6786,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1069346495",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -6820,7 +6820,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/4819651",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -6853,7 +6853,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/232841959",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -6886,7 +6886,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/70588906",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -6919,7 +6919,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1064716303",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "addr:city": "Manchester",
@@ -6956,7 +6956,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3653301069",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "gardens",
         "tags": {
           "access": "yes",
@@ -6991,7 +6991,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1046879098",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7024,7 +7024,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1216896217",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -7057,7 +7057,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/relation/8162272",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -7090,7 +7090,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/726879344",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "gardens",
         "tags": {
           "access": "private",
@@ -7124,7 +7124,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/487170355",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "access": "permissive",
@@ -7160,7 +7160,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/378055547",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7193,7 +7193,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/28005789",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7226,7 +7226,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1046362241",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7260,7 +7260,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/166987846",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7293,7 +7293,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/40734603",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7326,7 +7326,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1252314875",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7359,7 +7359,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/316036816",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7393,7 +7393,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1429709188",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "gardens",
         "tags": {
           "garden:type": "community",
@@ -7427,7 +7427,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9516572899",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -7461,7 +7461,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/256276246",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7495,7 +7495,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/242810991",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7528,7 +7528,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/726879345",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -7561,7 +7561,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/171661488",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7594,7 +7594,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/746501943",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -7628,7 +7628,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10897731720",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7661,7 +7661,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/159208913",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7694,7 +7694,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/159257498",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7727,7 +7727,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/443491542",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7760,7 +7760,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/178699993",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7793,7 +7793,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/159591116",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7826,7 +7826,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/159202154",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7860,7 +7860,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/126350739",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7893,7 +7893,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/333255628",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7926,7 +7926,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1242612627",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -7959,7 +7959,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/28082114",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "barrier": "fence",
@@ -7994,7 +7994,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/263689253",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -8028,7 +8028,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1069063535",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -8063,7 +8063,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/254957242",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -8096,7 +8096,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/137908529",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -8129,7 +8129,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/830108777",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -8162,7 +8162,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1293459224",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -8195,7 +8195,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/28004961",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -8228,7 +8228,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2311089146",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Kerry Morrison",
@@ -8266,7 +8266,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/570281429",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "theatre",
@@ -8300,7 +8300,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2717528820",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "statue",
@@ -8334,7 +8334,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/12837619487",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -8368,7 +8368,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5789492052",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "LS Lowry",
@@ -8405,7 +8405,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/480681874",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "theatre",
@@ -8439,50 +8439,12 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/12094600597",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "statue",
           "name": "Colin Bell, Francis Lee and Mike Summerbee Statue",
           "tourism": "artwork"
-        }
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -2.2438498,
-          53.4796493
-        ]
-      },
-      "properties": {
-        "id": "osm:node:9605157550",
-        "source": "osm",
-        "title": "Contemporary Six",
-        "address": "37 Princess Street, Manchester, M2 4FN",
-        "description": "",
-        "categories": [
-          "cultural",
-          "art"
-        ],
-        "primary_category": "cultural",
-        "interest_score": 30,
-        "website": "",
-        "wikipedia": "",
-        "wikidata": "",
-        "source_url": "https://www.openstreetmap.org/node/9605157550",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
-        "query_key": "galleries_and_arts",
-        "tags": {
-          "addr:city": "Manchester",
-          "addr:housenumber": "37",
-          "addr:postcode": "M2 4FN",
-          "addr:street": "Princess Street",
-          "fee": "no",
-          "name": "Contemporary Six",
-          "tourism": "gallery"
         }
       }
     },
@@ -8511,7 +8473,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13716590855",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Jacqueline Donachie",
@@ -8547,7 +8509,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7714968212",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -8585,7 +8547,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6253851591",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "soviet",
@@ -8622,7 +8584,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13300259678",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Jai Redman",
@@ -8658,7 +8620,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3050439633",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -8697,7 +8659,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14162928611",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:floor": "0",
@@ -8733,7 +8695,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5630317443",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "theatre",
@@ -8766,7 +8728,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6202260028",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -8803,7 +8765,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1564517931",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "theatre",
@@ -8836,7 +8798,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13300259679",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Matthew Noble",
@@ -8873,7 +8835,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/303802787",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -8913,7 +8875,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/258864502",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "access": "students;permit",
@@ -8923,6 +8885,43 @@
           "opening_hours": "2025 Jun 30-2025 Sep 14 off \"Closed for Refurbishment\"",
           "opening_hours:url": "https://www.library.manchester.ac.uk/locations-and-opening-hours/main-library/",
           "wheelchair": "yes"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.2501879,
+          53.4769024
+        ]
+      },
+      "properties": {
+        "id": "osm:node:4301828642",
+        "source": "osm",
+        "title": "Millesime Art",
+        "address": "257 Deansgate, Manchester, M3 4EN",
+        "description": "",
+        "categories": [
+          "cultural",
+          "art"
+        ],
+        "primary_category": "cultural",
+        "interest_score": 30,
+        "website": "",
+        "wikipedia": "",
+        "wikidata": "",
+        "source_url": "https://www.openstreetmap.org/node/4301828642",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
+        "query_key": "galleries_and_arts",
+        "tags": {
+          "addr:city": "Manchester",
+          "addr:housenumber": "257",
+          "addr:postcode": "M3 4EN",
+          "addr:street": "Deansgate",
+          "name": "Millesime Art",
+          "tourism": "gallery"
         }
       }
     },
@@ -8951,7 +8950,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6400305742",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "advertising": "sign",
@@ -8989,7 +8988,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2773552950",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "statue",
@@ -9024,7 +9023,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11665052701",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Mark Kennedy",
@@ -9060,7 +9059,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9687878279",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Salford",
@@ -9097,7 +9096,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/12007268178",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "alt_name": "Egghenge",
@@ -9134,7 +9133,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5652247301",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "name": "Phoenix Gallery",
@@ -9167,7 +9166,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5652247300",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "name": "RAM Realist Academy Manchester",
@@ -9200,7 +9199,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2753989497",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Marshall Wood",
@@ -9235,7 +9234,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/12001023871",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -9272,7 +9271,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11243840335",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "Manchester",
@@ -9312,7 +9311,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/relation/17514026",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Dan Dubowitz",
@@ -9347,7 +9346,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2886288855",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Ted Roocroft",
@@ -9384,11 +9383,47 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6990142202",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "statue",
           "name": "Sir John Dalton",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.233253,
+          53.4755861
+        ]
+      },
+      "properties": {
+        "id": "osm:node:14268508066",
+        "source": "osm",
+        "title": "Technology Arch",
+        "address": "",
+        "description": "",
+        "categories": [
+          "cultural",
+          "art"
+        ],
+        "primary_category": "cultural",
+        "interest_score": 30,
+        "website": "",
+        "wikipedia": "",
+        "wikidata": "",
+        "source_url": "https://www.openstreetmap.org/node/14268508066",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
+        "query_key": "galleries_and_arts",
+        "tags": {
+          "artist_name": "Axel Wolkenhauer",
+          "artwork_type": "sculpture",
+          "name": "Technology Arch",
+          "start_date": "1989",
           "tourism": "artwork"
         }
       }
@@ -9418,7 +9453,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9131790457",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "CJTaylord Art (Christian) and Bed Sedman",
@@ -9456,7 +9491,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3678936268",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "George Wylie",
@@ -9492,7 +9527,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7443630053",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "John Kennedy",
@@ -9530,7 +9565,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10052330092",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Colin Spofforth",
@@ -9567,7 +9602,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10048228711",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Nicola Fernandes",
@@ -9602,7 +9637,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6391518198",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -9638,7 +9673,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7443630052",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Lesley Fallais",
@@ -9675,7 +9710,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11828820086",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -9714,7 +9749,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/324664008",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -9751,7 +9786,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13608352693",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -9786,7 +9821,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9877666183",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "Manchester",
@@ -9822,7 +9857,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/260284292",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "Manchester",
@@ -9865,7 +9900,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4232308189",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "Manchester",
@@ -9903,7 +9938,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9600957100",
-        "fetched_at_utc": "2026-10-07T11:43:15+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:11+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "Manchester",

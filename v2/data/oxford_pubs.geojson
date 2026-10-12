@@ -42,7 +42,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -105,7 +105,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -169,7 +169,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -227,7 +227,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -300,7 +300,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "147-151",
@@ -358,7 +358,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -416,7 +416,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -476,7 +476,7 @@
         "smoking": "",
         "wikidata": "Q6182178",
         "wikipedia": "en:Jericho Tavern",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -543,7 +543,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -610,7 +610,7 @@
         "smoking": "",
         "wikidata": "Q6410842",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "40",
@@ -675,7 +675,7 @@
         "smoking": "",
         "wikidata": "Q82455",
         "wikipedia": "en:Lamb & Flag, Oxford",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -738,7 +738,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -796,7 +796,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -859,7 +859,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -932,7 +932,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "30",
@@ -991,7 +991,7 @@
         "smoking": "",
         "wikidata": "Q26299270",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "82",
@@ -1051,7 +1051,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1115,7 +1115,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1174,7 +1174,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -1223,7 +1223,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1286,7 +1286,7 @@
         "smoking": "",
         "wikidata": "Q4876452",
         "wikipedia": "en:The Bear, Oxford",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1357,7 +1357,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1415,7 +1415,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1479,7 +1479,7 @@
         "smoking": "",
         "wikidata": "Q26481975",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "131",
@@ -1544,7 +1544,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "19",
@@ -1601,7 +1601,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1669,7 +1669,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1733,7 +1733,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1795,7 +1795,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1856,7 +1856,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -1922,7 +1922,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "163",
@@ -1980,7 +1980,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "North Hinksey",
@@ -2042,7 +2042,7 @@
         "smoking": "",
         "wikidata": "Q88917759",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2111,7 +2111,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2177,7 +2177,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2236,7 +2236,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2298,7 +2298,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2365,7 +2365,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "1",
@@ -2432,7 +2432,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2489,7 +2489,7 @@
         "smoking": "",
         "wikidata": "Q26405543",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2558,7 +2558,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "182",
@@ -2629,7 +2629,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2692,7 +2692,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2767,7 +2767,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2826,7 +2826,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2892,7 +2892,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -2954,7 +2954,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3019,7 +3019,7 @@
         "smoking": "",
         "wikidata": "Q7756670",
         "wikipedia": "en:The Perch, Binsey",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3092,7 +3092,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3161,7 +3161,7 @@
         "smoking": "no",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3229,7 +3229,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3295,7 +3295,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3361,7 +3361,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3425,7 +3425,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3495,7 +3495,7 @@
         "smoking": "no",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3553,7 +3553,7 @@
         "smoking": "",
         "wikidata": "Q26653403",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3626,7 +3626,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3697,7 +3697,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3760,7 +3760,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3818,7 +3818,7 @@
         "smoking": "",
         "wikidata": "Q88917761",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3894,7 +3894,7 @@
         "smoking": "outside",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -3966,7 +3966,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -4026,7 +4026,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -4085,7 +4085,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -4151,7 +4151,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -4211,7 +4211,7 @@
         "smoking": "",
         "wikidata": "Q7854865",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -4289,7 +4289,7 @@
         "smoking": "",
         "wikidata": "Q26480787",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",
@@ -4349,7 +4349,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:17+00:00",
+        "fetched_at_utc": "2026-10-12T14:34:54+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Oxford",

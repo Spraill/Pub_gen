@@ -42,7 +42,7 @@
         "smoking": "",
         "wikidata": "Q99591735",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "14",
@@ -103,7 +103,7 @@
         "smoking": "",
         "wikidata": "Q99591732",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "47",
@@ -163,7 +163,7 @@
         "smoking": "",
         "wikidata": "Q99592696",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "17",
@@ -222,7 +222,7 @@
         "smoking": "",
         "wikidata": "Q26673173",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -282,7 +282,7 @@
         "smoking": "",
         "wikidata": "Q99591719",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "1",
@@ -337,7 +337,7 @@
         "smoking": "",
         "wikidata": "Q26688929",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "21",
@@ -396,7 +396,7 @@
         "smoking": "",
         "wikidata": "Q99591722",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "7-8",
@@ -454,7 +454,7 @@
         "smoking": "",
         "wikidata": "Q99591418",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "1",
@@ -514,7 +514,7 @@
         "smoking": "",
         "wikidata": "Q26674627",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "13",
@@ -572,7 +572,7 @@
         "smoking": "",
         "wikidata": "Q99591742",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "21",
@@ -627,7 +627,7 @@
         "smoking": "outside",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "44-45",
@@ -686,7 +686,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "13-14",
@@ -742,7 +742,7 @@
         "smoking": "",
         "wikidata": "Q26674044",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "42",
@@ -803,7 +803,7 @@
         "smoking": "",
         "wikidata": "Q26673899",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "10",
@@ -862,7 +862,7 @@
         "smoking": "",
         "wikidata": "Q26674647",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -920,7 +920,7 @@
         "smoking": "",
         "wikidata": "Q99591693",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "17",
@@ -979,7 +979,7 @@
         "smoking": "",
         "wikidata": "Q99591694",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA2 6NZ",
@@ -1035,7 +1035,7 @@
         "smoking": "",
         "wikidata": "Q99591696",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "8-10",
@@ -1095,7 +1095,7 @@
         "smoking": "",
         "wikidata": "Q26674547",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA1 5BW",
@@ -1153,7 +1153,7 @@
         "smoking": "",
         "wikidata": "Q99591701",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA2 3EH",
@@ -1208,7 +1208,7 @@
         "smoking": "",
         "wikidata": "Q99591703",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "9",
@@ -1268,7 +1268,7 @@
         "smoking": "",
         "wikidata": "Q99592693",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "1",
@@ -1327,7 +1327,7 @@
         "smoking": "",
         "wikidata": "Q99591710",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA2 3RR",
@@ -1384,7 +1384,7 @@
         "smoking": "outside",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -1445,7 +1445,7 @@
         "smoking": "",
         "wikidata": "Q99591753",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "5",
@@ -1501,7 +1501,7 @@
         "smoking": "",
         "wikidata": "Q99591766",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "11-12",
@@ -1558,7 +1558,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -1616,7 +1616,7 @@
         "smoking": "",
         "wikidata": "Q99592893",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -1674,7 +1674,7 @@
         "smoking": "",
         "wikidata": "Q99591725",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA2 1ES",
@@ -1729,7 +1729,7 @@
         "smoking": "",
         "wikidata": "Q99591727",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "14",
@@ -1788,7 +1788,7 @@
         "smoking": "outside",
         "wikidata": "Q26673508",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housename": "The Griffin Inn",
@@ -1854,7 +1854,7 @@
         "smoking": "",
         "wikidata": "Q26673224",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "7",
@@ -1914,7 +1914,7 @@
         "smoking": "",
         "wikidata": "Q17532467",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "1",
@@ -1976,7 +1976,7 @@
         "smoking": "",
         "wikidata": "Q99550477",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:country": "GB",
@@ -2045,7 +2045,7 @@
         "smoking": "",
         "wikidata": "Q99592929",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "15",
@@ -2106,7 +2106,7 @@
         "smoking": "",
         "wikidata": "Q26673927",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -2163,7 +2163,7 @@
         "smoking": "",
         "wikidata": "Q99592931",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "24",
@@ -2220,7 +2220,7 @@
         "smoking": "",
         "wikidata": "Q26673846",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -2276,7 +2276,7 @@
         "smoking": "",
         "wikidata": "Q26688962",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA1 2LY",
@@ -2331,7 +2331,7 @@
         "smoking": "",
         "wikidata": "Q99591738",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -2392,7 +2392,7 @@
         "smoking": "outside",
         "wikidata": "Q26674033",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA1 4BP",
@@ -2447,7 +2447,7 @@
         "smoking": "",
         "wikidata": "Q26674867",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -2505,7 +2505,7 @@
         "smoking": "",
         "wikidata": "Q26675104",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "12",
@@ -2564,7 +2564,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -2630,7 +2630,7 @@
         "smoking": "",
         "wikidata": "Q99591854",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -2696,7 +2696,7 @@
         "smoking": "",
         "wikidata": "Q26674085",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA2 6ND",
@@ -2751,7 +2751,7 @@
         "smoking": "",
         "wikidata": "Q99591750",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -2809,7 +2809,7 @@
         "smoking": "no",
         "wikidata": "Q26673630",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -2875,7 +2875,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "7",
@@ -2929,7 +2929,7 @@
         "smoking": "",
         "wikidata": "Q99593027",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Bath",
@@ -2990,7 +2990,7 @@
         "smoking": "",
         "wikidata": "Q99591754",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "6-8",
@@ -3046,7 +3046,7 @@
         "smoking": "",
         "wikidata": "Q99593451",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA2 3BW",
@@ -3104,7 +3104,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "8-10",
@@ -3159,7 +3159,7 @@
         "smoking": "",
         "wikidata": "Q99591762",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "3",
@@ -3219,7 +3219,7 @@
         "smoking": "",
         "wikidata": "Q26688927",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -3272,7 +3272,7 @@
         "smoking": "",
         "wikidata": "Q26674501",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA1 5NA",
@@ -3329,7 +3329,7 @@
         "smoking": "",
         "wikidata": "Q99591852",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "49",
@@ -3386,7 +3386,7 @@
         "smoking": "",
         "wikidata": "Q99591857",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "3",
@@ -3445,7 +3445,7 @@
         "smoking": "",
         "wikidata": "Q99591863",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "38",
@@ -3506,7 +3506,7 @@
         "smoking": "",
         "wikidata": "Q99591864",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "42",
@@ -3562,7 +3562,7 @@
         "smoking": "",
         "wikidata": "Q99593196",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "128",
@@ -3618,7 +3618,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "5",
@@ -3676,7 +3676,7 @@
         "smoking": "",
         "wikidata": "Q99591745",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:42:39+00:00",
+        "fetched_at_utc": "2026-10-12T14:35:34+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "BA1 3AT",

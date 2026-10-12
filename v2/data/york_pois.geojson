@@ -27,7 +27,7 @@
         "wikipedia": "en:Bar Convent",
         "wikidata": "Q4857921",
         "source_url": "https://www.openstreetmap.org/node/732346765",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -44,8 +44,7 @@
           "website": "https://www.bar-convent.org.uk/",
           "wikidata": "Q4857921",
           "wikipedia": "en:Bar Convent"
-        },
-        "sitelinks": 3
+        }
       }
     },
     {
@@ -74,7 +73,7 @@
         "wikipedia": "en:Barley Hall",
         "wikidata": "Q4861158",
         "source_url": "https://www.openstreetmap.org/node/457713424",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -92,8 +91,7 @@
           "wheelchair": "no",
           "wikidata": "Q4861158",
           "wikipedia": "en:Barley Hall"
-        },
-        "sitelinks": 2
+        }
       }
     },
     {
@@ -122,7 +120,7 @@
         "wikipedia": "en:Jorvik Viking Centre",
         "wikidata": "Q1704043",
         "source_url": "https://www.openstreetmap.org/node/316106165",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -140,8 +138,7 @@
           "wheelchair": "yes",
           "wikidata": "Q1704043",
           "wikipedia": "en:Jorvik Viking Centre"
-        },
-        "sitelinks": 8
+        }
       }
     },
     {
@@ -170,7 +167,7 @@
         "wikipedia": "en:City Walls Experience at Micklegate Bar",
         "wikidata": "Q28232884",
         "source_url": "https://www.openstreetmap.org/node/1843446913",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -187,8 +184,7 @@
           "wheelchair": "no",
           "wikidata": "Q28232884",
           "wikipedia": "en:City Walls Experience at Micklegate Bar"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -217,7 +213,7 @@
         "wikipedia": "en:National Railway Museum",
         "wikidata": "Q579958",
         "source_url": "https://www.openstreetmap.org/relation/14999691",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -252,8 +248,7 @@
           "wheelchair": "yes",
           "wikidata": "Q579958",
           "wikipedia": "en:National Railway Museum"
-        },
-        "sitelinks": 22
+        }
       }
     },
     {
@@ -282,7 +277,7 @@
         "wikipedia": "en:St Mary Bishophill Junior, York",
         "wikidata": "Q514750",
         "source_url": "https://www.openstreetmap.org/way/129670822",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "York",
@@ -299,8 +294,7 @@
           "website": "https://www.stmary-bishophill.co.uk/",
           "wikidata": "Q514750",
           "wikipedia": "en:St Mary Bishophill Junior, York"
-        },
-        "sitelinks": 4
+        }
       }
     },
     {
@@ -329,7 +323,7 @@
         "wikipedia": "en:York Castle Museum",
         "wikidata": "Q2024016",
         "source_url": "https://www.openstreetmap.org/way/1125235305",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -344,8 +338,7 @@
           "wheelchair": "limited",
           "wikidata": "Q2024016",
           "wikipedia": "en:York Castle Museum"
-        },
-        "sitelinks": 8
+        }
       }
     },
     {
@@ -375,7 +368,7 @@
         "wikipedia": "en:York Minster",
         "wikidata": "Q252575",
         "source_url": "https://www.openstreetmap.org/way/28750371",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",
@@ -418,8 +411,7 @@
           "wikidata": "Q252575",
           "wikipedia": "en:York Minster",
           "year_of_construction": "c. 1230–1472"
-        },
-        "sitelinks": 41
+        }
       }
     },
     {
@@ -448,7 +440,7 @@
         "wikipedia": "en:St Mary's Church, Castlegate, York",
         "wikidata": "Q17530659",
         "source_url": "https://www.openstreetmap.org/way/59096551",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -467,8 +459,7 @@
           "wheelchair": "limited",
           "wikidata": "Q17530659",
           "wikipedia": "en:St Mary's Church, Castlegate, York"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -497,7 +488,7 @@
         "wikipedia": "en:York's Chocolate Story",
         "wikidata": "Q41235388",
         "source_url": "https://www.openstreetmap.org/node/4792387396",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -512,8 +503,7 @@
           "wheelchair:description": "lift to all floors",
           "wikidata": "Q41235388",
           "wikipedia": "en:York's Chocolate Story"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -542,7 +532,7 @@
         "wikipedia": "en:Yorkshire Museum",
         "wikidata": "Q2086562",
         "source_url": "https://www.openstreetmap.org/node/13063082814",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -558,8 +548,7 @@
           "wheelchair": "yes",
           "wikidata": "Q2086562",
           "wikipedia": "en:Yorkshire Museum"
-        },
-        "sitelinks": 14
+        }
       }
     },
     {
@@ -588,7 +577,7 @@
         "wikipedia": "en:York Castle",
         "wikidata": "Q80637",
         "source_url": "https://www.openstreetmap.org/relation/2755833",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",
@@ -613,8 +602,7 @@
           "wheelchair": "no",
           "wikidata": "Q80637",
           "wikipedia": "en:York Castle"
-        },
-        "sitelinks": 23
+        }
       }
     },
     {
@@ -643,7 +631,7 @@
         "wikipedia": "",
         "wikidata": "Q113369990",
         "source_url": "https://www.openstreetmap.org/node/12557307443",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -660,8 +648,7 @@
           "website": "https://www.fairfaxhouse.co.uk/",
           "wheelchair": "no",
           "wikidata": "Q113369990"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -690,7 +677,7 @@
         "wikipedia": "",
         "wikidata": "Q113370066",
         "source_url": "https://www.openstreetmap.org/node/12521354903",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "fixme": "needs precise location within barracks",
@@ -698,8 +685,7 @@
           "tourism": "museum",
           "website": "https://www.kohimamuseum.co.uk/",
           "wikidata": "Q113370066"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -728,7 +714,7 @@
         "wikipedia": "",
         "wikidata": "Q45112549",
         "source_url": "https://www.openstreetmap.org/node/27422877",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -744,8 +730,7 @@
           "website": "https://yorkarmymuseum.co.uk/",
           "wheelchair": "yes",
           "wikidata": "Q45112549"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -774,7 +759,7 @@
         "wikipedia": "",
         "wikidata": "Q113391601",
         "source_url": "https://www.openstreetmap.org/node/12563303920",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "fee": "yes",
@@ -784,8 +769,7 @@
           "website": "https://yorkminster.org/undercroft/",
           "wheelchair": "yes",
           "wikidata": "Q113391601"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -814,7 +798,7 @@
         "wikipedia": "en:York Assembly Rooms",
         "wikidata": "Q4022894",
         "source_url": "https://www.openstreetmap.org/way/28752795",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "York",
@@ -829,8 +813,7 @@
           "wheelchair": "limited",
           "wikidata": "Q4022894",
           "wikipedia": "en:York Assembly Rooms"
-        },
-        "sitelinks": 3
+        }
       }
     },
     {
@@ -858,7 +841,7 @@
         "wikipedia": "en:Fenton House, York",
         "wikidata": "Q17549561",
         "source_url": "https://www.openstreetmap.org/way/129661458",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "York",
@@ -871,8 +854,7 @@
           "ref:GB:uprn": "100050579257",
           "wikidata": "Q17549561",
           "wikipedia": "en:Fenton House, York"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -900,7 +882,7 @@
         "wikipedia": "en:10 Precentor's Court",
         "wikidata": "Q17549565",
         "source_url": "https://www.openstreetmap.org/way/59110297",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:housenumber": "10",
@@ -909,8 +891,7 @@
           "heritage": "yes",
           "wikidata": "Q17549565",
           "wikipedia": "en:10 Precentor's Court"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -938,7 +919,7 @@
         "wikipedia": "en:St Anthony's Hall",
         "wikidata": "Q7592503",
         "source_url": "https://www.openstreetmap.org/way/170172415",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "addr:city": "York",
@@ -949,8 +930,7 @@
           "wheelchair": "yes",
           "wikidata": "Q7592503",
           "wikipedia": "en:St Anthony's Hall"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -979,7 +959,7 @@
         "wikipedia": "en:St William's College",
         "wikidata": "Q17530637",
         "source_url": "https://www.openstreetmap.org/relation/933165",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",
@@ -997,8 +977,7 @@
           "tourism": "attraction",
           "wikidata": "Q17530637",
           "wikipedia": "en:St William's College"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -1027,7 +1006,7 @@
         "wikipedia": "en:Roman column, York",
         "wikidata": "Q26548646",
         "source_url": "https://www.openstreetmap.org/node/316110590",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "attraction": "historic",
@@ -1041,8 +1020,7 @@
           "wheelchair": "yes",
           "wikidata": "Q26548646",
           "wikipedia": "en:Roman column, York"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -1070,7 +1048,7 @@
         "wikipedia": "en:Jacobs Well, York",
         "wikidata": "Q17530538",
         "source_url": "https://www.openstreetmap.org/way/146677028",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "York",
@@ -1084,8 +1062,7 @@
           "website": "http://www.jacobswellyork.org.uk",
           "wikidata": "Q17530538",
           "wikipedia": "en:Jacobs Well, York"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -1113,7 +1090,7 @@
         "wikipedia": "en:Merchant Adventurers' Hall",
         "wikidata": "Q6818359",
         "source_url": "https://www.openstreetmap.org/way/138371703",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "York",
@@ -1128,8 +1105,7 @@
           "website": "https://www.theyorkcompany.co.uk/",
           "wikidata": "Q6818359",
           "wikipedia": "en:Merchant Adventurers' Hall"
-        },
-        "sitelinks": 2
+        }
       }
     },
     {
@@ -1158,7 +1134,7 @@
         "wikipedia": "",
         "wikidata": "Q125556685",
         "source_url": "https://www.openstreetmap.org/node/730637298",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -1170,8 +1146,7 @@
           "tourism": "museum",
           "wheelchair": "no",
           "wikidata": "Q125556685"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -1200,7 +1175,7 @@
         "wikipedia": "en:Mansion House, York",
         "wikidata": "Q6751751",
         "source_url": "https://www.openstreetmap.org/way/128248398",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",
@@ -1216,8 +1191,46 @@
           "tourism": "attraction",
           "wikidata": "Q6751751",
           "wikipedia": "en:Mansion House, York"
-        },
-        "sitelinks": 1
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.08307895,
+          53.961315075
+        ]
+      },
+      "properties": {
+        "id": "osm:way:675322664",
+        "source": "osm",
+        "title": "Norman House",
+        "address": "",
+        "description": "Originally a two storey building of good Norman freestone, it would have had an undercroft of wood supporting the first floor which was probably also of wood. The hall on the first floor was lit by windows, one of which remains and has a shaft with a w…",
+        "categories": [
+          "architecture",
+          "historical",
+          "landmark",
+          "memorial"
+        ],
+        "primary_category": "historical",
+        "interest_score": 82,
+        "website": "",
+        "wikipedia": "en:The Norman House (York)",
+        "wikidata": "Q17530543",
+        "source_url": "https://www.openstreetmap.org/way/675322664",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
+        "query_key": "attractions_and_viewpoints",
+        "tags": {
+          "historic": "ruins",
+          "listed_status": "Grade I",
+          "name": "Norman House",
+          "tourism": "attraction",
+          "wikidata": "Q17530543",
+          "wikipedia": "en:The Norman House (York)"
+        }
       }
     },
     {
@@ -1247,7 +1260,7 @@
         "wikipedia": "en:York Barbican",
         "wikidata": "Q4859653",
         "source_url": "https://www.openstreetmap.org/way/59295315",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "York",
@@ -1266,8 +1279,7 @@
           "wheelchair": "yes",
           "wikidata": "Q4859653",
           "wikipedia": "en:York Barbican"
-        },
-        "sitelinks": 3
+        }
       }
     },
     {
@@ -1296,7 +1308,7 @@
         "wikipedia": "en:York Museum Gardens",
         "wikidata": "Q2883914",
         "source_url": "https://www.openstreetmap.org/relation/3600440",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "access": "yes",
@@ -1311,8 +1323,7 @@
           "wheelchair": "yes",
           "wikidata": "Q2883914",
           "wikipedia": "en:York Museum Gardens"
-        },
-        "sitelinks": 5
+        }
       }
     },
     {
@@ -1340,7 +1351,7 @@
         "wikipedia": "en:York city walls#Fishergate Bar",
         "wikidata": "Q101070885",
         "source_url": "https://www.openstreetmap.org/way/127257924",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "building": "yes",
@@ -1349,8 +1360,7 @@
           "name": "Fishergate Bar",
           "wikidata": "Q101070885",
           "wikipedia": "en:York city walls#Fishergate Bar"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -1378,7 +1388,7 @@
         "wikipedia": "en:Pikeing Well",
         "wikidata": "Q17549610",
         "source_url": "https://www.openstreetmap.org/way/126855753",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "York",
@@ -1392,8 +1402,7 @@
           "ref:GB:uprn": "200004776437;10007238652",
           "wikidata": "Q17549610",
           "wikipedia": "en:Pikeing Well"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -1421,7 +1430,7 @@
         "wikipedia": "en:Nether Poppleton Tithe Barn",
         "wikidata": "Q15261808",
         "source_url": "https://www.openstreetmap.org/way/352908681",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "York",
@@ -1433,8 +1442,7 @@
           "ref:GB:uprn": "200004771363",
           "wikidata": "Q15261808",
           "wikipedia": "en:Nether Poppleton Tithe Barn"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -1462,7 +1470,7 @@
         "wikipedia": "en:Red Tower (York)",
         "wikidata": "Q101069839",
         "source_url": "https://www.openstreetmap.org/way/127257930",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "York",
@@ -1478,8 +1486,7 @@
           "roof:shape": "hipped",
           "wikidata": "Q101069839",
           "wikipedia": "en:Red Tower (York)"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -1507,7 +1514,7 @@
         "wikipedia": "en:York city walls#Walmgate Bar",
         "wikidata": "Q101070417",
         "source_url": "https://www.openstreetmap.org/relation/1755286",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "building": "yes",
@@ -1518,8 +1525,7 @@
           "name": "Walmgate Bar",
           "wikidata": "Q101070417",
           "wikipedia": "en:York city walls#Walmgate Bar"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -1548,7 +1554,7 @@
         "wikipedia": "en:York city walls#Micklegate Bar",
         "wikidata": "Q102185955",
         "source_url": "https://www.openstreetmap.org/way/28759787",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "attraction": "historic",
@@ -1562,8 +1568,7 @@
           "wheelchair": "no",
           "wikidata": "Q102185955",
           "wikipedia": "en:York city walls#Micklegate Bar"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -1591,7 +1596,7 @@
         "wikipedia": "en:Second Boer War Memorial, York",
         "wikidata": "Q111936599",
         "source_url": "https://www.openstreetmap.org/node/1145041932",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -1600,8 +1605,7 @@
           "name": "Boer War Memorial",
           "wikidata": "Q111936599",
           "wikipedia": "en:Second Boer War Memorial, York"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -1630,12 +1634,13 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1517261532",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
           "addr:postcode": "YO1 9XD",
           "addr:street": "Fossgate",
+          "check_date": "2026-10-10",
           "check_date:opening_hours": "2024-02-26",
           "fee": "yes",
           "fee:conditional": "no @ (age < 17)",
@@ -1673,7 +1678,7 @@
         "wikipedia": "en:Old Palace, York",
         "wikidata": "Q7084690",
         "source_url": "https://www.openstreetmap.org/way/59267550",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -1691,8 +1696,7 @@
           "wheelchair": "no",
           "wikidata": "Q7084690",
           "wikipedia": "en:Old Palace, York"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -1720,7 +1724,7 @@
         "wikipedia": "en:North Eastern Railway War Memorial",
         "wikidata": "Q17549385",
         "source_url": "https://www.openstreetmap.org/node/1414952912",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -1730,8 +1734,7 @@
           "wheelchair": "yes",
           "wikidata": "Q17549385",
           "wikipedia": "en:North Eastern Railway War Memorial"
-        },
-        "sitelinks": 2
+        }
       }
     },
     {
@@ -1760,7 +1763,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1931394433",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "museums",
         "tags": {
           "addr:city": "York",
@@ -1804,7 +1807,7 @@
         "wikipedia": "en:Clarence Street",
         "wikidata": "Q96375086",
         "source_url": "https://www.openstreetmap.org/node/14164995805",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "260",
@@ -1814,8 +1817,7 @@
           "openplaques:id": "51926",
           "wikidata": "Q96375086",
           "wikipedia": "en:Clarence Street"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -1843,7 +1845,7 @@
         "wikipedia": "en:York City War Memorial",
         "wikidata": "Q22919983",
         "source_url": "https://www.openstreetmap.org/node/760466052",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -1851,8 +1853,7 @@
           "name": "War Memorial",
           "wikidata": "Q22919983",
           "wikipedia": "en:York City War Memorial"
-        },
-        "sitelinks": 3
+        }
       }
     },
     {
@@ -1881,7 +1882,7 @@
         "wikipedia": "en:York Theatre Royal",
         "wikidata": "Q3572609",
         "source_url": "https://www.openstreetmap.org/way/59110287",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -1900,8 +1901,7 @@
           "wheelchair": "limited",
           "wikidata": "Q3572609",
           "wikipedia": "en:York Theatre Royal"
-        },
-        "sitelinks": 4
+        }
       }
     },
     {
@@ -1930,7 +1930,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10054653032",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "30",
@@ -1972,7 +1972,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526918577",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "140",
@@ -2011,7 +2011,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526727521",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "135",
@@ -2052,7 +2052,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10166940718",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "330",
@@ -2091,7 +2091,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527354836",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "205",
@@ -2130,7 +2130,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526918394",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "55",
@@ -2171,7 +2171,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527036346",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "230",
@@ -2212,7 +2212,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527125960",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "240",
@@ -2253,7 +2253,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159648384",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "5",
@@ -2294,7 +2294,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526646109",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "140",
@@ -2335,7 +2335,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526677202",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "310",
@@ -2376,7 +2376,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526905934",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "270",
@@ -2417,7 +2417,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14162120202",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "140",
@@ -2458,7 +2458,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14158597435",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "310",
@@ -2498,7 +2498,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526902692",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "50",
@@ -2539,7 +2539,7 @@
         "wikipedia": "en:Goddards House and Garden",
         "wikidata": "Q17530540",
         "source_url": "https://www.openstreetmap.org/way/590885344",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "leisure": "garden",
@@ -2550,8 +2550,7 @@
           "website": "https://www.nationaltrust.org.uk/goddards/",
           "wikidata": "Q17530540",
           "wikipedia": "en:Goddards House and Garden"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -2580,7 +2579,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159816459",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "230",
@@ -2622,7 +2621,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527016846",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "145",
@@ -2663,7 +2662,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527343119",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "0",
@@ -2704,7 +2703,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10776982332",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "250",
@@ -2745,7 +2744,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/12111441085",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "230",
@@ -2787,7 +2786,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159795233",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "45",
@@ -2828,7 +2827,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526717203",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "85",
@@ -2867,7 +2866,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9788761717",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "225",
@@ -2908,7 +2907,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527350223",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "125",
@@ -2949,7 +2948,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526536478",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -2986,7 +2985,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14158638687",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "220",
@@ -3027,7 +3026,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159126936",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "135",
@@ -3067,7 +3066,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527304430",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "60",
@@ -3105,7 +3104,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527293734",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "20",
@@ -3146,7 +3145,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10611498406",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "325",
@@ -3188,7 +3187,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159134513",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "105",
@@ -3227,7 +3226,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526975480",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "190",
@@ -3268,7 +3267,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526935356",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "130",
@@ -3309,7 +3308,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159670655",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "15",
@@ -3349,7 +3348,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527309702",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "210",
@@ -3390,7 +3389,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526988308",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "310",
@@ -3429,7 +3428,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527300336",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "120",
@@ -3470,7 +3469,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527367227",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "85",
@@ -3511,7 +3510,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159720470",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "160",
@@ -3549,7 +3548,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526863837",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "225",
@@ -3587,7 +3586,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159417955",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "295",
@@ -3625,7 +3624,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527361432",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "5",
@@ -3666,7 +3665,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526934347",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "220",
@@ -3704,7 +3703,7 @@
         "wikipedia": "en:York Cold War Bunker",
         "wikidata": "Q12073377",
         "source_url": "https://www.openstreetmap.org/way/117420246",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",
@@ -3722,8 +3721,7 @@
           "wheelchair": "limited",
           "wikidata": "Q12073377",
           "wikipedia": "en:York Cold War Bunker"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -3752,7 +3750,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527231844",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "70",
@@ -3793,7 +3791,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526592641",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "335",
@@ -3831,7 +3829,7 @@
         "wikipedia": "en:Battle of Fulford",
         "wikidata": "Q1113659",
         "source_url": "https://www.openstreetmap.org/node/1251102492",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "date": "1066-09-20",
@@ -3840,8 +3838,7 @@
           "name": "Battle of Fulford",
           "wikidata": "Q1113659",
           "wikipedia": "en:Battle of Fulford"
-        },
-        "sitelinks": 30
+        }
       }
     },
     {
@@ -3869,7 +3866,7 @@
         "wikipedia": "en:Treasurer's House, York",
         "wikidata": "Q7836749",
         "source_url": "https://www.openstreetmap.org/way/241061247",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",
@@ -3892,8 +3889,7 @@
           "wikidata": "Q7836749",
           "wikimedia_commons": "File:The Treasurer's House1.jpg",
           "wikipedia": "en:Treasurer's House, York"
-        },
-        "sitelinks": 4
+        }
       }
     },
     {
@@ -3921,7 +3917,7 @@
         "wikipedia": "",
         "wikidata": "Q26550345",
         "source_url": "https://www.openstreetmap.org/way/127966482",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "amenity": "watering_place",
@@ -3943,8 +3939,7 @@
           "wikidata": "Q26550345",
           "wikimedia_commons": "File:Horse drinking trough Clifton Green York 01.jpg",
           "year_of_construction": "1883"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -3972,7 +3967,7 @@
         "wikipedia": "",
         "wikidata": "Q17549924",
         "source_url": "https://www.openstreetmap.org/way/4436607",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "heritage_sites",
         "tags": {
           "bicycle": "yes",
@@ -3989,10 +3984,11 @@
           "oneway": "yes",
           "oneway:foot": "no",
           "sidewalk": "both",
+          "sidewalk:both:surface": "paving_stones",
+          "smoothness": "very_bad",
           "surface": "sett",
           "wikidata": "Q17549924"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -4020,7 +4016,7 @@
         "wikipedia": "en:National Centre for Early Music",
         "wikidata": "Q6971404",
         "source_url": "https://www.openstreetmap.org/way/59294529",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -4033,8 +4029,7 @@
           "website": "https://www.ncem.co.uk/",
           "wikidata": "Q6971404",
           "wikipedia": "en:National Centre for Early Music"
-        },
-        "sitelinks": 2
+        }
       }
     },
     {
@@ -4064,7 +4059,7 @@
         "wikipedia": "",
         "wikidata": "Q26549171",
         "source_url": "https://www.openstreetmap.org/node/9859219081",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "George Walker Millburn",
@@ -4079,8 +4074,7 @@
           "subject:wikidata": "Q766362",
           "tourism": "artwork",
           "wikidata": "Q26549171"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -4108,7 +4102,7 @@
         "wikipedia": "en:Rowntree Park",
         "wikidata": "Q7372266",
         "source_url": "https://www.openstreetmap.org/way/26260331",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -4120,8 +4114,7 @@
           "website": "https://rowntreepark.org.uk/",
           "wikidata": "Q7372266",
           "wikipedia": "en:Rowntree Park"
-        },
-        "sitelinks": 2
+        }
       }
     },
     {
@@ -4148,7 +4141,7 @@
         "wikipedia": "en:Baile Hill",
         "wikidata": "Q4848305",
         "source_url": "https://www.openstreetmap.org/node/1415573669",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "archaeological_site",
@@ -4156,8 +4149,7 @@
           "name": "Baile Hill",
           "wikidata": "Q4848305",
           "wikipedia": "en:Baile Hill"
-        },
-        "sitelinks": 6
+        }
       }
     },
     {
@@ -4185,7 +4177,7 @@
         "wikipedia": "",
         "wikidata": "Q4879075",
         "source_url": "https://www.openstreetmap.org/way/129593236",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "York",
@@ -4199,8 +4191,7 @@
           "roof:shape": "gabled",
           "website": "https://www.bedernhall.co.uk/",
           "wikidata": "Q4879075"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -4228,7 +4219,7 @@
         "wikipedia": "en:Holgate Windmill",
         "wikidata": "Q5880199",
         "source_url": "https://www.openstreetmap.org/way/443789299",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",
@@ -4243,8 +4234,7 @@
           "website": "https://www.holgatewindmill.org/",
           "wikidata": "Q5880199",
           "wikipedia": "en:Holgate Windmill"
-        },
-        "sitelinks": 3
+        }
       }
     },
     {
@@ -4271,15 +4261,14 @@
         "wikipedia": "en:Lamel Hill",
         "wikidata": "Q6481692",
         "source_url": "https://www.openstreetmap.org/node/1405102391",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "archaeological_site",
           "name": "Lamel Hill Battery",
           "wikidata": "Q6481692",
           "wikipedia": "en:Lamel Hill"
-        },
-        "sitelinks": 2
+        }
       }
     },
     {
@@ -4306,7 +4295,7 @@
         "wikipedia": "en:Askham Bog",
         "wikidata": "Q4807193",
         "source_url": "https://www.openstreetmap.org/way/29102642",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "nature_reserves",
         "tags": {
           "leisure": "nature_reserve",
@@ -4316,8 +4305,7 @@
           "website": "https://www.ywt.org.uk/reserves/askham-bog-nature-reserve",
           "wikidata": "Q4807193",
           "wikipedia": "en:Askham Bog"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -4345,7 +4333,7 @@
         "wikipedia": "en:York Art Gallery",
         "wikidata": "Q8055361",
         "source_url": "https://www.openstreetmap.org/way/128245106",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "York",
@@ -4360,8 +4348,7 @@
           "wheelchair": "yes",
           "wikidata": "Q8055361",
           "wikipedia": "en:York Art Gallery"
-        },
-        "sitelinks": 9
+        }
       }
     },
     {
@@ -4389,7 +4376,7 @@
         "wikipedia": "en:Statue of Constantine the Great, York",
         "wikidata": "Q60748188",
         "source_url": "https://www.openstreetmap.org/node/9859219075",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "access": "yes",
@@ -4404,8 +4391,7 @@
           "wheelchair": "yes",
           "wikidata": "Q60748188",
           "wikipedia": "en:Statue of Constantine the Great, York"
-        },
-        "sitelinks": 3
+        }
       }
     },
     {
@@ -4433,7 +4419,7 @@
         "wikipedia": "en:Dean's Park",
         "wikidata": "Q116507246",
         "source_url": "https://www.openstreetmap.org/way/146401409",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -4442,8 +4428,7 @@
           "operator": "The Dean and Chapter of York Minster",
           "wikidata": "Q116507246",
           "wikipedia": "en:Dean's Park"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -4471,7 +4456,7 @@
         "wikipedia": "en:Hull Road Park",
         "wikidata": "Q130336060",
         "source_url": "https://www.openstreetmap.org/way/96761669",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -4483,8 +4468,7 @@
           "operator:wikidata": "Q17059453",
           "wikidata": "Q130336060",
           "wikipedia": "en:Hull Road Park"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -4511,7 +4495,7 @@
         "wikipedia": "en:DIG: An Archaeological Adventure",
         "wikidata": "Q5205109",
         "source_url": "https://www.openstreetmap.org/node/12528757952",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",
@@ -4528,8 +4512,7 @@
           "wheelchair": "yes",
           "wikidata": "Q5205109",
           "wikipedia": "en:DIG: An Archaeological Adventure"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -4557,7 +4540,7 @@
         "wikipedia": "",
         "wikidata": "Q101070586",
         "source_url": "https://www.openstreetmap.org/way/91888555",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "York",
@@ -4571,8 +4554,7 @@
           "ref:GB:uprn": "200004769476",
           "roof:shape": "hipped",
           "wikidata": "Q101070586"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -4600,7 +4582,7 @@
         "wikipedia": "",
         "wikidata": "Q17550038",
         "source_url": "https://www.openstreetmap.org/way/122605111",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "York",
@@ -4617,8 +4599,7 @@
           "religion": "christian",
           "wheelchair": "no",
           "wikidata": "Q17550038"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -4646,7 +4627,7 @@
         "wikipedia": "",
         "wikidata": "Q26549103",
         "source_url": "https://www.openstreetmap.org/node/1533530910",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "designation": "Dick Turpin's Grave",
@@ -4655,8 +4636,7 @@
           "name": "Dick Turpin's grave",
           "source": "Ive been to it",
           "wikidata": "Q26549103"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -4684,15 +4664,14 @@
         "wikipedia": "",
         "wikidata": "Q17662344",
         "source_url": "https://www.openstreetmap.org/node/1374286557",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "monument",
           "listed_status": "Grade II",
           "name": "Fulford Cross",
           "wikidata": "Q17662344"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -4720,7 +4699,7 @@
         "wikipedia": "en:Grand Opera House, York",
         "wikidata": "Q5594856",
         "source_url": "https://www.openstreetmap.org/node/1415945880",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -4734,8 +4713,7 @@
           "wheelchair": "limited",
           "wikidata": "Q5594856",
           "wikipedia": "en:Grand Opera House, York"
-        },
-        "sitelinks": 3
+        }
       }
     },
     {
@@ -4763,14 +4741,13 @@
         "wikipedia": "",
         "wikidata": "Q26548003",
         "source_url": "https://www.openstreetmap.org/node/2438042041",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "monument",
           "name": "Hob Stone",
           "wikidata": "Q26548003"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -4798,7 +4775,7 @@
         "wikipedia": "",
         "wikidata": "Q26676710",
         "source_url": "https://www.openstreetmap.org/node/1593939831",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4808,8 +4785,7 @@
           "name": "Leeman Road District War Memorial",
           "wheelchair": "yes",
           "wikidata": "Q26676710"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -4837,7 +4813,7 @@
         "wikipedia": "",
         "wikidata": "Q26547763",
         "source_url": "https://www.openstreetmap.org/node/1322858584",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -4846,8 +4822,7 @@
           "subject:wikidata": "Q9439",
           "subject:wikipedia": "en:Queen Victoria",
           "wikidata": "Q26547763"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -4875,7 +4850,7 @@
         "wikipedia": "en:York Library",
         "wikidata": "Q8055614",
         "source_url": "https://www.openstreetmap.org/way/56077520",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -4896,8 +4871,7 @@
           "wheelchair:description": "Changing Places Toilet",
           "wikidata": "Q8055614",
           "wikipedia": "en:York Library"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -4927,7 +4901,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7607057808",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "bust",
@@ -4965,7 +4939,7 @@
         "wikipedia": "en:York Dungeon",
         "wikidata": "Q8055440",
         "source_url": "https://www.openstreetmap.org/node/316115931",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",
@@ -4979,8 +4953,7 @@
           "wheelchair": "limited",
           "wikidata": "Q8055440",
           "wikipedia": "en:York Dungeon"
-        },
-        "sitelinks": 2
+        }
       }
     },
     {
@@ -5007,7 +4980,7 @@
         "wikipedia": "en:York Guildhall",
         "wikidata": "Q1553813",
         "source_url": "https://www.openstreetmap.org/way/373978290",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",
@@ -5022,8 +4995,7 @@
           "wheelchair": "yes",
           "wikidata": "Q1553813",
           "wikipedia": "en:York Guildhall"
-        },
-        "sitelinks": 3
+        }
       }
     },
     {
@@ -5051,7 +5023,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6515014843",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5089,7 +5061,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/316209311",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "castle_type": "defensive",
@@ -5124,7 +5096,7 @@
         "wikipedia": "",
         "wikidata": "Q26550339",
         "source_url": "https://www.openstreetmap.org/node/3595415216",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "boundary_stone",
@@ -5133,8 +5105,7 @@
           "note": "stone is base and all that remains of cross that marked city boundary and was used for sanitising coins during the plagues",
           "tourism": "yes",
           "wikidata": "Q26550339"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -5161,7 +5132,7 @@
         "wikipedia": "",
         "wikidata": "Q20058536",
         "source_url": "https://www.openstreetmap.org/way/25950009",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "York",
@@ -5174,8 +5145,7 @@
           "opening_hours": "Apr-Oct 10:00-17:00; Nov-Mar 11:00-16:00",
           "source": "OS StreetView",
           "wikidata": "Q20058536"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -5203,7 +5173,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6587178841",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5211,42 +5181,6 @@
           "memorial": "stone",
           "name": "Murton Airfield",
           "website": "https://www.abct.org.uk/airfields/airfield-finder/murton/"
-        }
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -1.0830974333333334,
-          53.96131303333334
-        ]
-      },
-      "properties": {
-        "id": "osm:way:675322664",
-        "source": "osm",
-        "title": "Norman House",
-        "address": "",
-        "description": "",
-        "categories": [
-          "historical",
-          "architecture",
-          "landmark"
-        ],
-        "primary_category": "historical",
-        "interest_score": 52,
-        "website": "",
-        "wikipedia": "",
-        "wikidata": "",
-        "source_url": "https://www.openstreetmap.org/way/675322664",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
-        "query_key": "attractions_and_viewpoints",
-        "tags": {
-          "historic": "ruins",
-          "listed_status": "Grade I",
-          "name": "Norman House",
-          "tourism": "attraction"
         }
       }
     },
@@ -5274,7 +5208,7 @@
         "wikipedia": "en:The Shambles",
         "wikidata": "Q7763628",
         "source_url": "https://www.openstreetmap.org/way/23693559",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "alt_name": "The Shambles",
@@ -5292,8 +5226,7 @@
           "wheelchair": "limited",
           "wikidata": "Q7763628",
           "wikipedia": "en:The Shambles"
-        },
-        "sitelinks": 10
+        }
       }
     },
     {
@@ -5320,7 +5253,7 @@
         "wikipedia": "",
         "wikidata": "Q102185753",
         "source_url": "https://www.openstreetmap.org/way/133326570",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "barrier": "city_wall",
@@ -5337,8 +5270,7 @@
           "surface": "paving_stones",
           "two_sided": "yes",
           "wikidata": "Q102185753"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -5365,15 +5297,14 @@
         "wikipedia": "",
         "wikidata": "Q26549011",
         "source_url": "https://www.openstreetmap.org/node/14029117034",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "boundary_stone",
           "listed_status": "Grade II",
           "name": "Whitestone Cross",
           "wikidata": "Q26549011"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -5401,7 +5332,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/316116174",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "description": "In 1190, 150 local Jews were killed in a pogrom in the castle keep. (Source: Wikipedia:en)",
@@ -5436,7 +5367,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3587004514",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "description": "Memorial plaque beneath a weather vane",
@@ -5473,7 +5404,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11809967617",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "description": "Plaque dedicating the site to Councillor Bob Eccles JP",
@@ -5507,7 +5438,7 @@
         "wikipedia": "",
         "wikidata": "Q31546795",
         "source_url": "https://www.openstreetmap.org/node/1415945862",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -5518,8 +5449,7 @@
           "operator": "Riding Lights Theatre Co",
           "website": "https://ridinglights.org/",
           "wikidata": "Q31546795"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -5547,7 +5477,7 @@
         "wikipedia": "",
         "wikidata": "Q26388451",
         "source_url": "https://www.openstreetmap.org/way/158422291",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -5566,8 +5496,7 @@
           "website": "https://www.josephrowntreetheatre.co.uk/",
           "wheelchair": "yes",
           "wikidata": "Q26388451"
-        },
-        "sitelinks": 1
+        }
       }
     },
     {
@@ -5595,7 +5524,7 @@
         "wikipedia": "",
         "wikidata": "Q81165369",
         "source_url": "https://www.openstreetmap.org/node/10694451598",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "library",
@@ -5606,8 +5535,7 @@
           "website": "https://www.railwaymuseum.org.uk/research-and-archive",
           "wheelchair": "yes",
           "wikidata": "Q81165369"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -5636,7 +5564,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/145577394",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "addr:city": "York",
@@ -5674,7 +5602,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/253360512",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "ruins",
@@ -5709,7 +5637,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1074961380",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "building": "yes",
@@ -5744,7 +5672,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14158592237",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "35",
@@ -5782,7 +5710,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10694451594",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "40",
@@ -5821,7 +5749,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1069690458",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -5858,7 +5786,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526854636",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -5898,7 +5826,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527414616",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -5937,7 +5865,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159736365",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "240",
@@ -5974,7 +5902,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159744955",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "250",
@@ -6014,7 +5942,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527381142",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -6055,7 +5983,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527372430",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "225",
@@ -6092,7 +6020,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527219771",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -6133,7 +6061,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527439986",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "215",
@@ -6173,7 +6101,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14162093429",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "40",
@@ -6213,7 +6141,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14160236199",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "230",
@@ -6253,7 +6181,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526836113",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -6294,7 +6222,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159074860",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "80",
@@ -6332,7 +6260,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10054649452",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -6374,7 +6302,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9405544454",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -6408,7 +6336,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159581287",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "220",
@@ -6444,7 +6372,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14158558601",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "230",
@@ -6483,7 +6411,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526474364",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "180",
@@ -6523,7 +6451,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/12916918686",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -6558,7 +6486,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14162069820",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "330",
@@ -6597,7 +6525,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526882595",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -6638,7 +6566,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14162093430",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "40",
@@ -6678,7 +6606,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/12111441087",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -6714,7 +6642,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10574412009",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "350",
@@ -6755,7 +6683,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527337466",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "310",
@@ -6795,7 +6723,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159400489",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "180",
@@ -6835,7 +6763,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159049081",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "325",
@@ -6875,7 +6803,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526886668",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "235",
@@ -6912,7 +6840,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10151517317",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "295",
@@ -6951,7 +6879,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159146325",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "105",
@@ -6991,7 +6919,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14158646193",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "320",
@@ -7030,7 +6958,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527414136",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -7069,7 +6997,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527142857",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "135",
@@ -7106,7 +7034,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527343102",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -7147,7 +7075,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159773454",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "315",
@@ -7185,7 +7113,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527148116",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "95",
@@ -7223,7 +7151,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1596730279",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -7258,7 +7186,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159744956",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "125",
@@ -7298,7 +7226,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7925250664",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -7334,7 +7262,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14158541452",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "230",
@@ -7373,7 +7301,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527409231",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -7412,7 +7340,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527377712",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "150",
@@ -7452,7 +7380,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527047225",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "315",
@@ -7492,7 +7420,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527009437",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "290",
@@ -7532,7 +7460,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10151458619",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "335",
@@ -7569,7 +7497,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527176128",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -7608,7 +7536,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527316322",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "120",
@@ -7646,7 +7574,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526915877",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "315",
@@ -7686,7 +7614,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/12111441086",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "155",
@@ -7726,7 +7654,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526871217",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "colour": "black",
@@ -7765,7 +7693,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159618512",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "140",
@@ -7801,7 +7729,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526926296",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "35",
@@ -7839,7 +7767,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14158601478",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "230",
@@ -7875,7 +7803,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10151458917",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "155",
@@ -7912,7 +7840,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14160388549",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "225",
@@ -7949,7 +7877,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527056960",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "215",
@@ -7986,7 +7914,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14158606369",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "315",
@@ -8025,7 +7953,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14158606370",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "40",
@@ -8065,7 +7993,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13526864785",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "45",
@@ -8105,7 +8033,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1369648096",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -8138,7 +8066,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5679724298",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "170",
@@ -8175,7 +8103,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527214825",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "230",
@@ -8215,7 +8143,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14159590793",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "310",
@@ -8255,7 +8183,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13527381175",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "direction": "320",
@@ -8292,7 +8220,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/316116539",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "memorial",
@@ -8328,7 +8256,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3555244021",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "monument",
@@ -8362,7 +8290,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/762138831",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "historic": "boundary_stone",
@@ -8396,7 +8324,7 @@
         "wikipedia": "",
         "wikidata": "Q54807170",
         "source_url": "https://www.openstreetmap.org/way/133334716",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -8409,8 +8337,7 @@
           "ref:GB:uprn": "100052211617",
           "wheelchair": "yes",
           "wikidata": "Q54807170"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -8438,7 +8365,7 @@
         "wikipedia": "",
         "wikidata": "Q26547976",
         "source_url": "https://www.openstreetmap.org/way/183040221",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -8450,8 +8377,7 @@
           "name": "Dringhouses Library",
           "ref:GB:uprn": "100052162628",
           "wikidata": "Q26547976"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -8479,7 +8405,7 @@
         "wikipedia": "",
         "wikidata": "Q56255293",
         "source_url": "https://www.openstreetmap.org/node/2011709651",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Austin Wright",
@@ -8489,8 +8415,7 @@
           "start_date": "1984",
           "tourism": "artwork",
           "wikidata": "Q56255293"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -8518,7 +8443,7 @@
         "wikipedia": "",
         "wikidata": "Q54807166",
         "source_url": "https://www.openstreetmap.org/node/6127267030",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -8529,8 +8454,7 @@
           "name": "Explore Library",
           "source": "View from road, books inside",
           "wikidata": "Q54807166"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -8558,7 +8482,7 @@
         "wikipedia": "",
         "wikidata": "Q26548079",
         "source_url": "https://www.openstreetmap.org/node/1955977926",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "George Walker Milburn",
@@ -8570,8 +8494,7 @@
           "subject:wikidata": "Q5541633",
           "tourism": "artwork",
           "wikidata": "Q26548079"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -8599,7 +8522,7 @@
         "wikipedia": "",
         "wikidata": "Q137582910",
         "source_url": "https://www.openstreetmap.org/node/12202104696",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Neil Mason",
@@ -8612,8 +8535,7 @@
           "tourism": "artwork",
           "wikidata": "Q137582910",
           "wikimedia_commons": "File:Statue of Long Boi Aug25 05.jpg"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -8641,7 +8563,7 @@
         "wikipedia": "",
         "wikidata": "Q54807438",
         "source_url": "https://www.openstreetmap.org/way/133335269",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -8654,8 +8576,7 @@
           "ref:GB:uprn": "100052166815",
           "wheelchair": "yes",
           "wikidata": "Q54807438"
-        },
-        "sitelinks": 0
+        }
       }
     },
     {
@@ -8683,7 +8604,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/relation/3432862",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -8708,7 +8629,7 @@
       "properties": {
         "id": "osm:way:59338112",
         "source": "osm",
-        "title": "Newgate Market",
+        "title": "Shambles Market",
         "address": "",
         "description": "",
         "categories": [
@@ -8722,16 +8643,15 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/59338112",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
-          "alt_name": "Shambles Market",
+          "alt_name": "Newgate Market",
           "amenity": "marketplace",
           "area": "yes",
           "highway": "pedestrian",
           "lit": "yes",
-          "name": "Newgate Market",
-          "note": "Newgate Market is still called Newgate Market.  The \"Shambles Market\" name was made up by visityork.org and is just a tourist-trap tagline",
+          "name": "Shambles Market",
           "surface": "sett",
           "tourism": "attraction",
           "wheelchair": "yes"
@@ -8763,7 +8683,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/860345752",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -8802,7 +8722,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/28770311",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "description": "Oval green levelled in 1777. The name reflects the former importance as the centre of county administration.",
@@ -8836,7 +8756,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/173550447",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "historic_sites",
         "tags": {
           "barrier": "city_wall",
@@ -8879,7 +8799,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/468790357",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "advertising": "wall_painting",
@@ -8917,7 +8837,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/334481750",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "York University",
@@ -8926,6 +8846,9 @@
           "image": "https://map.atownsend.org.uk/tmp/318991.jpg",
           "information": "board",
           "name": "The Sun",
+          "subject": "Sonne",
+          "subject:wikidata": "Q525",
+          "subject:wikipedia": "en:Sun",
           "sustrans_ref": "231a",
           "tourism": "artwork"
         }
@@ -8955,7 +8878,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1176703813",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "nature_reserves",
         "tags": {
           "leisure": "nature_reserve",
@@ -8991,7 +8914,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1834027023",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Ailsa Magnus",
@@ -9027,7 +8950,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/127586016",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "nature_reserves",
         "tags": {
           "access": "permit",
@@ -9067,7 +8990,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/relation/18419898",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "nature_reserves",
         "tags": {
           "leisure": "nature_reserve",
@@ -9101,7 +9024,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13945662777",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Janette Ireland",
@@ -9137,7 +9060,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1341975781",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -9176,7 +9099,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5710758070",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "George Cutts",
@@ -9214,7 +9137,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9834678859",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "installation",
@@ -9248,7 +9171,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1262131276",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "amenity": "bench",
@@ -9289,7 +9212,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1415157952",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "amenity": "bench",
@@ -9329,7 +9252,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5842514283",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -9363,7 +9286,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/8529441347",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Emma Garness",
@@ -9400,7 +9323,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6242217755",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "description": "owl",
@@ -9433,7 +9356,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7101786800",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Pam Estdale",
@@ -9469,7 +9392,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1516059618",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -9504,7 +9427,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1482563759",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "George Cutts",
@@ -9544,7 +9467,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13278826598",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_subject": "figurative",
@@ -9579,7 +9502,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/431587219",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "area": "yes",
@@ -9613,7 +9536,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/129539515",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -9651,7 +9574,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/502760092",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -9685,7 +9608,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/54264728",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -9723,7 +9646,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/127777535",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -9760,7 +9683,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/134092666",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -9793,7 +9716,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/676675561",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "garden": "community_garden",
@@ -9828,7 +9751,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/229911892",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "garden": "community_garden",
@@ -9864,7 +9787,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/369486199",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -9897,7 +9820,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/88139703",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -9930,7 +9853,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/127686436",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -9968,7 +9891,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/8027414",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "landuse": "village_green",
@@ -10002,7 +9925,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1518010272",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -10036,7 +9959,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/445696908",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "area": "yes",
@@ -10070,7 +9993,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/88135768",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -10103,7 +10026,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/268614189",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -10136,7 +10059,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/24811090",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "barrier": "fence",
@@ -10170,7 +10093,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1270609125",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "fee": "no",
@@ -10204,7 +10127,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/46733738",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -10240,7 +10163,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/491728649",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -10273,7 +10196,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/44360605",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -10309,7 +10232,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/127686412",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "amenity": "grave_yard",
@@ -10343,7 +10266,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/251951764",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "landuse": "meadow",
@@ -10377,7 +10300,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/127835240",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "amenity": "community_garden",
@@ -10412,7 +10335,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/297956691",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "amenity": "community_garden",
@@ -10447,7 +10370,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/114804535",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -10480,7 +10403,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/43512236",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -10518,7 +10441,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1186000478",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "access": "yes",
@@ -10554,7 +10477,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/537851341",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -10587,7 +10510,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/128115434",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -10620,7 +10543,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/128714606",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -10658,7 +10581,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/56683828",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -10693,7 +10616,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/127777534",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -10731,7 +10654,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1335773896",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -10764,7 +10687,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1054536479",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -10797,7 +10720,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/420526336",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -10830,7 +10753,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/71883216",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -10863,7 +10786,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/128136283",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -10896,7 +10819,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/relation/19311189",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -10935,7 +10858,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/485588202",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -10968,7 +10891,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/281131445",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -11003,7 +10926,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/907918635",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -11037,7 +10960,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/relation/19916120",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "landuse": "village_green",
@@ -11071,7 +10994,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/109458301",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -11108,7 +11031,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/128467312",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -11142,7 +11065,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/222519609",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "landuse": "community_food_growing",
@@ -11176,7 +11099,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1484695217",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -11209,7 +11132,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/25982681",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "access": "yes",
@@ -11246,7 +11169,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/486654922",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -11279,7 +11202,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1123308989",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -11312,7 +11235,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/458390951",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -11345,7 +11268,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/356131154",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "garden": "community_garden",
@@ -11380,7 +11303,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1518007643",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -11414,7 +11337,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/300127863",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "leisure": "garden",
@@ -11447,7 +11370,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/114798276",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -11480,7 +11403,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/28770193",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "leisure": "park",
@@ -11513,7 +11436,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/132091156",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "gardens",
         "tags": {
           "access": "yes",
@@ -11549,7 +11472,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/46733701",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "parks",
         "tags": {
           "barrier": "fence",
@@ -11583,7 +11506,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4464564725",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Lynne O'Dowd",
@@ -11618,7 +11541,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/566423269",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -11655,7 +11578,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3569128693",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Barbara Hepworth",
@@ -11690,7 +11613,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2011709656",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Bill Hodgson",
@@ -11727,7 +11650,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/8265446030",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "library",
@@ -11761,7 +11684,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/376042986",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Joanna Mowbray",
@@ -11796,7 +11719,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1134760688",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -11830,7 +11753,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7157147154",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "statue",
@@ -11867,7 +11790,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7377361709",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -11901,7 +11824,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4804409708",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "board_type": "planet_walk",
@@ -11937,7 +11860,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/12013432363",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "SledOne",
@@ -11972,7 +11895,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/352906444",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "nature_reserves",
         "tags": {
           "access": "yes",
@@ -12008,7 +11931,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/286583425",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "nature_reserves",
         "tags": {
           "leaf_type": "broadleaved",
@@ -12044,7 +11967,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3990188344",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Sally Arnup",
@@ -12078,7 +12001,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/123160709",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "nature_reserves",
         "tags": {
           "leisure": "nature_reserve",
@@ -12112,7 +12035,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1549340531",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -12149,13 +12072,13 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/41215468",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "library",
           "building": "university",
           "building:levels": "3",
-          "check_date:opening_hours": "2024-04-14",
+          "check_date:opening_hours": "2026-10-10",
           "name": "Harry Fairhurst Building",
           "nohousenumber": "yes",
           "opening_hours": "Mo-Su 08:00-24:00",
@@ -12190,7 +12113,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1904778755",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "name": "Helmet",
@@ -12222,7 +12145,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/156855104",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "nature_reserves",
         "tags": {
           "boundary": "protected_area",
@@ -12256,7 +12179,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11642298315",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "man_made": "village_sign",
@@ -12291,7 +12214,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/5629071014",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -12325,7 +12248,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1813259305",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "name": "Horse",
@@ -12358,7 +12281,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/14105454902",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:housenumber": "12",
@@ -12393,7 +12316,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/41218000",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -12439,7 +12362,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4805620561",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -12480,11 +12403,12 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/11592886813",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Leah Pendleton",
           "artwork_type": "mural",
+          "level": "0",
           "name": "Make History Every Day",
           "start_date": "2024",
           "tourism": "artwork"
@@ -12516,7 +12440,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4805620560",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -12550,7 +12474,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/128115457",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "nature_reserves",
         "tags": {
           "leisure": "nature_reserve",
@@ -12583,7 +12507,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1784178627",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Thomas Taylor",
@@ -12618,7 +12542,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4804409706",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "board_type": "planet_walk",
@@ -12653,7 +12577,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7576348166",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "statue",
@@ -12689,7 +12613,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3569121538",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Polly Ionides",
@@ -12725,7 +12649,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4807388253",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -12760,7 +12684,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1927728915",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -12795,7 +12719,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2011709659",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "York",
@@ -12836,7 +12760,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4807388254",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -12875,7 +12799,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1784178313",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Harry Mercer",
@@ -12910,7 +12834,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1610235459",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "amenity": "library",
@@ -12946,7 +12870,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/9859219080",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "statue",
@@ -12982,9 +12906,10 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4724882077",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
+          "artwork_type": "street_art",
           "name": "Saturn",
           "tourism": "artwork"
         }
@@ -13015,7 +12940,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3990202618",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Gordon Young",
@@ -13052,7 +12977,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/559540553",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "addr:city": "York",
@@ -13088,7 +13013,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/10616748847",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -13128,7 +13053,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/6860312834",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "ATM",
@@ -13166,7 +13091,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/7347139374",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -13201,7 +13126,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1531712900",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Rowdy Unofficial and Bombsquad",
@@ -13237,7 +13162,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/13995906501",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "statue",
@@ -13272,7 +13197,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/3042296859",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Thomas Taylor",
@@ -13309,7 +13234,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/1904778754",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Mike Oakenfull and Chris Wormald",
@@ -13348,7 +13273,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/2726497924",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "performance_and_literary",
         "tags": {
           "addr:city": "York",
@@ -13385,7 +13310,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4807388252",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artwork_type": "sculpture",
@@ -13419,7 +13344,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/1185177049",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "artist_name": "Emmeline - Charlotte North",
@@ -13455,7 +13380,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4804409707",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "galleries_and_arts",
         "tags": {
           "board_type": "planet_walk",
@@ -13490,7 +13415,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/way/28759731",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "attraction": "historic",
@@ -13529,7 +13454,7 @@
         "wikipedia": "",
         "wikidata": "",
         "source_url": "https://www.openstreetmap.org/node/4033087825",
-        "fetched_at_utc": "2026-10-07T11:40:55+00:00",
+        "fetched_at_utc": "2026-10-12T14:33:38+00:00",
         "query_key": "attractions_and_viewpoints",
         "tags": {
           "addr:city": "York",

@@ -42,7 +42,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -107,7 +107,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -163,7 +163,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -218,7 +218,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -275,7 +275,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -333,7 +333,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "112/114",
@@ -344,6 +344,59 @@
           "landuse": "retail",
           "name": "Bradford Inn",
           "source:addr:postcode": "NSUL postcode overlay"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.2402715,
+          53.4815873
+        ]
+      },
+      "properties": {
+        "name": "Brewdog",
+        "osm_type": "node",
+        "osm_id": 9601930957,
+        "address": "18 Fountain Street, Manchester, M2 2AA",
+        "house_name": "",
+        "house_number": "18",
+        "street": "Fountain Street",
+        "suburb": "",
+        "city": "Manchester",
+        "postcode": "M2 2AA",
+        "country": "",
+        "operator": "",
+        "brewery": "",
+        "website": "",
+        "phone": "",
+        "opening_hours": "",
+        "cuisine": "",
+        "food": "",
+        "drink": "",
+        "outdoor_seating": "",
+        "indoor_seating": "",
+        "internet_access": "",
+        "real_ale": "",
+        "real_cider": "",
+        "live_music": "",
+        "dog": "",
+        "wheelchair": "",
+        "toilets": "",
+        "smoking": "",
+        "wikidata": "",
+        "wikipedia": "",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
+        "source_endpoint": "osm-extract",
+        "tags": {
+          "addr:city": "Manchester",
+          "addr:housenumber": "18",
+          "addr:postcode": "M2 2AA",
+          "addr:street": "Fountain Street",
+          "amenity": "pub",
+          "name": "Brewdog"
         }
       }
     },
@@ -388,7 +441,7 @@
         "smoking": "outside",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -454,7 +507,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -512,7 +565,7 @@
         "smoking": "no",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -568,7 +621,7 @@
         "smoking": "outside",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -640,7 +693,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -703,7 +756,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -763,7 +816,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -821,7 +874,7 @@
         "smoking": "outside",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -881,7 +934,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -938,7 +991,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -992,7 +1045,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -1050,7 +1103,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -1099,7 +1152,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -1157,7 +1210,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -1212,7 +1265,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -1267,7 +1320,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -1325,7 +1378,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -1383,7 +1436,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -1435,7 +1488,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -1502,7 +1555,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -1554,7 +1607,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -1613,7 +1666,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -1663,7 +1716,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -1724,7 +1777,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -1779,7 +1832,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -1841,7 +1894,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -1897,7 +1950,7 @@
         "smoking": "",
         "wikidata": "Q26665842",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -1954,7 +2007,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housenumber": "325",
@@ -2013,7 +2066,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2068,7 +2121,7 @@
         "smoking": "no",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -2123,7 +2176,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2180,7 +2233,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2236,7 +2289,7 @@
         "smoking": "outside",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -2289,7 +2342,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2347,7 +2400,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2406,7 +2459,7 @@
         "smoking": "outside",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2469,7 +2522,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2526,7 +2579,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -2579,7 +2632,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2638,7 +2691,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2698,7 +2751,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2760,7 +2813,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2820,7 +2873,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2891,7 +2944,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -2948,7 +3001,7 @@
         "smoking": "outside",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3021,7 +3074,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3081,7 +3134,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -3131,7 +3184,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -3187,7 +3240,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3243,7 +3296,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3306,7 +3359,7 @@
         "smoking": "no",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3371,7 +3424,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3434,7 +3487,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3497,7 +3550,7 @@
         "smoking": "outside",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3560,7 +3613,7 @@
         "smoking": "",
         "wikidata": "Q26479963",
         "wikipedia": "en:Sir Ralph Abercromby (pub)",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3616,7 +3669,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3679,7 +3732,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3733,7 +3786,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3795,7 +3848,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3854,7 +3907,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -3918,7 +3971,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -3969,7 +4022,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -4029,7 +4082,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -4089,7 +4142,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4144,7 +4197,7 @@
         "smoking": "",
         "wikidata": "Q21647629",
         "wikipedia": "en:The Briton's Protection",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4204,7 +4257,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4271,7 +4324,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4328,7 +4381,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -4379,7 +4432,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4433,7 +4486,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housename": "Corner Shop",
@@ -4488,7 +4541,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4544,7 +4597,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4603,7 +4656,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4665,7 +4718,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4675,9 +4728,11 @@
           "addr:street": "Bloom Street",
           "amenity": "pub",
           "email": "info@eaglemanchester.com",
+          "fetish": "yes",
           "fhrs:id": "1821313",
           "lgbtq": "primary",
-          "lgbtq:men": "primary",
+          "lgbtq:gay": "yes",
+          "male": "only",
           "name": "The Eagle",
           "opening_hours": "Mo-We 17:00-02:30; Th 17:00-03:00; Fr 17:00-05:00; Sa 17:00-03:00",
           "postal_code": "M1 3HZ",
@@ -4726,7 +4781,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4785,7 +4840,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4850,7 +4905,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4910,7 +4965,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -4967,7 +5022,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:postcode": "M13 9WU",
@@ -5026,7 +5081,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -5077,7 +5132,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5140,7 +5195,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5202,7 +5257,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5266,7 +5321,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5327,7 +5382,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5383,7 +5438,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5450,7 +5505,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5513,7 +5568,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5571,7 +5626,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5625,7 +5680,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5682,7 +5737,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5746,7 +5801,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5814,7 +5869,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -5872,7 +5927,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -5932,7 +5987,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:street": "Oldham Street",
@@ -5984,7 +6039,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6039,7 +6094,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6099,7 +6154,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6153,7 +6208,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -6211,7 +6266,7 @@
         "smoking": "outside",
         "wikidata": "Q7754934",
         "wikipedia": "en:The Old Wellington Inn",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "HE_ref": "1270698",
@@ -6290,7 +6345,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -6346,7 +6401,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6417,7 +6472,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6475,7 +6530,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6531,7 +6586,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6585,7 +6640,7 @@
         "smoking": "no",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6649,7 +6704,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6708,7 +6763,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6783,7 +6838,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6794,8 +6849,8 @@
           "amenity": "pub",
           "brand": "Greene King",
           "brand:wikidata": "Q5564162",
-          "check_date": "2023-08-14",
-          "check_date:opening_hours": "2023-07-30",
+          "check_date": "2026-10-10",
+          "check_date:opening_hours": "2026-10-10",
           "fhrs:id": "1819600",
           "level": "0",
           "name": "The Shakespeare",
@@ -6846,7 +6901,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6908,7 +6963,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -6962,7 +7017,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7023,7 +7078,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7083,7 +7138,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7137,7 +7192,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:housename": "Townley Hotel",
@@ -7191,7 +7246,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7246,7 +7301,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7300,7 +7355,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7355,7 +7410,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7366,6 +7421,8 @@
           "brand": "Wetherspoon",
           "brand:wikidata": "Q6109362",
           "brand:wikipedia": "en:Wetherspoons",
+          "diet:vegan": "yes",
+          "diet:vegetarian": "yes",
           "dog": "no",
           "fhrs:id": "1819002",
           "food": "yes",
@@ -7418,7 +7475,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7479,7 +7536,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7535,7 +7592,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -7584,7 +7641,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7642,7 +7699,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7696,7 +7753,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7757,7 +7814,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -7813,7 +7870,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -7869,7 +7926,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7931,7 +7988,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -7995,7 +8052,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -8052,7 +8109,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "amenity": "pub",
@@ -8103,7 +8160,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Salford",
@@ -8159,7 +8216,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
@@ -8228,7 +8285,7 @@
         "smoking": "",
         "wikidata": "",
         "wikipedia": "",
-        "fetched_at_utc": "2026-10-07T11:43:04+00:00",
+        "fetched_at_utc": "2026-10-12T14:36:00+00:00",
         "source_endpoint": "osm-extract",
         "tags": {
           "addr:city": "Manchester",
